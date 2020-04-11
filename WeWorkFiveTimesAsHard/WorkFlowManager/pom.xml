@@ -14,10 +14,14 @@
 	<name>WorkFlowManager</name>
 	<description>Management Software</description>
 
+	<!-- IMPORTANT, MUST BE JAVA 11 -->
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 
+	<!-- These are the frameworks we will be using -->
+
+	<!--Spring Data JPA-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,27 +32,36 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--SPRING BOOT DEVTOOLS-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<!--H2, In Memory Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!--POSTGRE SQL, NoSQL?-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!--LOMBOK, GETTERS & SETTERS-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!--UNIT TESTING-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -60,6 +73,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<build>
