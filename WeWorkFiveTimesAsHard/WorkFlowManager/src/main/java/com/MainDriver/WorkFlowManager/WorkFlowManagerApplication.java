@@ -15,7 +15,7 @@ public class WorkFlowManagerApplication {
 
 		/*In general, try to have as few news as possible, keep in mind for later*/
 		LombokDemonstration LD = new LombokDemonstration();
-		LD.setNotSet(44); //its 44 (+1) now
+		LD.setNotSet(45); //its 44 (+1) now
 
 		/*No stack wasting exceptions, faster, and more manageable (Long term)*/
 		mStatus = CheckSet(LD);

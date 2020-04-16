@@ -32,6 +32,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--Flyway DB VERSION CONTROL -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
 		<!--SPRING BOOT DEVTOOLS-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -61,7 +67,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--UNIT TESTING-->
+		<!--TESTING-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
