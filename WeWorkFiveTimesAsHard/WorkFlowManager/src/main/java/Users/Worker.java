@@ -1,5 +1,7 @@
 package Users;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
 /*
@@ -7,8 +9,13 @@ import java.util.ArrayList;
  */
 public class Worker extends User
 {
-
+    /*Stack alignment, reduce padding by big types being on top. Access speed is also top priority */
     private ArrayList<String> Messages = null;
+    private String Username = null;
+    private String Password = null;
+
+    @Id @GeneratedValue
+    private Long  id;
 
     /*Send a message to a manager a user or an admin */
     void sendMessage()

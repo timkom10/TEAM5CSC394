@@ -15,11 +15,4 @@ abstract class User
    abstract void sendMessage();
    abstract void receiveMessage(String mes);
    abstract void viewMessages();
-
-   String Username;
-   String Password;
-
-   @Id @GeneratedValue
-   Long  id;
-
 }
