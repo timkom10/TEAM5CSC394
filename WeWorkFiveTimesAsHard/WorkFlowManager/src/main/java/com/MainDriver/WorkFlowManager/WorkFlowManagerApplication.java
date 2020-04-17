@@ -8,6 +8,6 @@ public class WorkFlowManagerApplication {
 	public static void main(String[] args)
 	{
 		SpringApplication.run(WorkFlowManagerApplication.class, args);
-		System.out.println("No errors?");
+		System.out.println("No errors? - test");
 	}
 }
