@@ -46,13 +46,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--H2, In Memory Database -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!--POSTGRE SQL, NoSQL?-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
