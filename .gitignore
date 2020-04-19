@@ -1,3 +1,4 @@
 #GLOBAL GIT IGNORE
 out/
 *.class
+WeWorkFiveTimesAsHard/WorkFlowManager/src/main/resources/application.properties
