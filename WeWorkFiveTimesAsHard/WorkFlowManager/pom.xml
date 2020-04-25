@@ -20,13 +20,21 @@
 	</properties>
 
 	<!-- These are the frameworks we will be using -->
-
-	<!--Spring Data JPA-->
 	<dependencies>
+
+		<!-- thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!--Spring Data JPA-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<!-- MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -38,7 +46,7 @@
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 
-		<!--SPRING BOOT DEVTOOLS-->
+		<!-- hot swapping, disable cache for template, enable live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -53,13 +61,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--LOMBOK, GETTERS & SETTERS-->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!--TESTING-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,7 +73,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 	</dependencies>
 
 	<build>
