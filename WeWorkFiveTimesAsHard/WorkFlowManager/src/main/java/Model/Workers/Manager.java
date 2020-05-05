@@ -1,5 +1,6 @@
 package Model.Workers;
 
+import Model.Projects.WorkProject;
 import Model.User.Users;
 
 import javax.persistence.CascadeType;
@@ -11,9 +12,11 @@ import java.util.List;
 @Entity
 public class Manager extends WorkerTypes
 {
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<WorkProject> projects;                     //Managed projects
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<StandardWorker> teamMembers;
+    private List<StandardWorker> teamMembers;               //Managed team members
 
 
     @Override

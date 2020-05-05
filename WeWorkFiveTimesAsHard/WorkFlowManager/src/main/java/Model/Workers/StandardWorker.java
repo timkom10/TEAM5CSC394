@@ -1,5 +1,6 @@
 package Model.Workers;
 
+import Model.Projects.WorkProject;
 import Model.User.Users;
 
 import javax.persistence.*;
@@ -12,8 +13,13 @@ import java.util.Set;
 @Entity
 public class StandardWorker extends WorkerTypes
 {
+
+    @ManyToOne
+    private WorkProject project;                                //Assigned project
+
+
     @ManyToOne(fetch = FetchType.EAGER)
-    private Manager manager;
+    private Manager manager;                                    //Assigned Manager
 
 
     /*Would like to enforce a no-default constructor*/
