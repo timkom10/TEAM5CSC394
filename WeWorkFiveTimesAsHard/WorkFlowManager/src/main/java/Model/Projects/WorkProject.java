@@ -15,6 +15,7 @@ import java.util.List;
 public class WorkProject {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int projectID;                              //Primary key
 
     @ManyToOne

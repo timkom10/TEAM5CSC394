@@ -13,6 +13,7 @@ public abstract class WorkerTypes
 {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int WorkerID;                                 //Becomes the primary key of admin, manager, standard
 
     @OneToOne

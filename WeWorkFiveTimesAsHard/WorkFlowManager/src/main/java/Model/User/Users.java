@@ -2,9 +2,7 @@ package Model.User;
 
 import Model.Workers.WorkerTypes;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /*
     Before someone can login, or do some actions, they need to "Become-A" worker type,
@@ -18,6 +16,7 @@ import javax.persistence.OneToOne;
 public class Users {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UID;
 
     @OneToOne
