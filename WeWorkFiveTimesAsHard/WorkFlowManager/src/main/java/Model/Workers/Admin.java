@@ -6,6 +6,18 @@ import javax.persistence.Entity;
 
 @Entity
 public class Admin extends WorkerTypes {
+
+
+    public Admin()
+    {
+        this.user = null;
+    }
+
+    public Admin(Users user)
+    {
+        this.user = user;
+    }
+
     @Override
     public void sendMessage(Users user) {
 

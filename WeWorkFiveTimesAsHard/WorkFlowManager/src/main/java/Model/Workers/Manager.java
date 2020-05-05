@@ -19,6 +19,20 @@ public class Manager extends WorkerTypes
     private List<StandardWorker> teamMembers;               //Managed team members
 
 
+    public Manager()
+    {
+        this.user = null;
+        this.projects = null;
+        this.teamMembers = null;
+    }
+
+    public Manager(Users user)
+    {
+        this.user = user;
+        this.projects = null;
+        this.teamMembers = null;
+    }
+
     @Override
     public void sendMessage(Users user) {
 

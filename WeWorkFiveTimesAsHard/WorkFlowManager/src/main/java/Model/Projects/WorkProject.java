@@ -2,8 +2,6 @@ package Model.Projects;
 
 import Model.Workers.Manager;
 import Model.Workers.StandardWorker;
-import org.hibernate.jdbc.Work;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class WorkProject {
     private int projectID;                              //Primary key
 
     @ManyToOne
-    private Manager manager;                            //project owner
+    private Manager manager;                            //project owner, Key
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<StandardWorker> projectWorkers;        //team-members of the project

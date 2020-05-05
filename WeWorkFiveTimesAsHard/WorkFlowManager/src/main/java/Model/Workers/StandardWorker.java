@@ -2,10 +2,7 @@ package Model.Workers;
 
 import Model.Projects.WorkProject;
 import Model.User.Users;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 /*
     Standard worker, not an admin, not a manager, a grunt assigned to a manager, and a project
