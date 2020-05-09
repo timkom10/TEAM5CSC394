@@ -1,9 +1,10 @@
-package Model.User;
+package com.MainDriver.WorkFlowManager.Model.User;
 
-import Model.Workers.Admin;
-import Model.Workers.Manager;
-import Model.Workers.StandardWorker;
-import Model.Workers.WorkerTypes;
+import com.MainDriver.WorkFlowManager.Model.Feedback.FeedbackSystem;
+import com.MainDriver.WorkFlowManager.Model.Workers.Admin;
+import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
+import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.Model.Workers.WorkerTypes;
 
 import javax.persistence.*;
 
@@ -25,6 +26,8 @@ public class Users {
     @OneToOne
     private WorkerTypes userWorkerType;                 //This user becomes bound to this worker, because they are it
 
+    @OneToOne
+    private FeedbackSystem feedback;
 
     /*Make this User become a standard worker as a default*/
     public Users()

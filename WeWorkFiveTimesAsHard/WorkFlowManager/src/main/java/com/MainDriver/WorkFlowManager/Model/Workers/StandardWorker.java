@@ -1,7 +1,8 @@
-package Model.Workers;
+package com.MainDriver.WorkFlowManager.Model.Workers;
 
-import Model.Projects.WorkProject;
-import Model.User.Users;
+import com.MainDriver.WorkFlowManager.Model.Projects.WorkProject;
+import com.MainDriver.WorkFlowManager.Model.User.Users;
+
 import javax.persistence.*;
 
 /*

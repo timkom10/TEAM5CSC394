@@ -1,6 +1,6 @@
-package Model.Workers;
+package com.MainDriver.WorkFlowManager.Model.Workers;
 
-import Model.User.Users;
+import com.MainDriver.WorkFlowManager.Model.User.Users;
 
 import javax.persistence.Entity;
 

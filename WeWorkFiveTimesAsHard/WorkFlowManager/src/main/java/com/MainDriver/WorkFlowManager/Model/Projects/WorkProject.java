@@ -1,7 +1,7 @@
-package Model.Projects;
+package com.MainDriver.WorkFlowManager.Model.Projects;
 
-import Model.Workers.Manager;
-import Model.Workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
+import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

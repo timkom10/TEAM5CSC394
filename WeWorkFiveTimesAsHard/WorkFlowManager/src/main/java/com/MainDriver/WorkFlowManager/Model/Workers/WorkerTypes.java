@@ -1,10 +1,10 @@
-package Model.Workers;
+package com.MainDriver.WorkFlowManager.Model.Workers;
 
 /*
     Outlines the basic functionalities we would expect from a worker, regardless of type (admin, manager, standard)
  */
 
-import Model.User.Users;
+import com.MainDriver.WorkFlowManager.Model.User.Users;
 import javax.persistence.*;
 
 @Entity
