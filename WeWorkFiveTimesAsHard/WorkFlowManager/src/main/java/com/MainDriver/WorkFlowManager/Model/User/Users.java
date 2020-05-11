@@ -1,12 +1,10 @@
 package com.MainDriver.WorkFlowManager.Model.User;
 
-import com.MainDriver.WorkFlowManager.Model.Feedback.FeedbackSystem;
-import com.MainDriver.WorkFlowManager.Model.Workers.Admin;
-import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.Model.Workers.WorkerTypes;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /*
     Before someone can login, or do some actions, they need to "Become-A" worker type,
@@ -20,14 +18,17 @@ import javax.persistence.*;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int UID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long UID;
 
-    @OneToOne
-    private WorkerTypes userWorkerType;                 //This user becomes bound to this worker, because they are it
+    @OneToOne(cascade = CascadeType.ALL)
+    private WorkerTypes userWorkerType;
 
-    @OneToOne
-    private FeedbackSystem feedback;
+
+    private String firstName;
+    private String lastName;
+    private String hireDate;
+    private String role;
 
     /*Make this User become a standard worker as a default*/
     public Users()
@@ -35,21 +36,70 @@ public class Users {
         this.userWorkerType = new StandardWorker(this);
     }
 
-    /*Set or reset strategy*/
-    public void setStrategy(WorkerTypes type)
-    {
-            if(type instanceof Manager)
-            {
-                this.userWorkerType = new Manager(this);
-            }
-            else if(type instanceof Admin)
-            {
-                this.userWorkerType = new Admin(this);
-            }
-            else if(type instanceof  StandardWorker)
-            {
-                this.userWorkerType = new StandardWorker(this);
-            }
+    public WorkerTypes getUserWorkerType() {
+        return userWorkerType;
     }
 
+    public void setUserWorkerType(WorkerTypes userWorkerType) {
+        this.userWorkerType = userWorkerType;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", hireDate='" + hireDate + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return Objects.equals(userWorkerType, users.userWorkerType) &&
+                firstName.equals(users.firstName) &&
+                lastName.equals(users.lastName) &&
+                hireDate.equals(users.hireDate) &&
+                role.equals(users.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, hireDate, role);
+    }
 }

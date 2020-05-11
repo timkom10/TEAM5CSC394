@@ -13,11 +13,11 @@ public abstract class WorkerTypes
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int WorkerID;                                 //Becomes the primary key of admin, manager, standard
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long WorkerID;                                 //Becomes the primary key of admin, manager, standard
 
     @OneToOne
-    public Users user;                                      //Any worker type becomes bound to this user
+    public Users user;                                        //Any worker type becomes bound to this user
 
     public abstract void sendMessage(Users user);
     public abstract void receiveMessage(Users user);

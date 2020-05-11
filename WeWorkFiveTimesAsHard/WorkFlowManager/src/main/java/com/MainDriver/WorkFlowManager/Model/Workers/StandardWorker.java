@@ -1,6 +1,5 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
-import com.MainDriver.WorkFlowManager.Model.Projects.WorkProject;
 import com.MainDriver.WorkFlowManager.Model.User.Users;
 
 import javax.persistence.*;
@@ -12,26 +11,17 @@ import javax.persistence.*;
 public class StandardWorker extends WorkerTypes
 {
 
-    @ManyToOne
-    private WorkProject project;                                //Assigned project
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Manager manager;                                    //Assigned Manager
-
 
     /*Would like to enforce a no-default constructor*/
    public StandardWorker()
     {
         this.user = null;
-        this.manager = null;
     }
 
     /*We want to use this one!*/
     public StandardWorker(Users user)
     {
         this.user = user;
-        this.manager = null;
     }
 
     @Override
