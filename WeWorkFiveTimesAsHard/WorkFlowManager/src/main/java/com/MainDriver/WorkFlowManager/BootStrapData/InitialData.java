@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.BootStrapData;
 
 import com.MainDriver.WorkFlowManager.Model.User.Users;
+import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,8 @@ public class InitialData implements CommandLineRunner
         users.setLastName("Gentile");
         users.setHireDate("02-20-2020");
         users.setRole("Writes stuff?");
+        StandardWorker standardWorker = (StandardWorker)users.getUserWorkerType();
+        standardWorker.setTeam("WeWorkFiveTimesAsHard");
 
         usersRepository.save(users);
         System.out.println("Amount of Users:" + usersRepository.count());

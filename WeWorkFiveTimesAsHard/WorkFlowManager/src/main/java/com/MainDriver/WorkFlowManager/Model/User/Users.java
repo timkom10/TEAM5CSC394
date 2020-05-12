@@ -24,7 +24,6 @@ public class Users {
     @OneToOne(cascade = CascadeType.ALL)
     private WorkerTypes userWorkerType;
 
-
     private String firstName;
     private String lastName;
     private String hireDate;
