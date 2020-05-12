@@ -14,6 +14,7 @@
         <th>Role</th>
         <th>Hire Date</th>
     </tr>
+    <!-- Equivalent to a for-loop-->
     <tr th:each = "user : ${users}">
         <td th:text = "${user.firstName}">123</td>
         <td th:text = "${user.lastName}">Spring in Action</td>
