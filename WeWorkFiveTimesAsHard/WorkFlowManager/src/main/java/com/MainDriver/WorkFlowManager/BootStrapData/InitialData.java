@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /*
-    PlaceHolder before flyway is up and going
+    PlaceHolder Data, forget about flyway....
  */
 @Component
 public class InitialData implements CommandLineRunner
