@@ -18,6 +18,6 @@ public class StandardWorkerController {
     public String getStandardWorkers(Model model)
     {
         model.addAttribute("standardWorkers", workerTypeRepository.findAll());
-        return "StandardWorkersView/StandardWorkersList";
+        return "StandardWorkersView/StandardWorkerHomePage";
     }
 }
