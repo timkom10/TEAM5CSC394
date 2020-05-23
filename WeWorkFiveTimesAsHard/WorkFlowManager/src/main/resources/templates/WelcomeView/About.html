@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AboutCSS/About.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li id="w-node-5ec26b017271-9d5a02f6">
+                <div>
+                    <h3 class="heading-2">WeWorkFiveTimesAsHard</h3>
+                </div>
+            </li>
+            <li><a th:href="@{/TermsOfService}" class="nav-link">Terms of Service</a></li>
+            <li><a th:href="@{/About}" class="nav-link">About</a></li>
+            <li><a th:href="@{/Login}" class="w-button">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="container w-container">
+        <div>
+            <h1 class="heading">About Us</h1>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container-2 w-container">
+        <div class="div-block">
+            <p class="paragraph">Welcome to WeWorkFiveTimesAsHard, a project management tool that makes working remotely easy. <br>The current rise of remote workers calls for an improved platform for team collaboration. WeWorkFiveTimesAsHard is a project management tool that allows teams to track task progress, provide peer-feedback, and communicate with one another all on one platform. By providing these features in one location, our tool allows for a more organized project workflow that allows for efficient and effective remote teamwork.<br></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

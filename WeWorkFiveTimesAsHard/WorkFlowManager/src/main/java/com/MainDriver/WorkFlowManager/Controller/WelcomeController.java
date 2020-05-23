@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeController {
 
     @RequestMapping("/")
-    public String getWelcome()
-    {
-        return "WelcomeView/LandingPage";
-    }
+    public String getWelcome() { return "WelcomeView/LandingPage"; }
 
     @RequestMapping("/Login")
     public String getLogin()
@@ -24,4 +21,7 @@ public class WelcomeController {
     {
         return "WelcomeView/TOS";
     }
+
+    @RequestMapping("/About")
+    public String getAbout() { return "WelcomeView/About"; }
 }
