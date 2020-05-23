@@ -18,4 +18,10 @@ public class WelcomeController {
     {
         return "WelcomeView/Login";
     }
+
+    @RequestMapping("/TermsOfService")
+    public String getTOS()
+    {
+        return "WelcomeView/TOS";
+    }
 }
