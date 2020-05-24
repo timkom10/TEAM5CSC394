@@ -39,7 +39,6 @@ public class InitialData implements CommandLineRunner
         users.setHireDate("02-20-2020");
         users.setRole("Writes stuff?");
         StandardWorker standardWorker = (StandardWorker)users.getUserWorkerType();
-        standardWorker.setTeam("WeWorkFiveTimesAsHard");
         usersRepository.save(users);
         System.out.println("Amount of Users:" + usersRepository.count());
 

@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
 import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
+import com.MainDriver.WorkFlowManager.Model.Projects.Project;
 import com.MainDriver.WorkFlowManager.Model.User.Users;
 
 import javax.persistence.*;
@@ -18,20 +19,18 @@ public class StandardWorker extends WorkerTypes
     @OneToMany
     Set<Announcement> announcements = new HashSet<Announcement>();
 
+    @ManyToOne
+    Project project;
 
-    private String team; //needs to be a table
 
     //Would like to enforce a no-default constructor
-    public StandardWorker()
-    {
+    public StandardWorker() {
         this.user = null;
     }
 
-    public StandardWorker(Users user) { this.user = user; }
-
-    public String getTeam() { return team; }
-
-    public void setTeam(String team) { this.team = team; }
+    public StandardWorker(Users user) {
+        this.user = user;
+    }
 
     public Set<Announcement> getAnnouncements() {
         return announcements;
@@ -41,25 +40,13 @@ public class StandardWorker extends WorkerTypes
         this.announcements = announcements;
     }
 
-    @Override
-   public String toString() {
-    return "StandardWorker{" +
-            "team='" + team + '\'' +
-            '}';
-   }
+    public Project getProject() {
+        return project;
+    }
 
-   @Override
-   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    StandardWorker that = (StandardWorker) o;
-    return Objects.equals(team, that.team);
-   }
-
-   @Override
-   public int hashCode() {
-    return Objects.hash(team);
-   }
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     @Override
     public void sendMessage(Users user) {
