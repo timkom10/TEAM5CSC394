@@ -12,7 +12,6 @@ import java.util.Objects;
     This class is really the handle for the basic functionalities of any User of the system,
     In addition to the functionalities that would be added on if they acquire a manager, admin,
     Or standard worker type.
-
  */
 @Entity
 public class Users {

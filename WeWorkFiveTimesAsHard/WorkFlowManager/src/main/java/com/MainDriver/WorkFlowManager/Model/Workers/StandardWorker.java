@@ -1,9 +1,12 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
+import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
 import com.MainDriver.WorkFlowManager.Model.User.Users;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /*
     Standard worker, not an admin, not a manager, a grunt assigned to a manager, and a project
@@ -12,7 +15,11 @@ import java.util.Objects;
 public class StandardWorker extends WorkerTypes
 {
 
-    private String team;
+    @OneToMany
+    Set<Announcement> announcements = new HashSet<Announcement>();
+    
+
+    private String team; //needs to be a table
 
     //Would like to enforce a no-default constructor
     public StandardWorker()
