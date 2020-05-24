@@ -3,9 +3,9 @@ package com.MainDriver.WorkFlowManager.Model.Projects;
 import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 
+
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,6 +16,9 @@ public class Project {
 
     @OneToMany
     private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
+
+    @OneToMany
+    private Set<Tasks> tasks = new HashSet<Tasks>();
 
     @OneToOne
     private Manager manager;
@@ -36,20 +39,6 @@ public class Project {
 
     public void setProjectName(String projectName) {
         ProjectName = projectName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Project project = (Project) o;
-        return Objects.equals(teamMembers, project.teamMembers) &&
-                Objects.equals(manager, project.manager);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(teamMembers, manager);
     }
 
     public Set<StandardWorker> getTeamMembers() {

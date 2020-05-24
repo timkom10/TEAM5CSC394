@@ -2,6 +2,7 @@ package com.MainDriver.WorkFlowManager.Model.Workers;
 
 import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
+import com.MainDriver.WorkFlowManager.Model.Projects.Tasks;
 import com.MainDriver.WorkFlowManager.Model.User.Users;
 
 import javax.persistence.*;
@@ -19,11 +20,14 @@ public class StandardWorker extends WorkerTypes
     @OneToMany
     Set<Announcement> announcements = new HashSet<Announcement>();
 
+    @OneToMany
+    Set<Tasks> currentTasks = new HashSet<Tasks>();
+
     @ManyToOne
     Project project;
 
+    private int points = 0;
 
-    //Would like to enforce a no-default constructor
     public StandardWorker() {
         this.user = null;
     }
@@ -46,6 +50,46 @@ public class StandardWorker extends WorkerTypes
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public void updatePoints(Tasks completedTask, int addScore) {
+        if(completedTask.isComplete() && (completedTask.getStandardWorker() == this)) {
+            this.points += addScore;
+        }
+    }
+
+    public Set<Tasks> getCurrentTasks() {
+        return currentTasks;
+    }
+
+    public void setCurrentTasks(Set<Tasks> currentTasks) {
+        this.currentTasks = currentTasks;
+    }
+
+    @Override
+    public String toString() {
+        return "StandardWorker{" +
+                "announcements=" + announcements +
+                ", currentTasks=" + currentTasks +
+                ", project=" + project +
+                ", points=" + points +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StandardWorker that = (StandardWorker) o;
+        return points == that.points &&
+                Objects.equals(announcements, that.announcements) &&
+                Objects.equals(currentTasks, that.currentTasks) &&
+                Objects.equals(project, that.project);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(announcements, currentTasks, project, points);
     }
 
     @Override
