@@ -7,6 +7,14 @@ import javax.persistence.Entity;
 @Entity
 public class Manager extends WorkerTypes{
 
+    public Manager() {
+        this.user = null;
+    }
+
+    public Manager(Users user) {
+        this.user = user;
+    }
+
     @Override
     public void sendMessage(Users user) {
 

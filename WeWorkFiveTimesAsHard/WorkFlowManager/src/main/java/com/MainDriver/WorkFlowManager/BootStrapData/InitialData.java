@@ -2,8 +2,10 @@ package com.MainDriver.WorkFlowManager.BootStrapData;
 
 import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
 import com.MainDriver.WorkFlowManager.Model.User.Users;
+import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.AnnouncementRepository;
+import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
 import com.MainDriver.WorkFlowManager.repository.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,14 +19,17 @@ public class InitialData implements CommandLineRunner
 
     private final UsersRepository usersRepository;
     private final AnnouncementRepository announcementRepository;
+    private final ManagerRepository managerRepository;
 
     public InitialData(
             UsersRepository usersRepository,
-            AnnouncementRepository announcementRepository
+            AnnouncementRepository announcementRepository,
+            ManagerRepository managerRepository
     )
     {
         this.usersRepository = usersRepository;
         this.announcementRepository = announcementRepository;
+        this.managerRepository = managerRepository;
     }
 
     @Override
@@ -56,6 +61,13 @@ public class InitialData implements CommandLineRunner
 
         //Print out the announcement
         System.out.println(standardWorker.getAnnouncements().toString());
+
+        //Make a new manager...
+        Users users2 = new Users();
+        users2.setUserWorkerType(new Manager(users2));
+        
+
+
 
     }
 }

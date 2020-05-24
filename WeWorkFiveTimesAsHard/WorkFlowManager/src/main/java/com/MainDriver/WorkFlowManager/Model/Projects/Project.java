@@ -20,7 +20,7 @@ public class Project {
     @OneToMany
     private Set<Tasks> tasks = new HashSet<Tasks>();
 
-    @OneToOne
+    @ManyToOne
     private Manager manager;
 
     private String ProjectName;

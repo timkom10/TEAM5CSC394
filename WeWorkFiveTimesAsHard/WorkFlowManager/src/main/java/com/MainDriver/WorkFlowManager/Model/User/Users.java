@@ -74,10 +74,12 @@ public class Users {
         this.role = role;
     }
 
+
     @Override
     public String toString() {
         return "Users{" +
-                "firstName='" + firstName + '\'' +
+                "userWorkerType=" + userWorkerType +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hireDate='" + hireDate + '\'' +
                 ", role='" + role + '\'' +
