@@ -17,7 +17,7 @@ public class StandardWorker extends WorkerTypes
 
     @OneToMany
     Set<Announcement> announcements = new HashSet<Announcement>();
-    
+
 
     private String team; //needs to be a table
 
