@@ -10,7 +10,6 @@ public class WorkFlowManagerApplication extends SpringBootServletInitializer
 	public static void main(String[] args) throws Exception {
 		{
 			SpringApplication.run(WorkFlowManagerApplication.class, args);
-			System.out.println("No errors? - test");
 		}
 	}
 }

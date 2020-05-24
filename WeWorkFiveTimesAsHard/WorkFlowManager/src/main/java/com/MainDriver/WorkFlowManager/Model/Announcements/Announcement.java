@@ -1,9 +1,7 @@
 package com.MainDriver.WorkFlowManager.Model.Announcements;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Announcement {
@@ -14,10 +12,36 @@ public class Announcement {
 
     public String WrittenBy;
     public String Subject;
+
+    @Lob
     public String MessageContent;
 
     public Announcement(){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "WrittenBy='" + WrittenBy + '\'' +
+                ", Subject='" + Subject + '\'' +
+                ", MessageContent='" + MessageContent + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Announcement that = (Announcement) o;
+        return Objects.equals(WrittenBy, that.WrittenBy) &&
+                Objects.equals(Subject, that.Subject) &&
+                Objects.equals(MessageContent, that.MessageContent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(WrittenBy, Subject, MessageContent);
     }
 
     public String getWrittenBy() {

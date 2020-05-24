@@ -33,8 +33,15 @@ public class StandardWorker extends WorkerTypes
 
     public void setTeam(String team) { this.team = team; }
 
+    public Set<Announcement> getAnnouncements() {
+        return announcements;
+    }
 
-   @Override
+    public void setAnnouncements(Set<Announcement> announcements) {
+        this.announcements = announcements;
+    }
+
+    @Override
    public String toString() {
     return "StandardWorker{" +
             "team='" + team + '\'' +
