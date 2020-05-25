@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.Model.Projects;
 
+import com.MainDriver.WorkFlowManager.Model.Feedback.Feedback;
 import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 
@@ -22,6 +23,10 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "project", orphanRemoval = true)
     private Set<Tasks> tasks = new HashSet<Tasks>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "project")
+    private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
     @ManyToOne
     private Manager manager;

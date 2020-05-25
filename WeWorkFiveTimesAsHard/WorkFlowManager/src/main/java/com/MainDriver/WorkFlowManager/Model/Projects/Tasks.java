@@ -14,13 +14,13 @@ public class Tasks {
     private Long T_ID;
 
     @ManyToOne
-    Manager manager;
+    private Manager manager;
 
     @ManyToOne
-    StandardWorker standardWorker;
+    private StandardWorker standardWorker;
 
     @ManyToOne
-    Project project;
+    private Project project;
 
     @Lob
     private String taskDescription;

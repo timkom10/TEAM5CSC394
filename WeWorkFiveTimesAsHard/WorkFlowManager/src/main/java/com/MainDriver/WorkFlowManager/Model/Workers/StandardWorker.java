@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
 import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
+import com.MainDriver.WorkFlowManager.Model.Feedback.Feedback;
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
 import com.MainDriver.WorkFlowManager.Model.Projects.Tasks;
 
@@ -19,22 +20,26 @@ public class StandardWorker extends WorkerTypes
 
     @OneToMany(mappedBy = "standardWorker", orphanRemoval = true,
             fetch = FetchType.EAGER)
-    Set<Announcement> announcements = new HashSet<Announcement>();
+    private Set<Announcement> announcements = new HashSet<Announcement>();
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "standardWorker", orphanRemoval = true)
-    Set<Tasks> currentTasks = new HashSet<Tasks>();
+    private Set<Tasks> currentTasks = new HashSet<Tasks>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "standardWorker")
+    private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
     @ManyToOne
-    Project project;
+    private Project project;
 
     @ManyToOne
-    Manager manager;
+    private Manager manager;
 
-    public String firstName;
-    public String lastName;
-    public String hireDate;
-    public String role;
+    private String firstName;
+    private String lastName;
+    private String hireDate;
+    private String role;
 
     private int points = 0;
 

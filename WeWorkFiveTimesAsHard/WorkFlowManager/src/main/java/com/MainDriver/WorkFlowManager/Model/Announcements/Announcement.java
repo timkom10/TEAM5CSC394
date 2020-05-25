@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.Model.Announcements;
 
+import com.MainDriver.WorkFlowManager.Model.Workers.Manager;
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 
 import javax.persistence.*;
@@ -13,15 +14,23 @@ public class Announcement {
     private Long A_ID;
 
     @ManyToOne
-    StandardWorker standardWorker;
+    private Manager manager;
 
-    public String WrittenBy;
-    public String Subject;
+    @ManyToOne
+    private StandardWorker standardWorker;
+
+
+    private String WrittenBy;
+    private String Subject;
 
     @Lob
-    public String MessageContent;
+    private String MessageContent;
 
     public Announcement(){
+    }
+
+    public Announcement(Manager manager) {
+        this.manager =manager;
     }
 
     @Override
@@ -46,6 +55,22 @@ public class Announcement {
     @Override
     public int hashCode() {
         return Objects.hash(WrittenBy, Subject, MessageContent);
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public StandardWorker getStandardWorker() {
+        return standardWorker;
+    }
+
+    public void setStandardWorker(StandardWorker standardWorker) {
+        this.standardWorker = standardWorker;
     }
 
     public String getWrittenBy() {

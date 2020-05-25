@@ -1,5 +1,7 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
+import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
+import com.MainDriver.WorkFlowManager.Model.Feedback.Feedback;
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
 
 import javax.persistence.CascadeType;
@@ -10,21 +12,28 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Manager extends WorkerTypes
-{
+public class Manager extends WorkerTypes {
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "manager", orphanRemoval = true)
-    Set<StandardWorker> dominion = new HashSet<StandardWorker>();
+    private Set<StandardWorker> dominion = new HashSet<StandardWorker>();
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "manager")
-    Set<Project> projects = new HashSet<Project>();
+    private Set<Project> projects = new HashSet<Project>();
 
-    public String firstName;
-    public String lastName;
-    public String hireDate;
-    public String role;
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "manager")
+    private Set<Announcement> announcements = new HashSet<Announcement>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "manager")
+    private Set<Feedback> feedbacks = new HashSet<Feedback>();
+
+    private String firstName;
+    private String lastName;
+    private String hireDate;
+    private String role;
 
     public Manager() {
     }
