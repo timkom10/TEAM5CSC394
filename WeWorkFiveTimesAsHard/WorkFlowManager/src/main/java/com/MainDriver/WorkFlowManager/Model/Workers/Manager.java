@@ -18,7 +18,7 @@ public class Manager extends WorkerTypes
     Set<StandardWorker> dominion = new HashSet<StandardWorker>();
 
     @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "manager", orphanRemoval = true)
+            mappedBy = "manager")
     Set<Project> projects = new HashSet<Project>();
 
     public String firstName;

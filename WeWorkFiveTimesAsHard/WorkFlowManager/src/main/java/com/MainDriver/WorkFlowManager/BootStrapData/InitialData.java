@@ -56,14 +56,25 @@ public class InitialData implements CommandLineRunner
         manager_1.getProjects().add(project_1);
         projectRepository.save(project_1);
 
+
         //Make some standard workers
         StandardWorker standardWorker_1 = new StandardWorker();
         standardWorker_1.setFirstName("Not Peter");
         standardWorker_1.setLastName("Not Gentile");
         standardWorker_1.setHireDate("Yesterday?");
         standardWorker_1.setRole("Literally does nothing...");
+        standardWorker_1.setManager(manager_1);
         manager_1.getDominion().add(standardWorker_1);
+
+
+        for(Project project : manager_1.getProjects())
+        {
+            project.getTeamMembers().add(standardWorker_1);
+            standardWorker_1.setProject(project);
+        }
+
         standardWorkerRepository.save(standardWorker_1);
+        projectRepository.save(project_1);
 
         //Assign workers to project
         standardWorker_1.setProject(project_1);
@@ -73,11 +84,11 @@ public class InitialData implements CommandLineRunner
         Tasks tasks_1 = new Tasks(manager_1, 450);
         tasks_1.setTaskName("Very important");
         tasks_1.setTaskDescription("Please do this:....");
-        taskRepository.save(tasks_1);
 
         //Assign Workers to task
         standardWorker_1.getCurrentTasks().add(tasks_1);
         tasks_1.setStandardWorker(standardWorker_1);
+        taskRepository.save(tasks_1);
 
         //Make an announcement
         Announcement announcement_1 =new Announcement();
