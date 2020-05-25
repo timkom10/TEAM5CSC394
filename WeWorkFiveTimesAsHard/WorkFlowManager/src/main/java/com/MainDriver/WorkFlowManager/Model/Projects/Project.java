@@ -15,7 +15,8 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long PID;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "project", orphanRemoval = true)
     private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
 
     @OneToMany(cascade = CascadeType.ALL,
