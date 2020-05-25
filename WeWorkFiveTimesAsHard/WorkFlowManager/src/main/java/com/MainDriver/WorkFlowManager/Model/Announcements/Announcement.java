@@ -17,7 +17,6 @@ public class Announcement {
     public String MessageContent;
 
     public Announcement(){
-
     }
 
     @Override

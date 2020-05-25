@@ -3,7 +3,7 @@ package com.MainDriver.WorkFlowManager.Model.Workers;
 import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
 import com.MainDriver.WorkFlowManager.Model.Projects.Tasks;
-import com.MainDriver.WorkFlowManager.Model.User.Users;
+
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -29,11 +29,6 @@ public class StandardWorker extends WorkerTypes
     private int points = 0;
 
     public StandardWorker() {
-        this.user = null;
-    }
-
-    public StandardWorker(Users user) {
-        this.user = user;
     }
 
     public Set<Announcement> getAnnouncements() {
@@ -66,6 +61,7 @@ public class StandardWorker extends WorkerTypes
         this.currentTasks = currentTasks;
     }
 
+
     @Override
     public String toString() {
         return "StandardWorker{" +
@@ -93,15 +89,55 @@ public class StandardWorker extends WorkerTypes
     }
 
     @Override
-    public void sendMessage(Users user) {
+    public String getFirstName() {
+        return this.firstName;
     }
 
     @Override
-    public void receiveMessage(Users user) {
+    public String getLastName() {
+        return this.lastName;
     }
 
     @Override
-    public void viewProjects(Users user) {
+    public String getHireDate() {
+        return this.hireDate;
+    }
+
+    @Override
+    public String getRole() {
+        return this.role;
+    }
+
+    @Override
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    @Override
+    public void setLastName(String name) {
+        this.lastName = name;
+    }
+
+    @Override
+    public void setHireDate(String hireDate) {
+        this.hireDate =hireDate;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public void sendMessage() {
+    }
+
+    @Override
+    public void receiveMessage() {
+    }
+
+    @Override
+    public void viewProjects() {
     }
 
     @Override

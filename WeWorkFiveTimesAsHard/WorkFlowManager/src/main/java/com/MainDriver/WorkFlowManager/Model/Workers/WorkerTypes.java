@@ -4,7 +4,6 @@ package com.MainDriver.WorkFlowManager.Model.Workers;
     Outlines the basic functionalities we would expect from a worker, regardless of type (admin, manager, standard)
  */
 
-import com.MainDriver.WorkFlowManager.Model.User.Users;
 import javax.persistence.*;
 
 @Entity
@@ -14,13 +13,26 @@ public abstract class WorkerTypes
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long WorkerID;                                 //Becomes the primary key of admin, manager, standard
+    protected Long WorkerID;                         //Becomes the primary key of admin, manager, standard
 
-    @OneToOne
-    public Users user;                                        //Any worker type becomes bound to this user
+    public String firstName;
+    public String lastName;
+    public String hireDate;
+    public String role;
 
-    public abstract void sendMessage(Users user);
-    public abstract void receiveMessage(Users user);
-    public abstract void viewProjects(Users user);
+
+    public abstract String getFirstName();
+    public abstract String getLastName();
+    public abstract String getHireDate();
+    public abstract String getRole();
+
+    public abstract void setFirstName(String name);
+    public abstract void setLastName(String name);
+    public abstract void setHireDate(String hireDate);
+    public abstract void setRole(String role);
+
+    public abstract void sendMessage();
+    public abstract void receiveMessage();
+    public abstract void viewProjects();
     public abstract void viewTasks();
 }

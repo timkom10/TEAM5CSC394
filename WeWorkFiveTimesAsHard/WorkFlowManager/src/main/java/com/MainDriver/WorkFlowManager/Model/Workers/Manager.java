@@ -1,8 +1,6 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
-import com.MainDriver.WorkFlowManager.Model.User.Users;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
@@ -20,11 +18,6 @@ public class Manager extends WorkerTypes
     Set<Project> projects = new HashSet<Project>();
 
     public Manager() {
-        this.user = null;
-    }
-
-    public Manager(Users user) {
-        this.user = user;
     }
 
     public Set<StandardWorker> getDominion() {
@@ -44,17 +37,57 @@ public class Manager extends WorkerTypes
     }
 
     @Override
-    public void sendMessage(Users user) {
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    @Override
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    @Override
+    public String getHireDate() {
+        return this.hireDate;
+    }
+
+    @Override
+    public String getRole() {
+        return this.role;
+    }
+
+    @Override
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    @Override
+    public void setLastName(String name) {
+        this.lastName = name;
+    }
+
+    @Override
+    public void setHireDate(String hireDate) {
+        this.hireDate =hireDate;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public void sendMessage() {
 
     }
 
     @Override
-    public void receiveMessage(Users user) {
+    public void receiveMessage() {
 
     }
 
     @Override
-    public void viewProjects(Users user) {
+    public void viewProjects() {
 
     }
 
@@ -82,7 +115,6 @@ public class Manager extends WorkerTypes
         return "Manager{" +
                 "dominion=" + dominion +
                 ", projects=" + projects +
-                ", user=" + user +
                 '}';
     }
 }
