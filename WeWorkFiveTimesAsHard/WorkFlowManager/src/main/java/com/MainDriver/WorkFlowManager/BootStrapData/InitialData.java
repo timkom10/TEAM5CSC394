@@ -53,9 +53,10 @@ public class InitialData implements CommandLineRunner
         Project project_1 = new Project();
         project_1.setProjectName("WeWork");
         project_1.setManager(manager_1);
+        projectRepository.save(project_1);
 
         manager_1.getProjects().add(project_1);
-        projectRepository.save(project_1);
+        managerRepository.save(manager_1);
 
         //Make some standard workers
         StandardWorker standardWorker_1 = new StandardWorker();
@@ -63,12 +64,17 @@ public class InitialData implements CommandLineRunner
         standardWorker_1.setLastName("Not Gentile");
         standardWorker_1.setHireDate("Yesterday?");
         standardWorker_1.setRole("Literally does nothing...");
-        manager_1.getDominion().add(standardWorker_1);
         standardWorkerRepository.save(standardWorker_1);
+
+        manager_1.getDominion().add(standardWorker_1);
+        //managerRepository.save(manager_1);
 
         //Assign workers to project
         standardWorker_1.setProject(project_1);
         project_1.getTeamMembers().add(standardWorker_1); //could also find users in the manager repo
+
+        projectRepository.save(project_1);
+        standardWorkerRepository.save(standardWorker_1);
 
         //Make a task
         Tasks tasks_1 = new Tasks(manager_1, 450);
@@ -78,20 +84,23 @@ public class InitialData implements CommandLineRunner
 
         //Assign Workers to task
         standardWorker_1.getCurrentTasks().add(tasks_1);
+        tasks_1.setStandardWorker(standardWorker_1);
+
+        standardWorkerRepository.save(standardWorker_1);
+        taskRepository.save(tasks_1);
 
         //Make an announcement
         Announcement announcement_1 =new Announcement();
         announcement_1.setWrittenBy("Could use a worker types first name");
         announcement_1.setSubject("Ultra important subject");
         announcement_1.setMessageContent("The compiler is ignoring my comments???");
+        announcementRepository.save(announcement_1);
 
         //Push the announcement to all workers within the managers dominion
-        for(StandardWorker standardWorker : manager_1.getDominion()) {
-            standardWorker.getAnnouncements().add(announcement_1);
-        }
-
-        announcementRepository.save(announcement_1);
-        //Print out the announcement
-
+       //for(StandardWorker standardWorker : ) {
+         //   standardWorker.getAnnouncements().add(announcement_1);
+           // standardWorkerRepository.save(standardWorker);
+        //}
+        //check the Database
     }
 }
