@@ -67,7 +67,7 @@ public class InitialData implements CommandLineRunner
         standardWorkerRepository.save(standardWorker_1);
 
         manager_1.getDominion().add(standardWorker_1);
-        //managerRepository.save(manager_1);
+        managerRepository.save(manager_1);
 
         //Assign workers to project
         standardWorker_1.setProject(project_1);
@@ -97,10 +97,10 @@ public class InitialData implements CommandLineRunner
         announcementRepository.save(announcement_1);
 
         //Push the announcement to all workers within the managers dominion
-       //for(StandardWorker standardWorker : ) {
-         //   standardWorker.getAnnouncements().add(announcement_1);
-           // standardWorkerRepository.save(standardWorker);
-        //}
+       for(StandardWorker standardWorker : manager_1.getDominion() ) {
+            standardWorker.getAnnouncements().add(announcement_1);
+            standardWorkerRepository.save(standardWorker);
+        }
         //check the Database
     }
 }

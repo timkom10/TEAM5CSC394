@@ -17,6 +17,11 @@ public class Manager extends WorkerTypes
     @OneToMany
     Set<Project> projects = new HashSet<Project>();
 
+    public String firstName;
+    public String lastName;
+    public String hireDate;
+    public String role;
+
     public Manager() {
     }
 
@@ -101,20 +106,24 @@ public class Manager extends WorkerTypes
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Manager manager = (Manager) o;
-        return dominion.equals(manager.dominion) &&
-                projects.equals(manager.projects);
+        return Objects.equals(firstName, manager.firstName) &&
+                Objects.equals(lastName, manager.lastName) &&
+                Objects.equals(hireDate, manager.hireDate) &&
+                Objects.equals(role, manager.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dominion, projects);
+        return Objects.hash(firstName, lastName, hireDate, role);
     }
 
     @Override
     public String toString() {
         return "Manager{" +
-                "dominion=" + dominion +
-                ", projects=" + projects +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", hireDate='" + hireDate + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -26,6 +26,11 @@ public class StandardWorker extends WorkerTypes
     @ManyToOne
     Project project;
 
+    public String firstName;
+    public String lastName;
+    public String hireDate;
+    public String role;
+
     private int points = 0;
 
     public StandardWorker() {
@@ -59,33 +64,6 @@ public class StandardWorker extends WorkerTypes
 
     public void setCurrentTasks(Set<Tasks> currentTasks) {
         this.currentTasks = currentTasks;
-    }
-
-
-    @Override
-    public String toString() {
-        return "StandardWorker{" +
-                "announcements=" + announcements +
-                ", currentTasks=" + currentTasks +
-                ", project=" + project +
-                ", points=" + points +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StandardWorker that = (StandardWorker) o;
-        return points == that.points &&
-                Objects.equals(announcements, that.announcements) &&
-                Objects.equals(currentTasks, that.currentTasks) &&
-                Objects.equals(project, that.project);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(announcements, currentTasks, project, points);
     }
 
     @Override
@@ -142,5 +120,33 @@ public class StandardWorker extends WorkerTypes
 
     @Override
     public void viewTasks() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StandardWorker that = (StandardWorker) o;
+        return points == that.points &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(hireDate, that.hireDate) &&
+                Objects.equals(role, that.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, hireDate, role, points);
+    }
+
+    @Override
+    public String toString() {
+        return "StandardWorker{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", hireDate='" + hireDate + '\'' +
+                ", role='" + role + '\'' +
+                ", points=" + points +
+                '}';
     }
 }

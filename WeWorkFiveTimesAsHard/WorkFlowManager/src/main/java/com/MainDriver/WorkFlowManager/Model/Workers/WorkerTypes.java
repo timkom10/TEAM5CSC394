@@ -15,12 +15,6 @@ public abstract class WorkerTypes
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long WorkerID;                         //Becomes the primary key of admin, manager, standard
 
-    public String firstName;
-    public String lastName;
-    public String hireDate;
-    public String role;
-
-
     public abstract String getFirstName();
     public abstract String getLastName();
     public abstract String getHireDate();
