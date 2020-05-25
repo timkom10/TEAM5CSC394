@@ -1,5 +1,7 @@
 package com.MainDriver.WorkFlowManager.Model.Announcements;
 
+import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,6 +11,9 @@ public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long A_ID;
+
+    @ManyToOne
+    StandardWorker standardWorker;
 
     public String WrittenBy;
     public String Subject;

@@ -1,6 +1,8 @@
 package com.MainDriver.WorkFlowManager.Model.Workers;
 
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
@@ -11,10 +13,12 @@ import java.util.Set;
 public class Manager extends WorkerTypes
 {
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "manager", orphanRemoval = true)
     Set<StandardWorker> dominion = new HashSet<StandardWorker>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "manager", orphanRemoval = true)
     Set<Project> projects = new HashSet<Project>();
 
     public String firstName;

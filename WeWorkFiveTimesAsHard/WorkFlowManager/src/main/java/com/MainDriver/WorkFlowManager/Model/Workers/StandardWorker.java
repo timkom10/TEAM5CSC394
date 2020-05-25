@@ -17,14 +17,19 @@ import java.util.Set;
 public class StandardWorker extends WorkerTypes
 {
 
-    @OneToMany
+    @OneToMany(mappedBy = "standardWorker", orphanRemoval = true,
+            fetch = FetchType.EAGER)
     Set<Announcement> announcements = new HashSet<Announcement>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "standardWorker", orphanRemoval = true)
     Set<Tasks> currentTasks = new HashSet<Tasks>();
 
     @ManyToOne
     Project project;
+
+    @ManyToOne
+    Manager manager;
 
     public String firstName;
     public String lastName;
@@ -34,6 +39,14 @@ public class StandardWorker extends WorkerTypes
     private int points = 0;
 
     public StandardWorker() {
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     public Set<Announcement> getAnnouncements() {

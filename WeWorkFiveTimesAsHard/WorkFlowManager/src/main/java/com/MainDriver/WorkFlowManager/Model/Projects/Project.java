@@ -6,6 +6,7 @@ import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,8 @@ public class Project {
     @OneToMany
     private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "project", orphanRemoval = true)
     private Set<Tasks> tasks = new HashSet<Tasks>();
 
     @ManyToOne
@@ -27,7 +29,6 @@ public class Project {
 
     public Project(){
     }
-
 
     public Project(Manager manager)
     {
@@ -56,5 +57,32 @@ public class Project {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(PID, project.PID) &&
+                Objects.equals(teamMembers, project.teamMembers) &&
+                Objects.equals(tasks, project.tasks) &&
+                Objects.equals(manager, project.manager) &&
+                Objects.equals(ProjectName, project.ProjectName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(PID, teamMembers, tasks, manager, ProjectName);
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "teamMembers=" + teamMembers +
+                ", tasks=" + tasks +
+                ", manager=" + manager +
+                ", ProjectName='" + ProjectName + '\'' +
+                '}';
     }
 }
