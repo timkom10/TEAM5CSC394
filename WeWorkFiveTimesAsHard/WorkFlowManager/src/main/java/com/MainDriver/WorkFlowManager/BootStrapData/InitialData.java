@@ -84,6 +84,7 @@ public class InitialData implements CommandLineRunner
         Tasks tasks_1 = new Tasks(manager_1, 450);
         tasks_1.setTaskName("Very important");
         tasks_1.setTaskDescription("Please do this:....");
+        tasks_1.setProject(project_1);
 
         //Assign Workers to task
         standardWorker_1.getCurrentTasks().add(tasks_1);
