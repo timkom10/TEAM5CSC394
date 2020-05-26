@@ -67,14 +67,12 @@ public class InitialData implements CommandLineRunner
         manager_1.getDominion().add(standardWorker_1);
 
 
-        for(Project project : manager_1.getProjects())
-        {
+        for(Project project : manager_1.getProjects()) {
             project.getTeamMembers().add(standardWorker_1);
             standardWorker_1.setProject(project);
         }
 
         standardWorkerRepository.save(standardWorker_1);
-        projectRepository.save(project_1);
 
         //Assign workers to project
         standardWorker_1.setProject(project_1);
@@ -93,7 +91,7 @@ public class InitialData implements CommandLineRunner
 
         //Make an announcement
         Announcement announcement_1 =new Announcement();
-        announcement_1.setWrittenBy("Could use a worker types first name");
+        announcement_1.setWrittenBy("Could ");
         announcement_1.setSubject("Ultra important subject");
         announcement_1.setMessageContent("The compiler is ignoring my comments???");
         announcementRepository.save(announcement_1);
