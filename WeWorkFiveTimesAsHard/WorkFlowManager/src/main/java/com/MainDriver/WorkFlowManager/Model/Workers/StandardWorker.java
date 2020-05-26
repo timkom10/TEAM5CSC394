@@ -36,6 +36,9 @@ public class StandardWorker extends WorkerTypes
     @ManyToOne
     private Manager manager;
 
+    private String userName;
+    private String password;
+
     private String firstName;
     private String lastName;
     private String hireDate;
@@ -102,6 +105,26 @@ public class StandardWorker extends WorkerTypes
     @Override
     public String getRole() {
         return this.role;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUserName() {
+        return this.userName;
+    }
+
+    @Override
+    public void setPassword(String pass) {
+        this.password =pass;
+    }
+
+    @Override
+    public void setUserName(String userName) {
+            this.userName =userName;
     }
 
     @Override

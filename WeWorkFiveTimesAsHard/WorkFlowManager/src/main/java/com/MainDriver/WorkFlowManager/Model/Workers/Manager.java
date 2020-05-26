@@ -30,6 +30,9 @@ public class Manager extends WorkerTypes {
             mappedBy = "manager")
     private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
+    private String userName;
+    private String password;
+
     private String firstName;
     private String lastName;
     private String hireDate;
@@ -52,6 +55,27 @@ public class Manager extends WorkerTypes {
 
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUserName() {
+        return this.userName;
+    }
+
+    @Override
+    public void setPassword(String pass) {
+        this.password =pass;
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        this.userName =userName;
     }
 
     @Override

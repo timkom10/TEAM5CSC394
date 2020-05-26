@@ -20,6 +20,11 @@ public abstract class WorkerTypes
     public abstract String getHireDate();
     public abstract String getRole();
 
+    public abstract String getPassword();
+    public abstract String getUserName();
+    public abstract void setPassword(String pass);
+    public abstract void setUserName(String userName);
+
     public abstract void setFirstName(String name);
     public abstract void setLastName(String name);
     public abstract void setHireDate(String hireDate);

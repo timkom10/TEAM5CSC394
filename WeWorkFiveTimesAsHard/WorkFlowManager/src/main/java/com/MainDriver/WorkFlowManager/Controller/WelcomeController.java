@@ -10,12 +10,6 @@ public class WelcomeController {
     @RequestMapping("/")
     public String getWelcome() { return "WelcomeView/LandingPage"; }
 
-    @RequestMapping("/Login")
-    public String getLogin()
-    {
-        return "WelcomeView/Login";
-    }
-
     @RequestMapping("/TermsOfService")
     public String getTOS()
     {
