@@ -20,7 +20,7 @@ public class StandardWorkerController {
         this.announcementRepository = announcementRepository;
     }
 
-    @RequestMapping("/StandardWorkers")
+    @RequestMapping({"/StandardWorkers","/user"})
     public String getStandardWorkers(Model model)
     {
         model.addAttribute("standardWorkers", workerTypeRepository.findAll());

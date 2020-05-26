@@ -110,7 +110,7 @@ public class StandardWorker extends WorkerTypes implements UserDetails
 
     @Override
     public String getRole() {
-        return this.role;
+        return "ROLE_USER";
     }
 
     @Override
