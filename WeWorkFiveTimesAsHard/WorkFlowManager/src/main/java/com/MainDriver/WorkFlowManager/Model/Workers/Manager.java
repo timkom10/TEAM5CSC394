@@ -64,7 +64,7 @@ public class Manager extends WorkerTypes {
     }
 
     @Override
-    public String getUserName() {
+    public String getUsername() {
         return this.userName;
     }
 

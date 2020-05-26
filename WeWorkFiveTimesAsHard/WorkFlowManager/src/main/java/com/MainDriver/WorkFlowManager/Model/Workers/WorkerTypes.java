@@ -21,7 +21,7 @@ public abstract class WorkerTypes
     public abstract String getRole();
 
     public abstract String getPassword();
-    public abstract String getUserName();
+    public abstract String getUsername();
     public abstract void setPassword(String pass);
     public abstract void setUserName(String userName);
 

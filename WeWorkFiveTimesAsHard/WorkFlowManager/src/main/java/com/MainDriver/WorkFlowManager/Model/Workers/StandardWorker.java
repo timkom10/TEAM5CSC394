@@ -4,18 +4,19 @@ import com.MainDriver.WorkFlowManager.Model.Announcements.Announcement;
 import com.MainDriver.WorkFlowManager.Model.Feedback.Feedback;
 import com.MainDriver.WorkFlowManager.Model.Projects.Project;
 import com.MainDriver.WorkFlowManager.Model.Projects.Tasks;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /*
     Standard worker, not an admin, not a manager, a grunt assigned to a manager, and a project
  */
 @Entity
-public class StandardWorker extends WorkerTypes
+public class StandardWorker extends WorkerTypes implements UserDetails
 {
 
     @OneToMany(mappedBy = "standardWorker", orphanRemoval = true,
@@ -47,6 +48,11 @@ public class StandardWorker extends WorkerTypes
     private int points = 0;
 
     public StandardWorker() {
+    }
+
+    public StandardWorker(String name)
+    {
+        this.userName = name;
     }
 
     public Manager getManager() {
@@ -108,13 +114,38 @@ public class StandardWorker extends WorkerTypes
     }
 
     @Override
-    public String getPassword() {
-        return this.password;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public String getUserName() {
+    public String getPassword() {
+        return "pass";
+    }
+
+    @Override
+    public String getUsername() {
         return this.userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override
