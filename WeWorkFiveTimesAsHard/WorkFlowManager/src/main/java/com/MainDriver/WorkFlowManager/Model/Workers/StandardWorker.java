@@ -29,17 +29,13 @@ public class StandardWorker extends WorkerTypes
     @ManyToOne
     private Project project;
 
-    @ManyToOne
+    @ManyToOne()
     private Manager manager;
 
     private String userName;
-    private String password;
-
     private String firstName;
     private String lastName;
     private String hireDate;
-    private String role;
-
     private int points = 0;
 
     public StandardWorker() {
@@ -104,31 +100,8 @@ public class StandardWorker extends WorkerTypes
     }
 
     @Override
-    public String getRole() {
-        return "ROLE_USER";
-    }
-
-    /*
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-     */
-
-    @Override
-    public String getPassword() {
-        return "pass";
-    }
-
-    @Override
     public String getUsername() {
         return this.userName;
-    }
-
-    @Override
-    public void setPassword(String pass) {
-        this.password =pass;
     }
 
     @Override
@@ -149,11 +122,6 @@ public class StandardWorker extends WorkerTypes
     @Override
     public void setHireDate(String hireDate) {
         this.hireDate =hireDate;
-    }
-
-    @Override
-    public void setRole(String role) {
-        this.role = role;
     }
 
     @Override
@@ -180,13 +148,12 @@ public class StandardWorker extends WorkerTypes
         return points == that.points &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(hireDate, that.hireDate) &&
-                Objects.equals(role, that.role);
+                Objects.equals(hireDate, that.hireDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, hireDate, role, points);
+        return Objects.hash(firstName, lastName, hireDate, points);
     }
 
     @Override
@@ -195,7 +162,6 @@ public class StandardWorker extends WorkerTypes
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hireDate='" + hireDate + '\'' +
-                ", role='" + role + '\'' +
                 ", points=" + points +
                 '}';
     }

@@ -25,7 +25,6 @@ public class StandardWorkerController
     @GetMapping("index")
     public  String index(Principal principal, Model model)
     {
-
         StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
         if(standardWorker != null)
         {

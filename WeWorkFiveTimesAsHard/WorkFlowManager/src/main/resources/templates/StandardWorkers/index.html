@@ -13,7 +13,7 @@
         <ul role="list" class="nav-grid w-list-unstyled">
             <li id="w-node-e8ef6aa8c31d-0c5b8230">
                 <a href="#" class="link-block-7 w-inline-block">
-                    <div class="text-block" th:text="Peter">Your Name</div>
+                    <div class="text-block" th:text="${standardWorker.getFirstName()}">Your Name</div>
                 </a>
             </li>
             <li>
@@ -44,7 +44,7 @@
 <div>
     <div class="container-12 w-container">
         <div class="contentcontainer">
-            <div th:each="announcement : ${announcements}">
+            <div th:each="announcement : ${standardWorker.getAnnouncements()}">
                 <td th:insert="fragments/AnnouncementFragment::
                  AnnounceFragment(WrittenBy = ${announcement.getWrittenBy()},
                 Subject = ${announcement.getSubject()})">

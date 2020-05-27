@@ -43,7 +43,15 @@ public class InitialData implements CommandLineRunner
     @Override
     public void run(String... args) {
         System.out.println("Started in Bootstrap");
+
+        //clear the DB
         this.userRepository.deleteAll();
+        this.announcementRepository.deleteAll();
+        this.managerRepository.deleteAll();
+        this.standardWorkerRepository.deleteAll();
+        this.projectRepository.deleteAll();
+        this.taskRepository.deleteAll();
+
 
         //Any new users need to have password encrypted before db insert
         Users peter = new Users("peter", passwordEncoder.encode("peter12"),"USER", "none");
@@ -59,8 +67,8 @@ public class InitialData implements CommandLineRunner
         Manager manager_1 = new Manager();
         manager_1.setFirstName("Peter");
         manager_1.setLastName("gentile");
-        manager_1.setRole("Writes stuff?");
         manager_1.setHireDate("02-20-2020");
+
         managerRepository.save(manager_1);
 
         //Make a project
@@ -75,16 +83,18 @@ public class InitialData implements CommandLineRunner
         StandardWorker standardWorker = new StandardWorker();
         standardWorker.setUserName("peter");
         standardWorker.setHireDate("02-20-2020");
-        standardWorker.setRole("USER");
-        standardWorker.setFirstName("peter I guess");
+        standardWorker.setFirstName("Peter");
         standardWorker.setLastName("a cool last name");
+        standardWorker.setManager(manager_1);
         manager_1.getDominion().add(standardWorker);
+
 
         for(Project project : manager_1.getProjects()) {
             project.getTeamMembers().add(standardWorker);
             standardWorker.setProject(project);
         }
         standardWorkerRepository.save(standardWorker);
+        managerRepository.save(manager_1);
 
         //Assign workers to project
         standardWorker.setProject(project_1);

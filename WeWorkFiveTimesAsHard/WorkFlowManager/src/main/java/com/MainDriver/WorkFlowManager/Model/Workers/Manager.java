@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 public class Manager extends WorkerTypes {
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "manager", orphanRemoval = true)
     private Set<StandardWorker> dominion = new HashSet<StandardWorker>();
 
@@ -31,12 +31,9 @@ public class Manager extends WorkerTypes {
     private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
     private String userName;
-    private String password;
-
     private String firstName;
     private String lastName;
     private String hireDate;
-    private String role;
 
     public Manager() {
     }
@@ -59,18 +56,8 @@ public class Manager extends WorkerTypes {
 
 
     @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
     public String getUsername() {
         return this.userName;
-    }
-
-    @Override
-    public void setPassword(String pass) {
-        this.password =pass;
     }
 
     @Override
@@ -94,11 +81,6 @@ public class Manager extends WorkerTypes {
     }
 
     @Override
-    public String getRole() {
-        return this.role;
-    }
-
-    @Override
     public void setFirstName(String name) {
         this.firstName = name;
     }
@@ -113,10 +95,6 @@ public class Manager extends WorkerTypes {
         this.hireDate =hireDate;
     }
 
-    @Override
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     @Override
     public void sendMessage() {
@@ -145,13 +123,12 @@ public class Manager extends WorkerTypes {
         Manager manager = (Manager) o;
         return Objects.equals(firstName, manager.firstName) &&
                 Objects.equals(lastName, manager.lastName) &&
-                Objects.equals(hireDate, manager.hireDate) &&
-                Objects.equals(role, manager.role);
+                Objects.equals(hireDate, manager.hireDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, hireDate, role);
+        return Objects.hash(firstName, lastName, hireDate);
     }
 
     @Override
@@ -160,7 +137,6 @@ public class Manager extends WorkerTypes {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hireDate='" + hireDate + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }
