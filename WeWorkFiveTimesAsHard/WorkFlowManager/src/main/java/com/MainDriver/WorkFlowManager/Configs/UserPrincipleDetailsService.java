@@ -24,7 +24,6 @@ public class UserPrincipleDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for "+ s);
         }
         UserPrinciple userPrinciple = new UserPrinciple(users);
-
         return userPrinciple;
     }
 }
