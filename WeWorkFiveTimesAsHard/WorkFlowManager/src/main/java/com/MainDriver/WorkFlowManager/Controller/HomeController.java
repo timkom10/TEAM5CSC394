@@ -37,11 +37,6 @@ public class HomeController {
         return "HumanResources";
     }
 
-    @RequestMapping("/info")
-    public String getinfo() {
-        return "Info/info";
-    }
-
     @RequestMapping("/success")
     public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
 
