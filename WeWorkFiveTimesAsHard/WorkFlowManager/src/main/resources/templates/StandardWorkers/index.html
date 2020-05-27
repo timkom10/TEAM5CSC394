@@ -44,7 +44,7 @@
 <div>
     <div class="container-12 w-container">
         <div class="contentcontainer">
-            <div th:each="announcement : ${standardWorker.getAnnouncements()}">
+            <div th:each="announcement : ${announcements}">
                 <td th:insert="fragments/AnnouncementFragment::
                  AnnounceFragment(WrittenBy = ${announcement.getWrittenBy()},
                 Subject = ${announcement.getSubject()})">

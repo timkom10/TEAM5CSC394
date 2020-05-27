@@ -65,9 +65,9 @@ public class InitialData implements CommandLineRunner
 
         //Make a new manager...
         Manager manager_1 = new Manager();
-        manager_1.setFirstName("Mr");
-        manager_1.setLastName("Krabs");
-        manager_1.setHireDate("02-20-2020");
+        manager_1.setFirstName("Kim");
+        manager_1.setLastName("Possible");
+        manager_1.setHireDate("2002-06-07");
 
         managerRepository.save(manager_1);
 
@@ -84,17 +84,16 @@ public class InitialData implements CommandLineRunner
         standardWorker.setUserName("peter");
         standardWorker.setHireDate("02-20-2020");
         standardWorker.setFirstName("Peter");
-        standardWorker.setLastName("a cool last name");
+        standardWorker.setLastName("Gentile");
         standardWorker.setManager(manager_1);
         manager_1.getDominion().add(standardWorker);
-
+        standardWorkerRepository.save(standardWorker);
 
         for(Project project : manager_1.getProjects()) {
             project.getTeamMembers().add(standardWorker);
             standardWorker.setProject(project);
         }
-        standardWorkerRepository.save(standardWorker);
-        managerRepository.save(manager_1);
+
 
         //Assign workers to project
         standardWorker.setProject(project_1);
@@ -113,19 +112,14 @@ public class InitialData implements CommandLineRunner
         taskRepository.save(tasks_1);
 
 
-        //Make an announcement
+       /* //Make an announcement
         Announcement announcement_1 =new Announcement();
         announcement_1.setWrittenBy(manager_1.getFirstName() + " " + manager_1.getLastName());
-        announcement_1.setSubject("Ultra important subject");
-        announcement_1.setMessageContent("The compiler is ignoring my comments???");
-
-
-        //Push the announcement to all workers within the managers dominion
-        for(StandardWorker sw : manager_1.getDominion() ) {
-            sw.getAnnouncements().add(announcement_1);
-        }
-        announcementRepository.save(announcement_1);
-
+        announcement_1.setManager(manager_1);
+        announcement_1.setSubject("Adjusted Deadline for Task #34");
+        announcement_1.setMessageContent("The deadline for Task #34 has been extended!");
+        announcement_1.setStandardWorker(standardWorker);
+        announcementRepository.save(announcement_1);*/
 
        //check the Database
     }

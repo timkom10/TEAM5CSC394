@@ -39,11 +39,4 @@ public class StandardWorkerController
     {
         return "feedback/FeedbackPortal";
     }
-
-
-    @GetMapping("info")
-    public String info()
-    {
-        return "Info/info";
-    }
 }

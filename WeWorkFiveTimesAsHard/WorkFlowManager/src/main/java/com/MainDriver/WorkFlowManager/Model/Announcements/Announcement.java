@@ -24,7 +24,7 @@ public class Announcement {
     private String Subject;
 
     @Lob
-    private String MessageContent;
+    private byte[] MessageContent;
 
     public Announcement(){
     }
@@ -90,10 +90,10 @@ public class Announcement {
     }
 
     public String getMessageContent() {
-        return MessageContent;
+        return new String(this.MessageContent);
     }
 
     public void setMessageContent(String messageContent) {
-        MessageContent = messageContent;
+        this.MessageContent = messageContent.getBytes();
     }
 }
