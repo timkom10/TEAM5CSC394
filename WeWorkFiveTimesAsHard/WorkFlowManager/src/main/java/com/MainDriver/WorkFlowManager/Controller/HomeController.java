@@ -44,7 +44,7 @@ public class HomeController {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/management/index"));
         }
         else if(role.contains("ROLE_USER")) {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/StandardWorkers/index"));
         }
     }
 }
