@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.Controller;
 
 import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.repository.AnnouncementRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,22 +15,23 @@ import java.security.Principal;
 public class StandardWorkerController
 {
     private final StandardWorkerRepository standardWorkerRepository;
+    private final AnnouncementRepository announcementRepository;
 
-    public StandardWorkerController(StandardWorkerRepository standardWorkerRepository) {
+    public StandardWorkerController(StandardWorkerRepository standardWorkerRepository, AnnouncementRepository announcementRepository) {
         this.standardWorkerRepository = standardWorkerRepository;
+        this.announcementRepository = announcementRepository;
     }
 
     @GetMapping("index")
     public  String index(Principal principal, Model model)
     {
-        //System.out.println(principal.getName());
+
         StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
         if(standardWorker != null)
         {
             model.addAttribute(standardWorker);
             System.out.println(standardWorker);
         }
-        System.out.println("REQUESTING SENT");
         return "StandardWorkers/index";
     }
 }
