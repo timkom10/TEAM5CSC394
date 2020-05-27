@@ -4,4 +4,5 @@ import com.MainDriver.WorkFlowManager.Model.Workers.StandardWorker;
 import org.springframework.data.repository.CrudRepository;
 
 public interface StandardWorkerRepository extends CrudRepository<StandardWorker, Long> {
+    StandardWorker findByuserName(String username);
 }
