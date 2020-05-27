@@ -1,8 +1,14 @@
 package com.MainDriver.WorkFlowManager.Controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/")
@@ -24,5 +30,21 @@ public class HomeController {
     @RequestMapping("/TOS")
     public String getTOS() {
         return "WelcomeView/TOS";
+    }
+
+    @RequestMapping("/success")
+    public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
+
+        String role =  authResult.getAuthorities().toString();
+
+        if(role.contains("ROLE_ADMIN")){
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin/index"));
+        }
+        else if(role.contains("ROLE_MANAGER")) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/management/index"));
+        }
+        else if(role.contains("ROLE_USER")) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index"));
+        }
     }
 }

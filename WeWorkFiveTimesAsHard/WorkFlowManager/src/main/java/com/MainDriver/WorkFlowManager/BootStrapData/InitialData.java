@@ -39,6 +39,6 @@ public class InitialData implements CommandLineRunner
        this.userRepository.save(admin);
        this.userRepository.save(manager);
 
-        //check the Database
+       //check the Database
     }
 }
