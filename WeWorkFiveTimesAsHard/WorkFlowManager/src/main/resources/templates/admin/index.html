@@ -3,40 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Home</title>
-    <link rel="stylesheet" type="text/css"  th:href="@{/css/CommonCSS/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css"  th:href="@{/css/AdminCSS/Admin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/admin.css}"/>
 
 </head>
-<body class="text-capitalize text-center flex-grow-1 flex-shrink-1 flex-fill justify-content-center">
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-    <div class="container">
-        <strong class="d-xl-flex flex-grow-1 flex-shrink-1 justify-content-xl-center align-items-xl-center" style="width: 250px;height: 50px;font-size: 25px;">Username
-        </strong>
-        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-            <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon">
-        </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item" role="presentation">
-                    <button class="btn btn-outline-primary active border rounded border-white visible" type="button" style="width: 150px;height: 50px;margin: 0px;margin-right: 80px;margin-left: 80px;">
-                        <a class="active text-white border-white" href="#" target="_top">Home</a>
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="btn btn-outline-primary active border rounded border-white visible" type="button" style="width: 150px;height: 50px;margin-left: 80px;margin-right: 80px;"><a class="text-white" href="#">Info</a>
-                    </button>
-                </li>
-            </ul>
-            <a class="btn btn-light text-center text-white d-xl-flex justify-content-xl-center align-items-xl-center action-button" role="button" href="#" style="background-color: rgb(255,0,0);width: 100px;height: 50px;">Log Out</a>
+<body class="body">
+<div>
+    <div class="container-3 w-container">
+        <div>
+            <h1 class="heading-4">ADMIN:</h1>
         </div>
+        <a href="#" class="link-block-4 w-inline-block">
+            <h1 class="heading-5">Username</h1>
+        </a>
     </div>
-</nav>
-<div class="btn-group btn-group-lg border rounded-0 border-secondary shadow-lg d-inline-flex d-lg-flex d-xl-flex flex-row flex-grow-1 justify-content-lg-center justify-content-xl-center align-items-xl-center" role="group"></div><button class="btn btn-primary text-capitalize text-center text-lg-center text-white bg-success border rounded border-dark shadow-lg flex-grow-1 flex-shrink-1 flex-fill align-self-center flex-wrap" type="button" style="background-color: rgb(74,145,62);height: 300px;width: 500px;margin: 50px;margin-top: 200px;font-size: 30px;">Compose New Announcement</button>
-<button
-        class="btn btn-primary bg-info flex-grow-1 flex-shrink-1 flex-fill" type="button" style="margin: 50px;height: 300px;width: 500px;margin-top: 200px;font-size: 30px;">Human Resources&nbsp;
-</button>
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</div>
+<div class="section">
+    <div class="container-4 w-container">
+        <a href="#" class="link-block-3 w-inline-block">
+            <h2>Announcement</h2>
+            <div class="text-block-2">Compose an Announcement</div>
+        </a>
+        <a href="#" class="link-block-3 w-inline-block">
+            <h2>Human Resources</h2>
+            <div class="text-block">Add, update, or Remove Employees</div>
+        </a>
+    </div>
+</div>
 </body>
 </html>
