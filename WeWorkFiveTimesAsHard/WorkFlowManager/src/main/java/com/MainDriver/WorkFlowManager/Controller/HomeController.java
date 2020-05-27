@@ -25,6 +25,4 @@ public class HomeController {
     public String getTOS() {
         return "WelcomeView/TOS";
     }
-
-
 }
