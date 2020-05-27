@@ -17,4 +17,9 @@ public class AdminController {
     public String info() {
         return "Info/info";
     }
+
+    @RequestMapping("Hr")
+    public String getHR() {
+        return "admin/HumanResources";
+    }
 }
