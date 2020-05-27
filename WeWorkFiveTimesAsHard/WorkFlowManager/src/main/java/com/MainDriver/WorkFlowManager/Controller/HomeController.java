@@ -11,7 +11,7 @@ public class HomeController {
     @GetMapping("index")
     public String getWelcome() { return "index"; }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String getLogin() {
         return "login";
     }

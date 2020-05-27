@@ -1,4 +1,4 @@
-package com.MainDriver.WorkFlowManager.Services;
+package com.MainDriver.WorkFlowManager.Configs;
 
 import com.MainDriver.WorkFlowManager.Model.Users;
 import com.MainDriver.WorkFlowManager.repository.UserRepository;
