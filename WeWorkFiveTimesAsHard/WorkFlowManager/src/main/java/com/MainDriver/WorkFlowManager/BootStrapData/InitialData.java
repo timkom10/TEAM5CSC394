@@ -40,7 +40,7 @@ public class InitialData implements CommandLineRunner
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Started in Bootstrap");
-
+        /*
         //Make a new manager...
         Manager manager_1 = new Manager();
         manager_1.setFirstName("Peter");
@@ -100,6 +100,8 @@ public class InitialData implements CommandLineRunner
        for(StandardWorker standardWorker : manager_1.getDominion() ) {
             standardWorker.getAnnouncements().add(announcement_1);
         }
+
+         */
         //check the Database
     }
 }
