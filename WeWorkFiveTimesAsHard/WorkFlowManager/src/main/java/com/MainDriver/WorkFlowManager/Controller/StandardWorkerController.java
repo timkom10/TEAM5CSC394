@@ -33,4 +33,10 @@ public class StandardWorkerController
         }
         return "StandardWorkers/index";
     }
+
+    @GetMapping("feedbackPortal")
+    public String portal()
+    {
+        return "feedback/FeedbackPortal";
+    }
 }

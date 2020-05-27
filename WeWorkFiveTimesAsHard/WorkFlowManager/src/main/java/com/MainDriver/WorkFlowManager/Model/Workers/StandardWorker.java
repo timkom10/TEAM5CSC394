@@ -14,7 +14,8 @@ import java.util.*;
 public class StandardWorker extends WorkerTypes
 {
 
-    @OneToMany(mappedBy = "standardWorker", orphanRemoval = true,
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "standardWorker", orphanRemoval = true,
             fetch = FetchType.EAGER)
     private Set<Announcement> announcements = new HashSet<Announcement>();
 

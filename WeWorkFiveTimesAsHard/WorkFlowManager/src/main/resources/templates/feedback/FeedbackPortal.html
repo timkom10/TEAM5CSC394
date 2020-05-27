@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Feedback Portal</title>
+
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/CommonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/Portal/Features-Boxed.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/Portal/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/Portal/Navigation-Clean.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/Portal/styles.css}"/>
+
+</head>
+<body>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean">
+    <div class="container"><a class="navbar-brand" href="#"><strong>WeWorkFiveTimesAsHard</strong><br></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div
+                class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Resources</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Feedback</a></li>
+            </ul>
+        </div><a class="text-dark" href="#">Info</a></div>
+</nav>
+<div class="features-boxed">
+    <div class="container">
+        <div class="intro">
+            <h1 class="text-center"><strong>Feedback Portal&nbsp;&nbsp;</strong><i class="fa fa-comments"></i></h1>
+        </div>
+        <div class="row justify-content-center features">
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box"><i class="fa fa-comments icon"></i>
+                    <h3 class="name">&nbsp;<a class="text-dark learn-more" href="#">Your Feedback&nbsp;</a></h3>
+                    <p class="description">&nbsp; &nbsp; &nbsp; &nbsp;View feedback left for you.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box"><i class="fa fa-group icon"></i>
+                    <h3 class="name"><a class="text-dark learn-more" href="#">Project Wide&nbsp;</a>&nbsp;</h3>
+                    <p class="description">See feedback left for others in your project.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box"><i class="fa fa-folder-open icon"></i>
+                    <h3 class="name"><a class="text-dark learn-more" href="#">Public</a></h3>
+                    <p class="description">&nbsp; &nbsp; &nbsp; &nbsp;View any public feedback.&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -65,8 +65,8 @@ public class InitialData implements CommandLineRunner
 
         //Make a new manager...
         Manager manager_1 = new Manager();
-        manager_1.setFirstName("Peter");
-        manager_1.setLastName("gentile");
+        manager_1.setFirstName("Mr");
+        manager_1.setLastName("Krabs");
         manager_1.setHireDate("02-20-2020");
 
         managerRepository.save(manager_1);
@@ -118,12 +118,14 @@ public class InitialData implements CommandLineRunner
         announcement_1.setWrittenBy(manager_1.getFirstName() + " " + manager_1.getLastName());
         announcement_1.setSubject("Ultra important subject");
         announcement_1.setMessageContent("The compiler is ignoring my comments???");
-        announcementRepository.save(announcement_1);
+
 
         //Push the announcement to all workers within the managers dominion
         for(StandardWorker sw : manager_1.getDominion() ) {
             sw.getAnnouncements().add(announcement_1);
         }
+        announcementRepository.save(announcement_1);
+
 
        //check the Database
     }
