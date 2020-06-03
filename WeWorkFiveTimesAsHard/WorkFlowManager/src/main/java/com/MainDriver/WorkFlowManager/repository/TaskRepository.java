@@ -1,6 +1,6 @@
 package com.MainDriver.WorkFlowManager.repository;
 
-import com.MainDriver.WorkFlowManager.Model.Projects.Tasks;
+import com.MainDriver.WorkFlowManager.model.projects.Tasks;
 import org.springframework.data.repository.CrudRepository;
 
 

@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Management Index</title>
-</head>
-<body>
 
-<h1> Booted into management index</h1>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ManagerCSS/managerHomepage.css}"/>
+
+</head>
+<body class="body">
+<div>
+    <div class="container w-container">
+        <a th:href="@{info}" class="link-block w-inline-block">
+            <div class="text-block" th:text="${manager.getFirstName()}">Name</div>
+        </a>
+        <a href="#" class="link-block w-inline-block">
+            <div class="text-block">Project</div>
+        </a>
+        <a th:href="@{feedback}" class="link-block w-inline-block">
+            <div class="text-block">Feedback</div>
+        </a>
+        <a class="link-block w-inline-block">
+            <form form-method ="post" th:action="@{/logout}">
+                <button type = "submit" style = "background-color: transparent;">Logout</button>
+            </form>
+        </a>
+    </div>
+</div>
+<div>
+    <div class="container-2 w-container">
+        <div>
+            <h1>Announcements:</h1>
+        </div>
+        <div><a href="#" class="w-button">Compose New Announcement</a></div>
+    </div>
+</div>
+<div>
+    <div class="w-container">
+        <ul role="list" class="list">
+            <li>Written By:</li>
+            <li>Subject</li>
+            <li>Is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#x27;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+            <li><a href="#" class="w-button">Remove?</a></li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

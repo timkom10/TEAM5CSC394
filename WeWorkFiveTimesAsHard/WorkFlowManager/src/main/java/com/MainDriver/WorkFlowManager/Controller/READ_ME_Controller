@@ -1,6 +1,0 @@
-The Controller package is used to handle client requests.
-
-In this package we will list out the "logic" behind how a users
-Can click a button and be redirected to a page, or perform some
-Database updates, I.e. assign a role, or notify that they are done
-With project, send a message, etc.

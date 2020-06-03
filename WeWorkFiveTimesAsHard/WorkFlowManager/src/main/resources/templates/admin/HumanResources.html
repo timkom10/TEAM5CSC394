@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-md text-center navigation-clean">
-    <div class="container"><a class="navbar-brand" th:href="@{index}">WeWorkFiveTimesAsHard</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand" th:href="@{/}">WeWorkFiveTimesAsHard</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
@@ -38,7 +38,7 @@
             </div>
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box"><i class="fa fa-remove icon"></i>
-                    <h3 class="name"><a class="text-dark learn-more" href="#">Remove</a></h3>
+                    <h3 class="name"><a class="text-dark learn-more" th:href="@{RemoveUser}">Remove</a></h3>
                     <p class="description">Remove an employee.</p>
                 </div>
             </div>

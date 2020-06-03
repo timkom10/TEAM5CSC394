@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove User</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/removeUser.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="container-8 w-container">
+        <div>
+            <a th:href="@{/}" class="link-block-10 w-inline-block">
+                <h5 class="heading-9">WeWorkFiveTimesAsHard</h5>
+            </a>
+        </div>
+        <div>
+            <a th:href="@{index}" class="link-block-10 w-inline-block">
+                <h5 class="heading-9">Home</h5>
+            </a>
+        </div>
+        <div>
+            <div class="form-block w-form">
+                <form id="email-form" name="email-form" data-name="Email Form" method="post" class="form" th:action="@{/logout}">
+                    <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="section-4">
+    <div class="container-9 w-container">
+        <div>
+            <h3>Search User</h3>
+        </div>
+        <div>
+            <div class="w-form">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{RemoveUser}" method="get">
+                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search By Username..." id="username">
+                    <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="returnedusers w-container">
+        <h4 class="heading-14">Current Users</h4>
+        <div>
+            <ul role="list" class="list w-list-unstyled">
+                <li>Username</li>
+                <li>Role</li>
+                <li>ID</li>
+                <li>Remove?</li>
+            </ul>
+            <ul role="list" class="usertable w-list-unstyled" th:each="user: ${users}" style="border: 1px solid black">
+                <li class="username" th:text="${user.getUsername()}"></li>
+                <li class="role" th:text="${user.getRoles()}"></li>
+                <li class="active" th:text="${user.getId()}"></li>
+                <li class="remove">
+                    <a th:href="@{deleteUser(username=${user.username})}" class="w-button"> X </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

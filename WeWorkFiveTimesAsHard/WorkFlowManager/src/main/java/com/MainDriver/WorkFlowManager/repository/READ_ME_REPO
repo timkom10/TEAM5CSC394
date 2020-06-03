@@ -1,3 +1,0 @@
-This package contains the repositories of anytype that we want to have tables for.
-It does not "implement" anything really, but rather serves as a hint to Spring that
-We can perform CRUD (Create, Read, Update, Delete) operations on these classes

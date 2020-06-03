@@ -15,7 +15,7 @@
             <h1 class="heading-4">ADMIN:</h1>
         </div>
         <a th:href="@{info}" class="link-block-4 w-inline-block">
-            <h1 class="heading-5">Username</h1>
+            <h1 class="heading-5" th:text="${workerType.getFirstName()}">Username</h1>
         </a>
     </div>
 </div>

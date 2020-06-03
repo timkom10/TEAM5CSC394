@@ -13,23 +13,20 @@
 <body class = "body">
 
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#">WeWorkFiveTimesAsHard</a>
+        <a class="navbar-brand" th:href="@{/}">WeWorkFiveTimesAsHard</a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="main-navigation">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" th:href="@{index}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Project</a>
+                    <a class="nav-link" th:href="@{feedback}">Feedback</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Feedback</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Info</a>
+                    <a class="nav-link" th:href="@{info}">Info</a>
                 </li>
             </ul>
         </div>
@@ -37,16 +34,16 @@
 
     <div class="container-fluid">
         <div class="user-information overlay first-name">
-            <span style="color:#19a8e0">First Name:</span> Willy
+            <span style="color:#19a8e0">First Name:</span> <a th:text="${workerType.getFirstName()}"> Willy </a>
         </div>
         <div class="user-information overlay last-name">
-            <span style="color:#19a8e0">Last Name:</span> Moore
+            <span style="color:#19a8e0">Last Name:</span> <a th:text="${workerType.getLastName()}"> Moore </a>
         </div>
         <div class="user-information overlay role">
-            <span style="color:#19a8e0">Role:</span> Manager
+            <span style="color:#19a8e0">Role:</span> <a th:text="${workerType.getRole()}"> Manager </a>
         </div>
         <div class="user-information overlay points">
-            <span style="color:#19a8e0">Total Points:</span> 15
+            <span style="color:#19a8e0">Hire Date:</span><a th:text="${workerType.getHireDate()}"> 15 </a>
         </div>
 
     </div>

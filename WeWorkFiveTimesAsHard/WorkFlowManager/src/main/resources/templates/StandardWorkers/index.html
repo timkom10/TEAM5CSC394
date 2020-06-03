@@ -5,55 +5,44 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/StandardWorkerCSS/StandardWorkerHomepage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/StandardWorkerCSS/standardWorkerHomepage.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-4">
-    <nav class="container-11 w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li id="w-node-e8ef6aa8c31d-0c5b8230">
-                <a th:href="@{info}" class="link-block-7 w-inline-block">
-                    <div class="text-block" th:text="${standardWorker.getFirstName()}">Your Name</div>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{index}" class="link-block-9 w-inline-block">
-                    <div class="text-block-3">Home</div>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="link-block-10 w-inline-block">
-                    <div class="text-block-4">Projects</div>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{feedbackPortal}" class="link-block-8 w-inline-block">
-                    <div class="text-block-2">Feedback</div>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
 <div>
-    <div class="container-9 w-container">
+    <div class="container w-container">
+        <a th:href="@{info}" class="link-block w-inline-block">
+            <div class="text-block" th:text="${standardWorker.getFirstName()}">Name</div>
+        </a>
+        <a href="#" class="link-block w-inline-block">
+            <div class="text-block">Project</div>
+        </a>
+        <a th:href="@{feedback}" class="link-block w-inline-block">
+            <div class="text-block">Feedback</div>
+        </a>
+        <a  class="link-block w-inline-block">
+            <form form-method ="post" th:action="@{/logout}">
+                <button type = "submit" style = "background-color: transparent;">Logout</button>
+            </form>
+        </a>
+    </div>
+</div>
+<div>
+    <div class="container-2 w-container">
         <div>
-            <h2 class="heading-14">Announcements</h2>
+            <h1>Announcements:</h1>
         </div>
     </div>
 </div>
 <div>
-    <div class="container-12 w-container">
-        <div class="contentcontainer">
-            <div th:each="announcement : ${announcements}">
-                <td th:insert="fragments/AnnouncementFragment::
-                 AnnounceFragment(WrittenBy = ${announcement.getWrittenBy()},
-                Subject = ${announcement.getSubject()})">
-                </td>
-
-                <td th:insert= "fragments/AnnouncementFragment:: AnnouncePayload(PayLoad = ${announcement.getMessageContent()} )">
-                </td>
-            </div>
-        </div>
+    <div class="w-container">
+        <ul role="list" class="list" th:each="announcement: ${announcements}">
+            <li th:text="${announcement.getWrittenBy()}">Written By:</li>
+            <li th:text="${announcement.getSubject()}">Subject</li>
+            <li th:text="${announcement.getMessageContent()}">Is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#x27;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
+            <li>
+                <a th:href="@{removeAnnouncement(announcementId = ${announcement.getId()})}"  class="w-button">Remove?</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
