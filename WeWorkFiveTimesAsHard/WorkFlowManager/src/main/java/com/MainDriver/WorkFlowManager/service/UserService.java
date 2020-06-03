@@ -24,4 +24,16 @@ public class UserService {
             userRepository.delete(user);
         }
     }
+
+    public boolean addUser(Users user)
+    {
+        if(userRepository.findByUsername(user.getUsername()) == null)
+        {
+            //can insert
+            userRepository.save(user);
+            return true;
+        }
+        //no insert
+        return false;
+    }
 }

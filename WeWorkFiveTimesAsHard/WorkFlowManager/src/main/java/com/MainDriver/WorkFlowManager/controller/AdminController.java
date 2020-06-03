@@ -1,15 +1,13 @@
 package com.MainDriver.WorkFlowManager.controller;
 
+import com.MainDriver.WorkFlowManager.model.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.service.AdminService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -62,4 +60,31 @@ public class AdminController {
         return "admin/RemoveUser";
     }
 
+    @RequestMapping("addUser")
+    public String getAddUser(Model model) {
+        model.addAttribute("user", new Users());
+        return "admin/addUser";
+    }
+
+    @RequestMapping(value = "insertUser", method = RequestMethod.POST)
+    public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model)
+    {
+
+        if(userService.addUser(user))
+        {
+            if(user.getRoles().equals("STANDARDWORKER"))
+            {
+                //make the user a standard worker
+                return "admin/addStandardWorker";
+            }
+            else
+            {
+                //make the user a manager
+                System.out.println("ROLES NOT EQUAL:  " +user.getRoles());
+                System.out.println(user.getRoles());
+            }
+        }
+        System.out.println("ROLES:  " +user.getRoles());
+        return "admin/addUser";
+    }
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Add Standard Worker</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/addStandardWorker.css}"/>
+
+</head>
+<body class="body">
+<div th:replace="fragments/addUsersFragment :: addUserHeader"></div>
+<div>
+    <div class="container-2 w-container">
+        <div>
+            <h1>Make StandardWorker</h1>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="w-container">
+        <div class="w-form">
+            <form id="email-form" name="email-form" data-name="Email Form">
+                <label for="First-Name">First Name</label>
+                    <input type="text" class="w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="First Name" id="First-Name" required="">
+                <label for="lastname">Last Name</label>
+                    <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Last Name" id="lastname" required="">
+                <label for="Hire-Date">Hire Date</label>
+                    <input type="text" class="w-input" maxlength="256" name="Hire-Date" data-name="Hire Date" placeholder="Hire Date" id="Hire-Date">
+                <label for="Manager">Manager:</label>
+                    <input type="text" class="w-input" maxlength="256" name="Manager" data-name="Manager" placeholder="Manager Username" id="Manager" required="">
+                <input type="submit" value="Submit" data-wait="Please wait..." class="w-button">
+            </form>
+            <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
