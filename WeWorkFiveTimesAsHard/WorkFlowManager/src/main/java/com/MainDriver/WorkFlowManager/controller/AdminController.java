@@ -2,8 +2,10 @@ package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
+import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.service.AdminService;
+import com.MainDriver.WorkFlowManager.service.ManagerService;
 import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ManagerService managerService;
 
     @Autowired
     StandardWorkerService standardWorkerService;
@@ -79,35 +84,47 @@ public class AdminController {
     {
         if(userService.addUser(user))
         {
+            usernamePlaceholder = user.getUsername();
             if(user.getRoles().equals("STANDARDWORKER")) {
                 //make the user a standard worker
-                usernamePlaceholder = user.getUsername();
                 model.addAttribute("worker", new StandardWorker());
                 return "admin/addStandardWorker";
             }
-            else {
+            else if(user.getRoles().equals("MANAGER"))
+            {
+
                 //make the user a manager
-                System.out.println("ROLES NOT EQUAL:  " +user.getRoles());
-                System.out.println(user.getRoles());
+                model.addAttribute("manager", new Manager());
+                return "admin/addManager";
             }
         }
         return "admin/addUser";
     }
 
     @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
-    public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker, BindingResult bindingResult, Principal principal, Model model)
-    {
+    public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model) {
 
         Users user = userService.getByUsername(this.usernamePlaceholder);
-        if(user != null)
-        {
-
+        if(user != null) {
             standardWorker.setROLE(user.getRoles());
             standardWorker.setUserName(user.getUsername());
             standardWorkerService.addStandardWorker(standardWorker);
         }
         model.addAttribute("user", new Users());
-       return "admin/addUser";
+        return "admin/addUser";
+    }
+
+    @RequestMapping(value = "insertManager", method = RequestMethod.POST)
+    public String getInsertManager(@ModelAttribute("manager") Manager manager,Model model) {
+
+        Users user = userService.getByUsername(this.usernamePlaceholder);
+        if(user != null) {
+            manager.setROLE(user.getRoles());
+            manager.setUserName(user.getUsername());
+            managerService.addManager(manager);
+        }
+        model.addAttribute("user", new Users());
+        return "admin/addUser";
     }
 
 }
