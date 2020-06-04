@@ -99,7 +99,7 @@ public class InitialData implements CommandLineRunner
         standardWorker.setHireDate("02-20-2020");
         standardWorker.setFirstName("Peter");
         standardWorker.setLastName("Gentile");
-        standardWorker.setROLE("Just a worker");
+        standardWorker.setEmployeeRole("Just a worker");
         standardWorker.setManager(manager_1);
         manager_1.getDominion().add(standardWorker);
         standardWorkerRepository.save(standardWorker);

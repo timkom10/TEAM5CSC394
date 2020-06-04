@@ -80,20 +80,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
-    public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model)
-    {
-        if(userService.addUser(user))
-        {
+    public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model) {
+        if(userService.addUser(user)) {
             usernamePlaceholder = user.getUsername();
             if(user.getRoles().equals("STANDARDWORKER")) {
-                //make the user a standard worker
                 model.addAttribute("worker", new StandardWorker());
                 return "admin/addStandardWorker";
             }
-            else if(user.getRoles().equals("MANAGER"))
-            {
-
-                //make the user a manager
+            else if(user.getRoles().equals("MANAGER")) {
                 model.addAttribute("manager", new Manager());
                 return "admin/addManager";
             }
@@ -115,4 +109,25 @@ public class AdminController {
         return "admin/addUser";
     }
 
+    @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
+    public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("workers", standardWorkerService.findAllByUsername(username));
+        return "admin/searchTeamMembers";
+    }
+
+    @GetMapping("alterTeamMember")
+    public String getAlterEmployee(Model model, String username)
+    {
+        this.usernamePlaceholder = username;
+        model.addAttribute("worker", standardWorkerService.getByUsername(username));
+        return "admin/alterTeamMember";
+    }
+
+    @RequestMapping(value = "insertAlteredStandardWorker", method = RequestMethod.POST)
+    public String getInsertAlteredStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model)
+    {
+        standardWorkerService.insertAlteredStandardWorker(standardWorker, usernamePlaceholder);
+        model.addAttribute("user", new Users());
+        return "admin/addUser";
+    }
 }

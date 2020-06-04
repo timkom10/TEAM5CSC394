@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Team Members</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/searchTeamMember.css}"/>
+
+</head>
+<body class="body">
+<div th:replace="fragments/addUsersFragment :: addUserHeader"></div>
+<div>
+    <div class="w-container">
+        <div class="w-form">
+            <form id="email-form" name="email-form" data-name="Email Form" class="searchteammembers" th:action="@{searchTeamMember}" method="get">
+                <h1>Search Team Members:</h1>
+                <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search By Username" id="username" required="">
+                <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
+            </form>
+            <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="w-container">
+        <ul role="list" class="list w-list-unstyled">
+            <li>Username </li>
+            <li>Manager</li>
+            <li>Role</li>
+            <li>Select?</li>
+        </ul>
+        <ul role="list" class="list w-list-unstyled" th:each="worker: ${workers}">
+            <li th:text="${worker.getUserName()}">Username </li>
+            <li th:text="${worker.getManagerUsername()}">Manager</li>
+            <li th:text="${worker.getRole()}">Role</li>
+            <li>
+                <a th:href="@{alterTeamMember(username=${worker.getUserName()})}" class="w-button"> Select </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

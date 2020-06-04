@@ -38,14 +38,13 @@ public class StandardWorker extends WorkerType
     @ManyToOne()
     private Manager manager;
 
+    private String managerUsername;
     private String userName;
-    private String ROLE;
+    private String employeeRole;
     private String firstName;
     private String lastName;
     private String hireDate;
     private int points = 0;
-
-    private String managerUsername;
 
     public StandardWorker() {
     }
@@ -95,6 +94,6 @@ public class StandardWorker extends WorkerType
 
     @Override
     public String getRole() {
-        return this.ROLE;
+        return this.getEmployeeRole();
     }
 }
