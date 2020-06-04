@@ -45,6 +45,8 @@ public class StandardWorker extends WorkerType
     private String hireDate;
     private int points = 0;
 
+    private String managerUsername;
+
     public StandardWorker() {
     }
 

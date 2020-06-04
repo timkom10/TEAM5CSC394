@@ -21,15 +21,15 @@
 <div>
     <div class="w-container">
         <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form">
+            <form id="email-form" name="email-form" data-name="Email Form" form action="#" th:action="@{insertStandardWorker}" th:object="${worker}" method="post">
                 <label for="First-Name">First Name</label>
-                    <input type="text" class="w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="First Name" id="First-Name" required="">
+                    <input type="text" class="w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="First Name" id="First-Name" required="" th:field = "*{firstName}">
                 <label for="lastname">Last Name</label>
-                    <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Last Name" id="lastname" required="">
+                    <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Last Name" id="lastname" required="" th:field = "*{lastName}">
                 <label for="Hire-Date">Hire Date</label>
-                    <input type="text" class="w-input" maxlength="256" name="Hire-Date" data-name="Hire Date" placeholder="Hire Date" id="Hire-Date">
+                    <input type="text" class="w-input" maxlength="256" name="Hire-Date" data-name="Hire Date" placeholder="Hire Date" id="Hire-Date" th:field = "*{hireDate}">
                 <label for="Manager">Manager:</label>
-                    <input type="text" class="w-input" maxlength="256" name="Manager" data-name="Manager" placeholder="Manager Username" id="Manager" required="">
+                    <input type="text" class="w-input" maxlength="256" name="Manager" data-name="Manager" placeholder="Manager Username" id="Manager" required="" th:field = "*{managerUsername}">
                 <input type="submit" value="Submit" data-wait="Please wait..." class="w-button">
             </form>
             <div class="w-form-done">

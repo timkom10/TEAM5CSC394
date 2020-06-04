@@ -2,11 +2,14 @@ package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
+import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.service.AdminService;
+import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -20,6 +23,11 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    StandardWorkerService standardWorkerService;
+
+    private static  String usernamePlaceholder ="";
 
     @GetMapping("index")
     public String index(Principal principal, Model model) {
@@ -69,22 +77,38 @@ public class AdminController {
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
     public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model)
     {
-
         if(userService.addUser(user))
         {
-            if(user.getRoles().equals("STANDARDWORKER"))
-            {
+            if(user.getRoles().equals("STANDARDWORKER")) {
+                System.out.println("ROLES " + user.getRoles());
                 //make the user a standard worker
+                usernamePlaceholder = user.getUsername();
+                model.addAttribute("worker", new StandardWorker());
                 return "admin/addStandardWorker";
             }
-            else
-            {
+            else {
                 //make the user a manager
                 System.out.println("ROLES NOT EQUAL:  " +user.getRoles());
                 System.out.println(user.getRoles());
             }
         }
-        System.out.println("ROLES:  " +user.getRoles());
         return "admin/addUser";
     }
+
+    @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
+    public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker, BindingResult bindingResult, Principal principal, Model model)
+    {
+
+        Users user = userService.getByUsername(this.usernamePlaceholder);
+        if(user != null)
+        {
+
+            standardWorker.setROLE(user.getRoles());
+            standardWorker.setUserName(user.getUsername());
+            standardWorkerService.addStandardWorker(standardWorker);
+        }
+        model.addAttribute("user", new Users());
+       return "admin/addUser";
+    }
+
 }
