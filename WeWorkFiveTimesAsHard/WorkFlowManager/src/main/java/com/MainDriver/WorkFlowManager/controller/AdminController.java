@@ -103,26 +103,14 @@ public class AdminController {
 
     @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
     public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model) {
-
-        Users user = userService.getByUsername(this.usernamePlaceholder);
-        if(user != null) {
-            standardWorker.setROLE(user.getRoles());
-            standardWorker.setUserName(user.getUsername());
-            standardWorkerService.addStandardWorker(standardWorker);
-        }
+        standardWorkerService.addStandardWorker(userService.getByUsername(this.usernamePlaceholder), standardWorker);
         model.addAttribute("user", new Users());
         return "admin/addUser";
     }
 
     @RequestMapping(value = "insertManager", method = RequestMethod.POST)
     public String getInsertManager(@ModelAttribute("manager") Manager manager,Model model) {
-
-        Users user = userService.getByUsername(this.usernamePlaceholder);
-        if(user != null) {
-            manager.setROLE(user.getRoles());
-            manager.setUserName(user.getUsername());
-            managerService.addManager(manager);
-        }
+        managerService.addManager(userService.getByUsername(this.usernamePlaceholder), manager);
         model.addAttribute("user", new Users());
         return "admin/addUser";
     }

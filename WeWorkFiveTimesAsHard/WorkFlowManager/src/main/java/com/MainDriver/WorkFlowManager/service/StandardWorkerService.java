@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.service;
 
+import com.MainDriver.WorkFlowManager.model.Users;
 import com.MainDriver.WorkFlowManager.model.announcements.Announcement;
 import com.MainDriver.WorkFlowManager.model.announcements.StandardWorkerAnnouncements;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
@@ -46,11 +47,19 @@ public class StandardWorkerService {
         standardWorkerAnnouncementRepository.delete(standardWorkerAnnouncements);
     }
 
-    public void addStandardWorker(StandardWorker standardWorker) {
-        Manager manager = managerRepository.findByUserName(standardWorker.getManagerUsername());
-        if(manager != null) {
-            standardWorker.setManager(manager);
+    public void addStandardWorker(Users user, StandardWorker standardWorker)
+    {
+        if((user !=null) &&(standardWorker != null))
+        {
+            standardWorker.setROLE(user.getRoles());
+            standardWorker.setUserName(user.getUsername());
+
+            Manager manager = managerRepository.findByUserName(standardWorker.getManagerUsername());
+            if(manager != null) {
+                standardWorker.setManager(manager);
+            }
+            standardWorkerRepository.save(standardWorker);
+
         }
-        standardWorkerRepository.save(standardWorker);
     }
 }

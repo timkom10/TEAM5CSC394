@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.service;
 
+import com.MainDriver.WorkFlowManager.model.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ public class ManagerService {
         this.managerRepository = managerRepository;
     }
 
-   public void addManager(Manager manager)
+   public void addManager(Users user, Manager manager)
     {
-        if(manager != null)
+        if((user != null) && (manager != null))
         {
+            manager.setROLE(user.getRoles());
+            manager.setUserName(user.getUsername());
             this.managerRepository.save(manager);
         }
     }
