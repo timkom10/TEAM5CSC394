@@ -12,8 +12,7 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public Admin findByUserName(String name)
-    {
+    public Admin findByUserName(String name) {
         return adminRepository.findByUserName(name);
     }
 }

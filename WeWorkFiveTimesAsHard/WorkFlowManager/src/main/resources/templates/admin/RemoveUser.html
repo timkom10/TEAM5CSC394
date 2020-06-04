@@ -33,7 +33,7 @@
 <div class="section-4">
     <div class="container-9 w-container">
         <div>
-            <h3>Search User</h3>
+            <h3>Remove User Search</h3>
         </div>
         <div>
             <div class="w-form">
@@ -47,20 +47,22 @@
     <div class="returnedusers w-container">
         <h4 class="heading-14">Current Users</h4>
         <div>
-            <ul role="list" class="list w-list-unstyled">
-                <li>Username</li>
-                <li>Role</li>
-                <li>ID</li>
-                <li>Remove?</li>
-            </ul>
-            <ul role="list" class="usertable w-list-unstyled" th:each="user: ${users}" style="border: 1px solid black">
-                <li class="username" th:text="${user.getUsername()}"></li>
-                <li class="role" th:text="${user.getRoles()}"></li>
-                <li class="active" th:text="${user.getId()}"></li>
-                <li class="remove">
-                    <a th:href="@{deleteUser(username=${user.username})}" class="w-button"> X </a>
-                </li>
-            </ul>
+            <table class="usertable w-list-unstyled" style="border-spacing: 15px 0px; border: 1px solid black" th:each="user: ${users}">
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>ID</th>
+                    <th>Remove?</th>
+                </tr>
+                <tr>
+                    <td class="username" th:text="${user.getUsername()}">Jill</td>
+                    <td class="role" th:text="${user.getRoles()}">Smith</td>
+                    <td class="active" th:text="${user.getId()}">50</td>
+                    <td class="remove">
+                        <a th:href="@{deleteUser(username=${user.username})}" class="w-button"> X </a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

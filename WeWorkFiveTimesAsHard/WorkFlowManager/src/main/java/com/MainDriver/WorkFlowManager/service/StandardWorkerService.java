@@ -2,6 +2,7 @@ package com.MainDriver.WorkFlowManager.service;
 
 import com.MainDriver.WorkFlowManager.model.announcements.Announcement;
 import com.MainDriver.WorkFlowManager.model.announcements.StandardWorkerAnnouncements;
+import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.AnnouncementRepository;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
@@ -15,7 +16,6 @@ import java.util.Set;
 
 @Service
 public class StandardWorkerService {
-
 
     private final AnnouncementRepository announcementRepository;
     private final ManagerRepository managerRepository;
@@ -44,13 +44,13 @@ public class StandardWorkerService {
     public void removeAnnouncement( StandardWorker standardWorker, Long announcementID) {
         StandardWorkerAnnouncements standardWorkerAnnouncements = standardWorkerAnnouncementRepository.findByStandardWorkerAndAnnouncementID(standardWorker, announcementID);
         standardWorkerAnnouncementRepository.delete(standardWorkerAnnouncements);
-        System.out.println("Count: " + standardWorkerAnnouncementRepository.count());
-
     }
 
-    public void addStandardWorker(StandardWorker standardWorker)
-    {
-        //standardWorker.setManager(managerRepository.findByUserName(standardWorker.getManagerUsername()));
+    public void addStandardWorker(StandardWorker standardWorker) {
+        Manager manager = managerRepository.findByUserName(standardWorker.getManagerUsername());
+        if(manager != null) {
+            standardWorker.setManager(manager);
+        }
         standardWorkerRepository.save(standardWorker);
     }
 }
