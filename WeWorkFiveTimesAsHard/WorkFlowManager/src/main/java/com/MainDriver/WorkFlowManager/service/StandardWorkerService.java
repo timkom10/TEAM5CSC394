@@ -50,7 +50,7 @@ public class StandardWorkerService {
 
     public void addStandardWorker(StandardWorker standardWorker)
     {
-        standardWorker.setManager(managerRepository.findByUserName(standardWorker.getManagerUsername()));
+        //standardWorker.setManager(managerRepository.findByUserName(standardWorker.getManagerUsername()));
         standardWorkerRepository.save(standardWorker);
     }
 }

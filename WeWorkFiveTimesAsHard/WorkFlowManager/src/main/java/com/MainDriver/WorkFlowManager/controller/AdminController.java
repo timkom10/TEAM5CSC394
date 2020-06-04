@@ -80,7 +80,6 @@ public class AdminController {
         if(userService.addUser(user))
         {
             if(user.getRoles().equals("STANDARDWORKER")) {
-                System.out.println("ROLES " + user.getRoles());
                 //make the user a standard worker
                 usernamePlaceholder = user.getUsername();
                 model.addAttribute("worker", new StandardWorker());

@@ -40,6 +40,8 @@ public class UserService {
             //can insert
             String plainTextPassword = user.getPassword();
             user.setPassword(passwordEncoder.encode(plainTextPassword));
+            user.setPermissions("");
+            user.setActive(1);
             userRepository.save(user);
             return true;
         }
