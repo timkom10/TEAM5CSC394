@@ -3,6 +3,7 @@ package com.MainDriver.WorkFlowManager.controller;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
+import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class StandardWorkerController
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    AnnouncementService announcementService;
 
 
     static String usernamePlaceHolder ="";
@@ -110,11 +114,20 @@ public class StandardWorkerController
     }
 
     @GetMapping(value = "viewAnnouncement")
-    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID)
-    {
-        System.out.println(principal.getName());
-        System.out.println("" + announcementID);
+    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
+        return "announcements/viewAnnouncement";
+    }
 
+    @GetMapping(value = "deleteAnnouncement")
+    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
+       announcementService.deleteAnnouncement(principal.getName(), announcementID);
+        StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
+        if(standardWorker != null) {
+            model.addAttribute(standardWorker);
+            model.addAttribute("announcements", standardWorker.getAnnouncements());
+        }
         return "standardWorkers/index";
     }
 }
