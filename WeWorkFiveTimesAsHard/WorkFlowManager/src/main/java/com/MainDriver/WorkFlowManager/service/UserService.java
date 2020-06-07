@@ -6,7 +6,8 @@ import java.util.Set;
 
 public interface UserService {
     Set<Users> findByUsername(String username);
-    void removeUser(String username);
     Users getByUsername(String username);
+    void removeUser(String username);
+    void simpleSaveUserInRoleRepo(String username);
     boolean addUser(Users user);
 }

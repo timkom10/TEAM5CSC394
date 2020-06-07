@@ -1,6 +1,12 @@
 package com.MainDriver.WorkFlowManager.service.implementation;
 
+import com.MainDriver.WorkFlowManager.model.workers.Admin;
+import com.MainDriver.WorkFlowManager.model.workers.Manager;
+import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
+import com.MainDriver.WorkFlowManager.repository.AdminRepository;
+import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
+import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.repository.UserRepository;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,12 +16,19 @@ import java.util.Set;
 
 @Service
 public class UserServiceImp implements UserService {
+
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final StandardWorkerRepository standardWorkerRepository;
+    private final ManagerRepository managerRepository;
+    private final AdminRepository adminRepository;
 
-    public UserServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder, StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository, AdminRepository adminRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.standardWorkerRepository = standardWorkerRepository;
+        this.managerRepository = managerRepository;
+        this.adminRepository = adminRepository;
     }
 
     @Override
@@ -28,6 +41,25 @@ public class UserServiceImp implements UserService {
         Users user = userRepository.findByUsername(username);
         if(user != null){
             userRepository.delete(user);
+        }
+    }
+
+    @Override
+    public void simpleSaveUserInRoleRepo(String username) {
+        if(this.standardWorkerRepository.existsByUserName(username))
+        {
+            StandardWorker standardWorker = standardWorkerRepository.findByuserName(username);
+            this.standardWorkerRepository.save(standardWorker);
+        }
+        else if(this.managerRepository.existsByUserName(username))
+        {
+            Manager manager = this.managerRepository.findByUserName(username);
+            this.managerRepository.save(manager);
+        }
+        else if(this.adminRepository.existsByUserName(username))
+        {
+            Admin admin = this.adminRepository.findByUserName(username);
+            this.adminRepository.save(admin);
         }
     }
 
