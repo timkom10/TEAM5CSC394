@@ -32,15 +32,14 @@
         </div>
     </div>
     <div class="container-5 w-container">
-        <ul role="list" class="list">
-            <li class="list-item">From</li>
-            <li>Subject</li>
-            <li>View</li>
-        </ul>
-        <ul role="list" class="list">
-            <li class="list-item">From</li>
-            <li>Subject</li>
-            <li>View</li>
+        <ul role="list" class="list" th:each="announcement: ${announcements}">
+            <li class="list-item">From: [[${announcement.getFrom()}]]</li>
+            <li>Subject  [[${announcement.getSubject()}]]</li>
+            <li class="w-button" style="text-decoration: none;">
+                <a th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" style="text-decoration: none; color: white;">
+                    Select
+                </a>
+            </li>
         </ul>
     </div>
 </div>

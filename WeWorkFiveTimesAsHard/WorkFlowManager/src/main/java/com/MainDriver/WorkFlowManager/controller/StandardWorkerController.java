@@ -5,16 +5,14 @@ import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
 import com.MainDriver.WorkFlowManager.service.UserService;
-import com.MainDriver.WorkFlowManager.service.implementation.StandardWorkerServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 
 @Controller
-@RequestMapping("StandardWorkers")
+@RequestMapping("standardWorkers")
 public class StandardWorkerController
 {
     @Autowired
@@ -23,8 +21,6 @@ public class StandardWorkerController
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private StandardWorkerServiceImp standardWorkerService;
 
     static String usernamePlaceHolder ="";
 
@@ -40,8 +36,9 @@ public class StandardWorkerController
         StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
         if(standardWorker != null) {
             model.addAttribute(standardWorker);
+            model.addAttribute("announcements", standardWorker.getAnnouncements());
         }
-        return "StandardWorkers/index";
+        return "standardWorkers/index";
     }
 
     @GetMapping("feedback")
@@ -65,7 +62,7 @@ public class StandardWorkerController
         if(standardWorker != null) {
             model.addAttribute(standardWorker);
         }
-        return "StandardWorkers/index";
+        return "standardWorkers/index";
     }
     @GetMapping("messagingPortal")
     public String getMessagingPortal() {
@@ -110,5 +107,14 @@ public class StandardWorkerController
         this.messagingService.deleteMessage(principal.getName(), messageId);
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
         return "messaging/messageInbox";
+    }
+
+    @GetMapping(value = "viewAnnouncement")
+    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID)
+    {
+        System.out.println(principal.getName());
+        System.out.println("" + announcementID);
+
+        return "standardWorkers/index";
     }
 }

@@ -24,12 +24,12 @@ public class HomeController {
 
     @RequestMapping("/About")
     public String getAbout() {
-        return "WelcomeView/About";
+        return "welcomePages/About";
     }
 
     @RequestMapping("/TOS")
     public String getTOS() {
-        return "WelcomeView/TOS";
+        return "welcomePages/TOS";
     }
 
     @RequestMapping("/success")
@@ -44,7 +44,7 @@ public class HomeController {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/management/index"));
         }
         else if(role.contains("ROLE_STANDARDWORKER")) {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/StandardWorkers/index"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/standardWorkers/index"));
         }
     }
 }

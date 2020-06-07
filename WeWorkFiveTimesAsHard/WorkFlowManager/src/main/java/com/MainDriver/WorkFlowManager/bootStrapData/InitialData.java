@@ -1,4 +1,5 @@
 package com.MainDriver.WorkFlowManager.bootStrapData;
+import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Tasks;
@@ -123,6 +124,14 @@ public class InitialData implements CommandLineRunner
         standardWorker.addMessage(message_1);
         standardWorkerRepository.save(standardWorker);
 
+        //Make an announcement:
+        Announcement announcement_1 = new Announcement();
+        announcement_1.setTo(standardWorker.getUserName());
+        announcement_1.setFrom(manager_1.getUserName());
+        announcement_1.setSubject("Test this");
+        announcement_1.setMessagePayload("Wtcfhjbnuiyutcyvjghbknuiyguvtgjh kjyvjg");
+        standardWorker.addAnnouncement(announcement_1);
+        standardWorkerRepository.save(standardWorker);
        //check the Database
     }
 
