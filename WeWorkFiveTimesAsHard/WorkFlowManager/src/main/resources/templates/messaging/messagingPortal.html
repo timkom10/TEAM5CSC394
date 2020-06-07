@@ -2,19 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Messaging Portal</title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/StandardWorkerCSS/standardWorkerHomepage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/messagingPortal.css}"/>
+
 </head>
 <body class="body">
 <header id="nav" class="sticky-nav-2">
     <nav class="w-container">
         <ul role="list" class="nav-grid-2 w-list-unstyled">
-            <li><a th:href="@{info}"  class="nav-link" th:text="${standardWorker.getUserName()}">Username</a></li>
-            <li><a href="#" class="nav-link">Project</a></li>
-            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li><a th:href="@{/}" class="nav-link">WeWorkFiveTimesAsHard</a></li>
+            <li><a th:href="@{index}" class="nav-link">Home</a></li>
+            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
             <li>
                 <div class="w-form">
                     <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
@@ -28,20 +29,20 @@
 <div>
     <div class="container-4 w-container">
         <div>
-            <h1>Announcements</h1>
+            <h1>Messaging Portal </h1>
         </div>
     </div>
+</div>
+<div class="section-2">
     <div class="container-5 w-container">
-        <ul role="list" class="list">
-            <li class="list-item">From</li>
-            <li>Subject</li>
-            <li>View</li>
-        </ul>
-        <ul role="list" class="list">
-            <li class="list-item">From</li>
-            <li>Subject</li>
-            <li>View</li>
-        </ul>
+        <a th:href="@{searchUserToMessage}" class="link-block-3 w-inline-block">
+            <h2 class="heading-4">Compose</h2>
+            <p>Compose A Message<br>To Someone</p>
+        </a>
+        <a th:href="@{inbox}" class="link-block-3 w-inline-block">
+            <h2 class="heading-4">Inbox</h2>
+            <p>View your Message<br>Inbox</p>
+        </a>
     </div>
 </div>
 </body>

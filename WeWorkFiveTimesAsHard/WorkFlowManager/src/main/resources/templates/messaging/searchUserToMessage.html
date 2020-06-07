@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search User</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/searchUserToMessage.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{/}" class="nav-link">WeWorkFiveTimesAsHard</a></li>
+            <li><a th:href="@{index}" class="nav-link">Home</a></li>
+            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button"></form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="w-container">
+        <div class="w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form-2" th:action="@{searchUserToMessage}" method="get">
+                <h2  class="heading-5">Search By Username:</h2><input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search Username...." id="username">
+                <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container-6 w-container">
+        <ul role="list" class="users">
+            <li>Username</li>
+            <li>Occupation</li>
+            <li>Select?</li>
+        </ul>
+        <ul role="list" class="users" th:each="user: ${users}">
+            <li th:text="${user.getUsername()}">Username</li>
+            <li th:text="${user.getRoles()}">Occupation</li>
+            <li class="w-button" style="text-decoration: none;">
+                <a th:href="@{composeMessage(username=${user.username})}" style="text-decoration: none; color: white;">
+                    Select
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
