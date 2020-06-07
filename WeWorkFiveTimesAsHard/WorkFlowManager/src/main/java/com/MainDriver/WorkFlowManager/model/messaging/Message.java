@@ -17,6 +17,4 @@ public class Message implements Serializable {
     private String to;
     private String subject;
     private String messagePayload;
-    private Date date;
-
 }
