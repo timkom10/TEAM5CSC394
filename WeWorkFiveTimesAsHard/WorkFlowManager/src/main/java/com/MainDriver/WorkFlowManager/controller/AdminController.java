@@ -1,17 +1,16 @@
 package com.MainDriver.WorkFlowManager.controller;
 
-import com.MainDriver.WorkFlowManager.model.Users;
+import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
-import com.MainDriver.WorkFlowManager.service.AdminService;
-import com.MainDriver.WorkFlowManager.service.ManagerService;
-import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
-import com.MainDriver.WorkFlowManager.service.UserService;
+import com.MainDriver.WorkFlowManager.service.implementation.AdminServiceImp;
+import com.MainDriver.WorkFlowManager.service.implementation.ManagerServiceImp;
+import com.MainDriver.WorkFlowManager.service.implementation.StandardWorkerServiceImp;
+import com.MainDriver.WorkFlowManager.service.implementation.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -21,16 +20,16 @@ import java.security.Principal;
 public class AdminController {
 
     @Autowired
-    AdminService adminService;
+    AdminServiceImp adminService;
 
     @Autowired
-    UserService userService;
+    UserServiceImp userService;
 
     @Autowired
-    ManagerService managerService;
+    ManagerServiceImp managerService;
 
     @Autowired
-    StandardWorkerService standardWorkerService;
+    StandardWorkerServiceImp standardWorkerService;
 
     private static  String usernamePlaceholder ="";
 

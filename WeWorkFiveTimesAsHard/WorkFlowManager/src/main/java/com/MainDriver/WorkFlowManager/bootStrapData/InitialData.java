@@ -1,9 +1,8 @@
 package com.MainDriver.WorkFlowManager.bootStrapData;
-
-import com.MainDriver.WorkFlowManager.model.announcements.Announcement;
+import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Tasks;
-import com.MainDriver.WorkFlowManager.model.Users;
+import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
@@ -12,41 +11,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+
 /*
     PlaceHolder Data
  */
 @Component
 public class InitialData implements CommandLineRunner
 {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AnnouncementRepository announcementRepository;
     private final ManagerRepository managerRepository;
     private final ProjectRepository projectRepository;
     private final StandardWorkerRepository standardWorkerRepository;
-    private final StandardWorkerAnnouncementRepository standardWorkerAnnouncementRepository;
-    private final TaskRepository taskRepository;
     private final AdminRepository adminRepository;
 
-    public InitialData
-            (
-                    UserRepository userRepository,
-                    PasswordEncoder passwordEncoder,
-                    AnnouncementRepository announcementRepository, ManagerRepository managerRepository,
-                    ProjectRepository projectRepository,
-                    StandardWorkerRepository standardWorkerRepository,
-                    StandardWorkerAnnouncementRepository standardWorkerAnnouncementRepository, TaskRepository taskRepository,
-                    AdminRepository adminRepository)
+    public InitialData(UserRepository userRepository, PasswordEncoder passwordEncoder, ManagerRepository managerRepository, ProjectRepository projectRepository, StandardWorkerRepository standardWorkerRepository, AdminRepository adminRepository)
     {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.announcementRepository = announcementRepository;
         this.managerRepository = managerRepository;
         this.projectRepository = projectRepository;
         this.standardWorkerRepository = standardWorkerRepository;
-        this.standardWorkerAnnouncementRepository = standardWorkerAnnouncementRepository;
-        this.taskRepository = taskRepository;
         this.adminRepository = adminRepository;
     }
 
@@ -55,14 +42,11 @@ public class InitialData implements CommandLineRunner
         System.out.println("Started in Bootstrap");
 
         //clear the DB
-        this.userRepository.deleteAll();
-        this.announcementRepository.deleteAll();
-        this.managerRepository.deleteAll();
-        this.standardWorkerRepository.deleteAll();
-        this.standardWorkerAnnouncementRepository.deleteAll();
-        this.projectRepository.deleteAll();
-        this.taskRepository.deleteAll();
-        this.adminRepository.deleteAll();
+        userRepository.deleteAll();
+        managerRepository.deleteAll();
+        standardWorkerRepository.deleteAll();
+        projectRepository.deleteAll();
+        adminRepository.deleteAll();
 
 
        //Any new users need to have password encrypted before db insert
@@ -70,9 +54,9 @@ public class InitialData implements CommandLineRunner
        Users admin = new Users("admin", passwordEncoder.encode("peter12"),"ADMIN", "");
        Users manager = new Users("manager", passwordEncoder.encode("peter12"),"MANAGER", "");
 
-       this.userRepository.save(peter);
-       this.userRepository.save(admin);
-       this.userRepository.save(manager);
+       userRepository.save(peter);
+       userRepository.save(admin);
+       userRepository.save(manager);
 
 
         //Make a new manager...
@@ -120,52 +104,6 @@ public class InitialData implements CommandLineRunner
         tasks_1.setTaskDescription("Please do this:....");
         tasks_1.setProject(project_1);
 
-
-        //Assign Workers to task
-        standardWorker.getCurrentTasks().add(tasks_1);
-        tasks_1.setStandardWorker(standardWorker);
-        taskRepository.save(tasks_1);
-
-
-        //Make an announcement
-        Announcement announcement_1 =new Announcement();
-        announcement_1.setWrittenBy(manager_1.getFirstName() + " " + manager_1.getLastName());
-        announcement_1.setManager(manager_1);
-        announcement_1.setSubject("Adjusted Deadline for Task #34");
-        announcement_1.setMessageContent("The deadline for Task #34 has been extended!");
-        announcementRepository.save(announcement_1);
-
-        standardWorker.addAnnouncement(announcement_1);
-        standardWorkerAnnouncementRepository.saveAll(standardWorker.getStandardWorkerAnnouncements());
-        standardWorkerRepository.save(standardWorker);
-
-
-        //Make an announcement
-        Announcement announcement_2 =new Announcement();
-        announcement_2.setWrittenBy(manager_1.getFirstName() + " " + manager_1.getLastName());
-        announcement_2.setManager(manager_1);
-        announcement_2.setSubject("Adjusted Deadline for Task #32");
-        announcement_2.setMessageContent("The deadline for Task #32 has been extended!");
-        announcementRepository.save(announcement_2);
-
-        standardWorker.addAnnouncement(announcement_2);
-        standardWorkerAnnouncementRepository.saveAll(standardWorker.getStandardWorkerAnnouncements());
-        standardWorkerRepository.save(standardWorker);
-
-
-        //Make an announcement
-        Announcement announcement_3 =new Announcement();
-        announcement_3.setWrittenBy(manager_1.getFirstName() + " " + manager_1.getLastName());
-        announcement_3.setManager(manager_1);
-        announcement_3.setSubject("Adjusted Deadline for Task #33");
-        announcement_3.setMessageContent("The deadline for Task #33 has been extended!");
-        announcementRepository.save(announcement_3);
-
-        standardWorker.addAnnouncement(announcement_3);
-        standardWorkerAnnouncementRepository.saveAll(standardWorker.getStandardWorkerAnnouncements());
-        standardWorkerRepository.save(standardWorker);
-
-
         //Make a new admin
         Admin admin_1 = new Admin();
         admin_1.setUserName("admin");
@@ -175,6 +113,17 @@ public class InitialData implements CommandLineRunner
         admin_1.setHireDate("09-30-2020");
         adminRepository.save(admin_1);
 
+
+        //Make some messages: STRESS TEST
+        Message message_1 = new Message();
+        message_1.setFrom(manager.getUsername());
+        message_1.setTo(standardWorker.getUserName());
+        message_1.setSubject("I Hope I am doing this right..");
+        message_1.setMessagePayload("Because, If I am not, I am more than likely doomed");
+        standardWorker.addMessage(message_1);
+        standardWorkerRepository.save(standardWorker);
+
        //check the Database
     }
+
 }

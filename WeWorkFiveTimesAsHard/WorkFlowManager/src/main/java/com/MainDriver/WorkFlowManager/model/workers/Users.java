@@ -1,15 +1,17 @@
-package com.MainDriver.WorkFlowManager.model;
+package com.MainDriver.WorkFlowManager.model.workers;
 
 import lombok.Data;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "users", schema = "public")
+@Table(name ="users", schema = "public")
 public class Users {
 
     @Id

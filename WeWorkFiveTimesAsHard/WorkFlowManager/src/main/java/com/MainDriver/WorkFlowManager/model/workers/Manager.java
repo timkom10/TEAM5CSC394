@@ -1,18 +1,28 @@
 package com.MainDriver.WorkFlowManager.model.workers;
 
-import com.MainDriver.WorkFlowManager.model.announcements.Announcement;
-import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
+import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
+import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
+@TypeDefs({
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
 @Entity
 @Data
 @Table(name= "manager", schema = "public")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Manager extends WorkerType {
 
     @Id
@@ -27,23 +37,29 @@ public class Manager extends WorkerType {
             mappedBy = "manager")
     private Set<Project> projects = new HashSet<Project>();
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "manager")
-    private Set<Announcement> announcements = new HashSet<Announcement>();
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="messages" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Message> messages = new ArrayList<Message> ();
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "manager")
-    private Set<Feedback> feedbacks = new HashSet<Feedback>();
+    @Column(name = "last_message_id")
+    private Integer lastMessageKey = 0;
+
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="announcements" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Announcement> announcements = new ArrayList<Announcement> ();
+
+    @Column(name = "last_announcement_id")
+    private Integer lastAnnouncementKey = 0;
 
     private String userName;
     private String firstName;
     private String lastName;
     private String hireDate;
     private String ROLE;
-
-    public Manager() {
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -72,5 +88,19 @@ public class Manager extends WorkerType {
     @Override
     public String getRole() {
         return this.ROLE;
+    }
+
+    public void addMessage(Message message) {
+        if(message != null) {
+            message.setId(this.lastMessageKey++);
+            this.messages.add(message);
+        }
+    }
+
+    public void addAnnouncement(Announcement announcement) {
+        if(announcement != null) {
+            announcement.setId(this.lastAnnouncementKey++);
+            this.announcements.add(announcement);
+        }
     }
 }

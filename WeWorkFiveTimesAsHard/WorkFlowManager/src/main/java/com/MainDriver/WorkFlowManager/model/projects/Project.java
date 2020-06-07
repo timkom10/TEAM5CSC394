@@ -1,6 +1,5 @@
 package com.MainDriver.WorkFlowManager.model.projects;
 
-import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,9 +23,6 @@ public class Project {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
     private Set<Tasks> tasks = new HashSet<Tasks>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
     @ManyToOne
     private Manager manager;

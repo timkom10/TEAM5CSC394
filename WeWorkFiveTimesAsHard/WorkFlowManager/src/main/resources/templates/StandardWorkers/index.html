@@ -8,40 +8,39 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/StandardWorkerCSS/standardWorkerHomepage.css}"/>
 </head>
 <body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{info}"  class="nav-link" th:text="${standardWorker.getUserName()}">Username</a></li>
+            <li><a href="#" class="nav-link">Project</a></li>
+            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li><a href="#" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
 <div>
-    <div class="container w-container">
-        <a th:href="@{info}" class="link-block w-inline-block">
-            <div class="text-block" th:text="${standardWorker.getFirstName()}">Name</div>
-        </a>
-        <a href="#" class="link-block w-inline-block">
-            <div class="text-block">Project</div>
-        </a>
-        <a th:href="@{feedback}" class="link-block w-inline-block">
-            <div class="text-block">Feedback</div>
-        </a>
-        <a  class="link-block w-inline-block">
-            <form form-method ="post" th:action="@{/logout}">
-                <button type = "submit" style = "background-color: transparent;">Logout</button>
-            </form>
-        </a>
-    </div>
-</div>
-<div>
-    <div class="container-2 w-container">
+    <div class="container-4 w-container">
         <div>
-            <h1>Announcements:</h1>
+            <h1>Announcements</h1>
         </div>
     </div>
-</div>
-<div>
-    <div class="w-container">
-        <ul role="list" class="list" th:each="announcement: ${announcements}">
-            <li th:text="${announcement.getWrittenBy()}">Written By:</li>
-            <li th:text="${announcement.getSubject()}">Subject</li>
-            <li th:text="${announcement.getMessageContent()}">Is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#x27;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>
-            <li>
-                <a th:href="@{removeAnnouncement(announcementId = ${announcement.getId()})}"  class="w-button">Remove?</a>
-            </li>
+    <div class="container-5 w-container">
+        <ul role="list" class="list">
+            <li class="list-item">From</li>
+            <li>Subject</li>
+            <li>View</li>
+        </ul>
+        <ul role="list" class="list">
+            <li class="list-item">From</li>
+            <li>Subject</li>
+            <li>View</li>
         </ul>
     </div>
 </div>

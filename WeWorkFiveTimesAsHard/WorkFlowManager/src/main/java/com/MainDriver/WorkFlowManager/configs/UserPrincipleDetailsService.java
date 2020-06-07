@@ -1,6 +1,6 @@
 package com.MainDriver.WorkFlowManager.configs;
 
-import com.MainDriver.WorkFlowManager.model.Users;
+import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

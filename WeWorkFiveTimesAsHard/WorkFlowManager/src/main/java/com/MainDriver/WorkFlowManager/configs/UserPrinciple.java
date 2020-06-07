@@ -1,6 +1,6 @@
 package com.MainDriver.WorkFlowManager.configs;
 
-import com.MainDriver.WorkFlowManager.model.Users;
+import com.MainDriver.WorkFlowManager.model.workers.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

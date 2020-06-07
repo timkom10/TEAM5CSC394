@@ -1,36 +1,41 @@
 package com.MainDriver.WorkFlowManager.model.workers;
 
-import com.MainDriver.WorkFlowManager.model.announcements.Announcement;
-import com.MainDriver.WorkFlowManager.model.announcements.StandardWorkerAnnouncements;
-import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
+import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
+import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Tasks;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
-/*
-    Standard worker, not an admin, not a manager, a grunt assigned to a manager, and a project
- */
 @Entity
 @Data
 @Table(name= "standard_worker", schema = "public")
-public class StandardWorker extends WorkerType
+
+@TypeDefs({
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
+@NoArgsConstructor
+@AllArgsConstructor
+public class StandardWorker extends WorkerType implements Serializable
 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "standardWorker", orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<StandardWorkerAnnouncements> standardWorkerAnnouncements = new HashSet<StandardWorkerAnnouncements>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "standardWorker", orphanRemoval = true)
     private Set<Tasks> currentTasks = new HashSet<Tasks>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "standardWorker")
-    private Set<Feedback> feedbacks = new HashSet<Feedback>();
 
     @ManyToOne
     private Project project;
@@ -46,22 +51,42 @@ public class StandardWorker extends WorkerType
     private String hireDate;
     private int points = 0;
 
-    public StandardWorker() {
-    }
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="messages" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Message> messages = new ArrayList<Message> ();
 
-    public StandardWorker(String name)
-    {
-        this.userName = name;
-    }
+    @Column(name = "last_message_id")
+    private Integer lastMessageKey = 0;
 
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="announcements" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Announcement> announcements = new ArrayList<Announcement> ();
 
-    public void addAnnouncement(Announcement announcement) {
-        standardWorkerAnnouncements.add(new StandardWorkerAnnouncements(this, announcement.getId()));
-    }
+    @Column(name = "last_announcement_id")
+    private Integer lastAnnouncementKey = 0;
+
 
     public void updatePoints(Tasks completedTask, int addScore) {
         if(completedTask.isComplete() && (completedTask.getStandardWorker() == this)) {
             this.points += addScore;
+        }
+    }
+
+    public void addMessage(Message message) {
+        if(message != null) {
+            message.setId(this.lastMessageKey++);
+            this.messages.add(message);
+        }
+    }
+
+    public void addAnnouncement(Announcement announcement) {
+        if(announcement != null) {
+            announcement.setId(this.lastAnnouncementKey++);
+            this.announcements.add(announcement);
         }
     }
 

@@ -1,7 +1,6 @@
 .body {
-  padding-top: 0px;
   background-image: url('images/standardWorkerBackground.jpg');
-  background-position: 100% 100%;
+  background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -12,19 +11,21 @@
   top: 0px;
   z-index: 1;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: transparent;
 }
 
 .nav-grid-2 {
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   margin: 0px;
   padding: 0px;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -40,44 +41,33 @@
   grid-template-columns: 1fr max-content max-content max-content;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
+  color: #444;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.nav-logo-link {
-  display: block;
-  height: 60px;
-  margin-right: 0px;
-  margin-left: 0px;
-  padding: 0px;
-}
-
-.nav-logo {
-  width: auto;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  -o-object-position: 0% 50%;
-  object-position: 0% 50%;
-}
-
-.nav-link-2 {
+.nav-link {
   display: block;
   margin-right: 0px;
   margin-left: 0px;
   padding: 10px 0px;
-  color: #444;
+  color: #121212;
+  font-size: 22px;
+  line-height: 22px;
   text-decoration: none;
 }
 
-.nav-link-2:hover {
+.nav-link:hover {
   text-decoration: underline;
 }
 
-.link-block {
-  text-decoration: none;
+.submit-button-2 {
+  margin-top: 7px;
+  padding-top: 11px;
 }
 
-.text-block {
-  color: #333;
+.form {
+  margin-top: 4px;
 }
 
 .container {
@@ -85,28 +75,105 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  font-size: 18px;
 }
 
-.list {
-  list-style-type: none;
-}
-
-.container-2 {
+.paragraph {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  color: #000;
+  font-size: 20px;
+}
+
+.div-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 0px;
+  padding-bottom: 0px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.container-3 {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.container-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.button {
+  width: 100%;
+  background-color: #ec383b;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.div-block-2 {
+  width: 20%;
+}
+
+.div-block-3 {
+  width: 20%;
+}
+
+.button-2 {
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  font-size: 20px;
+  list-style-type: none;
+}
+
+.list-item {
+  font-size: 20px;
+}
+
+.container-5 {
+  padding-top: 10px;
 }
 
 @media screen and (max-width: 767px) {
@@ -131,10 +198,7 @@
     -ms-grid-rows: 100px;
     grid-template-rows: 100px;
   }
-  .nav-logo-link {
-    border-top: 1px solid #c4c4c4;
-  }
-  .nav-link-2 {
+  .nav-link {
     padding-top: 10px;
     padding-bottom: 10px;
     border-top: 1px solid #c4c4c4;

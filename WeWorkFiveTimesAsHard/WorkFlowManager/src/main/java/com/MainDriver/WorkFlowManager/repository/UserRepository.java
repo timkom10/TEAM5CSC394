@@ -1,6 +1,6 @@
 package com.MainDriver.WorkFlowManager.repository;
 
-import com.MainDriver.WorkFlowManager.model.Users;
+import com.MainDriver.WorkFlowManager.model.workers.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
