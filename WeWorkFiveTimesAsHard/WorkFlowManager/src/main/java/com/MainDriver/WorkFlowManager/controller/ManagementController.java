@@ -4,6 +4,7 @@ import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
+import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class ManagementController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    AnnouncementService announcementService;
+
     static String usernamePlaceHolder ="";
 
     private final ManagerRepository managerRepository;
@@ -35,7 +39,12 @@ public class ManagementController {
     @GetMapping("index")
     public  String index(Principal principal, Model model)
     {
-        model.addAttribute("manager", managerRepository.findByUserName(principal.getName()));
+        Manager manager =  this.managerRepository.findByUserName(principal.getName());
+        if(manager != null)
+        {
+            model.addAttribute("manager", managerRepository.findByUserName(principal.getName()));
+            model.addAttribute("announcements", manager.getAnnouncements());
+        }
         return "management/index";
     }
 
@@ -96,6 +105,25 @@ public class ManagementController {
         this.messagingService.deleteMessage(principal.getName(), messageId);
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
         return "messaging/messageInbox";
+    }
+
+
+    @GetMapping(value = "viewAnnouncement")
+    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
+        return "announcements/viewAnnouncement";
+    }
+
+    @GetMapping(value = "deleteAnnouncement")
+    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
+        announcementService.deleteAnnouncement(principal.getName(), announcementID);
+        Manager manager = managerRepository.findByUserName(principal.getName());
+        if(manager != null) {
+            model.addAttribute("manager", manager);
+            model.addAttribute("announcements", manager.getAnnouncements());
+        }
+        return "management/index";
     }
 
 }

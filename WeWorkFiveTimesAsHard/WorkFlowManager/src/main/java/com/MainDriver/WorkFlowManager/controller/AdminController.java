@@ -4,6 +4,7 @@ import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.implementation.AdminServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.ManagerServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.StandardWorkerServiceImp;
@@ -30,6 +31,9 @@ public class AdminController {
 
     @Autowired
     StandardWorkerServiceImp standardWorkerService;
+
+    @Autowired
+    AnnouncementService announcementService;
 
     private static  String usernamePlaceholder ="";
 
