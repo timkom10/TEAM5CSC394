@@ -1,8 +1,6 @@
 package com.MainDriver.WorkFlowManager.service;
 
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
-import com.MainDriver.WorkFlowManager.model.messaging.Message;
-
 import java.util.List;
 
 public interface AnnouncementService {

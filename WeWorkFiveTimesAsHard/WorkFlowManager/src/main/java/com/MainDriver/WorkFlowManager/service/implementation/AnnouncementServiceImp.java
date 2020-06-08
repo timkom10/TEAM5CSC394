@@ -1,7 +1,6 @@
 package com.MainDriver.WorkFlowManager.service.implementation;
 
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
-import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.AdminRepository;
@@ -11,7 +10,6 @@ import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -72,8 +70,10 @@ public class AnnouncementServiceImp implements AnnouncementService {
         }
         if(announcement.getFrom().equals(from))
         {
-            //passed validation
+            //Already passed validation (!null)
             Manager manager = this.managerRepository.findByUserName(from);
+            manager.addAnnouncement(announcement);
+            this.managerRepository.save(manager);
             Set<StandardWorker> workers = manager.getDominion();
             for(StandardWorker w : workers) {
                 w.getAnnouncements().add(announcement);

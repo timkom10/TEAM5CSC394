@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.controller;
 
+import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
@@ -126,4 +127,23 @@ public class ManagementController {
         return "management/index";
     }
 
+    @GetMapping(value = "composeAnnouncement")
+    public String getComposeAnnouncement(Principal principal,Model model) {
+
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("announcement", new Announcement());
+        return "announcements/composeAnnouncement";
+    }
+
+    @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
+    public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
+        this.announcementService.sendAnnouncement(announcement,principal.getName(), principal.getName());
+
+        Manager manager = managerRepository.findByUserName(principal.getName());
+        if(manager != null) {
+            model.addAttribute("manager", manager);
+            model.addAttribute("announcements", manager.getAnnouncements());
+        }
+        return "management/index";
+    }
 }

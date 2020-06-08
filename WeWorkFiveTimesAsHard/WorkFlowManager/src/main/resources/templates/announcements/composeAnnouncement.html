@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Announcement Composer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/composeAnnouncement.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{info}"class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{index}" class="nav-link">Home</a></li>
+            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                            <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="container-4 w-container">
+        <div>
+            <h1 class="heading">Compose Announcement</h1>
+        </div>
+    </div>
+    <div class="container-5 w-container">
+        <div>
+            <div class="w-form">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{sendAnnouncement}" th:object="${announcement}" method="post">
+                    <label for="subject" class="field-label">Subject:</label>
+                        <input type="text" class="text-field-2 w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter Subject..." id="subject" required="" th:field = "*{subject}">
+                    <label for="content" class="field-label-2">Announcement:</label>
+                        <input type="text" class="text-field w-input" maxlength="1024" name="content" data-name="content" placeholder="Enter announcement..." id="content" required="" th:field = "*{messagePayload}">
+                    <input type="submit" value="Send Announcement" data-wait="Please wait..." class="w-button">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

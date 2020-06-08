@@ -5,6 +5,7 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/StandardWorkerCSS/standardWorkerHomepage.css}"/>
 </head>
 <body class="body">
@@ -32,15 +33,24 @@
         </div>
     </div>
     <div class="container-5 w-container">
-        <ul role="list" class="list" th:each="announcement: ${announcements}">
-            <li class="list-item">From: [[${announcement.getFrom()}]]</li>
-            <li>Subject  [[${announcement.getSubject()}]]</li>
-            <li class="w-button" style="text-decoration: none;">
-                <a th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" style="text-decoration: none; color: white;">
-                    Select
-                </a>
-            </li>
-        </ul>
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>From&nbsp;</th>
+                <th>Subject</th>
+                <th style="width: 200px;">View</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" th:each="announcement : ${announcements}">
+            <tr>
+                <td th:text="${announcement.getFrom()}">From</td>
+                <td th:text="${announcement.getSubject()}">Subject</td>
+                <td>
+                    <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" >View</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

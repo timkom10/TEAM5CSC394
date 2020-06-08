@@ -6,8 +6,8 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/ManagerCSS/managerHomepage.css}"/>
-
 </head>
 <body class="body">
 <header id="nav" class="sticky-nav-2">
@@ -32,14 +32,27 @@
         <div>
             <h1>Announcements</h1>
         </div>
-        <div><a href="#" class="w-button">Compose New Announcement</a></div>
+        <div><a th:href="@{composeAnnouncement}" class="w-button">Compose New Announcement</a></div>
     </div>
     <div class="container-5 w-container">
-        <ul role="list" class="list">
-            <li class="list-item">From</li>
-            <li>Subject</li>
-            <li>View</li>
-        </ul>
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>From&nbsp;</th>
+                <th>Subject</th>
+                <th style="width: 200px;">View</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" th:each="announcement : ${announcements}">
+            <tr>
+                <td th:text="${announcement.getFrom()}">From</td>
+                <td th:text="${announcement.getSubject()}">Subject</td>
+                <td>
+                    <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" >View</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
