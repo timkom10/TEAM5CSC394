@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/searchUserToMessage.css}"/>
 </head>
 <body class="body">
@@ -36,20 +37,27 @@
 </div>
 <div>
     <div class="container-6 w-container">
-        <ul role="list" class="users">
-            <li>Username</li>
-            <li>Occupation</li>
-            <li>Select?</li>
-        </ul>
-        <ul role="list" class="users" th:each="user: ${users}">
-            <li th:text="${user.getUsername()}">Username</li>
-            <li th:text="${user.getRoles()}">Occupation</li>
-            <li class="w-button" style="text-decoration: none;">
-                <a th:href="@{composeMessage(username=${user.username})}" style="text-decoration: none; color: white;">
-                    Select
-                </a>
-            </li>
-        </ul>
+
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>Users&nbsp;</th>
+                <th>Role</th>
+                <th>ID#</th>
+                <th style="width: 200px;">Message?</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" th:each="user: ${users}">
+            <tr>
+                <td th:text="${user.getUsername()}">User1</td>
+                <td th:text="${user.getRoles()}">Role</td>
+                <td th:text="${user.getId()}">12345</td>
+                <td>
+                    <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{composeMessage(username=${user.username})}">Message</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
