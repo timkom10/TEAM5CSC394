@@ -59,24 +59,14 @@ public class StandardWorkerController
         return "Info/info";
     }
 
-    @RequestMapping(value = "removeAnnouncement", method = RequestMethod.GET)
-    public String getRemoveAnnouncement(Model model, Principal principal, Long announcementId) {
-
-        StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
-        if(standardWorker != null) {
-            model.addAttribute(standardWorker);
-        }
-        return "standardWorkers/index";
-    }
     @GetMapping("messagingPortal")
     public String getMessagingPortal() {
         return "messaging/messagingPortal";
     }
 
     @GetMapping("searchUserToMessage")
-    public String getSearchUserToMessage(Model model, @RequestParam(defaultValue = "") String username) {
-        //could probably remove yourself
-        model.addAttribute("users",userService.findByUsername(username));
+    public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("users",userService.findByUsernameExcludeSelf(username, principal.getName()));
         return "messaging/searchUserToMessage";
     }
 

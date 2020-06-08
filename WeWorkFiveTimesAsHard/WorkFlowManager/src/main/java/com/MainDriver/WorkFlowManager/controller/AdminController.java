@@ -164,9 +164,8 @@ public class AdminController {
     }
 
     @GetMapping("searchUserToMessage")
-    public String getSearchUserToMessage(Model model, @RequestParam(defaultValue = "") String username) {
-        //could probably remove yourself
-        model.addAttribute("users",userService.findByUsername(username));
+    public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("users",userService.findByUsernameExcludeSelf(username, principal.getName()));
         return "messaging/searchUserToMessage";
     }
 

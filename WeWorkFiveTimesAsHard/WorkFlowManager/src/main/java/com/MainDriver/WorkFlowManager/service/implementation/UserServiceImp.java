@@ -12,6 +12,7 @@ import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -29,6 +30,21 @@ public class UserServiceImp implements UserService {
         this.standardWorkerRepository = standardWorkerRepository;
         this.managerRepository = managerRepository;
         this.adminRepository = adminRepository;
+    }
+
+    @Override
+    public Set<Users> findByUsernameExcludeSelf(String username, String self) {
+        Set<Users> users = this.userRepository.findByUsernameLike( "%" + username + "%");
+        if(users != null) {
+            for(Users user : users) {
+                if(user.getUsername().equals(self)) {
+                    users.remove(user);
+                    if( users != null) { return users; }
+                    break;
+                }
+            }
+        }
+        return new HashSet<Users>();
     }
 
     @Override
