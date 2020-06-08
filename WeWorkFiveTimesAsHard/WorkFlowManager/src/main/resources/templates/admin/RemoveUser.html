@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/removeUser.css}"/>
 </head>
 <body class="body">
@@ -47,21 +48,25 @@
     <div class="returnedusers w-container">
         <h4 class="heading-14">Current Users</h4>
         <div>
-            <table class="usertable w-list-unstyled" style="border-spacing: 15px 0px; border: 1px solid black" th:each="user: ${users}">
+            <table class="table">
+                <thead class="text-center">
                 <tr>
-                    <th>Username</th>
+                    <th>Users&nbsp;</th>
                     <th>Role</th>
-                    <th>ID</th>
-                    <th>Remove?</th>
+                    <th>ID#</th>
+                    <th style="width: 200px;">Remove?</th>
                 </tr>
+                </thead>
+                <tbody class="text-center" th:each="user: ${users}">
                 <tr>
-                    <td class="username" th:text="${user.getUsername()}">Jill</td>
-                    <td class="role" th:text="${user.getRoles()}">Smith</td>
-                    <td class="active" th:text="${user.getId()}">50</td>
-                    <td class="remove">
-                        <a th:href="@{deleteUser(username=${user.username})}" class="w-button"> X </a>
+                    <td th:text="${user.getUsername()}">User1</td>
+                    <td th:text="${user.getRoles()}">Role</td>
+                    <td th:text="${user.getId()}">12345</td>
+                    <td>
+                        <a class="btn btn-danger btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{deleteUser(username=${user.username})}">X</a>
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </div>

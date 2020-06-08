@@ -134,5 +134,4 @@ public class InitialData implements CommandLineRunner
         standardWorkerRepository.save(standardWorker);
        //check the Database
     }
-
 }
