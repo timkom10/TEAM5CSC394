@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/messageInbox.css}"/>
 </head>
 <body class="body">
@@ -40,20 +41,25 @@
             <h1>Your Inbox</h1>
         </div>
     </div>
-        <ul role="list" class="list">
-            <li>From</li>
-            <li>Subject</li>
-            <li>View</li>
-        </ul>
-        <ul role="list" class="list" th:each="message : ${messages}">
-            <li th:text="${message.from}"> From</li>
-            <li th:text="${message.subject}">Subject</li>
-            <li class="w-button" style="text-decoration: none;">
-                <a th:href="@{viewMessage(messageId=${message.getId()})}" style="text-decoration: none; color: white;">
-                View
-                </a>
-            </li>
-        </ul>
+
+    <table class="table">
+        <thead class="text-center">
+        <tr>
+            <th>From&nbsp;</th>
+            <th>Subject</th>
+            <th style="width: 200px;">View</th>
+        </tr>
+        </thead>
+        <tbody class="text-center" th:each="message : ${messages}">
+        <tr>
+            <td th:text="${message.from}">From</td>
+            <td th:text="${message.subject}">Subject</td>
+            <td>
+                <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{viewMessage(messageId=${message.getId()})}">Message</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     </div>
 </div>
 </body>
