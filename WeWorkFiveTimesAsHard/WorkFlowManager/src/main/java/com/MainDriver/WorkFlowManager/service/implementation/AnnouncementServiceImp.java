@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.service.implementation;
 
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
+import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.AdminRepository;
@@ -64,14 +65,16 @@ public class AnnouncementServiceImp implements AnnouncementService {
         //ensure that from is a manager or an admin
         if(this.adminRepository.existsByUserName(from)) {
             announcement.setFrom(from);
+            Admin admin = this.adminRepository.findByUserName(from);
+            admin.addAnnouncement(announcement);
+            this.adminRepository.save(admin);
         }
         else if(this.managerRepository.existsByUserName(from)) {
             announcement.setFrom(from);
         }
-        if(announcement.getFrom().equals(from))
-        {
+        if(announcement.getFrom().equals(from)) {
             //Already passed validation (!null)
-            Manager manager = this.managerRepository.findByUserName(from);
+            Manager manager = this.managerRepository.findByUserName(toManager);
             manager.addAnnouncement(announcement);
             this.managerRepository.save(manager);
             Set<StandardWorker> workers = manager.getDominion();
@@ -97,6 +100,4 @@ public class AnnouncementServiceImp implements AnnouncementService {
             }
         }
     }
-
-
 }

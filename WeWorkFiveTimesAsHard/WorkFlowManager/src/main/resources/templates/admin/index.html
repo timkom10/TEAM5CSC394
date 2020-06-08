@@ -5,30 +5,55 @@
     <title>Admin Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/admin.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/adminHomepage.css}"/>
 </head>
 <body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{info}" class="nav-link" th:text="${admin.getUserName()}">Username</a></li>
+            <li><a th:href="@{index}" class="nav-link">Home</a></li>
+            <li><a th:href="@{Hr}" class="nav-link">Resources</a></li>
+            <li><a th:href= "@{messagingPortal}"  class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
 <div>
-    <div class="container-3 w-container">
-        <div>
-            <h1 class="heading-4">ADMIN:</h1>
-        </div>
-        <a th:href="@{info}" class="link-block-4 w-inline-block">
-            <h1 class="heading-5" th:text="${workerType.getFirstName()}">Username</h1>
-        </a>
-    </div>
-</div>
-<div class="section">
     <div class="container-4 w-container">
-        <a href="#" class="link-block-3 w-inline-block">
-            <h2>Announcement</h2>
-            <div class="text-block-2">Compose an Announcement</div>
-        </a>
-        <a th:href="@{Hr}"  class="link-block-3 w-inline-block">
-            <h2>Human Resources</h2>
-            <div class="text-block">Add, update, or Remove Employees</div>
-        </a>
+        <div>
+            <h1 class="heading">Compose Announcement</h1>
+        </div>
+        <div><a th:href="@{searchTeamToSendAnnouncement}" class="w-button">Compose Announcement</a></div>
+    </div>
+    <div class="container-5 w-container">
+        <div>
+            <table class="table">
+                <thead class="text-center">
+                <tr>
+                    <th>From&nbsp;</th>
+                    <th>Subject</th>
+                    <th style="width: 200px;">View</th>
+                </tr>
+                </thead>
+                <tbody class="text-center" th:each="announcement : ${announcements}">
+                <tr>
+                    <td th:text="${announcement.getFrom()}"><strong>From</strong></td>
+                    <td th:text="${announcement.getSubject()}"><strong>Subject</strong></td>
+                    <td>
+                        <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" >View</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

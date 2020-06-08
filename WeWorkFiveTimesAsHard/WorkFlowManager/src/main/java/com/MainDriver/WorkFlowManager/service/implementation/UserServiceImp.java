@@ -37,6 +37,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Set<Users> findManagersByUsernameLike(String username) {
+        return userRepository.findAllByRolesAndUsernameLike("MANAGER", "%" + username + "%");
+    }
+
+    @Override
     public void removeUser(String username) {
         Users user = userRepository.findByUsername(username);
         if(user != null){

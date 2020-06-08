@@ -47,18 +47,10 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         StandardWorker modifyThis = this.standardWorkerRepository.findByuserName(username);
         if((standardWorker != null) && (modifyThis != null))
         {
-            System.out.println("Over writing" +modifyThis.getFirstName() + " with: " +standardWorker.getFirstName() );
             modifyThis.setFirstName(standardWorker.getFirstName());
-
-            System.out.println("Over writing" +modifyThis.getLastName() + " with: " + standardWorker.getLastName() );
             modifyThis.setLastName(standardWorker.getLastName());
-
-            System.out.println("Over writing" +modifyThis.getRole() + " with: " + standardWorker.getRole() );
             modifyThis.setEmployeeRole(standardWorker.getRole());
-
-            System.out.println("Over writing" +modifyThis.getManagerUsername() + " with: " + standardWorker.getManagerUsername() );
             modifyThis.setManagerUsername(standardWorker.getManagerUsername());
-
             this.standardWorkerRepository.save(modifyThis);
         }
     }

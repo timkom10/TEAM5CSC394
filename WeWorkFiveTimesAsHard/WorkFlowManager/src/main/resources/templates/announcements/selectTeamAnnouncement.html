@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Team</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/selectTeamAnnouncement.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{index}" class="nav-link">Home</a></li>
+            <li><a th:href="@{Hr}"  class="nav-link">Resources</a></li>
+            <li><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="container-4 w-container">
+        <div class="div-block-4">
+            <h2 class="heading-2">Select Manager to Send Announcement to</h2>
+        </div>
+        <div class="form-block w-form">
+            <form id="wf-form-managerSearch" name="wf-form-managerSearch" data-name="managerSearch" class="form-2" th:action="@{searchTeamToSendAnnouncement}" method="get">
+                <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search Manager Username" id="username">
+                <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
+            </form>
+        </div>
+    </div>
+    <div class="container-5 w-container">
+        <div>
+            <table class="table">
+                <thead class="text-center">
+                <tr>
+                    <th>Username&nbsp;</th>
+                    <th>Id#</th>
+                    <th>Is Active?</th>
+                    <th style="width: 200px;">Select Team?</th>
+                </tr>
+                </thead>
+                <tbody class="text-center" th:each="manager: ${managers}">
+                <tr>
+                    <td th:text="${manager.getUsername()}">User1</td>
+                    <td th:text="${manager.getId()}">ID</td>
+                    <td th:text="${manager.getActive() &gt; 0 ? 'true' : 'false'}">Maybe</td>
+                    <td>
+                        <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{composeAnnouncement(managerUsername=${manager.getUsername()})}">Select Team</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

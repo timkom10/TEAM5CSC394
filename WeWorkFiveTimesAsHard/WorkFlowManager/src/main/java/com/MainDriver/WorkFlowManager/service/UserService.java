@@ -6,6 +6,7 @@ import java.util.Set;
 
 public interface UserService {
     Set<Users> findByUsername(String username);
+    Set<Users> findManagersByUsernameLike(String username);
     Users getByUsername(String username);
     void removeUser(String username);
     void simpleSaveUserInRoleRepo(String username);

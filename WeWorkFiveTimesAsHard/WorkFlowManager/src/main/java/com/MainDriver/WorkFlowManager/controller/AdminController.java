@@ -1,9 +1,11 @@
 package com.MainDriver.WorkFlowManager.controller;
 
+import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.repository.AdminRepository;
 import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.implementation.AdminServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.ManagerServiceImp;
@@ -35,12 +37,22 @@ public class AdminController {
     @Autowired
     AnnouncementService announcementService;
 
+    private final AdminRepository adminRepository;
+
     private static  String usernamePlaceholder ="";
+
+    public AdminController(AdminRepository adminRepository) {
+        this.adminRepository = adminRepository;
+    }
 
     @GetMapping("index")
     public String index(Principal principal, Model model) {
         Admin admin = adminService.findByUserName(principal.getName());
-        model.addAttribute("workerType", admin);
+        if(admin != null)
+        {
+            model.addAttribute("admin", admin);
+            model.addAttribute("announcements", admin.getAnnouncements());
+        }
         return "admin/index";
     }
 
@@ -132,5 +144,52 @@ public class AdminController {
         standardWorkerService.insertAlteredStandardWorker(standardWorker, usernamePlaceholder);
         model.addAttribute("user", new Users());
         return "admin/addUser";
+    }
+
+    @GetMapping(value = "viewAnnouncement")
+    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
+        return "announcements/viewAnnouncement";
+    }
+
+    @GetMapping(value = "deleteAnnouncement")
+    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
+        announcementService.deleteAnnouncement(principal.getName(), announcementID);
+        Admin admin = adminRepository.findByUserName(principal.getName());
+        if(admin != null) {
+            model.addAttribute("admin", admin);
+            model.addAttribute("announcements", admin.getAnnouncements());
+        }
+        return "admin/index";
+    }
+
+    @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
+    public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("managers", userService.findManagersByUsernameLike(username));
+        return "announcements/selectTeamAnnouncement";
+    }
+
+
+    @GetMapping(value = "composeAnnouncement")
+    public String getComposeAnnouncement(Principal principal,Model model, String managerUsername) {
+        usernamePlaceholder = managerUsername;
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("announcement", new Announcement());
+        return "announcements/composeAnnouncement";
+    }
+
+    @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
+    public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
+
+        this.announcementService.sendAnnouncement(announcement,principal.getName(), usernamePlaceholder);
+
+        Admin admin = adminRepository.findByUserName(principal.getName());
+        if(admin != null) {
+            model.addAttribute("admin", admin);
+            model.addAttribute("announcements", admin.getAnnouncements());
+        }
+        return "admin/index";
     }
 }
