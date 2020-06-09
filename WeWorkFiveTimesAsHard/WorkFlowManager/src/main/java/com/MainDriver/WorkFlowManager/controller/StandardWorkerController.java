@@ -197,10 +197,16 @@ public class StandardWorkerController
 
     @RequestMapping(value = "publicFeedback")
     @Transactional
-    public String getPublicFeedback(Principal principal, Model model)
-    {
+    public String getPublicFeedback(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("feedbacks",allFeedbackRepository.findAll());
         return "feedback/publicFeedback";
+    }
+
+    @RequestMapping(value = "leaderboard")
+    @Transactional
+    public String getLeaderboard(Principal principal, Model model) {
+        model.addAttribute("workers", this.standardWorkerRepository.findAll());
+        return "feedback/leaderboard";
     }
 }
