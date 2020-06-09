@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 import java.security.Principal;
 
 @Controller
@@ -40,6 +42,7 @@ public class StandardWorkerController
     }
 
     @GetMapping("index")
+    @Transactional
     public  String index(Principal principal, Model model)
     {
         StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
@@ -56,6 +59,7 @@ public class StandardWorkerController
     }
 
     @GetMapping("info")
+    @Transactional
     public String info(Principal principal, Model model) {
         StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
         if(standardWorker != null) {

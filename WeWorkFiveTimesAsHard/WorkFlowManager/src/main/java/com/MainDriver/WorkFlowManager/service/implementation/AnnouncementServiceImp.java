@@ -11,6 +11,8 @@ import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +34,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
+    @Transactional
     public List<Announcement> getAllAnnouncementsByUsername(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             return standardWorkerRepository.findByuserName(username).getAnnouncements();
@@ -46,6 +49,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
+    @Transactional
     public Announcement getByUsernameAndAnnouncementId(String username, Integer announcementId) {
         List<Announcement> announcements = this.getAllAnnouncementsByUsername(username);
         if(announcements != null) {
@@ -57,6 +61,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
+    @Transactional
     public void sendAnnouncement(Announcement announcement, String from, String toManager)
     {
         if(this.managerRepository.existsByUserName(toManager) == false) {return;}
@@ -86,6 +91,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
+    @Transactional
     public void deleteAnnouncement(String username, Integer announcementID)
     {
         List<Announcement> announcements = this.getAllAnnouncementsByUsername(username);

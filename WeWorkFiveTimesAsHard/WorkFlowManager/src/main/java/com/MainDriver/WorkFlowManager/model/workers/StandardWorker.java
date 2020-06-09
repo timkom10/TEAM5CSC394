@@ -57,13 +57,12 @@ public class StandardWorker extends WorkerType implements Serializable
 
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="announcements" )
-    @Basic(fetch = FetchType.LAZY)
+    @Basic(fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Announcement> announcements = new ArrayList<Announcement> ();
 
     @Column(name = "last_announcement_id")
     private Integer lastAnnouncementKey = 0;
-
 
     public void addMessage(Message message) {
         if(message != null) {
@@ -78,7 +77,6 @@ public class StandardWorker extends WorkerType implements Serializable
             this.announcements.add(announcement);
         }
     }
-
 
     @Override
     public boolean equals(Object o) {

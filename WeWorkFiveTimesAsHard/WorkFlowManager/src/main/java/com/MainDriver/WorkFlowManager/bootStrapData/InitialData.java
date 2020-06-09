@@ -57,7 +57,6 @@ public class InitialData implements CommandLineRunner
        Users peter = new Users("Peter", passwordEncoder.encode("peter12"),"STANDARDWORKER", "none");
        Users admin = new Users("admin", passwordEncoder.encode("peter12"),"ADMIN", "");
        Users manager = new Users("manager", passwordEncoder.encode("peter12"),"MANAGER", "");
-
        Users tyler = new Users("Tyler", passwordEncoder.encode("tyler"),"STANDARDWORKER", "none");
        Users tim = new Users("Tim", passwordEncoder.encode("tim"),"STANDARDWORKER", "none");
        Users joey = new Users("Joey", passwordEncoder.encode("joey"),"STANDARDWORKER", "none");
@@ -96,11 +95,11 @@ public class InitialData implements CommandLineRunner
 
         //Make standard workers
         StandardWorker standardWorker = new StandardWorker();
-        standardWorker.setUserName("peter");
+        standardWorker.setUserName("Peter");
         standardWorker.setHireDate("02-20-2020");
         standardWorker.setFirstName("Peter");
         standardWorker.setLastName("Gentile");
-        standardWorker.setEmployeeRole("architect");
+        standardWorker.setEmployeeRole("Architect");
         standardWorker.setManager(manager_1);
         standardWorker.setProject(project_1);
         manager_1.getDominion().add(standardWorker);
@@ -206,15 +205,20 @@ public class InitialData implements CommandLineRunner
         standardWorker.addMessage(message_1);
         standardWorkerRepository.save(standardWorker);
 
-        //Make an announcement:
-        Announcement announcement_1 = new Announcement();
-        announcement_1.setTo(standardWorker.getUserName());
-        announcement_1.setFrom(manager_1.getUserName());
-        announcement_1.setSubject("Test this");
-        announcement_1.setMessagePayload("Wtcfhjbnuiyutcyvjghbknuiyguvtgjh kjyvjg");
-        standardWorker.addAnnouncement(announcement_1);
-        standardWorkerRepository.save(standardWorker);
-        //check the Database
+        //Make an announcement(s):
+       for(StandardWorker sw : manager_1.getDominion())
+       {
+           Announcement announcement_1 = new Announcement();
+           announcement_1.setFrom(manager_1.getUserName());
+           announcement_1.setSubject("Hello World!");
+           announcement_1.setMessagePayload("A very cool project that will no doubt impress!");
+           System.out.println("Setting to: " + sw.getUserName());
+           announcement_1.setTo(sw.getUserName());
+           sw.addAnnouncement(announcement_1);
+           standardWorkerRepository.save(sw);
+       }
+
+        System.out.println(standardWorker_2.getAnnouncements());
 
         //Make a milestone
         Milestones milestone_1 = new Milestones();
@@ -258,6 +262,8 @@ public class InitialData implements CommandLineRunner
         task_2.setWorker("Not peter");
         project_1.addCompletedTask(task_2);
         projectRepository.save(project_1);
+
+        //check the Database
 
     }
 }
