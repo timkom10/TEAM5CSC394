@@ -265,6 +265,61 @@ public class InitialData implements CommandLineRunner
         project_1.addCompletedTask(task_2);
         projectRepository.save(project_1);
 
+        Task task_3 = new Task();
+        task_3.setBounty(310);
+        task_3.setAssigned(true);
+        task_3.setProjectId(project_1.getId());
+        task_3.setTaskName("Important Task Name");
+        task_3.setUrgency("Crucial");
+        task_3.setComplete(true);
+        task_3.setWorker(standardWorker_2.getUserName());
+        project_1.addCompletedTask(task_3);
+        projectRepository.save(project_1);
+
+        Task task_4 = new Task();
+        task_4.setBounty(320);
+        task_4.setAssigned(true);
+        task_4.setProjectId(project_1.getId());
+        task_4.setTaskName("Also important");
+        task_4.setUrgency("Was key");
+        task_4.setComplete(true);
+        task_4.setWorker(standardWorker_3.getUserName());
+        project_1.addCompletedTask(task_4);
+        projectRepository.save(project_1);
+
+        Task task_5 = new Task();
+        task_5.setBounty(330);
+        task_5.setAssigned(true);
+        task_5.setProjectId(project_1.getId());
+        task_5.setTaskName("Hard Task Name");
+        task_5.setUrgency("very urgent");
+        task_5.setComplete(true);
+        task_5.setWorker(standardWorker_4.getUserName());
+        project_1.addCompletedTask(task_5);
+        projectRepository.save(project_1);
+
+        Task task_6 = new Task();
+        task_6.setBounty(340);
+        task_6.setAssigned(true);
+        task_6.setProjectId(project_1.getId());
+        task_6.setTaskName("Hard.Task.Name");
+        task_6.setUrgency("Did I say important?");
+        task_6.setComplete(true);
+        task_6.setWorker(standardWorker_5.getUserName());
+        project_1.addCompletedTask(task_6);
+        projectRepository.save(project_1);
+
+        Task task_7 = new Task();
+        task_7.setBounty(350);
+        task_7.setAssigned(true);
+        task_7.setProjectId(project_1.getId());
+        task_7.setTaskName("Task Name");
+        task_7.setUrgency("Im-port-ant");
+        task_7.setComplete(true);
+        task_7.setWorker(standardWorker_6.getUserName());
+        project_1.addCompletedTask(task_7);
+        projectRepository.save(project_1);
+
 
         //Make some feedback
         Feedback feedback = new Feedback();
