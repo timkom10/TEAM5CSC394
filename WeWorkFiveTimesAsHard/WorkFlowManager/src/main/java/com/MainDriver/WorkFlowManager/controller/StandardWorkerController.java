@@ -131,6 +131,7 @@ public class StandardWorkerController
         Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
         if(project != null) {
             model.addAttribute("name", principal.getName());
+            model.addAttribute("workers", project.getTeamMembers());
             model.addAttribute("project", project);
             model.addAttribute("milestones", project.getMilestones());
             model.addAttribute("completedTasks", project.getCompletedTasksReverse());

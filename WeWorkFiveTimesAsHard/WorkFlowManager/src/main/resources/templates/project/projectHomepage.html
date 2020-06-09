@@ -37,11 +37,11 @@
 <div class="section-2">
     <div class="container-3 w-container">
         <div class="teamlist">
-            <ul role="list" class="list-4">
-                <li>Username</li>
-                <li>Role</li>
-                <li>Hire Date</li>
-                <li><a href="#" class="w-button">Message</a></li>
+            <ul role="list" class="list-4" th:each="worker : ${workers}">
+                <li th:text="${worker.getUserName()}">Username</li>
+                <li th:text="${worker.getRole()}">Role</li>
+                <li th:text="${worker.getHireDate()}">Hire Date</li>
+                <li><a th:href="@{composeMessage(username=${worker.getUserName()})}" class="w-button">Message</a></li>
             </ul>
         </div>
         <div class="milestones">

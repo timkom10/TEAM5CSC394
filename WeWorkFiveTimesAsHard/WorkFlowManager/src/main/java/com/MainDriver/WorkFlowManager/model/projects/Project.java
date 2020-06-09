@@ -37,7 +37,6 @@ public class Project {
     @Column(name="project_name")
     private String ProjectName;
 
-
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="milestones" )
     @Basic(fetch = FetchType.LAZY)
@@ -51,7 +50,6 @@ public class Project {
     @Lob
     String projectDescription;
 
-
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="recently_completed_tasks" )
     @Basic(fetch = FetchType.LAZY)
@@ -60,6 +58,15 @@ public class Project {
 
     @Column(name = "next_recent_task_key")
     private int completedTasksSize = 0;
+
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="all_tasks" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Task> tasks = new ArrayList<Task>();
+
+    @Column(name = "next_task_key")
+    private Integer nextTaskKey = 0;
 
     public Project(){
     }
@@ -91,6 +98,14 @@ public class Project {
         if(completedTasksSize > 5) {
             this.completedTasks.remove(0);
             completedTasksSize--;
+        }
+    }
+
+    public void addTask(Task task) {
+        if(task != null) {
+            task.setProjectId(this.id);
+            task.setTaskId(this.nextTaskKey++);
+            this.tasks.add(task);
         }
     }
 }
