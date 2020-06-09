@@ -44,7 +44,8 @@ public class StandardWorker extends WorkerType implements Serializable
     private String firstName;
     private String lastName;
     private String hireDate;
-    private int points = 0;
+    private int totalPoints = 0;
+    private int currentProjectPoints = 0;
 
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="messages" )
@@ -78,29 +79,43 @@ public class StandardWorker extends WorkerType implements Serializable
         }
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StandardWorker that = (StandardWorker) o;
-        return points == that.points &&
+        return totalPoints == that.totalPoints &&
+                currentProjectPoints == that.currentProjectPoints &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(userName, that.userName) &&
+                Objects.equals(employeeRole, that.employeeRole) &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(hireDate, that.hireDate);
+                Objects.equals(hireDate, that.hireDate) &&
+                Objects.equals(lastMessageKey, that.lastMessageKey) &&
+                Objects.equals(lastAnnouncementKey, that.lastAnnouncementKey);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, hireDate, points);
+        return Objects.hash(id, userName, employeeRole, firstName, lastName, hireDate, totalPoints, currentProjectPoints, lastMessageKey, lastAnnouncementKey);
     }
 
     @Override
     public String toString() {
         return "StandardWorker{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", managerUsername='" + managerUsername + '\'' +
+                ", userName='" + userName + '\'' +
+                ", employeeRole='" + employeeRole + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", hireDate='" + hireDate + '\'' +
-                ", points=" + points +
+                ", totalPoints=" + totalPoints +
+                ", currentProjectPoints=" + currentProjectPoints +
+                ", lastMessageKey=" + lastMessageKey +
+                ", lastAnnouncementKey=" + lastAnnouncementKey +
                 '}';
     }
 
