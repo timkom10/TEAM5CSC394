@@ -89,12 +89,13 @@
 }
 
 .section {
-  border: 1px solid #000;
+  border: 1px none #000;
   background-color: #fff;
   opacity: 0.85;
 }
 
 .leaderboards {
+  border: 1px none #000;
   background-color: #fff;
   opacity: 0.85;
 }
