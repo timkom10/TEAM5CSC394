@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 
 @Controller
@@ -51,6 +52,7 @@ public class AdminController {
     }
 
     @GetMapping("index")
+    @Transactional
     public String index(Principal principal, Model model) {
         Admin admin = adminService.findByUserName(principal.getName());
         if(admin != null)
@@ -165,7 +167,7 @@ public class AdminController {
 
     @GetMapping("searchUserToMessage")
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users",userService.findByUsernameExcludeSelf(username, principal.getName()));
+        model.addAttribute("users",userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 

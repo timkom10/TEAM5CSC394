@@ -33,21 +33,6 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Set<Users> findByUsernameExcludeSelf(String username, String self) {
-        Set<Users> users = this.userRepository.findByUsernameLike( "%" + username + "%");
-        if(users != null) {
-            for(Users user : users) {
-                if(user.getUsername().equals(self)) {
-                    users.remove(user);
-                    if( users != null) { return users; }
-                    break;
-                }
-            }
-        }
-        return new HashSet<Users>();
-    }
-
-    @Override
     public Set<Users> findByUsername(String username) {
         return  userRepository.findByUsernameLike("%" + username + "%");
     }

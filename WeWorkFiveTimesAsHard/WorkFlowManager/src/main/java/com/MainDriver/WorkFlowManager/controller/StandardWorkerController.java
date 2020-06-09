@@ -75,7 +75,7 @@ public class StandardWorkerController
 
     @GetMapping("searchUserToMessage")
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users",userService.findByUsernameExcludeSelf(username, principal.getName()));
+        model.addAttribute("users", userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 

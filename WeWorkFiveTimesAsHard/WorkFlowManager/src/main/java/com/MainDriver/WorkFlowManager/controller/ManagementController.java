@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 
 @Controller
@@ -38,6 +39,7 @@ public class ManagementController {
     }
 
     @GetMapping("index")
+    @Transactional
     public  String index(Principal principal, Model model)
     {
         Manager manager =  this.managerRepository.findByUserName(principal.getName());
@@ -70,7 +72,7 @@ public class ManagementController {
 
     @GetMapping("searchUserToMessage")
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users",userService.findByUsernameExcludeSelf(username, principal.getName()));
+        model.addAttribute("users",userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 
