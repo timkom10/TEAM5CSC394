@@ -31,7 +31,7 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
     private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
 
-    @ManyToOne
+    @OneToOne
     private Manager manager;
 
     @Column(name="project_name")

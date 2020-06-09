@@ -54,14 +54,28 @@ public class InitialData implements CommandLineRunner
 
 
        //Any new users need to have password encrypted before db insert
-       Users peter = new Users("peter", passwordEncoder.encode("peter12"),"STANDARDWORKER", "none");
+       Users peter = new Users("Peter", passwordEncoder.encode("peter12"),"STANDARDWORKER", "none");
        Users admin = new Users("admin", passwordEncoder.encode("peter12"),"ADMIN", "");
        Users manager = new Users("manager", passwordEncoder.encode("peter12"),"MANAGER", "");
 
+       Users tyler = new Users("Tyler", passwordEncoder.encode("tyler"),"STANDARDWORKER", "none");
+       Users tim = new Users("Tim", passwordEncoder.encode("tim"),"STANDARDWORKER", "none");
+       Users joey = new Users("Joey", passwordEncoder.encode("joey"),"STANDARDWORKER", "none");
+       Users paulina = new Users("Paulina", passwordEncoder.encode("paulina"),"STANDARDWORKER", "none");
+       Users ricky = new Users("Ricky", passwordEncoder.encode("ricky"),"STANDARDWORKER", "none");
+       Users willy = new Users("Willy", passwordEncoder.encode("willy"),"STANDARDWORKER", "none");
+
+       userRepository.save(tyler);
+       userRepository.save(tim);
+       userRepository.save(joey);
+       userRepository.save(paulina);
+       userRepository.save(ricky);
+       userRepository.save(willy);
        userRepository.save(peter);
        userRepository.save(admin);
        userRepository.save(manager);
 
+       //See below for turning these into Standard Workers
 
         //Make a new manager...
         Manager manager_1 = new Manager();
@@ -70,7 +84,6 @@ public class InitialData implements CommandLineRunner
         manager_1.setLastName("Possible");
         manager_1.setHireDate("2002-06-07");
         manager_1.setROLE("MANAGER");
-
         managerRepository.save(manager_1);
 
         //Make a project
@@ -78,28 +91,102 @@ public class InitialData implements CommandLineRunner
         project_1.setProjectName("We(Really)Work");
         project_1.setManager(manager_1);
         project_1.setProjectDescription("A very important project that will beat the competition 100%");
-        manager_1.getProjects().add(project_1);
+        manager_1.setProject(project_1);
         projectRepository.save(project_1);
 
-        //Make a standard worker
+        //Make standard workers
         StandardWorker standardWorker = new StandardWorker();
         standardWorker.setUserName("peter");
         standardWorker.setHireDate("02-20-2020");
         standardWorker.setFirstName("Peter");
         standardWorker.setLastName("Gentile");
-        standardWorker.setEmployeeRole("Just a worker");
+        standardWorker.setEmployeeRole("architect");
         standardWorker.setManager(manager_1);
-        manager_1.getDominion().add(standardWorker);
-        standardWorkerRepository.save(standardWorker);
-
-        for(Project project : manager_1.getProjects()) {
-            project.getTeamMembers().add(standardWorker);
-            standardWorker.setProject(project);
-        }
-
-        //Assign workers to project
         standardWorker.setProject(project_1);
-        project_1.getTeamMembers().add(standardWorker); //could also find users in the manager repo
+        manager_1.getDominion().add(standardWorker);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker);
+        projectRepository.save(project_1);
+
+        StandardWorker standardWorker_1 = new StandardWorker();
+        standardWorker_1.setUserName("Tyler");
+        standardWorker_1.setHireDate("03-30-2020");
+        standardWorker_1.setFirstName("Tyler");
+        standardWorker_1.setLastName("DemoLastName");
+        standardWorker_1.setEmployeeRole("Engine");
+        standardWorker_1.setManager(manager_1);
+        manager_1.getDominion().add(standardWorker_1);
+        standardWorker_1.setProject(project_1);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_1);
+        projectRepository.save(project_1);
+
+        StandardWorker standardWorker_2 = new StandardWorker();
+        standardWorker_2.setUserName("Tim");
+        standardWorker_2.setHireDate("03-31-2020");
+        standardWorker_2.setFirstName("Tim");
+        standardWorker_2.setLastName("DemoLastName");
+        standardWorker_2.setEmployeeRole("Core");
+        standardWorker_2.setManager(manager_1);
+        manager_1.getDominion().add(standardWorker_2);
+        standardWorker_2.setProject(project_1);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_2);
+        projectRepository.save(project_1);
+
+        StandardWorker standardWorker_3 = new StandardWorker();
+        standardWorker_3.setUserName("Joey");
+        standardWorker_3.setHireDate("04-01-2020");
+        standardWorker_3.setFirstName("Joey");
+        standardWorker_3.setLastName("DemoLastName");
+        standardWorker_3.setEmployeeRole("Test");
+        standardWorker_3.setManager(manager_1);
+        standardWorker_3.setProject(project_1);
+        manager_1.getDominion().add(standardWorker_3);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_3);
+        projectRepository.save(project_1);
+
+        StandardWorker standardWorker_4 = new StandardWorker();
+        standardWorker_4.setUserName("Paulina");
+        standardWorker_4.setHireDate("04-02-2020");
+        standardWorker_4.setFirstName("Paulina");
+        standardWorker_4.setLastName("DemoLastName");
+        standardWorker_4.setEmployeeRole("Lead");
+        standardWorker_4.setManager(manager_1);
+        standardWorker_4.setProject(project_1);
+        manager_1.getDominion().add(standardWorker_4);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_4);
+        projectRepository.save(project_1);
+
+
+        StandardWorker standardWorker_5 = new StandardWorker();
+        standardWorker_5.setUserName("Ricky");
+        standardWorker_5.setHireDate("04-03-2020");
+        standardWorker_5.setFirstName("Ricky");
+        standardWorker_5.setLastName("DemoLastName");
+        standardWorker_5.setEmployeeRole("Security");
+        standardWorker_5.setManager(manager_1);
+        standardWorker_5.setProject(project_1);
+        manager_1.getDominion().add(standardWorker_5);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_5);
+        projectRepository.save(project_1);
+
+        StandardWorker standardWorker_6 = new StandardWorker();
+        standardWorker_6.setUserName("Willy");
+        standardWorker_6.setHireDate("04-04-2020");
+        standardWorker_6.setFirstName("Willy");
+        standardWorker_6.setLastName("DemoLastName");
+        standardWorker_6.setEmployeeRole("Front End");
+        standardWorker_6.setManager(manager_1);
+        standardWorker_6.setProject(project_1);
+        manager_1.getDominion().add(standardWorker_6);
+        project_1.getTeamMembers().add(standardWorker);
+        standardWorkerRepository.save(standardWorker_6);
+        projectRepository.save(project_1);
+
 
         //Make a new admin
         Admin admin_1 = new Admin();

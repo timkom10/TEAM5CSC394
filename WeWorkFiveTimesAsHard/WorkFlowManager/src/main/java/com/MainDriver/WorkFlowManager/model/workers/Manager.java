@@ -33,9 +33,8 @@ public class Manager extends WorkerType {
             mappedBy = "manager", orphanRemoval = true)
     private Set<StandardWorker> dominion = new HashSet<StandardWorker>();
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "manager")
-    private Set<Project> projects = new HashSet<Project>();
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "manager")
+    private Project project;
 
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="messages" )
