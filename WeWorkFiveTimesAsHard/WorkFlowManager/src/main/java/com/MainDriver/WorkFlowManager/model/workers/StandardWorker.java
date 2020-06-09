@@ -72,6 +72,9 @@ public class StandardWorker extends WorkerType implements Serializable
     @JsonIgnore
     private List<Feedback> personalFeedback = new ArrayList<Feedback> ();
 
+    @Column(name = "last_feedback_id")
+    private Integer lastFeedbackKey = 0;
+
     public void addMessage(Message message) {
         if(message != null) {
             message.setId(this.lastMessageKey++);
@@ -83,6 +86,13 @@ public class StandardWorker extends WorkerType implements Serializable
         if(announcement != null) {
             announcement.setId(this.lastAnnouncementKey++);
             this.announcements.add(announcement);
+        }
+    }
+
+    public void addFeedback(Feedback feedback) {
+        if(feedback != null) {
+            feedback.setId(this.lastFeedbackKey++);
+            this.personalFeedback.add(feedback);
         }
     }
 

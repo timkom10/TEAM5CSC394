@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/personalFeedback.css}"/>
 </head>
 <body class="body">
@@ -33,7 +34,22 @@
         </div>
     </div>
     <div class="container-3 w-container">
-
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>From&nbsp;</th>
+                <th>Subject</th>
+                <th>Feedback</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" th:each="feedback: ${feedbacks}">
+            <tr>
+                <td th:text="${feedback.getFrom()}">From</td>
+                <td th:text="${feedback.getSubject()}">Subject</td>
+                <th th:text="${feedback.getContent()}">Content</th>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

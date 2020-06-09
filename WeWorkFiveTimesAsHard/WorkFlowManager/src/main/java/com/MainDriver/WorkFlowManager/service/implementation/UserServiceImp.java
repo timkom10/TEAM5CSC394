@@ -12,7 +12,6 @@ import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -34,7 +33,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public Set<Users> findByUsername(String username) {
-        return  userRepository.findByUsernameLike("%" + username + "%");
+        return  userRepository.findAllByUsernameLike("%" + username + "%");
     }
 
     @Override

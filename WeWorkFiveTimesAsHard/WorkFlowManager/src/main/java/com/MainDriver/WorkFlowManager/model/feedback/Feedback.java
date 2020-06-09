@@ -12,5 +12,5 @@ public class Feedback {
     private String subject;
     private String content;
     private String to;
-    boolean isPublic;
+    private String from;
 }

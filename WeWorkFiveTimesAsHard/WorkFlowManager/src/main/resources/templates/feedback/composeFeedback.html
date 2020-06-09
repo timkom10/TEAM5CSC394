@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Composer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/FeedbackCSS/composeFeedback.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="container w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
+            <li class="list-item"><a th:href="@{feedback}"  class="nav-link">Feedback</a></li>
+            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="w-container">
+        <div class="div-block-3">
+            <h1 class="heading-2">Congratulate [[${to}]]</h1>
+        </div>
+        <div>
+            <div class="w-form">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{feedbackSent}" th:object="${feedback}" method="post">
+                    <label for="subject" class="field-label">Subject:</label>
+                        <input type="text" class="w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter subject" id="subject" th:field = "*{subject}">
+                    <label for="feedback" class="field-label-2">Feedback</label>
+                        <input type="text" class="w-input" maxlength="1024" name="feedback" data-name="feedback" placeholder="Enter Feedbacl" id="feedback" required="" th:field = "*{content}">
+                    <input type="submit" value="Send Feedback" data-wait="Please wait..." class="w-button">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

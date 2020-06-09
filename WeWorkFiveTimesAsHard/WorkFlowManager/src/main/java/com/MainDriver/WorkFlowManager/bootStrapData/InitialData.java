@@ -1,4 +1,5 @@
 package com.MainDriver.WorkFlowManager.bootStrapData;
+import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
@@ -29,8 +30,9 @@ public class InitialData implements CommandLineRunner
     private final ProjectRepository projectRepository;
     private final StandardWorkerRepository standardWorkerRepository;
     private final AdminRepository adminRepository;
+    private final AllFeedbackRepository allFeedbackRepository;
 
-    public InitialData(UserRepository userRepository, PasswordEncoder passwordEncoder, ManagerRepository managerRepository, ProjectRepository projectRepository, StandardWorkerRepository standardWorkerRepository, AdminRepository adminRepository)
+    public InitialData(UserRepository userRepository, PasswordEncoder passwordEncoder, ManagerRepository managerRepository, ProjectRepository projectRepository, StandardWorkerRepository standardWorkerRepository, AdminRepository adminRepository, AllFeedbackRepository allFeedbackRepository)
     {
 
         this.userRepository = userRepository;
@@ -39,6 +41,7 @@ public class InitialData implements CommandLineRunner
         this.projectRepository = projectRepository;
         this.standardWorkerRepository = standardWorkerRepository;
         this.adminRepository = adminRepository;
+        this.allFeedbackRepository = allFeedbackRepository;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class InitialData implements CommandLineRunner
         standardWorkerRepository.deleteAll();
         projectRepository.deleteAll();
         adminRepository.deleteAll();
+        allFeedbackRepository.deleteAll();
 
 
        //Any new users need to have password encrypted before db insert
@@ -216,7 +220,7 @@ public class InitialData implements CommandLineRunner
            sw.addAnnouncement(announcement_1);
            standardWorkerRepository.save(sw);
        }
-       
+
         //Make a milestone
         Milestones milestone_1 = new Milestones();
         milestone_1.setMilestoneName("Milestone #343");
@@ -256,11 +260,19 @@ public class InitialData implements CommandLineRunner
         task_2.setTaskName("Pretty important");
         task_2.setUrgency("Extremely urgent");
         task_2.setComplete(true);
-        task_2.setWorker("Not peter");
+        task_2.setWorker(standardWorker_1.getUserName());
         project_1.addCompletedTask(task_2);
         projectRepository.save(project_1);
 
-        //check the Database
 
+        //Make some feedback
+        Feedback feedback = new Feedback();
+        feedback.setFrom(manager_1.getUserName());
+        feedback.setTo(standardWorker.getUserName());
+        feedback.setSubject("Great Job");
+        feedback.setContent("very nice thank you!");
+        standardWorker.addFeedback(feedback);
+        this.standardWorkerRepository.save(standardWorker);
+        //check the Database
     }
 }

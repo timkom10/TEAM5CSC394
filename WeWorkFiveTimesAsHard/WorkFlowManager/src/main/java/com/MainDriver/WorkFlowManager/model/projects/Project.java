@@ -93,7 +93,7 @@ public class Project {
             this.completedTasks.add(task);
             this.completedTasksSize++;
         }
-        if(completedTasksSize > 5) {
+        if(completedTasksSize > 7) {
             this.completedTasks.remove(0);
             completedTasksSize--;
         }

@@ -10,5 +10,6 @@ import java.util.Set;
 public interface UserRepository extends CrudRepository<Users, Long> {
     Users findByUsername(String username);
     Set<Users> findByUsernameLike(String username);
+    Set<Users> findAllByUsernameLike(String username);
     Set<Users> findAllByRolesAndUsernameLike(String role, String username);
 }

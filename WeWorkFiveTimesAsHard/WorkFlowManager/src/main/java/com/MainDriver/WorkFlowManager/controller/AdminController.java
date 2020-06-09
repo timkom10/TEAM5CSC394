@@ -132,12 +132,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
+    @Transactional
     public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("workers", standardWorkerService.findAllByUsername(username));
         return "admin/searchTeamMembers";
     }
 
     @GetMapping("alterTeamMember")
+    @Transactional
     public String getAlterEmployee(Model model, String username)
     {
         this.usernamePlaceholder = username;

@@ -1,13 +1,12 @@
 package com.MainDriver.WorkFlowManager.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
-import com.MainDriver.WorkFlowManager.service.AnnouncementService;
-import com.MainDriver.WorkFlowManager.service.MessagingService;
-import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
-import com.MainDriver.WorkFlowManager.service.UserService;
+import com.MainDriver.WorkFlowManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +30,9 @@ public class StandardWorkerController
 
     @Autowired
     StandardWorkerService standardWorkerService;
+
+    @Autowired
+    FeedbackService feedbackService;
 
 
     static String usernamePlaceHolder ="";
@@ -164,4 +166,32 @@ public class StandardWorkerController
         return "feedback/personalFeedback";
     }
 
+    @GetMapping(value = "composeFeedback")
+    @Transactional
+    public String getComposeFeedback(Principal principal,Model model, String to) {
+        StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(principal.getName());
+        if(standardWorker != null) {
+            usernamePlaceHolder = to;
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("to", to);
+            model.addAttribute("feedback", new Feedback());
+        }
+        return "feedback/composeFeedback";
+    }
+
+    @RequestMapping(value = "feedbackSent", method = RequestMethod.POST)
+    @Transactional
+    public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback)
+    {
+        this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
+        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
+        if(project != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("workers", project.getTeamMembers());
+            model.addAttribute("project", project);
+            model.addAttribute("milestones", project.getMilestones());
+            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
+        }
+        return "project/projectHomepage";
+    }
 }

@@ -57,7 +57,7 @@
                 <li>[[${task.getWorker()}]] Completed:</li>
                 <li th:text="${task.getTaskName()}">TaskName</li>
                 <li th:text="${task.getBounty()}">Points</li>
-                <li><a href="#" class="w-button">Give Feedback</a></li>
+                <li><a th:href="@{composeFeedback(to=${task.getWorker()})}" class="w-button">Give Feedback</a></li>
             </ul>
         </div>
     </div>
