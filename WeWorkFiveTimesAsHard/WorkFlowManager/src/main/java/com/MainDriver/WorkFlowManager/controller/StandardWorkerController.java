@@ -153,4 +153,15 @@ public class StandardWorkerController
         return "project/projectInfo";
     }
 
+    @GetMapping(value = "personalFeedback")
+    @Transactional
+    public String getPersonalFeedback(Principal principal,Model model) {
+        StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(principal.getName());
+        if(standardWorker != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("feedbacks", standardWorker.getPersonalFeedback());
+        }
+        return "feedback/personalFeedback";
+    }
+
 }

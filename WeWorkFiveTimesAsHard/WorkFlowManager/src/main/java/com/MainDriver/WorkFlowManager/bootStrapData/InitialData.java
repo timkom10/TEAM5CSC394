@@ -212,7 +212,6 @@ public class InitialData implements CommandLineRunner
            announcement_1.setFrom(manager_1.getUserName());
            announcement_1.setSubject("Hello World!");
            announcement_1.setMessagePayload("A very cool project that will no doubt impress!");
-           System.out.println("Setting to: " + sw.getUserName());
            announcement_1.setTo(sw.getUserName());
            sw.addAnnouncement(announcement_1);
            standardWorkerRepository.save(sw);

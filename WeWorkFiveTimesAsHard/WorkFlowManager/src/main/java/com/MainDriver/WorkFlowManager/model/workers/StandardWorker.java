@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.model.workers;
 
+import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
@@ -65,6 +66,12 @@ public class StandardWorker extends WorkerType implements Serializable
     @Column(name = "last_announcement_id")
     private Integer lastAnnouncementKey = 0;
 
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="personal_feedback" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Feedback> personalFeedback = new ArrayList<Feedback> ();
+
     public void addMessage(Message message) {
         if(message != null) {
             message.setId(this.lastMessageKey++);
@@ -78,7 +85,6 @@ public class StandardWorker extends WorkerType implements Serializable
             this.announcements.add(announcement);
         }
     }
-
 
     @Override
     public boolean equals(Object o) {
