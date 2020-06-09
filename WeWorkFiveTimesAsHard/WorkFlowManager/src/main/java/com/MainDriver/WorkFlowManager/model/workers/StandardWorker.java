@@ -3,10 +3,8 @@ package com.MainDriver.WorkFlowManager.model.workers;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
-import com.MainDriver.WorkFlowManager.model.projects.Tasks;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,9 +31,6 @@ public class StandardWorker extends WorkerType implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "standardWorker", orphanRemoval = true)
-    private Set<Tasks> currentTasks = new HashSet<Tasks>();
 
     @ManyToOne
     private Project project;
@@ -69,12 +64,6 @@ public class StandardWorker extends WorkerType implements Serializable
     @Column(name = "last_announcement_id")
     private Integer lastAnnouncementKey = 0;
 
-
-    public void updatePoints(Tasks completedTask, int addScore) {
-        if(completedTask.isComplete() && (completedTask.getStandardWorker() == this)) {
-            this.points += addScore;
-        }
-    }
 
     public void addMessage(Message message) {
         if(message != null) {

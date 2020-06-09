@@ -21,8 +21,6 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
     private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
-    private Set<Tasks> tasks = new HashSet<Tasks>();
 
     @ManyToOne
     private Manager manager;
@@ -33,12 +31,8 @@ public class Project {
     public Project(){
     }
 
-    public Project(Manager manager)
-    {
+    public Project(Manager manager) {
         this.manager = manager;
     }
-
-
-
 
 }

@@ -120,4 +120,10 @@ public class StandardWorkerController
         }
         return "standardWorkers/index";
     }
+
+    @GetMapping(value = "viewProject")
+    public String getViewProject(Principal principal,Model model) {
+        return "project/projectHomepage";
+    }
+
 }

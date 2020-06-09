@@ -2,7 +2,6 @@ package com.MainDriver.WorkFlowManager.bootStrapData;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
-import com.MainDriver.WorkFlowManager.model.projects.Tasks;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
@@ -94,16 +93,9 @@ public class InitialData implements CommandLineRunner
             standardWorker.setProject(project);
         }
 
-
         //Assign workers to project
         standardWorker.setProject(project_1);
         project_1.getTeamMembers().add(standardWorker); //could also find users in the manager repo
-
-        //Make a task
-        Tasks tasks_1 = new Tasks(manager_1, 450);
-        tasks_1.setTaskName("Very important");
-        tasks_1.setTaskDescription("Please do this:....");
-        tasks_1.setProject(project_1);
 
         //Make a new admin
         Admin admin_1 = new Admin();
@@ -113,7 +105,6 @@ public class InitialData implements CommandLineRunner
         admin_1.setROLE("ADMIN");
         admin_1.setHireDate("09-30-2020");
         adminRepository.save(admin_1);
-
 
         //Make some messages: STRESS TEST
         Message message_1 = new Message();
@@ -133,5 +124,6 @@ public class InitialData implements CommandLineRunner
         standardWorker.addAnnouncement(announcement_1);
         standardWorkerRepository.save(standardWorker);
        //check the Database
+
     }
 }
