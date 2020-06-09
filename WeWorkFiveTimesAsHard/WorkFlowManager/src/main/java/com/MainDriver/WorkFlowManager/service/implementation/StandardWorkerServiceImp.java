@@ -7,6 +7,7 @@ import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.*;
 import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,8 +36,8 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     }
 
     @Override
-    public Project getStandardWorkerProject(String username)
-    {
+    @Transactional
+    public Project getStandardWorkerProject(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(username);
             return standardWorker.getProject();
@@ -45,17 +46,17 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     }
 
     @Override
-    public StandardWorker getByUsername(String username)
-    {
+    @Transactional
+    public StandardWorker getByUsername(String username) {
         StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(username);
         if(standardWorker != null) {
             return  standardWorker;
         }
         return new StandardWorker();
     }
+
     @Override
-    public void insertAlteredStandardWorker(StandardWorker standardWorker, String username)
-    {
+    public void insertAlteredStandardWorker(StandardWorker standardWorker, String username) {
         StandardWorker modifyThis = this.standardWorkerRepository.findByuserName(username);
         if((standardWorker != null) && (modifyThis != null))
         {
@@ -68,8 +69,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     }
 
     @Override
-    public void addStandardWorker(Users user, StandardWorker standardWorker)
-    {
+    public void addStandardWorker(Users user, StandardWorker standardWorker) {
         if((user !=null) &&(standardWorker != null)) {
             standardWorker.setEmployeeRole(user.getRoles());
             standardWorker.setUserName(user.getUsername());

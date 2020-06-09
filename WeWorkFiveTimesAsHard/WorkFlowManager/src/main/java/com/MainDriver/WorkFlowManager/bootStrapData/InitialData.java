@@ -76,9 +76,9 @@ public class InitialData implements CommandLineRunner
         Project project_1 = new Project();
         project_1.setProjectName("We(Really)Work");
         project_1.setManager(manager_1);
+        project_1.setProjectDescription("A very important project that will beat the competition 100%");
         manager_1.getProjects().add(project_1);
         projectRepository.save(project_1);
-
 
         //Make a standard worker
         StandardWorker standardWorker = new StandardWorker();
@@ -138,5 +138,13 @@ public class InitialData implements CommandLineRunner
         project_1.addMilestone(milestone_1);
         projectRepository.save(project_1);
 
+        Milestones milestone_2 = new Milestones();
+        milestone_2.setMilestoneName("Milestone #343");
+        milestone_2.setDescription("Not so very important milestone");
+        milestone_2.setIsOnSchedule(0);
+        milestone_2.setDueDate(new Date());
+
+        project_1.addMilestone(milestone_2);
+        projectRepository.save(project_1);
     }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Info</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/projectInfo.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="container w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li class="list-item"><a th:href="@{info}" class="nav-link">Username</a></li>
+            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
+            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="section-2">
+    <div class="container-2 w-container">
+        <div>
+            <h1 th:text="${project.getProjectName()}">Project Name</h1>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="w-container">
+        <div class="projectdescription">
+            <p th:text="${project.getProjectDescription()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+        </div>
+    </div>
+</div>
+<div class="leaderboards">
+    <div class="container-3 w-container">
+        <div class="div-block">
+            <h1>Project Leader Board</h1>
+        </div>
+    </div>
+    <div class="w-container">
+        <ul role="list" class="list">
+            <li>Username </li>
+            <li>Role</li>
+            <li>Project Points</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

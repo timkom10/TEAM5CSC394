@@ -49,6 +49,9 @@ public class Project {
     @Column(name = "next_milestone_key")
     private Integer nextMileStoneKey = 0;
 
+    @Column(name ="description")
+    @Lob
+    String projectDescription;
 
     public Project(){
     }

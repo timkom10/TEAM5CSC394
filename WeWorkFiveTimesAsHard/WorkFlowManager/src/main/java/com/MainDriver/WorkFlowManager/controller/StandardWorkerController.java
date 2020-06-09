@@ -42,7 +42,7 @@ public class StandardWorkerController
     @GetMapping("index")
     public  String index(Principal principal, Model model)
     {
-        StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
+        StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
         if(standardWorker != null) {
             model.addAttribute(standardWorker);
             model.addAttribute("announcements", standardWorker.getAnnouncements());
@@ -134,6 +134,15 @@ public class StandardWorkerController
             model.addAttribute("milestones", project.getMilestones());
         }
         return "project/projectHomepage";
+    }
+
+    @GetMapping(value = "projectInfo")
+    public String getProjectInfo(Principal principal,Model model) {
+        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
+        if(project != null) {
+            model.addAttribute("project", project);
+        }
+        return "project/projectInfo";
     }
 
 }
