@@ -211,8 +211,7 @@ public class InitialData implements CommandLineRunner
         standardWorkerRepository.save(standardWorker);
 
         //Make an announcement(s):
-       for(StandardWorker sw : manager_1.getDominion())
-       {
+       for(StandardWorker sw : manager_1.getDominion()) {
            Announcement announcement_1 = new Announcement();
            announcement_1.setFrom(manager_1.getUserName());
            announcement_1.setSubject("Hello World!");

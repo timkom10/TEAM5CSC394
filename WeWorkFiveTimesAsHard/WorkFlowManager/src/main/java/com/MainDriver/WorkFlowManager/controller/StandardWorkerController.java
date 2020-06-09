@@ -5,6 +5,7 @@ import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
+import com.MainDriver.WorkFlowManager.repository.AllFeedbackRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class StandardWorkerController
 
     @Autowired
     FeedbackService feedbackService;
+
+    @Autowired
+    AllFeedbackRepository allFeedbackRepository;
 
 
     static String usernamePlaceHolder ="";
@@ -193,5 +197,14 @@ public class StandardWorkerController
             model.addAttribute("completedTasks", project.getCompletedTasksReverse());
         }
         return "project/projectHomepage";
+    }
+
+    @RequestMapping(value = "publicFeedback")
+    @Transactional
+    public String getPublicFeedback(Principal principal, Model model)
+    {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("feedbacks",allFeedbackRepository.findAll());
+        return "feedback/publicFeedback";
     }
 }
