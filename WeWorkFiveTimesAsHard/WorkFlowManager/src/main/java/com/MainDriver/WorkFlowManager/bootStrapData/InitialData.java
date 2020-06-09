@@ -1,4 +1,5 @@
 package com.MainDriver.WorkFlowManager.bootStrapData;
+import com.MainDriver.WorkFlowManager.model.feedback.AllFeedback;
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
@@ -273,6 +274,13 @@ public class InitialData implements CommandLineRunner
         feedback.setContent("very nice thank you!");
         standardWorker.addFeedback(feedback);
         this.standardWorkerRepository.save(standardWorker);
+
+        AllFeedback allFeedback = new AllFeedback();
+        allFeedback.setTo(standardWorker.getUserName());
+        allFeedback.setFrom(standardWorker.getUserName());
+        allFeedback.setSubject("Congratulating myself?");
+        allFeedback.setContent("For demonstrations of course");
+        this.allFeedbackRepository.save(allFeedback);
         //check the Database
     }
 }
