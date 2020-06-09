@@ -1,6 +1,5 @@
 package com.MainDriver.WorkFlowManager.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import java.security.Principal;
 
@@ -37,7 +35,6 @@ public class StandardWorkerController
 
     @Autowired
     AllFeedbackRepository allFeedbackRepository;
-
 
     static String usernamePlaceHolder ="";
 
