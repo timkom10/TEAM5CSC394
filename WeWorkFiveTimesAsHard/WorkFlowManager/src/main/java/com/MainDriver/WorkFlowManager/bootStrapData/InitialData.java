@@ -216,9 +216,7 @@ public class InitialData implements CommandLineRunner
            sw.addAnnouncement(announcement_1);
            standardWorkerRepository.save(sw);
        }
-
-        System.out.println(standardWorker_2.getAnnouncements());
-
+       
         //Make a milestone
         Milestones milestone_1 = new Milestones();
         milestone_1.setMilestoneName("Milestone #343");

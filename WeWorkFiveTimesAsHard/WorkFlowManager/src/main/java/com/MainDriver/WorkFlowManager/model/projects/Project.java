@@ -1,13 +1,10 @@
 package com.MainDriver.WorkFlowManager.model.projects;
 
-import com.MainDriver.WorkFlowManager.model.feedback.ProjectFeedback;
-import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -68,9 +65,6 @@ public class Project {
 
     @Column(name = "next_task_key")
     private Integer nextTaskKey = 0;
-
-    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
-    ProjectFeedback projectFeedback;
 
     public Project(){
     }
