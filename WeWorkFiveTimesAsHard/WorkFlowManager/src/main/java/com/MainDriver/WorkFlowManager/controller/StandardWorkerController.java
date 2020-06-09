@@ -185,8 +185,7 @@ public class StandardWorkerController
 
     @RequestMapping(value = "feedbackSent", method = RequestMethod.POST)
     @Transactional
-    public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback)
-    {
+    public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback) {
         this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
         Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
         if(project != null) {
