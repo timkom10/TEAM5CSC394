@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.service.implementation;
 
+import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
@@ -32,6 +33,17 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         }
         return standardWorkerSet;
     }
+
+    @Override
+    public Project getStandardWorkerProject(String username)
+    {
+        if(this.standardWorkerRepository.existsByUserName(username)) {
+            StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(username);
+            return standardWorker.getProject();
+        }
+        return null;
+    }
+
     @Override
     public StandardWorker getByUsername(String username)
     {

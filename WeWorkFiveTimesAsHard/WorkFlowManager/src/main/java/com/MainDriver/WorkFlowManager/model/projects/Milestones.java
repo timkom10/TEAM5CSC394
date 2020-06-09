@@ -4,20 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
-    private String taskName;
-    private String urgency;
+public class Milestones {
 
+    private String milestoneName;
+    private String description;
     private Long projectId;
-    private Long workerId;
-
-    private Integer milestoneId;
-    private Integer taskId;
-
-    private int bounty;
+    private Integer id;
+    private Date dueDate;
+    private int isOnSchedule;
     private boolean isComplete;
-    private boolean isAssigned;
 }

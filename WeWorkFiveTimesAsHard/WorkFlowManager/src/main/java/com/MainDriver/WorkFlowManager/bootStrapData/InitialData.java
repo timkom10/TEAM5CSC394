@@ -1,6 +1,7 @@
 package com.MainDriver.WorkFlowManager.bootStrapData;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
+import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
@@ -10,6 +11,8 @@ import com.MainDriver.WorkFlowManager.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 
 /*
@@ -71,7 +74,7 @@ public class InitialData implements CommandLineRunner
 
         //Make a project
         Project project_1 = new Project();
-        project_1.setProjectName("WeWork");
+        project_1.setProjectName("We(Really)Work");
         project_1.setManager(manager_1);
         manager_1.getProjects().add(project_1);
         projectRepository.save(project_1);
@@ -123,7 +126,17 @@ public class InitialData implements CommandLineRunner
         announcement_1.setMessagePayload("Wtcfhjbnuiyutcyvjghbknuiyguvtgjh kjyvjg");
         standardWorker.addAnnouncement(announcement_1);
         standardWorkerRepository.save(standardWorker);
-       //check the Database
+        //check the Database
+
+        //Make a milestone
+        Milestones milestone_1 = new Milestones();
+        milestone_1.setMilestoneName("Milestone #343");
+        milestone_1.setDescription("A very important milestone");
+        milestone_1.setIsOnSchedule(1);
+        milestone_1.setDueDate(new Date());
+
+        project_1.addMilestone(milestone_1);
+        projectRepository.save(project_1);
 
     }
 }

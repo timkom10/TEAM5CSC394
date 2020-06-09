@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.service;
 
+import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 
@@ -10,4 +11,5 @@ public interface StandardWorkerService {
     void insertAlteredStandardWorker(StandardWorker standardWorker, String username);
     StandardWorker getByUsername(String username);
     Set<StandardWorker> findAllByUsername(String username);
+    Project getStandardWorkerProject(String username);
 }

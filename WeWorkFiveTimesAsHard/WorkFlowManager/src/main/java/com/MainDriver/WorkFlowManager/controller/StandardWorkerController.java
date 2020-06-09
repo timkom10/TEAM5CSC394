@@ -1,10 +1,12 @@
 package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
+import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
+import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
 import com.MainDriver.WorkFlowManager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class StandardWorkerController
 
     @Autowired
     AnnouncementService announcementService;
+
+    @Autowired
+    StandardWorkerService standardWorkerService;
 
 
     static String usernamePlaceHolder ="";
@@ -123,6 +128,11 @@ public class StandardWorkerController
 
     @GetMapping(value = "viewProject")
     public String getViewProject(Principal principal,Model model) {
+        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
+        if(project != null) {
+            model.addAttribute("project", project);
+            model.addAttribute("milestones", project.getMilestones());
+        }
         return "project/projectHomepage";
     }
 

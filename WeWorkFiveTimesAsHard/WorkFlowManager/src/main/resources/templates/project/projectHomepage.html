@@ -30,7 +30,7 @@
 <div class="section">
     <div class="container-2 w-container">
         <a href="#" class="link-block w-inline-block">
-            <h1 class="heading-2">Project Name</h1>
+            <h1 class="heading-2" th:text="${project.getProjectName()}">Project Name</h1>
         </a>
     </div>
 </div>
@@ -45,10 +45,10 @@
             </ul>
         </div>
         <div class="milestones">
-            <ul role="list" class="list-3">
-                <li>MileStone Nmber</li>
-                <li>Scheduled Due Date</li>
-                <li>On Schedule?</li>
+            <ul role="list" class="list-3" th:each="milestone : ${milestones}">
+                <li th:text="${milestone.getMilestoneName()}">MileStone Nmber</li>
+                <li>Scheduled Due Date [[${milestone.getDueDate()}]]</li>
+                <li th:text="${milestone.getIsOnSchedule()  &gt; 0 ? 'On Schedule' : 'Past Due'}">On Schedule</li>
                 <li><a href="#" class="button-2 w-button">View</a></li>
             </ul>
         </div>
