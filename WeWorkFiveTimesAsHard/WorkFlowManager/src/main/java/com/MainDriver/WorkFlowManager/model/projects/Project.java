@@ -6,16 +6,14 @@ import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
+import lombok.Getter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @TypeDefs({
         @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
@@ -53,6 +51,16 @@ public class Project {
     @Lob
     String projectDescription;
 
+
+    @Type( type = "jsonb" )
+    @Column( columnDefinition = "jsonb", name ="recently_completed_tasks" )
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Task> completedTasks = new ArrayList<Task>();
+
+    @Column(name = "next_recent_task_key")
+    private int completedTasksSize = 0;
+
     public Project(){
     }
     public Project(Manager manager) {
@@ -67,4 +75,22 @@ public class Project {
         }
     }
 
+    public List<Task> getCompletedTasksReverse()
+    {
+        List<Task> reverseList = this.completedTasks;
+        Collections.reverse(reverseList);
+        return reverseList;
+    }
+
+    public void addCompletedTask(Task task) {
+
+        if(task != null && task.isComplete()) {
+            this.completedTasks.add(task);
+            this.completedTasksSize++;
+        }
+        if(completedTasksSize > 5) {
+            this.completedTasks.remove(0);
+            completedTasksSize--;
+        }
+    }
 }

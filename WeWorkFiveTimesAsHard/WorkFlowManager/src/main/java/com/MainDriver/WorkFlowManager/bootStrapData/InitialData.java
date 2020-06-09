@@ -3,6 +3,7 @@ import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
+import com.MainDriver.WorkFlowManager.model.projects.Task;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
@@ -146,5 +147,30 @@ public class InitialData implements CommandLineRunner
 
         project_1.addMilestone(milestone_2);
         projectRepository.save(project_1);
+
+        //Make some completed Tasks
+        Task task_1 = new Task();
+        task_1.setBounty(450);
+        task_1.setAssigned(true);
+        task_1.setProjectId(project_1.getId());
+        task_1.setTaskName("Very important");
+        task_1.setUrgency("Extremely urgent");
+        task_1.setComplete(true);
+        task_1.setWorker(standardWorker.getUserName());
+        project_1.addCompletedTask(task_1);
+        projectRepository.save(project_1);
+
+
+        Task task_2 = new Task();
+        task_2.setBounty(300);
+        task_2.setAssigned(true);
+        task_2.setProjectId(project_1.getId());
+        task_2.setTaskName("Pretty important");
+        task_2.setUrgency("Extremely urgent");
+        task_2.setComplete(true);
+        task_2.setWorker("Not peter");
+        project_1.addCompletedTask(task_2);
+        projectRepository.save(project_1);
+
     }
 }

@@ -130,8 +130,10 @@ public class StandardWorkerController
     public String getViewProject(Principal principal,Model model) {
         Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
         if(project != null) {
+            model.addAttribute("name", principal.getName());
             model.addAttribute("project", project);
             model.addAttribute("milestones", project.getMilestones());
+            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
         }
         return "project/projectHomepage";
     }
@@ -140,6 +142,7 @@ public class StandardWorkerController
     public String getProjectInfo(Principal principal,Model model) {
         Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
         if(project != null) {
+            model.addAttribute("name", principal.getName());
             model.addAttribute("project", project);
         }
         return "project/projectInfo";

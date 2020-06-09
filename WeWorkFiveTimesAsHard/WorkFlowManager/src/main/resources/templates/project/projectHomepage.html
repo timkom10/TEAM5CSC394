@@ -13,7 +13,7 @@
 <header id="nav" class="sticky-nav">
     <nav class="container w-container">
         <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a th:href="@{info}" class="nav-link">Username</a></li>
+            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
             <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
             <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
             <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
@@ -53,10 +53,10 @@
             </ul>
         </div>
         <div class="recentlycompletedprojecttasks">
-            <ul role="list" class="list-2">
-                <li>TaskName</li>
-                <li>CompletedBy</li>
-                <li>Points</li>
+            <ul role="list" class="list-2" th:each="task : ${completedTasks}">
+                <li th:text="${task.getTaskName()}">TaskName</li>
+                <li th:text="${task.getWorker()}">CompletedBy</li>
+                <li th:text="${task.getBounty()}">Points</li>
                 <li><a href="#" class="w-button">Give Feedback</a></li>
             </ul>
         </div>
