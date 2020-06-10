@@ -252,6 +252,9 @@ public class InitialData implements CommandLineRunner
         project_1.addCompletedTask(task_1);
         projectRepository.save(project_1);
 
+        standardWorker.didTask(task_1);
+        this.standardWorkerRepository.save(standardWorker);
+
 
         Task task_2 = new Task();
         task_2.setBounty(300);
@@ -264,6 +267,9 @@ public class InitialData implements CommandLineRunner
         project_1.addCompletedTask(task_2);
         projectRepository.save(project_1);
 
+        standardWorker_1.didTask(task_2);
+        this.standardWorkerRepository.save(standardWorker_1);
+
         Task task_3 = new Task();
         task_3.setBounty(310);
         task_3.setAssigned(true);
@@ -274,6 +280,9 @@ public class InitialData implements CommandLineRunner
         task_3.setWorker(standardWorker_2.getUserName());
         project_1.addCompletedTask(task_3);
         projectRepository.save(project_1);
+
+        standardWorker_2.didTask(task_3);
+        this.standardWorkerRepository.save(standardWorker_2);
 
         Task task_4 = new Task();
         task_4.setBounty(320);
@@ -286,6 +295,9 @@ public class InitialData implements CommandLineRunner
         project_1.addCompletedTask(task_4);
         projectRepository.save(project_1);
 
+        standardWorker_3.didTask(task_4);
+        this.standardWorkerRepository.save(standardWorker_3);
+
         Task task_5 = new Task();
         task_5.setBounty(330);
         task_5.setAssigned(true);
@@ -296,6 +308,9 @@ public class InitialData implements CommandLineRunner
         task_5.setWorker(standardWorker_4.getUserName());
         project_1.addCompletedTask(task_5);
         projectRepository.save(project_1);
+
+        standardWorker_4.didTask(task_5);
+        this.standardWorkerRepository.save(standardWorker_4);
 
         Task task_6 = new Task();
         task_6.setBounty(340);
@@ -308,6 +323,9 @@ public class InitialData implements CommandLineRunner
         project_1.addCompletedTask(task_6);
         projectRepository.save(project_1);
 
+        standardWorker_5.didTask(task_6);
+        this.standardWorkerRepository.save(standardWorker_5);
+
         Task task_7 = new Task();
         task_7.setBounty(350);
         task_7.setAssigned(true);
@@ -318,6 +336,9 @@ public class InitialData implements CommandLineRunner
         task_7.setWorker(standardWorker_6.getUserName());
         project_1.addCompletedTask(task_7);
         projectRepository.save(project_1);
+
+        standardWorker_6.didTask(task_7);
+        this.standardWorkerRepository.save(standardWorker_6);
 
 
         //Make some feedback

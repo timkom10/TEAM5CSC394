@@ -4,6 +4,7 @@ import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
+import com.MainDriver.WorkFlowManager.model.projects.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -93,6 +94,14 @@ public class StandardWorker extends WorkerType implements Serializable
         if(feedback != null) {
             feedback.setId(this.lastFeedbackKey++);
             this.personalFeedback.add(feedback);
+        }
+    }
+
+    public void didTask(Task task)
+    {
+        if(task != null && task.isComplete()) {
+            this.currentProjectPoints += task.getBounty();
+            this.totalPoints += task.getBounty();
         }
     }
 

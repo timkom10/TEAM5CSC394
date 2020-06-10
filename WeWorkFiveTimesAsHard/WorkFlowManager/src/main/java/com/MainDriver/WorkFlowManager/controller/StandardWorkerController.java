@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("standardWorkers")
@@ -206,7 +209,9 @@ public class StandardWorkerController
     @RequestMapping(value = "leaderboard")
     @Transactional
     public String getLeaderboard(Principal principal, Model model) {
-        model.addAttribute("workers", this.standardWorkerRepository.findAll());
+        List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPoints();
+
+        model.addAttribute("workers", standardWorkerList);
         return "feedback/leaderboard";
     }
 }

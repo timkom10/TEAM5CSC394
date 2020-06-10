@@ -8,8 +8,7 @@ import com.MainDriver.WorkFlowManager.repository.*;
 import com.MainDriver.WorkFlowManager.service.StandardWorkerService;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StandardWorkerServiceImp implements StandardWorkerService {
@@ -44,6 +43,15 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         }
         return null;
     }
+
+    @Override
+    public List<StandardWorker> getAllStandardWorkersSortedByPoints()
+    {
+        List<StandardWorker> standardWorkers = this.standardWorkerRepository.findAll();
+        Collections.sort(standardWorkers,compareByTotalPoints);
+        return standardWorkers;
+    }
+
 
     @Override
     @Transactional
@@ -81,4 +89,16 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
             standardWorkerRepository.save(standardWorker);
         }
     }
+
+    public static Comparator<StandardWorker> compareByTotalPoints = new Comparator<StandardWorker>()
+    {
+
+        public int compare(StandardWorker s1, StandardWorker s2) {
+
+            int points1 = s1.getTotalPoints();
+            int points2 = s2.getTotalPoints();
+
+            //descending order
+            return points2-points1;
+        }};
 }
