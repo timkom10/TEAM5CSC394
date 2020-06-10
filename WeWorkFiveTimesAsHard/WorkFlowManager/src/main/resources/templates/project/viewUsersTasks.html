@@ -41,7 +41,7 @@
                 <li class="list-item-2" th:text="${task.getTaskName()}">Task Name</li>
                 <li class="list-item-3" th:text="${task.getUrgency()}">Urgency</li>
                 <li class="list-item-4" th:text="${task.getBounty()}">Bounty</li>
-                <li><a href="#" class="button-5 w-button">View</a></li>
+                <li><a th:href="@{viewSingleTask(projectId=${project.getId()}, milestoneId = ${milestone.getId()}, taskId = ${task.getTaskId()})}" class="button-5 w-button">View</a></li>
             </ul>
         </div>
     </div>

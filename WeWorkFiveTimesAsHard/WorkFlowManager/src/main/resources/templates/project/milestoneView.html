@@ -42,7 +42,7 @@
                 <li th:text="${task.getTaskName()}">Task Name</li>
                 <li th:text="${task.getIsAssigned()  &gt; 0 ? 'Is Assigned' : 'Available'}">Is Assigned</li>
                 <li th:text="${task.getBounty()}">Bounty</li>
-                <li><a href="#" class="button-5 w-button">View</a></li>
+                <li><a th:href="@{viewSingleTask(projectId=${project.getId()}, milestoneId = ${milestone.getId()}, taskId = ${task.getTaskId()})}"  class="button-5 w-button">View</a></li>
             </ul>
         </div>
     </div>

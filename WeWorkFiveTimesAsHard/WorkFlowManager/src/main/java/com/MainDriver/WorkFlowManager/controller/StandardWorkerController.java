@@ -239,10 +239,25 @@ public class StandardWorkerController
     public String getViewUsersTasks(Principal principal, Model model, Long projectId, Integer milestoneId) {
         List<Task> tasks = this.projectService.getTasksByUsernameProjectIdAndMilestoneId(principal.getName(),projectId, milestoneId);
         if(tasks != null) {
+            model.addAttribute("project", this.projectService.getByID(projectId));
+            model.addAttribute("milestone", this.projectService.getMilestone(projectId, milestoneId));
             model.addAttribute("name", principal.getName());
             model.addAttribute("tasks",tasks);
         }
         return "project/viewUsersTasks";
+    }
+
+    @GetMapping(value = "viewSingleTask")
+    @Transactional
+    public String getViewSingleTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
+    {
+        Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
+        if(task != null) {
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("task",task);
+        }
+        return "project/viewSingleTask";
     }
 
 }

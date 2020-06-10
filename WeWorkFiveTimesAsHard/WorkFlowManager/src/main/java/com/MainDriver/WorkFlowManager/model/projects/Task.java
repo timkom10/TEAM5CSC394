@@ -5,12 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Task {
     private String taskName;
     private String urgency;
     private String worker;
+    private String taskDescription;
 
     private Long projectId;
     private Integer milestoneId;
@@ -20,4 +20,9 @@ public class Task {
     private boolean upForReview;
     private boolean isComplete;
     private int isAssigned;
+
+    public Task() {
+        taskName = "Available";
+        worker = "Available";
+    }
 }

@@ -223,4 +223,17 @@ public class ManagementController {
         }
         return "project/milestoneView";
     }
+
+    @GetMapping(value = "viewSingleTask")
+    @Transactional
+    public String getViewSingleTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
+    {
+        Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
+        if(task != null) {
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("task",task);
+        }
+        return "project/viewSingleTask";
+    }
 }

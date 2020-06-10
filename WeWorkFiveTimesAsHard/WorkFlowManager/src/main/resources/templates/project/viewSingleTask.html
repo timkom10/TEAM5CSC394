@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/viewSingleTask.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="container w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{viewProject}"  class="nav-link">Project</a></li>
+            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="section-3">
+    <div class="container-4 w-container">
+        <div>
+            <h1 th:text="${task.getTaskName()}">Task Name</h1>
+        </div>
+    </div>
+</div>
+<div class="section-2">
+    <div class="w-container">
+        <div class="div-block">
+            <p class="paragraph" th:text="${task.getTaskDescription()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+        </div>
+    </div>
+</div>
+<div class="section-4">
+    <div class="container-5 w-container">
+        <div>
+            <h1 style="color: white;">Urgency: [[${task.getUrgency()}]]</h1>
+        </div>
+        <div>
+            <h1>Bounty: [[${task.getBounty()}]]</h1>
+        </div>
+        <div th:if="${task.getIsAssigned() &gt;0}">
+            <h1>Assigned to: [[${task.getWorker()}]]</h1>
+        </div>
+    </div>
+</div>
+<footer id="footer" class="footer">
+    <div class="w-container">
+        <div class="footer-flex-container">
+            <div>
+                <a th:if="${(!name.equals(task.getWorker())) && (task.getWorker() != 'Available')}" class="button-2 w-button" th:href="@{composeMessage(username=${task.getWorker()})}">Message</a>
+            </div>
+            <div th:if="${name.equals(task.getWorker())}">
+                <a href="#" class="button-2 w-button">Mark Complete</a>
+            </div>
+            <div th:if="${(task.getIsAssigned() &lt;1) && (ROLE.equals('STANDARDWORKER'))}">
+                <a href="#" class="button-2 w-button">Volunteer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

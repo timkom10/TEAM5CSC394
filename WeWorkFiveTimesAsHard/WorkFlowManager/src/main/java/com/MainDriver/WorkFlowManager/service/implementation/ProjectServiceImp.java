@@ -107,4 +107,21 @@ public class ProjectServiceImp implements ProjectService {
         }
         return tasks;
     }
+
+    @Override
+    public Task getSingleTask(Long projectId, Integer milestoneId, Integer taskId) {
+
+        if(this.projectRepository.existsById(projectId))
+        {
+            Project project = this.projectRepository.getById(projectId);
+            for(Task t: project.getTasks())
+            {
+                if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId))
+                {
+                    return t;
+                }
+            }
+        }
+        return new Task();
+    }
 }

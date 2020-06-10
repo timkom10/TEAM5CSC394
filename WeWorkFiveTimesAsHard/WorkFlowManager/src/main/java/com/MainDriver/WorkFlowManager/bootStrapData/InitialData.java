@@ -367,6 +367,7 @@ public class InitialData implements CommandLineRunner
      _task_.setUrgency("Extremely urgent");
      _task_.setWorker(standardWorker.getUserName());
      _task_.setMilestoneId(milestone_1.getId());
+     _task_.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_);
      projectRepository.save(project_1);
 
@@ -378,6 +379,7 @@ public class InitialData implements CommandLineRunner
      _task_1.setUrgency("is important");
      _task_1.setMilestoneId(milestone_1.getId());
      _task_1.setWorker(standardWorker_1.getUserName());
+     _task_1.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_1);
 
      projectRepository.save(project_1);
@@ -391,6 +393,7 @@ public class InitialData implements CommandLineRunner
      _task_2.setUrgency("crucial");
      _task_2.setMilestoneId(milestone_1.getId());
      _task_2.setWorker(standardWorker_2.getUserName());
+     _task_2.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_2);
 
      projectRepository.save(project_1);
@@ -403,6 +406,7 @@ public class InitialData implements CommandLineRunner
      _task_3.setUrgency("urgent");
      _task_3.setMilestoneId(milestone_1.getId());
      _task_3.setWorker(standardWorker_3.getUserName());
+     _task_3.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_3);
 
      projectRepository.save(project_1);
@@ -412,10 +416,11 @@ public class InitialData implements CommandLineRunner
      _task_4.setBounty(440);
      _task_4.setIsAssigned(1);
      _task_4.setProjectId(project_1.getId());
-     _task_4.setTaskName("Demo task Name");
-     _task_4.setUrgency("Demo urgency");
+     _task_4.setTaskName("A task Name");
+     _task_4.setUrgency("An urgency");
      _task_4.setMilestoneId(milestone_1.getId());
      _task_4.setWorker(standardWorker_4.getUserName());
+     _task_4.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_4);
 
      projectRepository.save(project_1);
@@ -429,6 +434,7 @@ public class InitialData implements CommandLineRunner
      _task_5.setUrgency("Demo urgency");
      _task_5.setMilestoneId(milestone_1.getId());
      _task_5.setWorker("Available");
+     _task_5.setTaskDescription("A very long, drawn-out, task description....");
      project_1.addTask(_task_5);
 
      projectRepository.save(project_1);
