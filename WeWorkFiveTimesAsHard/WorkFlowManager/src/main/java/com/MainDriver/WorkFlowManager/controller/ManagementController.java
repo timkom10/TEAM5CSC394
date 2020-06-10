@@ -3,7 +3,9 @@ package com.MainDriver.WorkFlowManager.controller;
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
+import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
+import com.MainDriver.WorkFlowManager.model.projects.Task;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
@@ -205,5 +207,20 @@ public class ManagementController {
             model.addAttribute("completedTasks", project.getCompletedTasksReverse());
         }
         return "project/managerViewProject";
+    }
+
+    @GetMapping(value = "viewMilestone")
+    @Transactional
+    public String getViewMilestone(Principal principal,Model model, Long projectId, Integer milestoneId) {
+        Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
+        List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
+        if(milestones != null) {
+            model.addAttribute("project",this.projectService.getByID(projectId));
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("milestone", milestones);
+            model.addAttribute("tasks", tasks);
+        }
+        return "project/milestoneView";
     }
 }

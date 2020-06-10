@@ -227,6 +227,7 @@ public class StandardWorkerController
         if(milestones != null) {
             model.addAttribute("project",this.projectService.getByID(projectId));
             model.addAttribute("name", principal.getName());
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
             model.addAttribute("milestone", milestones);
             model.addAttribute("tasks", tasks);
         }
