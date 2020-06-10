@@ -12,7 +12,5 @@ public interface StandardWorkerService {
     void insertAlteredStandardWorker(StandardWorker standardWorker, String username);
     StandardWorker getByUsername(String username);
     Set<StandardWorker> findAllByUsername(String username);
-    Project getStandardWorkerProject(String username);
-
     List<StandardWorker> getAllStandardWorkersSortedByPoints();
 }

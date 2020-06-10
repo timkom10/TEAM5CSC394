@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>your Project</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/managerViewProject.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="container w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
+            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li>
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="section">
+    <div class="container-2 w-container">
+        <a th:href="@{projectInfo}"  class="link-block w-inline-block">
+            <h1 class="heading-2" th:text="${project.getProjectName()}" >Project Name</h1>
+        </a>
+    </div>
+</div>
+<div class="section-2">
+    <div class="container-3 w-container">
+        <div class="teamlist">
+            <ul role="list" class="list-4" th:each="worker : ${workers}">
+                <li th:text="${worker.getUserName()}">Username</li>
+                <li th:text="${worker.getRole()}">Role</li>
+                <li th:text="${worker.getHireDate()}">Hire Date</li>
+                <li><a th:href="@{composeMessage(username=${worker.getUserName()})}" class="w-button">Message</a></li>
+            </ul>
+        </div>
+        <div class="milestones">
+            <ul role="list" class="list-3" th:each="milestone : ${milestones}">
+                <li th:text="${milestone.getMilestoneName()}">MileStone Nmber</li>
+                <li>Scheduled Due Date [[${milestone.getDueDate()}]]</li>
+                <li th:text="${milestone.getIsOnSchedule()  &gt; 0 ? 'On Schedule' : 'Past Due'}">On Schedule</li>
+                <li><a href="#" class="button-2 w-button">View</a></li>
+            </ul>
+        </div>
+        <div class="recentlycompletedprojecttasks">
+            <ul role="list" class="list-2" th:each="task : ${completedTasks}">
+                <li>[[${task.getWorker()}]] Completed:</li>
+                <li th:text="${task.getTaskName()}">TaskName</li>
+                <li th:text="${task.getBounty()}">Points</li>
+                <li><a th:href="@{composeFeedback(to=${task.getWorker()})}" class="w-button">Give Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="section-3">
+    <div class="container-5 w-container">
+        <div class="div-block-3"><a href="#" class="button-8 w-button">Add Worker</a></div>
+        <div class="div-block-4"><a href="#" class="button-9 w-button">Add Milestone</a></div>
+    </div>
+</div>
+<div class="section-4">
+    <div class="container-6 w-container">
+        <div class="div-block-6"><a href="#" class="button-7 w-button">Edit Project</a></div>
+    </div>
+</div>
+</body>
+</html>

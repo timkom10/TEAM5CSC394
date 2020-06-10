@@ -8,4 +8,5 @@ import java.util.Set;
 
 public interface ProjectService {
     void addMileStoneToProject(Project project, Milestones milestone);
+    Project getProjectByUsername(String username);
 }

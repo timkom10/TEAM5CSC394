@@ -35,16 +35,6 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     }
 
     @Override
-    @Transactional
-    public Project getStandardWorkerProject(String username) {
-        if(this.standardWorkerRepository.existsByUserName(username)) {
-            StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(username);
-            return standardWorker.getProject();
-        }
-        return null;
-    }
-
-    @Override
     public List<StandardWorker> getAllStandardWorkersSortedByPoints()
     {
         List<StandardWorker> standardWorkers = this.standardWorkerRepository.findAll();
@@ -90,8 +80,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         }
     }
 
-    public static Comparator<StandardWorker> compareByTotalPoints = new Comparator<StandardWorker>()
-    {
+    public static Comparator<StandardWorker> compareByTotalPoints = new Comparator<StandardWorker>() {
 
         public int compare(StandardWorker s1, StandardWorker s2) {
 

@@ -1,13 +1,13 @@
 package com.MainDriver.WorkFlowManager.controller;
 
+import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
+import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
-import com.MainDriver.WorkFlowManager.service.AnnouncementService;
-import com.MainDriver.WorkFlowManager.service.MessagingService;
-import com.MainDriver.WorkFlowManager.service.UserService;
+import com.MainDriver.WorkFlowManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("management")
@@ -28,7 +29,16 @@ public class ManagementController {
     private UserService userService;
 
     @Autowired
+    private StandardWorkerService standardWorkerService;
+
+    @Autowired
     AnnouncementService announcementService;
+
+    @Autowired
+    FeedbackService feedbackService;
+
+    @Autowired
+    ProjectService projectService;
 
     static String usernamePlaceHolder ="";
 
@@ -138,13 +148,62 @@ public class ManagementController {
 
     @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
     public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
-        this.announcementService.sendAnnouncement(announcement,principal.getName(), principal.getName());
+        this.announcementService.sendAnnouncement(announcement, principal.getName(), principal.getName());
 
         Manager manager = managerRepository.findByUserName(principal.getName());
-        if(manager != null) {
+        if (manager != null) {
             model.addAttribute("manager", manager);
             model.addAttribute("announcements", manager.getAnnouncements());
         }
         return "management/index";
+    }
+
+    @RequestMapping(value = "leaderboard")
+    @Transactional
+    public String getLeaderboard(Principal principal, Model model) {
+        List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPoints();
+        model.addAttribute("workers", standardWorkerList);
+        return "feedback/leaderboard";
+    }
+
+    @GetMapping(value = "composeFeedback")
+    @Transactional
+    public String getComposeFeedback(Principal principal,Model model, String to) {
+        usernamePlaceHolder = to;
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("to", to);
+        model.addAttribute("feedback", new Feedback());
+        return "feedback/composeFeedback";
+    }
+
+
+    @RequestMapping(value = "feedbackSent", method = RequestMethod.POST)
+    @Transactional
+    public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback) {
+        this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
+        Project project = this.projectService.getProjectByUsername(principal.getName());
+
+        if(project != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("workers", project.getTeamMembers());
+            model.addAttribute("project", project);
+            model.addAttribute("milestones", project.getMilestones());
+            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
+        }
+        return "project/managerViewProject";
+    }
+
+    @GetMapping(value = "viewProject")
+    public String getViewProject(Principal principal,Model model)
+    {
+        Project project = this.projectService.getProjectByUsername(principal.getName());
+        if(project != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("workers", project.getTeamMembers());
+            model.addAttribute("project", project);
+            model.addAttribute("milestones", project.getMilestones());
+            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
+        }
+        return "project/managerViewProject";
     }
 }

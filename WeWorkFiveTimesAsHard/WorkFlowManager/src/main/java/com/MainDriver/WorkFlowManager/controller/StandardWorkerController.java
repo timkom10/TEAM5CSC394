@@ -39,6 +39,9 @@ public class StandardWorkerController
     @Autowired
     AllFeedbackRepository allFeedbackRepository;
 
+    @Autowired
+    ProjectService projectService;
+
     static String usernamePlaceHolder ="";
 
     private final StandardWorkerRepository standardWorkerRepository;
@@ -136,22 +139,9 @@ public class StandardWorkerController
         return "standardWorkers/index";
     }
 
-    @GetMapping(value = "viewProject")
-    public String getViewProject(Principal principal,Model model) {
-        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
-        if(project != null) {
-            model.addAttribute("name", principal.getName());
-            model.addAttribute("workers", project.getTeamMembers());
-            model.addAttribute("project", project);
-            model.addAttribute("milestones", project.getMilestones());
-            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
-        }
-        return "project/projectHomepage";
-    }
-
     @GetMapping(value = "projectInfo")
     public String getProjectInfo(Principal principal,Model model) {
-        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
+        Project project = this.projectService.getProjectByUsername(principal.getName());
         if(project != null) {
             model.addAttribute("name", principal.getName());
             model.addAttribute("project", project);
@@ -173,13 +163,10 @@ public class StandardWorkerController
     @GetMapping(value = "composeFeedback")
     @Transactional
     public String getComposeFeedback(Principal principal,Model model, String to) {
-        StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(principal.getName());
-        if(standardWorker != null) {
-            usernamePlaceHolder = to;
-            model.addAttribute("name", principal.getName());
-            model.addAttribute("to", to);
-            model.addAttribute("feedback", new Feedback());
-        }
+        usernamePlaceHolder = to;
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("to", to);
+        model.addAttribute("feedback", new Feedback());
         return "feedback/composeFeedback";
     }
 
@@ -187,7 +174,7 @@ public class StandardWorkerController
     @Transactional
     public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback) {
         this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
-        Project project = this.standardWorkerService.getStandardWorkerProject(principal.getName());
+        Project project = this.projectService.getProjectByUsername(principal.getName());
         if(project != null) {
             model.addAttribute("name", principal.getName());
             model.addAttribute("workers", project.getTeamMembers());
@@ -214,4 +201,19 @@ public class StandardWorkerController
         model.addAttribute("workers", standardWorkerList);
         return "feedback/leaderboard";
     }
+
+    @GetMapping(value = "viewProject")
+    public String getViewProject(Principal principal,Model model)
+    {
+        Project project = this.projectService.getProjectByUsername(principal.getName());
+        if(project != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("workers", project.getTeamMembers());
+            model.addAttribute("project", project);
+            model.addAttribute("milestones", project.getMilestones());
+            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
+        }
+        return "project/projectHomepage";
+    }
+
 }
