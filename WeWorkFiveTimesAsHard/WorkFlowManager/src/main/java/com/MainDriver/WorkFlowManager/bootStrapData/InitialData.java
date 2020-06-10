@@ -221,10 +221,10 @@ public class InitialData implements CommandLineRunner
            standardWorkerRepository.save(sw);
        }
 
-        //Make some completed Tasks
+        //Make some COMPLETED Tasks
         Task task_1 = new Task();
         task_1.setBounty(450);
-        task_1.setAssigned(true);
+        task_1.setIsAssigned(1);
         task_1.setProjectId(project_1.getId());
         task_1.setTaskName("Very important");
         task_1.setUrgency("Extremely urgent");
@@ -239,7 +239,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_2 = new Task();
         task_2.setBounty(300);
-        task_2.setAssigned(true);
+        task_2.setIsAssigned(1);
         task_2.setProjectId(project_1.getId());
         task_2.setTaskName("Pretty important");
         task_2.setUrgency("Extremely urgent");
@@ -253,7 +253,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_3 = new Task();
         task_3.setBounty(310);
-        task_3.setAssigned(true);
+        task_3.setIsAssigned(1);
         task_3.setProjectId(project_1.getId());
         task_3.setTaskName("Important Task Name");
         task_3.setUrgency("Crucial");
@@ -267,7 +267,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_4 = new Task();
         task_4.setBounty(320);
-        task_4.setAssigned(true);
+        task_4.setIsAssigned(1);
         task_4.setProjectId(project_1.getId());
         task_4.setTaskName("Also important");
         task_4.setUrgency("Was key");
@@ -281,7 +281,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_5 = new Task();
         task_5.setBounty(330);
-        task_5.setAssigned(true);
+        task_5.setIsAssigned(1);
         task_5.setProjectId(project_1.getId());
         task_5.setTaskName("Hard Task Name");
         task_5.setUrgency("very urgent");
@@ -295,7 +295,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_6 = new Task();
         task_6.setBounty(340);
-        task_6.setAssigned(true);
+        task_6.setIsAssigned(1);
         task_6.setProjectId(project_1.getId());
         task_6.setTaskName("Hard.Task.Name");
         task_6.setUrgency("Did I say important?");
@@ -309,7 +309,7 @@ public class InitialData implements CommandLineRunner
 
         Task task_7 = new Task();
         task_7.setBounty(350);
-        task_7.setAssigned(true);
+        task_7.setIsAssigned(1);
         task_7.setProjectId(project_1.getId());
         task_7.setTaskName("Task Name");
         task_7.setUrgency("Im-port-ant");
@@ -355,6 +355,82 @@ public class InitialData implements CommandLineRunner
      milestone_2.setDueDate(new Date());
 
      project_1.addMilestone(milestone_2);
+     projectRepository.save(project_1);
+
+     /*Add milestone tasks !COMPLETED => In Progress*/
+
+     Task _task_ = new Task();
+     _task_.setBounty(450);
+     _task_.setIsAssigned(1);
+     _task_.setProjectId(project_1.getId());
+     _task_.setTaskName("Very important");
+     _task_.setUrgency("Extremely urgent");
+     _task_.setWorker(standardWorker.getUserName());
+     _task_.setMilestoneId(milestone_1.getId());
+     project_1.addTask(_task_);
+     projectRepository.save(project_1);
+
+     Task _task_1 = new Task();
+     _task_1.setBounty(440);
+     _task_1.setIsAssigned(1);
+     _task_1.setProjectId(project_1.getId());
+     _task_1.setTaskName("Very important");
+     _task_1.setUrgency("is important");
+     _task_1.setMilestoneId(milestone_1.getId());
+     _task_1.setWorker(standardWorker_1.getUserName());
+     project_1.addTask(_task_1);
+
+     projectRepository.save(project_1);
+
+
+     Task _task_2 = new Task();
+     _task_2.setBounty(440);
+     _task_2.setIsAssigned(1);
+     _task_2.setProjectId(project_1.getId());
+     _task_2.setTaskName("--important--");
+     _task_2.setUrgency("crucial");
+     _task_2.setMilestoneId(milestone_1.getId());
+     _task_2.setWorker(standardWorker_2.getUserName());
+     project_1.addTask(_task_2);
+
+     projectRepository.save(project_1);
+
+     Task _task_3 = new Task();
+     _task_3.setBounty(440);
+     _task_3.setIsAssigned(1);
+     _task_3.setProjectId(project_1.getId());
+     _task_3.setTaskName("--Task Name--");
+     _task_3.setUrgency("urgent");
+     _task_3.setMilestoneId(milestone_1.getId());
+     _task_3.setWorker(standardWorker_3.getUserName());
+     project_1.addTask(_task_3);
+
+     projectRepository.save(project_1);
+
+
+     Task _task_4 = new Task();
+     _task_4.setBounty(440);
+     _task_4.setIsAssigned(1);
+     _task_4.setProjectId(project_1.getId());
+     _task_4.setTaskName("Demo task Name");
+     _task_4.setUrgency("Demo urgency");
+     _task_4.setMilestoneId(milestone_1.getId());
+     _task_4.setWorker(standardWorker_4.getUserName());
+     project_1.addTask(_task_4);
+
+     projectRepository.save(project_1);
+
+
+     Task _task_5 = new Task();
+     _task_5.setBounty(440);
+     _task_5.setIsAssigned(0);
+     _task_5.setProjectId(project_1.getId());
+     _task_5.setTaskName("Demo task Name");
+     _task_5.setUrgency("Demo urgency");
+     _task_5.setMilestoneId(milestone_1.getId());
+     _task_5.setWorker("Available");
+     project_1.addTask(_task_5);
+
      projectRepository.save(project_1);
 
     }

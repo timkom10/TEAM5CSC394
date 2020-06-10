@@ -13,19 +13,15 @@
 <header id="nav" class="sticky-nav">
     <nav class="container w-container">
         <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a href="#" class="nav-link">Username</a></li>
-            <li><a href="#" class="nav-link">Project</a></li>
-            <li class="list-item"><a href="#" class="nav-link">Feedback</a></li>
-            <li class="list-item"><a href="#" class="nav-link">Messages</a></li>
+            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+            <li><a th:href="@{viewProject}"  class="nav-link">Project</a></li>
+            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
             <li>
                 <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form"><input type="submit" value="Logout" data-wait="Please wait..." class="w-button"></form>
-                    <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                    </div>
-                    <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                    </div>
+                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                    </form>
                 </div>
             </li>
         </ul>
@@ -33,28 +29,28 @@
 </header>
 <div class="section">
     <div class="container-2 w-container">
-        <a href="#" class="link-block w-inline-block">
-            <h1 class="heading-2">Milestone Name</h1>
-        </a>
+            <h1 class="heading-2" th:text="${milestone.getMilestoneName()}">Milestone Name</h1>
         <div>
-            <h1 class="heading-2">Due:</h1>
+            <h1 class="heading-2">Due: [[${milestone.getDueDate()}]]</h1>
         </div>
     </div>
 </div>
 <div class="section-2">
     <div class="milestonetasks w-container">
-        <div class="taskdiv">
+        <div class="taskdiv" th:each="task :${tasks}">
             <ul role="list" class="tasklist">
-                <li>Task Name</li>
-                <li>Is Assigned</li>
-                <li>Bounty</li>
+                <li th:text="${task.getTaskName()}">Task Name</li>
+                <li th:text="${task.getIsAssigned()  &gt; 0 ? 'Is Assigned' : 'Available'}">Is Assigned</li>
+                <li th:text="${task.getBounty()}">Bounty</li>
                 <li><a href="#" class="button-5 w-button">View</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div>
-    <div class="container-7 w-container"><a href="#" class="button-10 w-button"> View Your Tasks</a></div>
+    <div class="container-7 w-container">
+        <a href="#" class="button-10 w-button"> View Your Tasks</a>
+    </div>
 </div>
 </body>
 </html>

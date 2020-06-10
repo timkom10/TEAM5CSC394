@@ -19,5 +19,5 @@ public class Task {
     private int bounty;
     private boolean upForReview;
     private boolean isComplete;
-    private boolean isAssigned;
+    private int isAssigned;
 }
