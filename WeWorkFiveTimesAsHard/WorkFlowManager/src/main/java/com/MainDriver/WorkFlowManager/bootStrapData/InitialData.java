@@ -221,25 +221,6 @@ public class InitialData implements CommandLineRunner
            standardWorkerRepository.save(sw);
        }
 
-        //Make a milestone
-        Milestones milestone_1 = new Milestones();
-        milestone_1.setMilestoneName("Milestone #343");
-        milestone_1.setDescription("A very important milestone");
-        milestone_1.setIsOnSchedule(1);
-        milestone_1.setDueDate(new Date());
-
-        project_1.addMilestone(milestone_1);
-        projectRepository.save(project_1);
-
-        Milestones milestone_2 = new Milestones();
-        milestone_2.setMilestoneName("Milestone #343");
-        milestone_2.setDescription("Not so very important milestone");
-        milestone_2.setIsOnSchedule(0);
-        milestone_2.setDueDate(new Date());
-
-        project_1.addMilestone(milestone_2);
-        projectRepository.save(project_1);
-
         //Make some completed Tasks
         Task task_1 = new Task();
         task_1.setBounty(450);
@@ -357,5 +338,24 @@ public class InitialData implements CommandLineRunner
         allFeedback.setContent("For demonstrations of course");
         this.allFeedbackRepository.save(allFeedback);
         //check the Database
+
+
+     //Make a milestone
+     Milestones milestone_1 = new Milestones();
+     milestone_1.setMilestoneName("Milestone #343");
+     milestone_1.setDescription("A very important milestone");
+     milestone_1.setDueDate(new Date());
+
+     project_1.addMilestone(milestone_1);
+     projectRepository.save(project_1);
+
+     Milestones milestone_2 = new Milestones();
+     milestone_2.setMilestoneName("Milestone #342");
+     milestone_2.setDescription("Not so very important milestone");
+     milestone_2.setDueDate(new Date());
+
+     project_1.addMilestone(milestone_2);
+     projectRepository.save(project_1);
+
     }
 }

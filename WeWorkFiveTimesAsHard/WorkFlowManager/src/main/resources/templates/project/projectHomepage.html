@@ -49,7 +49,7 @@
                 <li th:text="${milestone.getMilestoneName()}">MileStone Nmber</li>
                 <li>Scheduled Due Date [[${milestone.getDueDate()}]]</li>
                 <li th:text="${milestone.getIsOnSchedule()  &gt; 0 ? 'On Schedule' : 'Past Due'}">On Schedule</li>
-                <li><a href="#" class="button-2 w-button">View</a></li>
+                <li><a th:href="@{viewMilestone(projectId=${project.getId()}, milestoneId = ${milestone.getId()})}" class="button-2 w-button">View</a></li>
             </ul>
         </div>
         <div class="recentlycompletedprojecttasks">

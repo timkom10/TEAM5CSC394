@@ -13,7 +13,6 @@ public class Milestones {
 
     private String milestoneName;
     private String description;
-    private Long projectId;
     private Integer id;
     private Date dueDate;
     private int isOnSchedule;

@@ -74,8 +74,8 @@ public class Project {
 
     public void addMilestone(Milestones milestone) {
         if(milestone != null) {
-            milestone.setProjectId(this.id);
             milestone.setId(this.nextMileStoneKey++);
+            milestone.setIsOnSchedule(1);
             this.milestones.add(milestone);
         }
     }
