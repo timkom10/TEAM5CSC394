@@ -234,4 +234,15 @@ public class StandardWorkerController
         return "project/milestoneView";
     }
 
+    @GetMapping(value = "viewUsersTasks")
+    @Transactional
+    public String getViewUsersTasks(Principal principal, Model model, Long projectId, Integer milestoneId) {
+        List<Task> tasks = this.projectService.getTasksByUsernameProjectIdAndMilestoneId(principal.getName(),projectId, milestoneId);
+        if(tasks != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("tasks",tasks);
+        }
+        return "project/viewUsersTasks";
+    }
+
 }

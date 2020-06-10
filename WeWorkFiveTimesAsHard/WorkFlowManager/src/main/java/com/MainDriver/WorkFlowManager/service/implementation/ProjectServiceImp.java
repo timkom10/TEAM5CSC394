@@ -89,4 +89,22 @@ public class ProjectServiceImp implements ProjectService {
         }
         return null;
     }
+
+    @Override
+    public List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId)
+    {
+        List<Task> tasks = new ArrayList<>();
+        if(this.projectRepository.existsById(projectId))
+        {
+            Project project = this.projectRepository.getById(projectId);
+            for(Task t : project.getTasks())
+            {
+                if(t.getWorker().equals(username) && t.getMilestoneId().equals(milestoneId))
+                {
+                    tasks.add(t);
+                }
+            }
+        }
+        return tasks;
+    }
 }
