@@ -59,11 +59,16 @@
             <div>
                 <a th:if="${(!name.equals(task.getWorker())) && (task.getWorker() != 'Available')}" class="button-2 w-button" th:href="@{composeMessage(username=${task.getWorker()})}">Message</a>
             </div>
-            <div th:if="${name.equals(task.getWorker())}">
-                <a href="#" class="button-2 w-button">Mark Complete</a>
+            <div th:if="${(name.equals(task.getWorker()))}">
+                <div th:if="${(task.getUpForReview() &lt; 1)}">
+                 <a th:href="@{markTaskComplete(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Mark Complete</a>
+                </div>
             </div>
             <div th:if="${(task.getIsAssigned() &lt;1) && (ROLE.equals('STANDARDWORKER'))}">
-                <a href="#" class="button-2 w-button">Volunteer</a>
+                <a th:href="@{addTask(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Volunteer</a>
+            </div>
+            <div th:if="${(task.getUpForReview() &gt;0) && (ROLE.equals('MANAGER'))}">
+                <a th:href="@{markTaskDone(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()}, username =${task.getWorker()})}" class="button-2 w-button">Mark Task Done</a>
             </div>
         </div>
     </div>

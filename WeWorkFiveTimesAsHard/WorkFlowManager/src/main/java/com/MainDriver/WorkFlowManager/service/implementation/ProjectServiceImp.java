@@ -35,6 +35,62 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
+    public void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId)
+    {
+        if(this.projectRepository.existsById(projectId))
+        {
+            Project project = this.projectRepository.getById(projectId);
+            for(Task t: project.getTasks())
+            {
+                if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId)) {
+                    t.setIsAssigned(1);
+                    t.setWorker(username);
+                    this.projectRepository.save(project);
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId)
+    {
+        if(this.projectRepository.existsById(projectId))
+        {
+            Project project = this.projectRepository.getById(projectId);
+            for(Task t: project.getTasks())
+            {
+                if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId)) {
+                    t.setUpForReview(1);
+                    this.projectRepository.save(project);
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
+    public Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId)
+    {
+        if(this.projectRepository.existsById(projectId))
+        {
+            Project project = this.projectRepository.getById(projectId);
+            for(Task t: project.getTasks())
+            {
+                if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId))
+                {
+                    t.setIsComplete(1);
+                    project.getCompletedTasks().add(t);
+                    project.getTasks().remove(t);
+                    this.projectRepository.save(project);
+                    return t;
+                }
+            }
+        }
+        return new Task();
+    }
+
+    @Override
     @Transactional
     public Project getProjectByUsername(String username)
     {

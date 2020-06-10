@@ -228,7 +228,7 @@ public class InitialData implements CommandLineRunner
         task_1.setProjectId(project_1.getId());
         task_1.setTaskName("Very important");
         task_1.setUrgency("Extremely urgent");
-        task_1.setComplete(true);
+        task_1.setIsComplete(1);
         task_1.setWorker(standardWorker.getUserName());
         project_1.addCompletedTask(task_1);
         projectRepository.save(project_1);
@@ -243,7 +243,7 @@ public class InitialData implements CommandLineRunner
         task_2.setProjectId(project_1.getId());
         task_2.setTaskName("Pretty important");
         task_2.setUrgency("Extremely urgent");
-        task_2.setComplete(true);
+        task_2.setIsComplete(1);
         task_2.setWorker(standardWorker_1.getUserName());
         project_1.addCompletedTask(task_2);
         projectRepository.save(project_1);
@@ -257,7 +257,7 @@ public class InitialData implements CommandLineRunner
         task_3.setProjectId(project_1.getId());
         task_3.setTaskName("Important Task Name");
         task_3.setUrgency("Crucial");
-        task_3.setComplete(true);
+        task_3.setIsComplete(1);
         task_3.setWorker(standardWorker_2.getUserName());
         project_1.addCompletedTask(task_3);
         projectRepository.save(project_1);
@@ -271,7 +271,7 @@ public class InitialData implements CommandLineRunner
         task_4.setProjectId(project_1.getId());
         task_4.setTaskName("Also important");
         task_4.setUrgency("Was key");
-        task_4.setComplete(true);
+        task_4.setIsComplete(1);
         task_4.setWorker(standardWorker_3.getUserName());
         project_1.addCompletedTask(task_4);
         projectRepository.save(project_1);
@@ -285,7 +285,7 @@ public class InitialData implements CommandLineRunner
         task_5.setProjectId(project_1.getId());
         task_5.setTaskName("Hard Task Name");
         task_5.setUrgency("very urgent");
-        task_5.setComplete(true);
+        task_5.setIsComplete(1);
         task_5.setWorker(standardWorker_4.getUserName());
         project_1.addCompletedTask(task_5);
         projectRepository.save(project_1);
@@ -299,7 +299,7 @@ public class InitialData implements CommandLineRunner
         task_6.setProjectId(project_1.getId());
         task_6.setTaskName("Hard.Task.Name");
         task_6.setUrgency("Did I say important?");
-        task_6.setComplete(true);
+        task_6.setIsComplete(1);
         task_6.setWorker(standardWorker_5.getUserName());
         project_1.addCompletedTask(task_6);
         projectRepository.save(project_1);
@@ -313,7 +313,7 @@ public class InitialData implements CommandLineRunner
         task_7.setProjectId(project_1.getId());
         task_7.setTaskName("Task Name");
         task_7.setUrgency("Im-port-ant");
-        task_7.setComplete(true);
+        task_7.setIsComplete(1);
         task_7.setWorker(standardWorker_6.getUserName());
         project_1.addCompletedTask(task_7);
         projectRepository.save(project_1);

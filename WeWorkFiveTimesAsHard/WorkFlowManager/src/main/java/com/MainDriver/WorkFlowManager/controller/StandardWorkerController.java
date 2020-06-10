@@ -253,6 +253,7 @@ public class StandardWorkerController
     {
         Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
         if(task != null) {
+            model.addAttribute("project", this.projectService.getByID(projectId));
             model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
             model.addAttribute("name", principal.getName());
             model.addAttribute("task",task);
@@ -260,4 +261,37 @@ public class StandardWorkerController
         return "project/viewSingleTask";
     }
 
+    @GetMapping(value = "addTask")
+    @Transactional
+    public String getAddTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
+    {
+        this.projectService.setTaskToUser(principal.getName(), projectId, milestoneId, taskId);
+        Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
+        List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
+        if(milestones != null) {
+            model.addAttribute("project",this.projectService.getByID(projectId));
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("milestone", milestones);
+            model.addAttribute("tasks", tasks);
+        }
+        return "project/milestoneView";
+    }
+
+    @GetMapping(value = "markTaskComplete")
+    @Transactional
+    public String getMarkTaskComplete(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
+    {
+        this.projectService.setTaskUpForReview(projectId, milestoneId, taskId);
+        Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
+        List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
+        if(milestones != null) {
+            model.addAttribute("project",this.projectService.getByID(projectId));
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("milestone", milestones);
+            model.addAttribute("tasks", tasks);
+        }
+        return "project/milestoneView";
+    }
 }

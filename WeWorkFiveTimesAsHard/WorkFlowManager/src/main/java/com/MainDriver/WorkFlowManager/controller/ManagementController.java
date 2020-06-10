@@ -9,6 +9,7 @@ import com.MainDriver.WorkFlowManager.model.projects.Task;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
+import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -41,6 +42,9 @@ public class ManagementController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    StandardWorkerRepository standardWorkerRepository;
 
     static String usernamePlaceHolder ="";
 
@@ -230,10 +234,30 @@ public class ManagementController {
     {
         Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
         if(task != null) {
+            model.addAttribute("project", this.projectService.getByID(projectId));
             model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
             model.addAttribute("name", principal.getName());
             model.addAttribute("task",task);
         }
         return "project/viewSingleTask";
+    }
+    @GetMapping(value = "markTaskDone")
+    @Transactional
+    public String getMarkTaskDone(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId, String username)
+    {
+       StandardWorker standardWorker = this.standardWorkerService.getByUsername(username);
+       standardWorker.didTask(this.projectService.setTaskDoneReturn(projectId, milestoneId, taskId));
+       this.standardWorkerRepository.save(standardWorker);
+
+       Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
+       List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
+       if(milestones != null) {
+            model.addAttribute("project",this.projectService.getByID(projectId));
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
+            model.addAttribute("milestone", milestones);
+            model.addAttribute("tasks", tasks);
+        }
+        return "project/milestoneView";
     }
 }

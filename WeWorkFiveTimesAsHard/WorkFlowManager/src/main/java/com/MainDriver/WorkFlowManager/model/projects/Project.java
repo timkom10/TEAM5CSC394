@@ -89,7 +89,7 @@ public class Project {
 
     public void addCompletedTask(Task task) {
 
-        if(task != null && task.isComplete()) {
+        if(task != null && (task.getIsComplete() >0)) {
             this.completedTasks.add(task);
             this.completedTasksSize++;
         }

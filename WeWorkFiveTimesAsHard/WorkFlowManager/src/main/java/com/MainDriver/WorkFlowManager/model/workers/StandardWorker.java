@@ -99,7 +99,7 @@ public class StandardWorker extends WorkerType implements Serializable
 
     public void didTask(Task task)
     {
-        if(task != null && task.isComplete()) {
+        if(task != null && task.getIsComplete() > 0) {
             this.currentProjectPoints += task.getBounty();
             this.totalPoints += task.getBounty();
         }

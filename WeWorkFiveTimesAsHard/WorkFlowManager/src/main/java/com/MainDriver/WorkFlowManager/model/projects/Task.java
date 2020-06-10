@@ -2,8 +2,6 @@ package com.MainDriver.WorkFlowManager.model.projects;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 public class Task {
@@ -17,9 +15,9 @@ public class Task {
     private Integer taskId;
 
     private int bounty;
-    private boolean upForReview;
-    private boolean isComplete;
-    private int isAssigned;
+    private int upForReview =0;
+    private int isComplete =0;
+    private int isAssigned =0;
 
     public Task() {
         taskName = "Available";
