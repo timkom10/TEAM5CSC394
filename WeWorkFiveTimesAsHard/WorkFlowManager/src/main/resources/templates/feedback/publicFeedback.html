@@ -36,6 +36,7 @@
         <table class="table">
             <thead class="text-center">
             <tr>
+                <th>To&nbsp;</th>
                 <th>From&nbsp;</th>
                 <th>Subject</th>
                 <th>Feedback</th>
@@ -43,6 +44,7 @@
             </thead>
             <tbody class="text-center" th:each="feedback: ${feedbacks}">
             <tr>
+                <td th:text="${feedback.getTo()}">From</td>
                 <td th:text="${feedback.getFrom()}">From</td>
                 <td th:text="${feedback.getSubject()}">Subject</td>
                 <th th:text="${feedback.getContent()}">Content</th>

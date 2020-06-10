@@ -142,9 +142,12 @@ public class StandardWorkerController
     }
 
     @GetMapping(value = "projectInfo")
-    public String getProjectInfo(Principal principal,Model model) {
-        Project project = this.projectService.getProjectByUsername(principal.getName());
+    @Transactional
+    public String getProjectInfo(Principal principal, Model model, Long projectId) {
+        Project project = this.projectService.getByID(projectId);
+        List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPointsByProject(project);
         if(project != null) {
+            model.addAttribute("workers", standardWorkerList);
             model.addAttribute("name", principal.getName());
             model.addAttribute("project", project);
         }

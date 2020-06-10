@@ -47,12 +47,25 @@
         </div>
     </div>
     <div class="w-container">
-        <ul role="list" class="list">
-            <li>Username </li>
-            <li>Role</li>
-            <li>Project Points</li>
-            <li>Total Points</li>
-        </ul>
+
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>Username&nbsp;</th>
+                <th>Role</th>
+                <th>Current Project Points</th>
+                <th>Total Points</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" th:each="worker : ${workers}">
+            <tr>
+                <td th:text="${worker.getUserName()}">From</td>
+                <td th:text="${worker.getRole()}" >Subject</td>
+                <th th:text="${worker.getCurrentProjectPoints()}">Content</th>
+                <th th:text="${worker.getTotalPoints()}">Content</th>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

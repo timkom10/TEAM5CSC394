@@ -42,6 +42,14 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         return standardWorkers;
     }
 
+    @Override
+    public List<StandardWorker> getAllStandardWorkersSortedByPointsByProject(Project project)
+    {
+        List<StandardWorker> standardWorkers = this.standardWorkerRepository.findAllByProject(project);
+        Collections.sort(standardWorkers,compareByTotalPoints);
+        return standardWorkers;
+    }
+
 
     @Override
     @Transactional

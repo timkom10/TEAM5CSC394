@@ -29,7 +29,7 @@
 </header>
 <div class="section">
     <div class="container-2 w-container">
-        <a th:href="@{projectInfo}" class="link-block w-inline-block">
+        <a th:href="@{projectInfo(projectId = ${project.getId()})}" class="link-block w-inline-block">
             <h1 class="heading-2" th:text="${project.getProjectName()}">Project Name</h1>
         </a>
     </div>

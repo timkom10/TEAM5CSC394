@@ -13,4 +13,5 @@ public interface StandardWorkerService {
     StandardWorker getByUsername(String username);
     Set<StandardWorker> findAllByUsername(String username);
     List<StandardWorker> getAllStandardWorkersSortedByPoints();
+    List<StandardWorker> getAllStandardWorkersSortedByPointsByProject(Project project);
 }
