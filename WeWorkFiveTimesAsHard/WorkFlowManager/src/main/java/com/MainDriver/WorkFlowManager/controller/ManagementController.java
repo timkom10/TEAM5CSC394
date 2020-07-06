@@ -77,6 +77,7 @@ public class ManagementController {
     }
 
     @GetMapping("feedback")
+    @Transactional
     public String portal() {
         return "feedback/FeedbackPortal";
     }
@@ -87,12 +88,14 @@ public class ManagementController {
     }
 
     @GetMapping("searchUserToMessage")
+    @Transactional
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users",userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 
     @GetMapping("composeMessage")
+    @Transactional
     public String getComposeMessage(Model model, String username) {
         usernamePlaceHolder = username;
         model.addAttribute("to", username);
@@ -101,24 +104,28 @@ public class ManagementController {
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
+    @Transactional
     public String getMessageSent(Principal principal, @ModelAttribute("message")Message message) {
         this.messagingService.saveMessage(message,principal.getName(), usernamePlaceHolder);
         return "messaging/messagingPortal";
     }
 
     @GetMapping(value = "inbox")
+    @Transactional
     public String getInbox(Model model, @RequestParam(defaultValue = "") String username, Principal principal) {
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
         return "messaging/messageInbox";
     }
 
     @GetMapping(value = "viewMessage")
+    @Transactional
     public String getViewMessage(Model model, Principal principal, Integer messageId) {
         model.addAttribute("message",this.messagingService.getByUsernameAndMessageId(principal.getName(), messageId));
         return "messaging/viewMessage";
     }
 
     @GetMapping(value = "deleteMessage")
+    @Transactional
     public String getDeleteMessage(Model model, Principal principal, @RequestParam(defaultValue = "") String username, Integer messageId) {
         this.messagingService.deleteMessage(principal.getName(), messageId);
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
@@ -127,6 +134,7 @@ public class ManagementController {
 
 
     @GetMapping(value = "viewAnnouncement")
+    @Transactional
     public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
@@ -134,6 +142,7 @@ public class ManagementController {
     }
 
     @GetMapping(value = "deleteAnnouncement")
+    @Transactional
     public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
         announcementService.deleteAnnouncement(principal.getName(), announcementID);
         Manager manager = managerRepository.findByUserName(principal.getName());
@@ -145,6 +154,7 @@ public class ManagementController {
     }
 
     @GetMapping(value = "composeAnnouncement")
+    @Transactional
     public String getComposeAnnouncement(Principal principal,Model model) {
 
         model.addAttribute("name", principal.getName());
@@ -153,6 +163,7 @@ public class ManagementController {
     }
 
     @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
+    @Transactional
     public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
         this.announcementService.sendAnnouncement(announcement, principal.getName(), principal.getName());
 
@@ -200,6 +211,7 @@ public class ManagementController {
     }
 
     @GetMapping(value = "viewProject")
+    @Transactional
     public String getViewProject(Principal principal,Model model)
     {
         Project project = this.projectService.getProjectByUsername(principal.getName());

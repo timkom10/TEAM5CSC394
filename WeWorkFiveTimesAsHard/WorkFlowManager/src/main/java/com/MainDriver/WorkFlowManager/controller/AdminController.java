@@ -64,6 +64,7 @@ public class AdminController {
     }
 
     @GetMapping("info")
+    @Transactional
     public String info(Principal principal, Model model) {
 
         Admin admin = adminService.findByUserName(principal.getName());
@@ -72,16 +73,19 @@ public class AdminController {
     }
 
     @RequestMapping("Hr")
+    @Transactional
     public String getHR() {
         return "admin/HumanResources";
     }
 
     @GetMapping("feedback")
+    @Transactional
     public String portal() {
         return "feedback/FeedbackPortal";
     }
 
     @RequestMapping(value = "RemoveUser", method = RequestMethod.GET)
+    @Transactional
     public String getUserSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/RemoveUser";
@@ -89,6 +93,7 @@ public class AdminController {
 
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
+    @Transactional
     public String getRemoveUser(Model model, String username) {
         userService.removeUser(username);
         model.addAttribute("users", userService.findByUsername(""));
@@ -96,12 +101,14 @@ public class AdminController {
     }
 
     @RequestMapping("addUser")
+    @Transactional
     public String getAddUser(Model model) {
         model.addAttribute("user", new Users());
         return "admin/addUser";
     }
 
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
+    @Transactional
     public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model) {
         if(userService.addUser(user)) {
             usernamePlaceholder = user.getUsername();
@@ -118,6 +125,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
+    @Transactional
     public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model) {
         standardWorkerService.addStandardWorker(userService.getByUsername(this.usernamePlaceholder), standardWorker);
         model.addAttribute("user", new Users());
@@ -125,6 +133,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertManager", method = RequestMethod.POST)
+    @Transactional
     public String getInsertManager(@ModelAttribute("manager") Manager manager,Model model) {
         managerService.addManager(userService.getByUsername(this.usernamePlaceholder), manager);
         model.addAttribute("user", new Users());
@@ -148,6 +157,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertAlteredStandardWorker", method = RequestMethod.POST)
+    @Transactional
     public String getInsertAlteredStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model)
     {
         standardWorkerService.insertAlteredStandardWorker(standardWorker, usernamePlaceholder);
@@ -156,6 +166,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "viewAnnouncement")
+    @Transactional
     public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
@@ -163,17 +174,20 @@ public class AdminController {
     }
 
     @GetMapping("messagingPortal")
+    @Transactional
     public String getMessagingPortal() {
         return "messaging/messagingPortal";
     }
 
     @GetMapping("searchUserToMessage")
+    @Transactional
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users",userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 
     @GetMapping("composeMessage")
+    @Transactional
     public String getComposeMessage(Model model, String username) {
         usernamePlaceholder = username;
         model.addAttribute("to", username);
@@ -182,24 +196,28 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
+    @Transactional
     public String getMessageSent(Principal principal, @ModelAttribute("message")Message message) {
         this.messagingService.saveMessage(message,principal.getName(), usernamePlaceholder);
         return "messaging/messagingPortal";
     }
 
     @GetMapping(value = "inbox")
+    @Transactional
     public String getInbox(Model model, @RequestParam(defaultValue = "") String username, Principal principal) {
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
         return "messaging/messageInbox";
     }
 
     @GetMapping(value = "viewMessage")
+    @Transactional
     public String getViewMessage(Model model, Principal principal, Integer messageId) {
         model.addAttribute("message",this.messagingService.getByUsernameAndMessageId(principal.getName(), messageId));
         return "messaging/viewMessage";
     }
 
     @GetMapping(value = "deleteMessage")
+    @Transactional
     public String getDeleteMessage(Model model, Principal principal, @RequestParam(defaultValue = "") String username, Integer messageId) {
         this.messagingService.deleteMessage(principal.getName(), messageId);
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
@@ -207,6 +225,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "deleteAnnouncement")
+    @Transactional
     public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
         announcementService.deleteAnnouncement(principal.getName(), announcementID);
         Admin admin = adminRepository.findByUserName(principal.getName());
@@ -218,6 +237,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
+    @Transactional
     public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("managers", userService.findManagersByUsernameLike(username));
@@ -226,6 +246,7 @@ public class AdminController {
 
 
     @GetMapping(value = "composeAnnouncement")
+    @Transactional
     public String getComposeAnnouncement(Principal principal,Model model, String managerUsername) {
         usernamePlaceholder = managerUsername;
         model.addAttribute("name", principal.getName());
@@ -234,6 +255,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
+    @Transactional
     public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
 
         this.announcementService.sendAnnouncement(announcement,principal.getName(), usernamePlaceholder);
