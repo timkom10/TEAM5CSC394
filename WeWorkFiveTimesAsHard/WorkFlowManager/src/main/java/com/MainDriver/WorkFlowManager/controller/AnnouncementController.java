@@ -18,7 +18,7 @@ import java.security.Principal;
  */
 
 @Controller
-@RequestMapping({"standardWorkers", "management"})
+@RequestMapping({"standardWorkers", "management", "admin"})
 public class AnnouncementController {
 
     @Autowired
@@ -48,19 +48,23 @@ public class AnnouncementController {
         announcementService.deleteAnnouncement(principal.getName(), announcementID);
         String username = principal.getName();
 
-        //find out the users type (worker, manager, admin)
+        //find out the users type (worker, manager, admin) and return to their homepage after deletion
         if(this.standardWorkerService.existsByUsername(username)) {
             model.addAttribute(this.standardWorkerService.getByUsername(username));
+            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(username));
+            return "standardWorkers/index";
         }
         else if(this.managerService.existsByUsername(username)) {
             model.addAttribute(this.managerService.getByUsername(username));
+            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(username));
+            return "management/index";
         }
         else if(this.adminService.existsByUsername(username)){
-            model.addAttribute(this.adminService.findByUserName(username));
+            model.addAttribute("admin", this.adminService.findByUserName(username));
+            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(username));
+            return "admin/index";
         }
-
-        model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(username));
-        return "standardWorkers/index";
+        return "error";
     }
 
 

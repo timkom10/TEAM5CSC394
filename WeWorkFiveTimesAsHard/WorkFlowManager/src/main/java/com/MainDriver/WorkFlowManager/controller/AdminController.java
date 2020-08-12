@@ -160,27 +160,6 @@ public class AdminController {
         return "admin/addUser";
     }
 
-    @GetMapping(value = "viewAnnouncement")
-    @Transactional
-    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
-        return "announcements/viewAnnouncement";
-    }
-
-
-    @GetMapping(value = "deleteAnnouncement")
-    @Transactional
-    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
-        announcementService.deleteAnnouncement(principal.getName(), announcementID);
-        Admin admin = adminRepository.findByUserName(principal.getName());
-        if(admin != null) {
-            model.addAttribute("admin", admin);
-            model.addAttribute("announcements", admin.getAnnouncements());
-        }
-        return "admin/index";
-    }
-
     @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
     @Transactional
     public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
