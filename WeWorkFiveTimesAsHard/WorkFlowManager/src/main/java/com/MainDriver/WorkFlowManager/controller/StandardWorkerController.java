@@ -54,7 +54,7 @@ public class StandardWorkerController
         StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
         if(standardWorker != null) {
             model.addAttribute(standardWorker);
-            model.addAttribute("announcements", standardWorker.getAnnouncements());
+            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(principal.getName()));
         }
         return "standardWorkers/index";
     }
@@ -72,24 +72,6 @@ public class StandardWorkerController
             model.addAttribute("workerType", standardWorker);
         }
         return "Info/info";
-    }
-
-    @GetMapping(value = "viewAnnouncement")
-    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
-        return "announcements/viewAnnouncement";
-    }
-
-    @GetMapping(value = "deleteAnnouncement")
-    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
-       announcementService.deleteAnnouncement(principal.getName(), announcementID);
-        StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
-        if(standardWorker != null) {
-            model.addAttribute(standardWorker);
-            model.addAttribute("announcements", standardWorker.getAnnouncements());
-        }
-        return "standardWorkers/index";
     }
 
     @GetMapping(value = "projectInfo")

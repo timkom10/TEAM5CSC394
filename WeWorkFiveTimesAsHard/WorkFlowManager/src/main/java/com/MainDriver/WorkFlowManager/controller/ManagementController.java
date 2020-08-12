@@ -78,27 +78,6 @@ public class ManagementController {
         return "feedback/FeedbackPortal";
     }
 
-
-    @GetMapping(value = "viewAnnouncement")
-    @Transactional
-    public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
-        return "announcements/viewAnnouncement";
-    }
-
-    @GetMapping(value = "deleteAnnouncement")
-    @Transactional
-    public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID) {
-        announcementService.deleteAnnouncement(principal.getName(), announcementID);
-        Manager manager = managerRepository.findByUserName(principal.getName());
-        if(manager != null) {
-            model.addAttribute("manager", manager);
-            model.addAttribute("announcements", manager.getAnnouncements());
-        }
-        return "management/index";
-    }
-
     @GetMapping(value = "composeAnnouncement")
     @Transactional
     public String getComposeAnnouncement(Principal principal,Model model) {

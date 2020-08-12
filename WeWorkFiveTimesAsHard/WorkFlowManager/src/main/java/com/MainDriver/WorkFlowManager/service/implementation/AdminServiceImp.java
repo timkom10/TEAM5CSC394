@@ -17,4 +17,9 @@ public class AdminServiceImp implements AdminService {
     public Admin findByUserName(String name) {
             return adminRepository.findByUserName(name);
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return this.adminRepository.existsByUserName(username);
+    }
 }

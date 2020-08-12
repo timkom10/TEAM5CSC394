@@ -75,6 +75,11 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     }
 
     @Override
+    public boolean existsByUsername(String username) {
+        return this.standardWorkerRepository.existsByUserName(username);
+    }
+
+    @Override
     public void addStandardWorker(Users user, StandardWorker standardWorker) {
         if((user !=null) &&(standardWorker != null)) {
             standardWorker.setEmployeeRole(user.getRoles());

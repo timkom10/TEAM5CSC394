@@ -1,5 +1,6 @@
 package com.MainDriver.WorkFlowManager.service.implementation;
 
+import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
@@ -21,5 +22,19 @@ public class ManagerServiceImp implements ManagerService {
             manager.setUserName(user.getUsername());
             this.managerRepository.save(manager);
         }
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return this.managerRepository.existsByUserName(username);
+    }
+
+    @Override
+    public Manager getByUsername(String username) {
+        Manager manager = this.managerRepository.findByUserName(username);
+        if(manager != null) {
+            return  manager;
+        }
+        return new Manager();
     }
 }
