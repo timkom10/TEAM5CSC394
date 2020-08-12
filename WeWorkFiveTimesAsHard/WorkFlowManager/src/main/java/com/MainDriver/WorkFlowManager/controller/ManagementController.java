@@ -1,7 +1,6 @@
 package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
-import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Task;
@@ -12,10 +11,8 @@ import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
@@ -29,9 +26,6 @@ public class ManagementController {
 
     @Autowired
     private StandardWorkerService standardWorkerService;
-
-    @Autowired
-    AnnouncementService announcementService;
 
     @Autowired
     FeedbackService feedbackService;
@@ -78,27 +72,6 @@ public class ManagementController {
         return "feedback/FeedbackPortal";
     }
 
-    @GetMapping(value = "composeAnnouncement")
-    @Transactional
-    public String getComposeAnnouncement(Principal principal,Model model) {
-
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("announcement", new Announcement());
-        return "announcements/composeAnnouncement";
-    }
-
-    @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
-    @Transactional
-    public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
-        this.announcementService.sendAnnouncement(announcement, principal.getName(), principal.getName());
-
-        Manager manager = managerRepository.findByUserName(principal.getName());
-        if (manager != null) {
-            model.addAttribute("manager", manager);
-            model.addAttribute("announcements", manager.getAnnouncements());
-        }
-        return "management/index";
-    }
 
     @RequestMapping(value = "leaderboard")
     @Transactional

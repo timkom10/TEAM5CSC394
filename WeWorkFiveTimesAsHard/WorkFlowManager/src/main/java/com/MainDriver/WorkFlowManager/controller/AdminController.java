@@ -1,12 +1,9 @@
 package com.MainDriver.WorkFlowManager.controller;
 
-import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
 import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.model.workers.Admin;
 import com.MainDriver.WorkFlowManager.model.workers.Manager;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
-import com.MainDriver.WorkFlowManager.repository.AdminRepository;
-import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.implementation.AdminServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.ManagerServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.StandardWorkerServiceImp;
@@ -35,16 +32,7 @@ public class AdminController {
     @Autowired
     StandardWorkerServiceImp standardWorkerService;
 
-    @Autowired
-    AnnouncementService announcementService;
-
-    private final AdminRepository adminRepository;
-
     private static  String usernamePlaceholder ="";
-
-    public AdminController(AdminRepository adminRepository) {
-        this.adminRepository = adminRepository;
-    }
 
     @GetMapping("index")
     @Transactional
@@ -160,35 +148,4 @@ public class AdminController {
         return "admin/addUser";
     }
 
-    @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
-    @Transactional
-    public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("managers", userService.findManagersByUsernameLike(username));
-        return "announcements/selectTeamAnnouncement";
-    }
-
-
-    @GetMapping(value = "composeAnnouncement")
-    @Transactional
-    public String getComposeAnnouncement(Principal principal,Model model, String managerUsername) {
-        usernamePlaceholder = managerUsername;
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("announcement", new Announcement());
-        return "announcements/composeAnnouncement";
-    }
-
-    @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
-    @Transactional
-    public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
-
-        this.announcementService.sendAnnouncement(announcement,principal.getName(), usernamePlaceholder);
-
-        Admin admin = adminRepository.findByUserName(principal.getName());
-        if(admin != null) {
-            model.addAttribute("admin", admin);
-            model.addAttribute("announcements", admin.getAnnouncements());
-        }
-        return "admin/index";
-    }
 }
