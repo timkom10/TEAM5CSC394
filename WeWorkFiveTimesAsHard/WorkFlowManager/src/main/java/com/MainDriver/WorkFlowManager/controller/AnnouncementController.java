@@ -1,12 +1,8 @@
 package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
-import com.MainDriver.WorkFlowManager.model.workers.Manager;
-import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
-import com.MainDriver.WorkFlowManager.model.workers.Users;
 import com.MainDriver.WorkFlowManager.service.*;
 import com.MainDriver.WorkFlowManager.service.implementation.UserServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +11,30 @@ import javax.transaction.Transactional;
 import java.security.Principal;
 
 /*
-    Any authenticated user can view an announcement (if they have one), managers and admins
-    Can send an announcement
+    Any authenticated user can view or delete an announcement (if they have one), managers and admins
+    Can send an announcement to either their own team (if the user is a manager), or choose a team
+    To send an announcement to (if the user is an admin)
  */
 
 @Controller
 @RequestMapping({"standardWorkers", "management", "admin"})
 public class AnnouncementController {
 
-    @Autowired
-    AnnouncementService announcementService;
-
-    @Autowired
-    private StandardWorkerService standardWorkerService;
-
-    @Autowired
-    private ManagerService managerService;
-
-    @Autowired
-    private AdminService adminService;
-
-    @Autowired
-    UserServiceImp userService;
+    private final AnnouncementService announcementService;
+    private final StandardWorkerService standardWorkerService;
+    private final ManagerService managerService;
+    private final AdminService adminService;
+    private final UserServiceImp userService;
 
     private static  String usernamePlaceholder ="";
+
+    public AnnouncementController(AnnouncementService announcementService, StandardWorkerService standardWorkerService, ManagerService managerService, AdminService adminService, UserServiceImp userService) {
+        this.announcementService = announcementService;
+        this.standardWorkerService = standardWorkerService;
+        this.managerService = managerService;
+        this.adminService = adminService;
+        this.userService = userService;
+    }
 
     @GetMapping(value = "viewAnnouncement")
     @Transactional
