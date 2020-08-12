@@ -2,7 +2,6 @@ package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.messaging.Announcement;
-import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Task;
@@ -24,9 +23,6 @@ import java.util.List;
 @Controller
 @RequestMapping("management")
 public class ManagementController {
-
-    @Autowired
-    MessagingService messagingService;
 
     @Autowired
     private UserService userService;
@@ -80,56 +76,6 @@ public class ManagementController {
     @Transactional
     public String portal() {
         return "feedback/FeedbackPortal";
-    }
-
-    @GetMapping("messagingPortal")
-    public String getMessagingPortal() {
-        return "messaging/messagingPortal";
-    }
-
-    @GetMapping("searchUserToMessage")
-    @Transactional
-    public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users",userService.findByUsername(username));
-        return "messaging/searchUserToMessage";
-    }
-
-    @GetMapping("composeMessage")
-    @Transactional
-    public String getComposeMessage(Model model, String username) {
-        usernamePlaceHolder = username;
-        model.addAttribute("to", username);
-        model.addAttribute("message", new Message());
-        return "messaging/composeMessage";
-    }
-
-    @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    @Transactional
-    public String getMessageSent(Principal principal, @ModelAttribute("message")Message message) {
-        this.messagingService.saveMessage(message,principal.getName(), usernamePlaceHolder);
-        return "messaging/messagingPortal";
-    }
-
-    @GetMapping(value = "inbox")
-    @Transactional
-    public String getInbox(Model model, @RequestParam(defaultValue = "") String username, Principal principal) {
-        model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
-        return "messaging/messageInbox";
-    }
-
-    @GetMapping(value = "viewMessage")
-    @Transactional
-    public String getViewMessage(Model model, Principal principal, Integer messageId) {
-        model.addAttribute("message",this.messagingService.getByUsernameAndMessageId(principal.getName(), messageId));
-        return "messaging/viewMessage";
-    }
-
-    @GetMapping(value = "deleteMessage")
-    @Transactional
-    public String getDeleteMessage(Model model, Principal principal, @RequestParam(defaultValue = "") String username, Integer messageId) {
-        this.messagingService.deleteMessage(principal.getName(), messageId);
-        model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
-        return "messaging/messageInbox";
     }
 
 

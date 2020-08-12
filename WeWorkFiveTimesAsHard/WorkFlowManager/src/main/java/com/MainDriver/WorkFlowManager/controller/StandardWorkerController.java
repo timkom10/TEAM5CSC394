@@ -1,7 +1,6 @@
 package com.MainDriver.WorkFlowManager.controller;
 
 import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
-import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Task;
@@ -15,16 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.security.Principal;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("standardWorkers")
 public class StandardWorkerController
 {
-    @Autowired
-    MessagingService messagingService;
 
     @Autowired
     private UserService userService;
@@ -77,50 +72,6 @@ public class StandardWorkerController
             model.addAttribute("workerType", standardWorker);
         }
         return "Info/info";
-    }
-
-    @GetMapping("messagingPortal")
-    public String getMessagingPortal() {
-        return "messaging/messagingPortal";
-    }
-
-    @GetMapping("searchUserToMessage")
-    public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users", userService.findByUsername(username));
-        return "messaging/searchUserToMessage";
-    }
-
-    @GetMapping("composeMessage")
-    public String getComposeMessage(Model model, String username) {
-        usernamePlaceHolder = username;
-        model.addAttribute("to", username);
-        model.addAttribute("message", new Message());
-        return "messaging/composeMessage";
-    }
-
-    @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    public String getMessageSent(Principal principal, @ModelAttribute("message")Message message) {
-        this.messagingService.saveMessage(message,principal.getName(), usernamePlaceHolder);
-        return "messaging/messagingPortal";
-    }
-
-    @GetMapping(value = "inbox")
-    public String getInbox(Model model, @RequestParam(defaultValue = "") String username, Principal principal) {
-        model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
-        return "messaging/messageInbox";
-    }
-
-    @GetMapping(value = "viewMessage")
-    public String getViewMessage(Model model, Principal principal, Integer messageId) {
-        model.addAttribute("message",this.messagingService.getByUsernameAndMessageId(principal.getName(), messageId));
-        return "messaging/viewMessage";
-    }
-
-    @GetMapping(value = "deleteMessage")
-    public String getDeleteMessage(Model model, Principal principal, @RequestParam(defaultValue = "") String username, Integer messageId) {
-        this.messagingService.deleteMessage(principal.getName(), messageId);
-        model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
-        return "messaging/messageInbox";
     }
 
     @GetMapping(value = "viewAnnouncement")
