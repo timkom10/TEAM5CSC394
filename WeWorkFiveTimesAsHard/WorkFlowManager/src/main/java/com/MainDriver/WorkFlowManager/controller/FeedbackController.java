@@ -27,9 +27,6 @@ import java.util.List;
 @RequestMapping({"standardWorkers", "management"})
 public class FeedbackController {
 
-    @Autowired
-    AllFeedbackRepository allFeedbackRepository;
-
     private final ManagerService managerService;
     private final ProjectService projectService;
     private final FeedbackService feedbackService;
@@ -88,7 +85,7 @@ public class FeedbackController {
     @Transactional
     public String getPublicFeedback(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
-        model.addAttribute("feedbacks",allFeedbackRepository.findAll());
+        model.addAttribute("feedbacks",this.feedbackService.getAllFeedbackSortedByDate());
         return "feedback/publicFeedback";
     }
 

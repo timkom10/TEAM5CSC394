@@ -18,5 +18,4 @@ public interface ProjectService {
     List<Task> getTasksByMileStoneId(Long projectId, Integer mID);
     List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId);
     Task getSingleTask(Long projectId, Integer milestoneId, Integer taskId);
-
 }

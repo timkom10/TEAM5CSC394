@@ -9,6 +9,9 @@ import com.MainDriver.WorkFlowManager.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class FeedbackServiceImp implements FeedbackService {
     @Autowired
@@ -34,5 +37,11 @@ public class FeedbackServiceImp implements FeedbackService {
             allFeedback.setSubject(feedback.getSubject());
             allFeedbackRepository.save(allFeedback);
         }
+    }
+
+    @Override
+    public List<AllFeedback> getAllFeedbackSortedByDate()
+    {
+        return (List<AllFeedback>) this.allFeedbackRepository.findAll();
     }
 }
