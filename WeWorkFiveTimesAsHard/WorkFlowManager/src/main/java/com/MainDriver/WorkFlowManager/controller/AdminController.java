@@ -61,19 +61,12 @@ public class AdminController {
         return "admin/HumanResources";
     }
 
-    @GetMapping("feedback")
-    @Transactional
-    public String portal() {
-        return "feedback/FeedbackPortal";
-    }
-
     @RequestMapping(value = "RemoveUser", method = RequestMethod.GET)
     @Transactional
     public String getUserSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/RemoveUser";
     }
-
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
     @Transactional

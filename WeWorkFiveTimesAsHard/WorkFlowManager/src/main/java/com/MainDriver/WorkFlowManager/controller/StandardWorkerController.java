@@ -1,6 +1,5 @@
 package com.MainDriver.WorkFlowManager.controller;
 
-import com.MainDriver.WorkFlowManager.model.feedback.Feedback;
 import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Task;
@@ -31,15 +30,7 @@ public class StandardWorkerController
     StandardWorkerService standardWorkerService;
 
     @Autowired
-    FeedbackService feedbackService;
-
-    @Autowired
-    AllFeedbackRepository allFeedbackRepository;
-
-    @Autowired
     ProjectService projectService;
-
-    static String usernamePlaceHolder ="";
 
     private final StandardWorkerRepository standardWorkerRepository;
 
@@ -59,10 +50,6 @@ public class StandardWorkerController
         return "standardWorkers/index";
     }
 
-    @GetMapping("feedback")
-    public String portal() {
-        return "feedback/FeedbackPortal";
-    }
 
     @GetMapping("info")
     @Transactional
@@ -96,48 +83,6 @@ public class StandardWorkerController
             model.addAttribute("feedbacks", standardWorker.getPersonalFeedback());
         }
         return "feedback/personalFeedback";
-    }
-
-    @GetMapping(value = "composeFeedback")
-    @Transactional
-    public String getComposeFeedback(Principal principal,Model model, String to) {
-        usernamePlaceHolder = to;
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("to", to);
-        model.addAttribute("feedback", new Feedback());
-        return "feedback/composeFeedback";
-    }
-
-    @RequestMapping(value = "feedbackSent", method = RequestMethod.POST)
-    @Transactional
-    public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback) {
-        this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
-        Project project = this.projectService.getProjectByUsername(principal.getName());
-        if(project != null) {
-            model.addAttribute("name", principal.getName());
-            model.addAttribute("workers", project.getTeamMembers());
-            model.addAttribute("project", project);
-            model.addAttribute("milestones", project.getMilestones());
-            model.addAttribute("completedTasks", project.getCompletedTasksReverse());
-        }
-        return "project/projectHomepage";
-    }
-
-    @RequestMapping(value = "publicFeedback")
-    @Transactional
-    public String getPublicFeedback(Principal principal, Model model) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("feedbacks",allFeedbackRepository.findAll());
-        return "feedback/publicFeedback";
-    }
-
-    @RequestMapping(value = "leaderboard")
-    @Transactional
-    public String getLeaderboard(Principal principal, Model model) {
-        List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPoints();
-
-        model.addAttribute("workers", standardWorkerList);
-        return "feedback/leaderboard";
     }
 
     @GetMapping(value = "viewProject")

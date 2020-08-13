@@ -59,9 +59,9 @@ public class InitialData implements CommandLineRunner
 
 
        //Any new users need to have password encrypted before db insert
-       Users peter = new Users("Peter", passwordEncoder.encode("peter12"),"STANDARDWORKER", "none");
-       Users admin = new Users("admin", passwordEncoder.encode("peter12"),"ADMIN", "");
-       Users manager = new Users("manager", passwordEncoder.encode("peter12"),"MANAGER", "");
+       Users peter = new Users("Peter", passwordEncoder.encode("peter"),"STANDARDWORKER", "none");
+       Users admin = new Users("admin", passwordEncoder.encode("peter"),"ADMIN", "");
+       Users manager = new Users("manager", passwordEncoder.encode("peter"),"MANAGER", "");
        Users tyler = new Users("Tyler", passwordEncoder.encode("tyler"),"STANDARDWORKER", "none");
        Users tim = new Users("Tim", passwordEncoder.encode("tim"),"STANDARDWORKER", "none");
        Users joey = new Users("Joey", passwordEncoder.encode("joey"),"STANDARDWORKER", "none");
