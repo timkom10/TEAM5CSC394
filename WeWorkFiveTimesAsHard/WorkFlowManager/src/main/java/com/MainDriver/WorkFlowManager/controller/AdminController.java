@@ -8,7 +8,6 @@ import com.MainDriver.WorkFlowManager.service.implementation.AdminServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.ManagerServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.StandardWorkerServiceImp;
 import com.MainDriver.WorkFlowManager.service.implementation.UserServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,19 +19,18 @@ import java.security.Principal;
 @RequestMapping("admin")
 public class AdminController {
 
-    @Autowired
-    AdminServiceImp adminService;
+    private final AdminServiceImp adminService;
+    private final UserServiceImp userService;
+    private final ManagerServiceImp managerService;
+    private final StandardWorkerServiceImp standardWorkerService;
+    private static String usernamePlaceholder ="";
 
-    @Autowired
-    UserServiceImp userService;
-
-    @Autowired
-    ManagerServiceImp managerService;
-
-    @Autowired
-    StandardWorkerServiceImp standardWorkerService;
-
-    private static  String usernamePlaceholder ="";
+    public AdminController(AdminServiceImp adminService, UserServiceImp userService, ManagerServiceImp managerService, StandardWorkerServiceImp standardWorkerService) {
+        this.adminService = adminService;
+        this.userService = userService;
+        this.managerService = managerService;
+        this.standardWorkerService = standardWorkerService;
+    }
 
     @GetMapping("index")
     @Transactional

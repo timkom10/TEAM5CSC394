@@ -4,10 +4,8 @@ import com.MainDriver.WorkFlowManager.model.projects.Milestones;
 import com.MainDriver.WorkFlowManager.model.projects.Project;
 import com.MainDriver.WorkFlowManager.model.projects.Task;
 import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
-import com.MainDriver.WorkFlowManager.repository.AllFeedbackRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +15,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("standardWorkers")
-public class StandardWorkerController
-{
+public class StandardWorkerController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    AnnouncementService announcementService;
-
-    @Autowired
-    StandardWorkerService standardWorkerService;
-
-    @Autowired
-    ProjectService projectService;
-
+    private final UserService userService;
+    private final AnnouncementService announcementService;
+    private final StandardWorkerService standardWorkerService;
+    private final ProjectService projectService;
     private final StandardWorkerRepository standardWorkerRepository;
 
-    public StandardWorkerController(StandardWorkerRepository standardWorkerRepository) {
+    public StandardWorkerController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService, StandardWorkerRepository standardWorkerRepository) {
+        this.userService = userService;
+        this.announcementService = announcementService;
+        this.standardWorkerService = standardWorkerService;
+        this.projectService = projectService;
         this.standardWorkerRepository = standardWorkerRepository;
     }
 

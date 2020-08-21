@@ -8,7 +8,6 @@ import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,24 +19,19 @@ import java.util.List;
 @RequestMapping("management")
 public class ManagementController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    AnnouncementService announcementService;
-
-    @Autowired
-    private StandardWorkerService standardWorkerService;
-
-    @Autowired
-    ProjectService projectService;
-
-    @Autowired
-    StandardWorkerRepository standardWorkerRepository;
-
+    private final UserService userService;
+    private final AnnouncementService announcementService;
+    private final StandardWorkerService standardWorkerService;
+    private final ProjectService projectService;
+    private final StandardWorkerRepository standardWorkerRepository;
     private final ManagerRepository managerRepository;
 
-    public ManagementController(ManagerRepository managerRepository) {
+    public ManagementController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService, StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository) {
+        this.userService = userService;
+        this.announcementService = announcementService;
+        this.standardWorkerService = standardWorkerService;
+        this.projectService = projectService;
+        this.standardWorkerRepository = standardWorkerRepository;
         this.managerRepository = managerRepository;
     }
 

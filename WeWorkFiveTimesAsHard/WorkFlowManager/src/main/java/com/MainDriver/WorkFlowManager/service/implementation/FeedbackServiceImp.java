@@ -39,7 +39,7 @@ public class FeedbackServiceImp implements FeedbackService {
             allFeedbackRepository.save(allFeedback);
         }
     }
-    /* Public feedback needs to be displayed by date newest first, the all feedback needs a date object */
+
     @Override
     public List<AllFeedback> getAllFeedbackSortedByDate()
     {

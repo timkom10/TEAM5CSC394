@@ -3,7 +3,6 @@ package com.MainDriver.WorkFlowManager.controller;
 import com.MainDriver.WorkFlowManager.model.messaging.Message;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
 import com.MainDriver.WorkFlowManager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +19,16 @@ import java.security.Principal;
 @RequestMapping({"standardWorkers", "management", "admin"})
 public class MessageController {
 
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    MessagingService messagingService;
+    private final UserService userService;
+    private final MessagingService messagingService;
 
     static String usernamePlaceHolder ="";
+
+    public MessageController(UserService userService, MessagingService messagingService) {
+        this.userService = userService;
+        this.messagingService = messagingService;
+    }
 
     @RequestMapping("messagingPortal")
     public String getMessagingPortal() {
