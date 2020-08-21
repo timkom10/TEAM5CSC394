@@ -81,14 +81,6 @@ public class FeedbackController {
     }
 
 
-    @RequestMapping(value = "publicFeedback")
-    @Transactional
-    public String getPublicFeedback(Principal principal, Model model) {
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("feedbacks",this.feedbackService.getAllFeedbackSortedByDate());
-        return "feedback/publicFeedback";
-    }
-
     @RequestMapping(value = "leaderboard")
     @Transactional
     public String getLeaderboard(Model model) {
@@ -97,5 +89,12 @@ public class FeedbackController {
         return "feedback/leaderboard";
     }
 
+    @RequestMapping(value = "publicFeedback")
+    @Transactional
+    public String getPublicFeedback(Principal principal, Model model) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("feedbacks",this.feedbackService.getAllFeedbackSortedByDate());
+        return "feedback/publicFeedback";
+    }
 
 }

@@ -93,14 +93,8 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         }
     }
 
-    public static Comparator<StandardWorker> compareByTotalPoints = new Comparator<StandardWorker>() {
-
-        public int compare(StandardWorker s1, StandardWorker s2) {
-
-            int points1 = s1.getTotalPoints();
-            int points2 = s2.getTotalPoints();
-
-            //descending order
-            return points2-points1;
-        }};
+    public static Comparator<StandardWorker> compareByTotalPoints = (s1, s2) -> {
+        //descending order
+        return s2.getTotalPoints() - s1.getTotalPoints();
+    };
 }

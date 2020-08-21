@@ -336,6 +336,7 @@ public class InitialData implements CommandLineRunner
         allFeedback.setFrom(standardWorker.getUserName());
         allFeedback.setSubject("Congratulating myself?");
         allFeedback.setContent("For demonstrations of course");
+        allFeedback.setDate(new Date());
         this.allFeedbackRepository.save(allFeedback);
         //check the Database
 

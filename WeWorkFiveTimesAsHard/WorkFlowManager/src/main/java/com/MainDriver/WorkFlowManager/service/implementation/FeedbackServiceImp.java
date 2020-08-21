@@ -6,19 +6,19 @@ import com.MainDriver.WorkFlowManager.model.workers.StandardWorker;
 import com.MainDriver.WorkFlowManager.repository.AllFeedbackRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.FeedbackService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class FeedbackServiceImp implements FeedbackService {
-    @Autowired
-    StandardWorkerRepository standardWorkerRepository;
+    private final StandardWorkerRepository standardWorkerRepository;
+    private final AllFeedbackRepository allFeedbackRepository;
 
-    @Autowired
-    AllFeedbackRepository allFeedbackRepository;
+    public FeedbackServiceImp(StandardWorkerRepository standardWorkerRepository, AllFeedbackRepository allFeedbackRepository) {
+        this.standardWorkerRepository = standardWorkerRepository;
+        this.allFeedbackRepository = allFeedbackRepository;
+    }
 
     @Override
     public void addFeedback(Feedback feedback, String to, String from)
@@ -35,13 +35,24 @@ public class FeedbackServiceImp implements FeedbackService {
             allFeedback.setTo(to);
             allFeedback.setContent(feedback.getContent());
             allFeedback.setSubject(feedback.getSubject());
+            allFeedback.setDate(new Date());
             allFeedbackRepository.save(allFeedback);
         }
     }
-
+    /* Public feedback needs to be displayed by date newest first, the all feedback needs a date object */
     @Override
     public List<AllFeedback> getAllFeedbackSortedByDate()
     {
-        return (List<AllFeedback>) this.allFeedbackRepository.findAll();
+        List<AllFeedback> sortedFeedback = (List<AllFeedback>) this.allFeedbackRepository.findAll();
+        Collections.sort(sortedFeedback,compareByDate);
+        return sortedFeedback;
     }
+
+
+    public static Comparator<AllFeedback> compareByDate= (f1, f2) -> {
+
+        //Newest at the top, older feedback goes to the bottom of the screen
+        return f2.getDate().compareTo(f1.getDate());
+    };
+
 }
