@@ -95,4 +95,15 @@ public class FeedbackController {
         return "feedback/publicFeedback";
     }
 
+    @GetMapping(value = "personalFeedback")
+    @Transactional
+    public String getPersonalFeedback(Principal principal,Model model) {
+        StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
+        if(standardWorker != null) {
+            model.addAttribute("name", principal.getName());
+            model.addAttribute("feedbacks", standardWorker.getPersonalFeedback());
+        }
+        return "feedback/personalFeedback";
+    }
+
 }
