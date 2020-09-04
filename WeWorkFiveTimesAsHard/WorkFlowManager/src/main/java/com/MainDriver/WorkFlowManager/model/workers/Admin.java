@@ -25,7 +25,8 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin extends  WorkerType{
+public class Admin
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,12 +35,6 @@ public class Admin extends  WorkerType{
     private String firstName;
     private String lastName;
     private String hireDate;
-
-    @Override
-    public String getRole() {
-        return this.ROLE;
-    }
-
 
     @Type( type = "jsonb" )
     @Column( columnDefinition = "jsonb", name ="messages" )
