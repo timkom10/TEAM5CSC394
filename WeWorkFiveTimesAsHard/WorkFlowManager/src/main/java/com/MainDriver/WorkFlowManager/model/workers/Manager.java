@@ -31,7 +31,7 @@ public class Manager extends WorkerType {
 
     @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy = "manager", orphanRemoval = true)
-    private Set<StandardWorker> dominion = new HashSet<StandardWorker>();
+    private Set<StandardWorker> dominion = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "manager")
     private Project project;
@@ -40,7 +40,7 @@ public class Manager extends WorkerType {
     @Column( columnDefinition = "jsonb", name ="messages" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Message> messages = new ArrayList<Message> ();
+    private List<Message> messages = new ArrayList<>();
 
     @Column(name = "last_message_id")
     private Integer lastMessageKey = 0;
@@ -49,7 +49,7 @@ public class Manager extends WorkerType {
     @Column( columnDefinition = "jsonb", name ="announcements" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Announcement> announcements = new ArrayList<Announcement> ();
+    private List<Announcement> announcements = new ArrayList<>();
 
     @Column(name = "last_announcement_id")
     private Integer lastAnnouncementKey = 0;

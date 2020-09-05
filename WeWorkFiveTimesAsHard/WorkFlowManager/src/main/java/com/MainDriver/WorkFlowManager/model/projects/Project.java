@@ -27,7 +27,7 @@ public class Project {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
-    private Set<StandardWorker> teamMembers = new HashSet<StandardWorker>();
+    private Set<StandardWorker> teamMembers = new HashSet<>();
 
     @OneToOne
     private Manager manager;
@@ -39,7 +39,7 @@ public class Project {
     @Column( columnDefinition = "jsonb", name ="milestones" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Milestones> milestones = new ArrayList<Milestones>();
+    private List<Milestones> milestones = new ArrayList<>();
 
     @Column(name = "next_milestone_key")
     private Integer nextMileStoneKey = 0;
@@ -52,7 +52,7 @@ public class Project {
     @Column( columnDefinition = "jsonb", name ="recently_completed_tasks" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Task> completedTasks = new ArrayList<Task>();
+    private List<Task> completedTasks = new ArrayList<>();
 
     @Column(name = "next_recent_task_key")
     private int completedTasksSize = 0;
@@ -61,7 +61,7 @@ public class Project {
     @Column( columnDefinition = "jsonb", name ="all_tasks" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks = new ArrayList<>();
 
     @Column(name = "next_task_key")
     private Integer nextTaskKey = 0;

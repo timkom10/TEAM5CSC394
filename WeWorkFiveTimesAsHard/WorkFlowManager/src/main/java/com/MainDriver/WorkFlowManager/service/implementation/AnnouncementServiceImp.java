@@ -9,7 +9,6 @@ import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.AnnouncementService;
 import com.MainDriver.WorkFlowManager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,14 +19,14 @@ import java.util.Set;
 @Service
 public class AnnouncementServiceImp implements AnnouncementService {
 
-    @Autowired
-    UserService userService;
 
+    private final UserService userService;
     private final StandardWorkerRepository standardWorkerRepository;
     private final ManagerRepository managerRepository;
     private final AdminRepository adminRepository;
 
-    public AnnouncementServiceImp(StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository, AdminRepository adminRepository) {
+    public AnnouncementServiceImp(UserService userService, StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository, AdminRepository adminRepository) {
+        this.userService = userService;
         this.standardWorkerRepository = standardWorkerRepository;
         this.managerRepository = managerRepository;
         this.adminRepository = adminRepository;
@@ -45,7 +44,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
         else if(this.adminRepository.existsByUserName(username)) {
             return this.adminRepository.findByUserName(username).getAnnouncements();
         }
-        return new ArrayList<Announcement>();
+        return new ArrayList<>();
     }
 
     @Override

@@ -20,7 +20,7 @@
 <div>
     <div class="w-container">
         <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form" form action="#" th:action="@{insertAlteredStandardWorker}" th:object="${worker}" method="post">
+            <form id="email-form" name="email-form" data-name="Email Form" th:action="@{insertAlteredStandardWorker}" th:object="${worker}" method="post">
                 <label for="First-Name">First Name</label>
                      <input type="text" class="w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="First Name" id="First-Name" required="" th:field = "*{firstName}">
                 <label for="lastname">Last Name</label>

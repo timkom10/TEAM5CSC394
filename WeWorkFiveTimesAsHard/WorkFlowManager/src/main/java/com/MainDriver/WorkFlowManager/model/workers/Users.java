@@ -1,9 +1,6 @@
 package com.MainDriver.WorkFlowManager.model.workers;
 
 import lombok.Data;
-
-
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

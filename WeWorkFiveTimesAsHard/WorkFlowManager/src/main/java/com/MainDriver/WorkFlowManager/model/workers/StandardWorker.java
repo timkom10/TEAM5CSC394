@@ -53,7 +53,7 @@ public class StandardWorker extends WorkerType implements Serializable
     @Column( columnDefinition = "jsonb", name ="messages" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Message> messages = new ArrayList<Message> ();
+    private List<Message> messages = new ArrayList<>();
 
     @Column(name = "last_message_id")
     private Integer lastMessageKey = 0;
@@ -62,7 +62,7 @@ public class StandardWorker extends WorkerType implements Serializable
     @Column( columnDefinition = "jsonb", name ="announcements" )
     @Basic(fetch = FetchType.EAGER)
     @JsonIgnore
-    private List<Announcement> announcements = new ArrayList<Announcement> ();
+    private List<Announcement> announcements = new ArrayList<>();
 
     @Column(name = "last_announcement_id")
     private Integer lastAnnouncementKey = 0;
@@ -71,7 +71,7 @@ public class StandardWorker extends WorkerType implements Serializable
     @Column( columnDefinition = "jsonb", name ="personal_feedback" )
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Feedback> personalFeedback = new ArrayList<Feedback> ();
+    private List<Feedback> personalFeedback = new ArrayList<>();
 
     @Column(name = "last_feedback_id")
     private Integer lastFeedbackKey = 0;

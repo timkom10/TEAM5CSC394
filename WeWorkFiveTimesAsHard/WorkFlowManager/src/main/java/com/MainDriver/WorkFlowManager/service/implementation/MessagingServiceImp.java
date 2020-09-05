@@ -9,7 +9,6 @@ import com.MainDriver.WorkFlowManager.repository.ManagerRepository;
 import com.MainDriver.WorkFlowManager.repository.StandardWorkerRepository;
 import com.MainDriver.WorkFlowManager.service.MessagingService;
 import com.MainDriver.WorkFlowManager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,14 +18,14 @@ import java.util.List;
 @Service
 public class MessagingServiceImp  implements MessagingService {
 
-    @Autowired
-    UserService userService;
 
+    private final UserService userService;
     private final StandardWorkerRepository standardWorkerRepository;
     private final ManagerRepository managerRepository;
     private final AdminRepository adminRepository;
 
-    public MessagingServiceImp(StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository, AdminRepository adminRepository) {
+    public MessagingServiceImp(UserService userService, StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository, AdminRepository adminRepository) {
+        this.userService = userService;
         this.standardWorkerRepository = standardWorkerRepository;
         this.managerRepository = managerRepository;
         this.adminRepository = adminRepository;
@@ -101,7 +100,7 @@ public class MessagingServiceImp  implements MessagingService {
             return this.adminRepository.findByUserName(username).getMessages();
         }
 
-        return new ArrayList<Message>();
+        return new ArrayList<>();
     }
 
     @Override
