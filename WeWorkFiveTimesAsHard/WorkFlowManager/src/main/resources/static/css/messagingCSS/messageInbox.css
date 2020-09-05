@@ -1,6 +1,6 @@
 .body {
   background-image: url('images/inboxBackground.jpg');
-  background-position: 0% 0%;
+  background-position: 0 0;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -8,7 +8,7 @@
 .sticky-nav-2 {
   position: -webkit-sticky;
   position: sticky;
-  top: 0px;
+  top: 0;
   z-index: 1;
   padding: 20px;
   background-color: transparent;
@@ -20,8 +20,8 @@
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -31,13 +31,10 @@
   -ms-flex-align: center;
   align-items: center;
   grid-auto-flow: column;
-  grid-auto-columns: -webkit-max-content;
   grid-auto-columns: max-content;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  -ms-grid-columns: 1fr -webkit-max-content -webkit-max-content -webkit-max-content;
   -ms-grid-columns: 1fr max-content max-content max-content;
-  grid-template-columns: 1fr -webkit-max-content -webkit-max-content -webkit-max-content;
   grid-template-columns: 1fr max-content max-content max-content;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
@@ -48,9 +45,9 @@
 
 .nav-link {
   display: block;
-  margin-right: 0px;
-  margin-left: 0px;
-  padding: 10px 0px;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 10px 0;
   color: #121212;
   font-size: 22px;
   line-height: 22px;
@@ -111,12 +108,12 @@
 
 @media screen and (max-width: 479px) {
   .sticky-nav-2 {
-    padding: 0px;
+    padding: 0;
   }
   .nav-grid-2 {
     grid-auto-flow: row;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     -ms-grid-rows: 100px;

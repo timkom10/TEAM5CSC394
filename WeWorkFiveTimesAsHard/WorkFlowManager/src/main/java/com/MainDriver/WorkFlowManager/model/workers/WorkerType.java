@@ -6,3 +6,4 @@ public abstract class WorkerType {
      public abstract String getRole();
      public abstract String getHireDate();
 }
+ 
