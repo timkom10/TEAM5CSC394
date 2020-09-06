@@ -23,7 +23,6 @@ public class UserPrincipleDetailsService implements UserDetailsService {
         if (users == null) {
             throw new UsernameNotFoundException("No user found for "+ s);
         }
-        UserPrinciple userPrinciple = new UserPrinciple(users);
-        return userPrinciple;
+        return new UserPrinciple(users);
     }
 }

@@ -63,7 +63,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     @Transactional
     public void sendAnnouncement(Announcement announcement, String from, String toManager)
     {
-        if(this.managerRepository.existsByUserName(toManager) == false) {return;}
+        if(!managerRepository.existsByUserName(toManager)) {return;}
         announcement.setTo(toManager);
 
         //ensure that from is a manager or an admin

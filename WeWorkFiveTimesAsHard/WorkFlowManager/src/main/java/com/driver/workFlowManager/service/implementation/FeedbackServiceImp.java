@@ -44,7 +44,7 @@ public class FeedbackServiceImp implements FeedbackService {
     public List<AllFeedback> getAllFeedbackSortedByDate()
     {
         List<AllFeedback> sortedFeedback = (List<AllFeedback>) this.allFeedbackRepository.findAll();
-        Collections.sort(sortedFeedback,compareByDate);
+        sortedFeedback.sort(compareByDate);
         return sortedFeedback;
     }
 

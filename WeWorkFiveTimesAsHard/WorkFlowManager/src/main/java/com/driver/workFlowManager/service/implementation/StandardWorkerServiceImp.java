@@ -38,7 +38,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     public List<StandardWorker> getAllStandardWorkersSortedByPoints()
     {
         List<StandardWorker> standardWorkers = this.standardWorkerRepository.findAll();
-        Collections.sort(standardWorkers,compareByTotalPoints);
+        standardWorkers.sort(compareByTotalPoints);
         return standardWorkers;
     }
 
@@ -46,7 +46,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     public List<StandardWorker> getAllStandardWorkersSortedByPointsByProject(Project project)
     {
         List<StandardWorker> standardWorkers = this.standardWorkerRepository.findAllByProject(project);
-        Collections.sort(standardWorkers,compareByTotalPoints);
+        standardWorkers.sort(compareByTotalPoints);
         return standardWorkers;
     }
 
