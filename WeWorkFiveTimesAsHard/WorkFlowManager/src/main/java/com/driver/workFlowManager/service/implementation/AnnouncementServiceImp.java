@@ -36,7 +36,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
     @Transactional
     public List<Announcement> getAllAnnouncementsByUsername(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
-            return standardWorkerRepository.findByuserName(username).getAnnouncements();
+            return standardWorkerRepository.findByUserName(username).getAnnouncements();
         }
         else if(this.managerRepository.existsByUserName(username)) {
             return this.managerRepository.findByUserName(username).getAnnouncements();

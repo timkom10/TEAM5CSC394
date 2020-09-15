@@ -40,7 +40,7 @@ public class MessagingServiceImp  implements MessagingService {
 
         if(this.standardWorkerRepository.existsByUserName(to))
         {
-            StandardWorker standardWorker = standardWorkerRepository.findByuserName(to);
+            StandardWorker standardWorker = standardWorkerRepository.findByUserName(to);
             standardWorker.addMessage(message);
             this.standardWorkerRepository.save(standardWorker);
         }
@@ -91,7 +91,7 @@ public class MessagingServiceImp  implements MessagingService {
     @Transactional
     public List<Message> getUsersMessages(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
-            return standardWorkerRepository.findByuserName(username).getMessages();
+            return standardWorkerRepository.findByUserName(username).getMessages();
         }
         else if(this.managerRepository.existsByUserName(username)) {
             return this.managerRepository.findByUserName(username).getMessages();

@@ -29,7 +29,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         Set<StandardWorker> standardWorkerSet = new HashSet<>();
         for(Users p: this.userRepository.findAllByRolesAndUsernameLike("STANDARDWORKER", "%" + username + "%"))
         {
-            standardWorkerSet.add(this.standardWorkerRepository.findByuserName(p.getUsername()));
+            standardWorkerSet.add(this.standardWorkerRepository.findByUserName(p.getUsername()));
         }
         return standardWorkerSet;
     }
@@ -54,7 +54,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     @Override
     @Transactional
     public StandardWorker getByUsername(String username) {
-        StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(username);
+        StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(username);
         if(standardWorker != null) {
             return  standardWorker;
         }
@@ -63,12 +63,12 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
 
     @Override
     public void insertAlteredStandardWorker(StandardWorker standardWorker, String username) {
-        StandardWorker modifyThis = this.standardWorkerRepository.findByuserName(username);
+        StandardWorker modifyThis = this.standardWorkerRepository.findByUserName(username);
         if((standardWorker != null) && (modifyThis != null))
         {
             modifyThis.setFirstName(standardWorker.getFirstName());
             modifyThis.setLastName(standardWorker.getLastName());
-            modifyThis.setEmployeeRole(standardWorker.getRole());
+            modifyThis.setEmployeeRole(standardWorker.getEmployeeRole());
             modifyThis.setManagerUsername(standardWorker.getManagerUsername());
             this.standardWorkerRepository.save(modifyThis);
         }
@@ -93,7 +93,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         }
     }
 
-    public static Comparator<StandardWorker> compareByTotalPoints = (s1, s2) -> {
+    public static final Comparator<StandardWorker> compareByTotalPoints = (s1, s2) -> {
         //descending order
         return s2.getTotalPoints() - s1.getTotalPoints();
     };

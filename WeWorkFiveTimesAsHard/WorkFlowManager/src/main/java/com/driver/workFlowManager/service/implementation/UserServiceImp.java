@@ -17,7 +17,7 @@ import java.util.Set;
 @Service
 public class UserServiceImp implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final StandardWorkerRepository standardWorkerRepository;
     private final ManagerRepository managerRepository;
@@ -53,7 +53,7 @@ public class UserServiceImp implements UserService {
     public void simpleSaveUserInRoleRepo(String username) {
         if(this.standardWorkerRepository.existsByUserName(username))
         {
-            StandardWorker standardWorker = standardWorkerRepository.findByuserName(username);
+            StandardWorker standardWorker = standardWorkerRepository.findByUserName(username);
             this.standardWorkerRepository.save(standardWorker);
         }
         else if(this.managerRepository.existsByUserName(username))

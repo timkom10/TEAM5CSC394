@@ -47,7 +47,7 @@ public class StandardWorkerController {
     @GetMapping("info")
     @Transactional
     public String info(Principal principal, Model model) {
-        StandardWorker standardWorker = standardWorkerRepository.findByuserName(principal.getName());
+        StandardWorker standardWorker = standardWorkerRepository.findByUserName(principal.getName());
         if(standardWorker != null) {
             model.addAttribute("workerType", standardWorker);
         }

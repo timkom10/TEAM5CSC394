@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImp implements AdminService {
-    private AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
 
     public AdminServiceImp(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;

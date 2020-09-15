@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -146,6 +147,6 @@ public class StandardWorker extends WorkerType implements Serializable
 
     @Override
     public String getRole() {
-        return this.getEmployeeRole();
+        return this.employeeRole;
     }
 }

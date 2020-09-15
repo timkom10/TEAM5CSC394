@@ -84,11 +84,6 @@ public class Manager extends WorkerType {
                 '}';
     }
 
-    @Override
-    public String getRole() {
-        return this.ROLE;
-    }
-
     public void addMessage(Message message) {
         if(message != null) {
             message.setId(this.lastMessageKey++);
@@ -101,5 +96,10 @@ public class Manager extends WorkerType {
             announcement.setId(this.lastAnnouncementKey++);
             this.announcements.add(announcement);
         }
+    }
+
+    @Override
+    public String getRole() {
+        return this.ROLE;
     }
 }

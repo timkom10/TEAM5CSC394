@@ -95,7 +95,7 @@ public class ProjectServiceImp implements ProjectService {
     public Project getProjectByUsername(String username)
     {
         if(this.standardWorkerRepository.existsByUserName(username)) {
-            return standardWorkerRepository.findByuserName(username).getProject();
+            return standardWorkerRepository.findByUserName(username).getProject();
         }
         else if(this.managerRepository.existsByUserName(username)) {
             return this.managerRepository.findByUserName(username).getProject();

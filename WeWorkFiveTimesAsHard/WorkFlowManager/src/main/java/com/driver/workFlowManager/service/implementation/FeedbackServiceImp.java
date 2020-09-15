@@ -24,7 +24,7 @@ public class FeedbackServiceImp implements FeedbackService {
     public void addFeedback(Feedback feedback, String to, String from)
     {
         if(this.standardWorkerRepository.existsByUserName(to) && feedback != null) {
-            StandardWorker standardWorker = this.standardWorkerRepository.findByuserName(to);
+            StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(to);
             feedback.setTo(to);
             feedback.setFrom(from);
             standardWorker.addFeedback(feedback);
@@ -49,7 +49,7 @@ public class FeedbackServiceImp implements FeedbackService {
     }
 
 
-    public static Comparator<AllFeedback> compareByDate= (f1, f2) -> {
+    public static final Comparator<AllFeedback> compareByDate= (f1, f2) -> {
 
         //Newest at the top, older feedback goes to the bottom of the screen
         return f2.getDate().compareTo(f1.getDate());
