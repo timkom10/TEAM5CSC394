@@ -93,13 +93,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--Performance-->
-		<dependency>
-			<groupId>io.hypersistence</groupId>
-			<artifactId>hypersistence-optimizer</artifactId>
-			<version>2.1.1-trial</version>
-		</dependency>
-
 		<!--TESTING-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
