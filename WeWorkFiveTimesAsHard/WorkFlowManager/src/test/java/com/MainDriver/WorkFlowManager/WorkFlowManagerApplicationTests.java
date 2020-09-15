@@ -19,7 +19,7 @@ class WorkFlowManagerApplicationTests {
 	public void init(){
 		new HypersistenceOptimizer(
 				new JpaConfig(entityManagerFactory)
-		).init();
+		);
 	}
 
 	@Test
