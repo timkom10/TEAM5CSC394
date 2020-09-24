@@ -86,7 +86,7 @@ public class StandardWorker extends WorkerType implements Serializable
 
     public void addAnnouncement(Announcement announcement) {
         if(announcement != null) {
-            announcement.setId(this.lastAnnouncementKey++);
+            announcement.setId(lastAnnouncementKey++);
             this.announcements.add(announcement);
         }
     }

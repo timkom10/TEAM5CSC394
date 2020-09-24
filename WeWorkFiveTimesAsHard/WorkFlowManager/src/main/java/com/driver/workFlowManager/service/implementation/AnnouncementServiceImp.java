@@ -81,7 +81,7 @@ public class AnnouncementServiceImp implements AnnouncementService {
             this.managerRepository.save(manager);
             Set<StandardWorker> workers = manager.getDominion();
             for(StandardWorker w : workers) {
-                w.getAnnouncements().add(announcement);
+                w.addAnnouncement(announcement);
                 this.standardWorkerRepository.save(w);
             }
         }
