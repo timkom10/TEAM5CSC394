@@ -13,6 +13,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @TypeDefs({
@@ -23,7 +24,7 @@ import java.util.*;
 @Table(name= "manager", schema = "public")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Manager extends WorkerType {
+public class Manager extends WorkerType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

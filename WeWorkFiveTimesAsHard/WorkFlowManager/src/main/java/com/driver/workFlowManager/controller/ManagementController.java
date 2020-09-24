@@ -24,35 +24,27 @@ public class ManagementController {
     private final StandardWorkerService standardWorkerService;
     private final ProjectService projectService;
     private final StandardWorkerRepository standardWorkerRepository;
-    private final ManagerRepository managerRepository;
+    private final ManagerService managerService;
 
-    public ManagementController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService, StandardWorkerRepository standardWorkerRepository, ManagerRepository managerRepository) {
+    public ManagementController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService, StandardWorkerRepository standardWorkerRepository, ManagerService managerService, ManagerRepository managerRepository) {
         this.userService = userService;
         this.announcementService = announcementService;
         this.standardWorkerService = standardWorkerService;
         this.projectService = projectService;
         this.standardWorkerRepository = standardWorkerRepository;
-        this.managerRepository = managerRepository;
+        this.managerService = managerService;
     }
 
     @GetMapping("index")
-    @Transactional
-    public  String index(Principal principal, Model model)
-    {
-        Manager manager =  this.managerRepository.findByUserName(principal.getName());
-        if(manager != null) {
-            model.addAttribute("manager", managerRepository.findByUserName(principal.getName()));
-            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(principal.getName()));
-        }
+    public  String index(Principal principal, Model model) {
+        model.addAttribute("manager", this.managerService.getByUsername(principal.getName()));
+        model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(principal.getName()));
         return "management/index";
     }
 
     @GetMapping("info")
     public String info(Principal principal, Model model) {
-        Manager manager = managerRepository.findByUserName(principal.getName());
-        if(manager != null) {
-            model.addAttribute("workerType", manager);
-        }
+        model.addAttribute("workerType", this.managerService.getByUsername(principal.getName()));
         return "Info/info";
     }
 
