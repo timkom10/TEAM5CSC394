@@ -42,7 +42,6 @@ public class MessageController {
     }
 
     @GetMapping("searchUserToMessage")
-    @Transactional
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users", userService.findByUsername(username));
         return "messaging/searchUserToMessage";

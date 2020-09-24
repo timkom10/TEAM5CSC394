@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class MessagingServiceImp  implements MessagingService {
 
 
@@ -32,7 +33,6 @@ public class MessagingServiceImp  implements MessagingService {
     }
 
     @Override
-    @Transactional
     public void saveMessage(Message message, String from, String to)
     {
         message.setFrom(from);
@@ -59,7 +59,6 @@ public class MessagingServiceImp  implements MessagingService {
     }
 
     @Override
-    @Transactional
     public void deleteMessage(String username, Integer messageID) {
         List<Message> messages = this.getUsersMessages(username);
         if(messages != null) {
@@ -75,7 +74,6 @@ public class MessagingServiceImp  implements MessagingService {
     }
 
     @Override
-    @Transactional
     public Message getByUsernameAndMessageId(String username, Integer messageId)
     {
         List<Message> messages = this.getUsersMessages(username);
@@ -88,7 +86,6 @@ public class MessagingServiceImp  implements MessagingService {
     }
 
     @Override
-    @Transactional
     public List<Message> getUsersMessages(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             return standardWorkerRepository.findByUserName(username).getMessages();
@@ -104,7 +101,6 @@ public class MessagingServiceImp  implements MessagingService {
     }
 
     @Override
-    @Transactional
     public List<Message> getByUserWhereFromIsLike(String username, String fromLike) {
         List<Message>  tempList = getUsersMessages(username);
         List<Message> listFromLike = new ArrayList<>();

@@ -37,7 +37,6 @@ public class AnnouncementController {
     }
 
     @GetMapping(value = "viewAnnouncement")
-    @Transactional
     public String getViewAnnouncement(Principal principal, Model model, Integer announcementID) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("announcement", announcementService.getByUsernameAndAnnouncementId(principal.getName(), announcementID));
@@ -45,7 +44,6 @@ public class AnnouncementController {
     }
 
     @GetMapping(value = "deleteAnnouncement")
-    @Transactional
     public String getDeleteAnnouncement(Principal principal,Model model, Integer announcementID)
     {
         announcementService.deleteAnnouncement(principal.getName(), announcementID);
@@ -71,7 +69,6 @@ public class AnnouncementController {
     }
 
     @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
-    @Transactional
     public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("managers", userService.findManagersByUsernameLike(username));
@@ -79,7 +76,6 @@ public class AnnouncementController {
     }
 
     @GetMapping(value = "composeAnnouncement")
-    @Transactional
     public String getComposeAnnouncement(Principal principal,Model model, String managerUsername) {
         if(managerUsername == null) {
             /*Manager sending an announcement to their own team*/
@@ -96,7 +92,6 @@ public class AnnouncementController {
 
 
     @RequestMapping(value = "sendAnnouncement", method = RequestMethod.POST)
-    @Transactional
     public String getSendAnnouncement(Principal principal,Model model, @ModelAttribute("announcement")Announcement announcement) {
         this.announcementService.sendAnnouncement(announcement, principal.getName(), usernamePlaceholder);
 

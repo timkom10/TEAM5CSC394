@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
+@Transactional
 public class ManagerServiceImp implements ManagerService {
     private final ManagerRepository managerRepository;
 
@@ -31,7 +32,6 @@ public class ManagerServiceImp implements ManagerService {
     }
 
     @Override
-    @Transactional
     public Manager getByUsername(String username) {
         Manager manager = this.managerRepository.findByUserName(username);
         if(manager != null) {

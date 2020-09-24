@@ -8,9 +8,11 @@ import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.FeedbackService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class FeedbackServiceImp implements FeedbackService {
     private final StandardWorkerRepository standardWorkerRepository;
     private final AllFeedbackRepository allFeedbackRepository;

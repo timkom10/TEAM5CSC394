@@ -33,7 +33,6 @@ public class AdminController {
     }
 
     @GetMapping("index")
-    @Transactional
     public String index(Principal principal, Model model) {
         Admin admin = adminService.findByUserName(principal.getName());
         if(admin != null)
@@ -45,7 +44,6 @@ public class AdminController {
     }
 
     @GetMapping("info")
-    @Transactional
     public String info(Principal principal, Model model) {
 
         Admin admin = adminService.findByUserName(principal.getName());
@@ -54,20 +52,17 @@ public class AdminController {
     }
 
     @RequestMapping("Hr")
-    @Transactional
     public String getHR() {
         return "admin/HumanResources";
     }
 
     @RequestMapping(value = "RemoveUser", method = RequestMethod.GET)
-    @Transactional
     public String getUserSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/RemoveUser";
     }
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
-    @Transactional
     public String getRemoveUser(Model model, String username) {
         userService.removeUser(username);
         model.addAttribute("users", userService.findByUsername(""));
@@ -75,14 +70,12 @@ public class AdminController {
     }
 
     @RequestMapping("addUser")
-    @Transactional
     public String getAddUser(Model model) {
         model.addAttribute("user", new Users());
         return "admin/addUser";
     }
 
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
-    @Transactional
     public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model) {
         if(userService.addUser(user)) {
             usernamePlaceholder = user.getUsername();
@@ -99,7 +92,6 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
-    @Transactional
     public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model) {
         standardWorkerService.addStandardWorker(userService.getByUsername(this.usernamePlaceholder), standardWorker);
         model.addAttribute("user", new Users());
@@ -107,7 +99,6 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertManager", method = RequestMethod.POST)
-    @Transactional
     public String getInsertManager(@ModelAttribute("manager") Manager manager,Model model) {
         managerService.addManager(userService.getByUsername(this.usernamePlaceholder), manager);
         model.addAttribute("user", new Users());
@@ -115,14 +106,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
-    @Transactional
     public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("workers", standardWorkerService.findAllByUsername(username));
         return "admin/searchTeamMembers";
     }
 
     @GetMapping("alterTeamMember")
-    @Transactional
     public String getAlterEmployee(Model model, String username)
     {
         this.usernamePlaceholder = username;
@@ -131,7 +120,6 @@ public class AdminController {
     }
 
     @RequestMapping(value = "insertAlteredStandardWorker", method = RequestMethod.POST)
-    @Transactional
     public String getInsertAlteredStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model)
     {
         standardWorkerService.insertAlteredStandardWorker(standardWorker, usernamePlaceholder);

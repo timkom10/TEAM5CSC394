@@ -40,13 +40,11 @@ public class FeedbackController {
 
 
     @GetMapping("feedback")
-    @Transactional
     public String portal() {
         return "feedback/FeedbackPortal";
     }
 
     @GetMapping(value = "composeFeedback")
-    @Transactional
     public String getComposeFeedback(Principal principal, Model model, String to) {
         usernamePlaceHolder = to;
         model.addAttribute("name", principal.getName());
@@ -56,7 +54,6 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "feedbackSent", method = RequestMethod.POST)
-    @Transactional
     public String getFeedbackSent(Principal principal,Model model, @ModelAttribute("feedback")Feedback feedback) {
         this.feedbackService.addFeedback(feedback,usernamePlaceHolder,principal.getName());
         Project project = this.projectService.getProjectByUsername(principal.getName());
@@ -80,7 +77,6 @@ public class FeedbackController {
 
 
     @RequestMapping(value = "leaderboard")
-    @Transactional
     public String getLeaderboard(Model model) {
         List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPoints();
         model.addAttribute("workers", standardWorkerList);
@@ -88,7 +84,6 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "publicFeedback")
-    @Transactional
     public String getPublicFeedback(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("feedbacks",this.feedbackService.getAllFeedbackSortedByDate());
@@ -96,7 +91,6 @@ public class FeedbackController {
     }
 
     @GetMapping(value = "personalFeedback")
-    @Transactional
     public String getPersonalFeedback(Principal principal,Model model) {
         StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
         if(standardWorker != null) {

@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class StandardWorkerServiceImp implements StandardWorkerService {
 
     private final ManagerRepository managerRepository;
@@ -52,7 +53,6 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
 
 
     @Override
-    @Transactional
     public StandardWorker getByUsername(String username) {
         StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(username);
         if(standardWorker != null) {

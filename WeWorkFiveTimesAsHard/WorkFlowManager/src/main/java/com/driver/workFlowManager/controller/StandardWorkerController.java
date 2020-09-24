@@ -21,41 +21,30 @@ public class StandardWorkerController {
     private final AnnouncementService announcementService;
     private final StandardWorkerService standardWorkerService;
     private final ProjectService projectService;
-    private final StandardWorkerRepository standardWorkerRepository;
 
-    public StandardWorkerController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService, StandardWorkerRepository standardWorkerRepository) {
+    public StandardWorkerController(UserService userService, AnnouncementService announcementService, StandardWorkerService standardWorkerService, ProjectService projectService) {
         this.userService = userService;
         this.announcementService = announcementService;
         this.standardWorkerService = standardWorkerService;
         this.projectService = projectService;
-        this.standardWorkerRepository = standardWorkerRepository;
     }
 
     @GetMapping("index")
-    @Transactional
     public  String index(Principal principal, Model model)
     {
-        StandardWorker standardWorker = this.standardWorkerService.getByUsername(principal.getName());
-        if(standardWorker != null) {
-            model.addAttribute(standardWorker);
-            model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(principal.getName()));
-        }
+        model.addAttribute("standardWorker", this.standardWorkerService.getByUsername(principal.getName()));
+        model.addAttribute("announcements", this.announcementService.getAllAnnouncementsByUsername(principal.getName()));
         return "standardWorkers/index";
     }
 
 
     @GetMapping("info")
-    @Transactional
     public String info(Principal principal, Model model) {
-        StandardWorker standardWorker = standardWorkerRepository.findByUserName(principal.getName());
-        if(standardWorker != null) {
-            model.addAttribute("workerType", standardWorker);
-        }
+        model.addAttribute("workerType", this.standardWorkerService.getByUsername(principal.getName()));
         return "Info/info";
     }
 
     @GetMapping(value = "projectInfo")
-    @Transactional
     public String getProjectInfo(Principal principal, Model model, Long projectId) {
         Project project = this.projectService.getByID(projectId);
         List<StandardWorker> standardWorkerList = this.standardWorkerService.getAllStandardWorkersSortedByPointsByProject(project);
@@ -84,7 +73,6 @@ public class StandardWorkerController {
 
 
     @GetMapping(value = "viewMilestone")
-    @Transactional
     public String getViewMilestone(Principal principal,Model model, Long projectId, Integer milestoneId) {
         Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
         List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
@@ -99,7 +87,6 @@ public class StandardWorkerController {
     }
 
     @GetMapping(value = "viewUsersTasks")
-    @Transactional
     public String getViewUsersTasks(Principal principal, Model model, Long projectId, Integer milestoneId) {
         List<Task> tasks = this.projectService.getTasksByUsernameProjectIdAndMilestoneId(principal.getName(),projectId, milestoneId);
         if(tasks != null) {
@@ -112,7 +99,6 @@ public class StandardWorkerController {
     }
 
     @GetMapping(value = "viewSingleTask")
-    @Transactional
     public String getViewSingleTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
     {
         Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
@@ -126,7 +112,6 @@ public class StandardWorkerController {
     }
 
     @GetMapping(value = "addTask")
-    @Transactional
     public String getAddTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
     {
         this.projectService.setTaskToUser(principal.getName(), projectId, milestoneId, taskId);
@@ -143,7 +128,6 @@ public class StandardWorkerController {
     }
 
     @GetMapping(value = "markTaskComplete")
-    @Transactional
     public String getMarkTaskComplete(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId)
     {
         this.projectService.setTaskUpForReview(projectId, milestoneId, taskId);

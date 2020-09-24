@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Transactional
 public class AnnouncementServiceImp implements AnnouncementService {
 
 
@@ -33,7 +34,6 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
-    @Transactional
     public List<Announcement> getAllAnnouncementsByUsername(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             return standardWorkerRepository.findByUserName(username).getAnnouncements();
@@ -48,7 +48,6 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
-    @Transactional
     public Announcement getByUsernameAndAnnouncementId(String username, Integer announcementId) {
         List<Announcement> announcements = this.getAllAnnouncementsByUsername(username);
         if(announcements != null) {
@@ -60,7 +59,6 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
-    @Transactional
     public void sendAnnouncement(Announcement announcement, String from, String toManager)
     {
         if(!managerRepository.existsByUserName(toManager)) {return;}
@@ -90,7 +88,6 @@ public class AnnouncementServiceImp implements AnnouncementService {
     }
 
     @Override
-    @Transactional
     public void deleteAnnouncement(String username, Integer announcementID)
     {
         List<Announcement> announcements = this.getAllAnnouncementsByUsername(username);

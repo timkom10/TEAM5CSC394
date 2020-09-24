@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProjectServiceImp implements ProjectService {
 
     private final ManagerRepository managerRepository;
@@ -91,7 +92,6 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    @Transactional
     public Project getProjectByUsername(String username)
     {
         if(this.standardWorkerRepository.existsByUserName(username)) {
@@ -106,17 +106,12 @@ public class ProjectServiceImp implements ProjectService {
     @Override
     public Milestones getMilestone(Long projectId, Integer milestoneId)
     {
-        if(this.projectRepository.existsById(projectId))
-        {
+        if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
             for(Milestones m : project.getMilestones())
             {
-                if(m.getId().equals(milestoneId))
-                {
-                    return m;
-                }
+                if(m.getId().equals(milestoneId)) return m;
             }
-
         }
         return null;
     }
@@ -139,8 +134,7 @@ public class ProjectServiceImp implements ProjectService {
 
     @Override
     public Project getByID(Long projectId) {
-        if(this.projectRepository.existsById(projectId))
-        {
+        if(this.projectRepository.existsById(projectId)) {
             return this.projectRepository.getById(projectId);
         }
         return null;

@@ -5,7 +5,10 @@ import com.driver.workFlowManager.repository.AdminRepository;
 import com.driver.workFlowManager.service.AdminService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class AdminServiceImp implements AdminService {
     private final AdminRepository adminRepository;
 

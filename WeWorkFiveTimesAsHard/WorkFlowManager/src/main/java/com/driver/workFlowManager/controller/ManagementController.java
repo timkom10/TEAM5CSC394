@@ -49,7 +49,6 @@ public class ManagementController {
     }
 
     @GetMapping(value = "viewProject")
-    @Transactional
     public String getViewProject(Principal principal,Model model)
     {
         Project project = this.projectService.getProjectByUsername(principal.getName());
@@ -65,7 +64,6 @@ public class ManagementController {
 
 
     @GetMapping(value = "projectInfo")
-    @Transactional
     public String getProjectInfo(Principal principal, Model model, Long projectId) {
         Project project = this.projectService.getByID(projectId);
         if(project != null) {
@@ -78,7 +76,6 @@ public class ManagementController {
     }
 
     @GetMapping(value = "viewMilestone")
-    @Transactional
     public String getViewMilestone(Principal principal,Model model, Long projectId, Integer milestoneId) {
         Milestones milestones = this.projectService.getMilestone(projectId, milestoneId);
         List<Task> tasks = this.projectService.getTasksByMileStoneId(projectId, milestoneId);
@@ -93,7 +90,6 @@ public class ManagementController {
     }
 
     @GetMapping(value = "viewSingleTask")
-    @Transactional
     public String getViewSingleTask(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId) {
         Task task = this.projectService.getSingleTask(projectId, milestoneId, taskId);
         if(task != null) {
@@ -106,7 +102,6 @@ public class ManagementController {
     }
 
     @GetMapping(value = "markTaskDone")
-    @Transactional
     public String getMarkTaskDone(Principal principal, Model model, Long projectId, Integer milestoneId, Integer taskId, String username)
     {
        StandardWorker standardWorker = this.standardWorkerService.getByUsername(username);
