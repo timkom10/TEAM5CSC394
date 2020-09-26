@@ -28,7 +28,7 @@ public class Users {
 
     public Users(String username, String password, String roles, String permissions)
     {
-        this.username = username;
+        this.username = username.toLowerCase();
         this.password = password;
         this.roles = roles;
         this.permissions = permissions;

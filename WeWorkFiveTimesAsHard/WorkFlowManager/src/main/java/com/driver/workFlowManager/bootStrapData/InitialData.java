@@ -100,7 +100,7 @@ public class InitialData implements CommandLineRunner
 
         //Make standard workers
         StandardWorker standardWorker = new StandardWorker();
-        standardWorker.setUserName("Peter");
+        standardWorker.setUserName("peter");
         standardWorker.setHireDate("02-20-2020");
         standardWorker.setFirstName("Peter");
         standardWorker.setLastName("Gentile");
@@ -113,7 +113,7 @@ public class InitialData implements CommandLineRunner
         projectRepository.save(project_1);
 
         StandardWorker standardWorker_1 = new StandardWorker();
-        standardWorker_1.setUserName("Tyler");
+        standardWorker_1.setUserName("tyler");
         standardWorker_1.setHireDate("03-30-2020");
         standardWorker_1.setFirstName("Tyler");
         standardWorker_1.setLastName("DemoLastName");
@@ -126,7 +126,7 @@ public class InitialData implements CommandLineRunner
         projectRepository.save(project_1);
 
         StandardWorker standardWorker_2 = new StandardWorker();
-        standardWorker_2.setUserName("Tim");
+        standardWorker_2.setUserName("tim");
         standardWorker_2.setHireDate("03-31-2020");
         standardWorker_2.setFirstName("Tim");
         standardWorker_2.setLastName("DemoLastName");
@@ -139,7 +139,7 @@ public class InitialData implements CommandLineRunner
         projectRepository.save(project_1);
 
         StandardWorker standardWorker_3 = new StandardWorker();
-        standardWorker_3.setUserName("Joey");
+        standardWorker_3.setUserName("joey");
         standardWorker_3.setHireDate("04-01-2020");
         standardWorker_3.setFirstName("Joey");
         standardWorker_3.setLastName("DemoLastName");
@@ -152,7 +152,7 @@ public class InitialData implements CommandLineRunner
         projectRepository.save(project_1);
 
         StandardWorker standardWorker_4 = new StandardWorker();
-        standardWorker_4.setUserName("Paulina");
+        standardWorker_4.setUserName("paulina");
         standardWorker_4.setHireDate("04-02-2020");
         standardWorker_4.setFirstName("Paulina");
         standardWorker_4.setLastName("DemoLastName");
@@ -166,7 +166,7 @@ public class InitialData implements CommandLineRunner
 
 
         StandardWorker standardWorker_5 = new StandardWorker();
-        standardWorker_5.setUserName("Ricky");
+        standardWorker_5.setUserName("ricky");
         standardWorker_5.setHireDate("04-03-2020");
         standardWorker_5.setFirstName("Ricky");
         standardWorker_5.setLastName("DemoLastName");
@@ -179,7 +179,7 @@ public class InitialData implements CommandLineRunner
         projectRepository.save(project_1);
 
         StandardWorker standardWorker_6 = new StandardWorker();
-        standardWorker_6.setUserName("Willy");
+        standardWorker_6.setUserName("willy");
         standardWorker_6.setHireDate("04-04-2020");
         standardWorker_6.setFirstName("Willy");
         standardWorker_6.setLastName("DemoLastName");
