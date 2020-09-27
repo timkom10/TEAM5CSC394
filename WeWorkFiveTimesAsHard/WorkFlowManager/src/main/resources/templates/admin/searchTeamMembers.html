@@ -9,41 +9,61 @@
 
 </head>
 <body class="body">
-<div th:replace="fragments/addUsersFragment :: addUserHeader"></div>
+<div>
+    <header id="nav" class="sticky-nav" >
+        <nav class="container w-container">
+            <ul role="list" class="nav-grid w-list-unstyled">
+                <li id="w-node-48f2440cb377-292155b3">
+                    <a th:href="@{index}" class="link-block w-inline-block">
+                        <h2 class="heading" style="color: white;">WeWorkFiveTimesAsHard</h2>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{Hr}" class="link-block w-inline-block">
+                        <h3 class="heading" style="color: white;">Resources</h3>
+                    </a>
+                </li>
+                <li>
+                    <form id="email-form" name="email-form" data-name="Email Form" method="post" class="form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>
 <div>
     <div class="w-container">
         <div class="w-form">
             <form id="email-form" name="email-form" data-name="Email Form" class="searchteammembers" th:action="@{searchTeamMember}" method="get">
-                <h1>Search Team Members:</h1>
+                <h1 style="color: white;">Search Team Members:</h1>
                 <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search By Username" id="username" required="">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>
-            <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
         </div>
     </div>
 </div>
-<div>
-    <div class="w-container">
-        <ul role="list" class="list w-list-unstyled">
-            <li>Username </li>
-            <li>Manager</li>
-            <li>Role</li>
-            <li>Select?</li>
-        </ul>
-        <ul role="list" class="list w-list-unstyled" th:each="worker: ${workers}">
-            <li th:text="${worker.getUserName()}">Username </li>
-            <li th:text="${worker.getManagerUsername()}">Manager</li>
-            <li th:text="${worker.getRole()}">Role</li>
-            <li>
-                <a th:href="@{alterTeamMember(username=${worker.getUserName()})}" class="w-button"> Select </a>
-            </li>
-        </ul>
-    </div>
+<div class="w-container">
+    <table class="table" style="text-align: left; width: 100%; font-size: 20px; color: white;">
+        <thead>
+        <tr style="padding: 15px; border-bottom: 1px solid #ddd;">
+            <th>Username</th>
+            <th>Manager</th>
+            <th>Role</th>
+            <th>Select?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="worker: ${workers}" style="border-bottom: 1px solid #ddd; padding: 15px; color: white;">
+            <td th:text="${worker.getUserName()}">Username</td>
+            <td th:text="${worker.getManagerUsername()}">Manager Username</td>
+            <td th:text="${worker.getRole()}">Front End</td>
+            <td>
+                <a th:href="@{alterTeamMember(username=${worker.getUserName()})}" class="w-button"> Edit </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

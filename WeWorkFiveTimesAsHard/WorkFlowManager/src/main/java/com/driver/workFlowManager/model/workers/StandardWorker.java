@@ -41,7 +41,6 @@ public class StandardWorker extends WorkerType implements Serializable
     @ManyToOne()
     private Manager manager;
 
-    private String managerUsername;
     private String userName;
     private String employeeRole;
     private String firstName;
@@ -132,7 +131,6 @@ public class StandardWorker extends WorkerType implements Serializable
     public String toString() {
         return "StandardWorker{" +
                 "id=" + id +
-                ", managerUsername='" + managerUsername + '\'' +
                 ", userName='" + userName + '\'' +
                 ", employeeRole='" + employeeRole + '\'' +
                 ", firstName='" + firstName + '\'' +
@@ -148,5 +146,13 @@ public class StandardWorker extends WorkerType implements Serializable
     @Override
     public String getRole() {
         return this.employeeRole;
+    }
+
+    public String getManagerUsername()
+    {
+        if(this.manager == null) {
+            return "";
+        }
+        return manager.getUserName();
     }
 }

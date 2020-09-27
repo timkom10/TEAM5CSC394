@@ -61,7 +61,7 @@ public class InitialData implements CommandLineRunner
        //Any new users need to have password encrypted before db insert
        Users peter = new Users("Peter", passwordEncoder.encode("peter"),"STANDARDWORKER", "none");
        Users admin = new Users("admin", passwordEncoder.encode("peter"),"ADMIN", "");
-       Users manager = new Users("manager", passwordEncoder.encode("peter"),"MANAGER", "");
+       Users manager = new Users("michael", passwordEncoder.encode("peter"),"MANAGER", "");
        Users tyler = new Users("Tyler", passwordEncoder.encode("tyler"),"STANDARDWORKER", "none");
        Users tim = new Users("Tim", passwordEncoder.encode("tim"),"STANDARDWORKER", "none");
        Users joey = new Users("Joey", passwordEncoder.encode("joey"),"STANDARDWORKER", "none");
@@ -79,14 +79,12 @@ public class InitialData implements CommandLineRunner
        userRepository.save(admin);
        userRepository.save(manager);
 
-       //See below for turning these into Standard Workers
-
         //Make a new manager...
         Manager manager_1 = new Manager();
-        manager_1.setUserName("manager");
-        manager_1.setFirstName("Kim");
-        manager_1.setLastName("Possible");
-        manager_1.setHireDate("2002-06-07");
+        manager_1.setUserName("michael");
+        manager_1.setFirstName("Michael");
+        manager_1.setLastName("Scott");
+        manager_1.setHireDate("2004-03-24");
         manager_1.setROLE("MANAGER");
         managerRepository.save(manager_1);
 

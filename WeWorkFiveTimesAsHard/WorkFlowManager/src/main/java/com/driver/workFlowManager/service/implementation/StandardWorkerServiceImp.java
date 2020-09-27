@@ -69,7 +69,7 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
             modifyThis.setFirstName(standardWorker.getFirstName());
             modifyThis.setLastName(standardWorker.getLastName());
             modifyThis.setEmployeeRole(standardWorker.getEmployeeRole());
-            modifyThis.setManagerUsername(standardWorker.getManagerUsername());
+            modifyThis.setManager(standardWorker.getManager());
             this.standardWorkerRepository.save(modifyThis);
         }
     }
