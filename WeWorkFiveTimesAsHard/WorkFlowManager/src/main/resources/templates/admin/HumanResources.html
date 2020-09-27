@@ -9,20 +9,23 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/HR/styles.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/font-awesome.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
-
-
 </head>
 <body>
 <nav class="navbar navbar-light navbar-expand-md text-center navigation-clean">
-    <div class="container"><a class="navbar-brand" th:href="@{/}">WeWorkFiveTimesAsHard</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand" th:href="@{index}">WeWorkFiveTimesAsHard</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link active" th:href="@{index}"><strong>Home</strong></a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{searchTeamToSendAnnouncement}" ><strong>Announcements</strong></a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{Hr}"><strong>HumanResources&nbsp;</strong></a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" th:href="@{messagingPortal}"><strong>Messages&nbsp;</strong></a></li>
             </ul>
-        </div><a th:href="@{info}"><strong>Info</strong></a></div>
+        </div>
+        <div>
+            <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
+                <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
+            </form>
+        </div>
+    </div>
 </nav>
 <div class="features-boxed">
     <div class="container">
