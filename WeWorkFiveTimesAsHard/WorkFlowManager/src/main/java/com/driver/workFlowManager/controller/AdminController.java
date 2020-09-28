@@ -72,7 +72,7 @@ public class AdminController {
     @RequestMapping("addUser")
     public String getAddUser(Model model) {
         model.addAttribute("user", new Users());
-        return "admin/addUser";
+        return "admin/selectUserTypeToAdd";
     }
 
     @RequestMapping(value = "insertUser", method = RequestMethod.POST)
@@ -112,8 +112,7 @@ public class AdminController {
     }
 
     @GetMapping("alterTeamMember")
-    public String getAlterEmployee(Model model, String username)
-    {
+    public String getAlterEmployee(Model model, String username) {
         this.usernamePlaceholder = username;
         model.addAttribute("worker", standardWorkerService.getByUsername(username));
         return "admin/alterTeamMember";

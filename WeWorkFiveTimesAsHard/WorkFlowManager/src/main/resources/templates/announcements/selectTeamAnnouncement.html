@@ -33,7 +33,7 @@
         </div>
         <div class="form-block w-form">
             <form id="wf-form-managerSearch" name="wf-form-managerSearch" data-name="managerSearch" class="form-2" th:action="@{searchTeamToSendAnnouncement}" method="get">
-                <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search Manager Username" id="username">
+                <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search Manager..." id="username">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>
         </div>
@@ -46,7 +46,7 @@
                     <th>Username&nbsp;</th>
                     <th>Id#</th>
                     <th>Is Active?</th>
-                    <th style="width: 200px;">Select Team?</th>
+                    <th style="width: 200px;">Select Team</th>
                 </tr>
                 </thead>
                 <tbody class="text-center" th:each="manager: ${managers}">
