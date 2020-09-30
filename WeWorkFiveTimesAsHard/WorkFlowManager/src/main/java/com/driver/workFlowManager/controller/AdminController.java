@@ -4,6 +4,7 @@ import com.driver.workFlowManager.model.workers.Users;
 import com.driver.workFlowManager.model.workers.Admin;
 import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
+import com.driver.workFlowManager.service.ManagerService;
 import com.driver.workFlowManager.service.implementation.AdminServiceImp;
 import com.driver.workFlowManager.service.implementation.ManagerServiceImp;
 import com.driver.workFlowManager.service.implementation.StandardWorkerServiceImp;
@@ -11,8 +12,6 @@ import com.driver.workFlowManager.service.implementation.UserServiceImp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 import java.security.Principal;
 
 @Controller
@@ -21,11 +20,10 @@ public class AdminController {
 
     private final AdminServiceImp adminService;
     private final UserServiceImp userService;
-    private final ManagerServiceImp managerService;
+    private final ManagerService managerService;
     private final StandardWorkerServiceImp standardWorkerService;
-    private static String usernamePlaceholder ="";
 
-    public AdminController(AdminServiceImp adminService, UserServiceImp userService, ManagerServiceImp managerService, StandardWorkerServiceImp standardWorkerService) {
+    public AdminController(AdminServiceImp adminService, UserServiceImp userService, ManagerService managerService, StandardWorkerServiceImp standardWorkerService) {
         this.adminService = adminService;
         this.userService = userService;
         this.managerService = managerService;
@@ -75,55 +73,50 @@ public class AdminController {
         return "admin/selectUserTypeToAdd";
     }
 
-    @RequestMapping(value = "insertUser", method = RequestMethod.POST)
-    public String getInsert(@ModelAttribute("user") Users user, Principal principal, Model model) {
-        if(userService.addUser(user)) {
-            usernamePlaceholder = user.getUsername();
-            if(user.getRoles().equals("STANDARDWORKER")) {
-                model.addAttribute("worker", new StandardWorker());
-                return "admin/addStandardWorker";
-            }
-            else if(user.getRoles().equals("MANAGER")) {
-                model.addAttribute("manager", new Manager());
-                return "admin/addManager";
-            }
-        }
-        return "admin/addUser";
+    @RequestMapping("addStandardWorker")
+    public String getAddStandardWorker(Model model) {
+        model.addAttribute("user", new Users());
+        model.addAttribute("worker", new StandardWorker());
+        return "admin/addStandardWorker";
     }
 
-    @RequestMapping(value = "insertStandardWorker", method = RequestMethod.POST)
-    public String getInsertStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model) {
-        standardWorkerService.addStandardWorker(userService.getByUsername(this.usernamePlaceholder), standardWorker);
-        model.addAttribute("user", new Users());
-        return "admin/addUser";
+    @RequestMapping(value = "makeStandardWorker", method = RequestMethod.POST)
+    public String getMakeStandardWorker(@ModelAttribute("user") Users user, @ModelAttribute("worker") StandardWorker standardWorker, Model model)
+    {
+        this.adminService.addStandardWorker(user, standardWorker);
+        model.addAttribute("currentSW", standardWorker.getUserName());
+        model.addAttribute("managers", this.managerService.findManagersByUsernameLike(""));
+        return "admin/addStandardWorkerSelectManager";
     }
 
-    @RequestMapping(value = "insertManager", method = RequestMethod.POST)
-    public String getInsertManager(@ModelAttribute("manager") Manager manager,Model model) {
-        managerService.addManager(userService.getByUsername(this.usernamePlaceholder), manager);
-        model.addAttribute("user", new Users());
-        return "admin/addUser";
+    @RequestMapping(value = "makeStandardWorkerSelectManager", method = RequestMethod.GET)
+    public String getMakeStandardWorkerSelectManager(Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername)
+    {
+        model.addAttribute("currentSW", standardWorkerUsername);
+        model.addAttribute("managers", this.managerService.findManagersByUsernameLike(username));
+        return "admin/addStandardWorkerSelectManager";
     }
+
+    @RequestMapping(value = "insertStandardWorker", method = RequestMethod.GET)
+    public String getInsertStandardWorker(String standardWorkerUsername, String managerUsername) {
+        this.adminService.bindStandardWorkerAndManager(standardWorkerUsername, managerUsername);
+        return "redirect:/admin/index";
+    }
+
+    @GetMapping("alterStandardWorker")
+    public String getAlterEmployee(Model model, String username)
+    {
+        /*Return the original standard worker from service*/
+        model.addAttribute("user", this.userService.getByUsername(username));
+        model.addAttribute("worker", this.adminService.removeStandardWorker(username));
+        return "admin/addStandardWorker";
+    }
+
 
     @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
     public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("workers", standardWorkerService.findAllByUsername(username));
         return "admin/searchTeamMembers";
-    }
-
-    @GetMapping("alterTeamMember")
-    public String getAlterEmployee(Model model, String username) {
-        this.usernamePlaceholder = username;
-        model.addAttribute("worker", standardWorkerService.getByUsername(username));
-        return "admin/alterTeamMember";
-    }
-
-    @RequestMapping(value = "insertAlteredStandardWorker", method = RequestMethod.POST)
-    public String getInsertAlteredStandardWorker(@ModelAttribute("worker") StandardWorker standardWorker,Model model)
-    {
-        standardWorkerService.insertAlteredStandardWorker(standardWorker, usernamePlaceholder);
-        model.addAttribute("user", new Users());
-        return "admin/addUser";
     }
 
 }

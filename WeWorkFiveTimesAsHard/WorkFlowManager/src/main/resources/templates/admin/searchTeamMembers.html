@@ -59,7 +59,7 @@
             <td th:text="${worker.getManagerUsername()}">Manager Username</td>
             <td th:text="${worker.getRole()}">Front End</td>
             <td>
-                <a th:href="@{alterTeamMember(username=${worker.getUserName()})}" class="w-button"> Edit </a>
+                <a th:href="@{alterStandardWorker(username=${worker.getUserName()})}" class="w-button"> Edit </a>
             </td>
         </tr>
         </tbody>

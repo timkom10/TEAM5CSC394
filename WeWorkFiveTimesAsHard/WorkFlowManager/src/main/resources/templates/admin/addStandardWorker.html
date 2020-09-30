@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title>Add Standard Worker</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/addStandardWorker.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/addUserMain.css}"/>
 
 </head>
 <body class="body">
@@ -14,30 +14,35 @@
 <div>
     <div class="container-2 w-container">
         <div>
-            <h1>Make StandardWorker</h1>
+            <h1>Add Or Alter Standard Worker:</h1>
         </div>
     </div>
 </div>
 <div>
     <div class="w-container">
         <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form" th:action="@{insertStandardWorker}" th:object="${worker}" method="post">
-                <label for="First-Name">First Name</label>
-                    <input type="text" class="w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="First Name" id="First-Name" required="" th:field = "*{firstName}">
-                <label for="lastname">Last Name</label>
-                    <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Last Name" id="lastname" required="" th:field = "*{lastName}">
-                <label for="Hire-Date">Hire Date</label>
-                    <input type="text" class="w-input" maxlength="256" name="Hire-Date" data-name="Hire Date" placeholder="Hire Date" id="Hire-Date" th:field = "*{hireDate}">
-                <label for="Manager">Manager:</label>
-                    <input type="text" class="w-input" maxlength="256" name="Manager" data-name="Manager" placeholder="Manager Username" id="Manager" required="" th:field = "*{managerUsername}">
-                <input type="submit" value="Submit" data-wait="Please wait..." class="w-button">
+            <form id="email-form" name="email-form" data-name="Email Form" th:action="@{makeStandardWorker}" th:object="${user}" method="post">
+                <label for="username">User Name</label>
+                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Username" id="username" th:field = "*{username}">
+                <label for="password">Password</label>
+                    <input type="password" class="w-input" maxlength="256" name="password" data-name="password" placeholder="Password" id="password" required="" th:field = "*{password}">
+                <div th:object="${worker}" >
+                    <label for="FirstName">FirstName</label>
+                        <input type="text" class="w-input" maxlength="256" name="firstName" data-name="firstName" placeholder="First Name" id="FirstName" required="" th:field = "*{firstName}">
+                    <label for="LastName">LastName</label>
+                        <input type="text" class="w-input" maxlength="256" name="lastName" data-name="lastName" placeholder="Last Name" id="LastName" required="" th:field = "*{lastName}">
+                        <input type="hidden" class="w-input" maxlength="256" name="HireDate" data-name="HireDate" placeholder="yyyy-mm-dd" id="HireDate" required="" th:field = "*{hireDate}">
+                    <label for="Role">Role</label>
+                        <input type="text" class="w-input" maxlength="256" name="Role" data-name="Role" placeholder="Lead, Core, Engine, etc." id="Role" required="" th:field = "*{employeeRole}">
+                    <label for= "ProjectID" >Project ID#</label>
+                        <input type="text" class="w-input" maxlength="256" name="ProjectID" data-name="ProjectID" placeholder="Enter Project ID#" id="ProjectID" required="" th:field = "*{project}">
+                    <label for= "ProjectPoints">Current Project Points</label>
+                         <input type="text" class="w-input" maxlength="256" name="ProjectPoints" data-name="ProjectPoints" placeholder="0" id="ProjectPoints" required="" th:field = "*{currentProjectPoints}">
+                    <label for= "StartingPoints">Total Points</label>
+                        <input type="text" class="w-input" maxlength="256" name="StartingPoints" data-name="StartingPoints" placeholder="0" id="StartingPoints" required="" th:field = "*{totalPoints}">
+                </div>
+                <input type="submit" value="Next" data-wait="Please wait..." class="w-button">
             </form>
-            <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-            </div>
-            <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-            </div>
         </div>
     </div>
 </div>

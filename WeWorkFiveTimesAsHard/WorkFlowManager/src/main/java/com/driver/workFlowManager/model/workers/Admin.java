@@ -12,6 +12,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin
+public class Admin extends WorkerType implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,5 +66,10 @@ public class Admin
             announcement.setId(this.lastAnnouncementKey++);
             this.announcements.add(announcement);
         }
+    }
+
+    @Override
+    public String getRole() {
+        return this.ROLE;
     }
 }

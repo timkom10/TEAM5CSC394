@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Add Standard Worker</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/makeStandardWorkerSelectManager.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li id="w-node-14d3ead45d2e-6fdf9210" class="list-item-2">
+                <a th:href="@{index}"  class="link-block w-inline-block">
+                    <h3 class="heading-2">WeWorkFiveTimesAsHard</h3>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{messagingPortal}" class="link-block-2 w-inline-block">
+                    <h3 class="heading">Messages</h3>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{Hr}" class="link-block-2 w-inline-block">
+                    <h3 class="heading">Resources</h3>
+                </a>
+            </li>
+            <li class="list-item">
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="container w-container">
+        <h3 class="heading-3">Please Select A Manager to Assign Worker to:</h3>
+    </div>
+    <div class="w-container">
+        <div class="w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeStandardWorkerSelectManager}" method="get">
+                <label for="name" class="field-label">Search Managers By Username</label>
+                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Manager Username" id="name">
+                <input type="hidden" name = "standardWorkerUsername" data-name="standardWorkerUsername" th:value="${currentSW}">
+                <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
+            </form>
+        </div>
+    </div>
+    <div class="w-container">
+        <table class="table" style="text-align: left; width: 100%; font-size: 20px; color: black;">
+            <thead>
+            <tr style="padding: 15px; border-bottom: 1px solid #ddd;">
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>ID#</th>
+                <th>Assign?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="manager: ${managers}" style="border-bottom: 1px solid #ddd; padding: 15px; color: black;">
+                <td th:text="${manager.getUserName()}">Username</td>
+                <td th:text="${manager.getFirstName()}">First name</td>
+                <td th:text="${manager.getLastName()}">Last name</td>
+                <td th:text="${manager.getId()}">Manager Username</td>
+                <td>
+                    <a th:href="@{insertStandardWorker(standardWorkerUsername = ${currentSW},managerUsername = ${manager.getUserName()})}" class="w-button"> Assign </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

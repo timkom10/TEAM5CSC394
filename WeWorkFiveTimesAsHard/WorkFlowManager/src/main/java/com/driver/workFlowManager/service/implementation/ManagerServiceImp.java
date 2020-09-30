@@ -7,6 +7,7 @@ import com.driver.workFlowManager.service.ManagerService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -38,5 +39,10 @@ public class ManagerServiceImp implements ManagerService {
             return  manager;
         }
         return new Manager();
+    }
+
+    @Override
+    public Set<Manager> findManagersByUsernameLike(String username) {
+        return this.managerRepository.findAllByUserNameLike("%" + username + "%");
     }
 }
