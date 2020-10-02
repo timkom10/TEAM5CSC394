@@ -32,7 +32,7 @@ public class Admin extends WorkerType implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String userName;
-    private String ROLE;
+    private String adminROLE;
     private String firstName;
     private String lastName;
     private String hireDate;
@@ -70,6 +70,6 @@ public class Admin extends WorkerType implements Serializable
 
     @Override
     public String getRole() {
-        return this.ROLE;
+        return this.adminROLE;
     }
 }

@@ -48,18 +48,18 @@
         <thead>
         <tr style="padding: 15px; border-bottom: 1px solid #ddd;">
             <th>Username</th>
-            <th>Manager</th>
             <th>Role</th>
+            <th>Is Active?</th>
             <th>Select?</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="worker: ${workers}" style="border-bottom: 1px solid #ddd; padding: 15px; color: white;">
-            <td th:text="${worker.getUserName()}">Username</td>
-            <td th:text="${worker.getManagerUsername()}">Manager Username</td>
-            <td th:text="${worker.getRole()}">Front End</td>
+        <tr th:each="user: ${users}" style="border-bottom: 1px solid #ddd; padding: 15px; color: white;">
+            <td th:text="${user.getUsername()}">Username</td>
+            <td th:text="${user.getRoles()}">A Role</td>
+            <td th:text="${user.getActive()}">Front End</td>
             <td>
-                <a th:href="@{alterStandardWorker(username=${worker.getUserName()})}" class="w-button"> Edit </a>
+                <a th:href="@{alterWorker(username=${user.getUsername()})}" class="w-button"> Edit </a>
             </td>
         </tr>
         </tbody>

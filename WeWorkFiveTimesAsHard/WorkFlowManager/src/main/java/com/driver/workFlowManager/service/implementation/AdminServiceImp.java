@@ -69,12 +69,40 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public StandardWorker removeStandardWorker(String username)
+    public void addAdmin(Users user, Admin admin)
+    {
+        if(user == null || admin == null) return;
+        user.setRoles("ADMIN");
+        if(userService.addUser(user))
+        {
+            admin.setUserName(user.getUsername());
+            System.out.println("ROLE: " + admin.getRole());
+            if(admin.getHireDate() == "")
+            {
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                admin.setHireDate(dateFormat.format(date));
+            }
+            this.adminRepository.save(admin);
+        }
+    }
+
+    @Override
+    public StandardWorker removeStandardWorkerAndReturn(String username)
     {
         StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(username);
         if(standardWorker != null) this.standardWorkerRepository.delete(standardWorker);
         this.userService.removeUser(username);
         return standardWorker;
+    }
+
+    @Override
+    public Admin removeAdminAndReturn(String username)
+    {
+        Admin admin = this.adminRepository.findByUserName(username);
+        if(admin != null) this.adminRepository.delete(admin);
+        this.userService.removeUser(username);
+        return admin;
     }
 
 

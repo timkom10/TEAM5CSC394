@@ -43,9 +43,7 @@ public class AdminController {
 
     @GetMapping("info")
     public String info(Principal principal, Model model) {
-
-        Admin admin = adminService.findByUserName(principal.getName());
-        model.addAttribute("workerType", admin);
+        model.addAttribute("workerType", adminService.findByUserName(principal.getName()));
         return "Info/info";
     }
 
@@ -81,8 +79,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "makeStandardWorker", method = RequestMethod.POST)
-    public String getMakeStandardWorker(@ModelAttribute("user") Users user, @ModelAttribute("worker") StandardWorker standardWorker, Model model)
-    {
+    public String getMakeStandardWorker(@ModelAttribute("user") Users user, @ModelAttribute("worker") StandardWorker standardWorker, Model model) {
         this.adminService.addStandardWorker(user, standardWorker);
         model.addAttribute("currentSW", standardWorker.getUserName());
         model.addAttribute("managers", this.managerService.findManagersByUsernameLike(""));
@@ -90,8 +87,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "makeStandardWorkerSelectManager", method = RequestMethod.GET)
-    public String getMakeStandardWorkerSelectManager(Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername)
-    {
+    public String getMakeStandardWorkerSelectManager(Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername) {
         model.addAttribute("currentSW", standardWorkerUsername);
         model.addAttribute("managers", this.managerService.findManagersByUsernameLike(username));
         return "admin/addStandardWorkerSelectManager";
@@ -103,20 +99,45 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
-    @GetMapping("alterStandardWorker")
-    public String getAlterEmployee(Model model, String username)
-    {
-        /*Return the original standard worker from service*/
-        model.addAttribute("user", this.userService.getByUsername(username));
-        model.addAttribute("worker", this.adminService.removeStandardWorker(username));
-        return "admin/addStandardWorker";
+    @RequestMapping("addAdmin")
+    public String getAddAdmin(Model model) {
+        model.addAttribute("user", new Users());
+        model.addAttribute("admin", new Admin());
+        return "admin/addAdmin";
     }
 
+    @RequestMapping("makeAdmin")
+    public String getMakeAdmin(@ModelAttribute("user") Users user, @ModelAttribute("admin") Admin admin, Principal principal) {
+        this.adminService.addAdmin(user, admin);
+        if(principal.getName().equals(user.getUsername())) {
+            return "login";
+        }
+        return "redirect:/admin/index";
+    }
 
     @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
     public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("workers", standardWorkerService.findAllByUsername(username));
+        model.addAttribute("users", userService.findByUsername(username));
         return "admin/searchTeamMembers";
     }
 
+    @GetMapping("alterWorker")
+    public String getAlterWorker(Model model,String username)
+    {
+        /*Return the original standard worker from service*/
+        Users user = this.userService.getByUsername(username);
+        if(user.getRoles().equals("STANDARDWORKER"))
+        {
+            model.addAttribute("user", user);
+            model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
+            return "admin/addStandardWorker";
+        }
+        else if(user.getRoles().equals("ADMIN"))
+        {
+            model.addAttribute("user", user);
+            model.addAttribute("admin", this.adminService.removeAdminAndReturn(username));
+            return "admin/addAdmin";
+        }
+        return "error";
+    }
 }

@@ -195,7 +195,7 @@ public class InitialData implements CommandLineRunner
         admin_1.setUserName("admin");
         admin_1.setFirstName("Bobby");
         admin_1.setLastName("Jenks");
-        admin_1.setROLE("ADMIN");
+        admin_1.setAdminROLE("ADMIN");
         admin_1.setHireDate("2020-09-30");
         adminRepository.save(admin_1);
 

@@ -5,9 +5,11 @@ import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.model.workers.Users;
 
 public interface AdminService {
-    Admin findByUserName(String name);
     void bindStandardWorkerAndManager(String standardWorkerUsername, String managerUsername);
     void addStandardWorker(Users user, StandardWorker standardWorker);
-    StandardWorker removeStandardWorker(String username);
+    void addAdmin(Users user, Admin admin);
     boolean existsByUsername(String username);
+    StandardWorker removeStandardWorkerAndReturn(String username);
+    Admin removeAdminAndReturn(String username);
+    Admin findByUserName(String name);
 }

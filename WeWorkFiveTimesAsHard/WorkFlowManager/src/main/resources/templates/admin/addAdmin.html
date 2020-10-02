@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Admin</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/AdminCSS/addAdmin.css}"/>
+</head>
+<body class="body">
+<header id="nav" class="sticky-nav">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid w-list-unstyled">
+            <li id="w-node-14d3ead45d2e-6fdf9210" class="list-item-2">
+                <a th:href="@{index}" class="link-block w-inline-block">
+                    <h3 class="heading-2">WeWorkFiveTimesAsHard</h3>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{messagingPortal}" class="link-block-2 w-inline-block">
+                    <h3 class="heading">Messages</h3>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{Hr}" class="link-block-2 w-inline-block">
+                    <h3 class="heading">Resources</h3>
+                </a>
+            </li>
+            <li class="list-item">
+                <div class="w-form">
+                    <form id="email-form" name="email-form" data-name="Email Form" th:action="@{/logout}">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <div class="container w-container">
+        <h3 class="heading-3">Add or Alter Administrator</h3>
+    </div>
+    <div class="w-container">
+        <div class="w-form">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeAdmin}" th:object="${user}" method="post">
+                <label for="name">User Name:</label>
+                    <input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter Username" id="name" required="" th:field = "*{username}">
+                <label for="password">Password:</label>
+                    <input type="password" class="w-input" maxlength="256" name="password" data-name="password" placeholder="Enter Password" id="password" required="" th:field = "*{password}">
+                <div th:object="${admin}" >
+                <label for="firstname">First Name:</label>
+                    <input type="text" class="w-input" maxlength="256" name="firstname" data-name="firstname" placeholder="Enter First Name" id="firstname" required="" th:field = "*{firstName}">
+                <label for="lastname">Last Name:</label>
+                    <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Enter Last Name" id="lastname" required="" th:field = "*{lastName}">
+                <label for="role">Role:</label>
+                    <input type="text" class="w-input" maxlength="256" name="role" data-name="role" placeholder="Enter Role" id="role" required="" th:field = "*{adminROLE}">
+                    <input type="hidden" class="w-input" maxlength="256" name="HireDate" data-name="HireDate" placeholder="yyyy-mm-dd" id="HireDate" required="" th:field = "*{hireDate}">
+                </div>
+                <input type="submit" value="Submit" data-wait="Please wait..." class="w-button"></form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
