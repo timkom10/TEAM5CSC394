@@ -21,7 +21,7 @@ public class ManagerServiceImp implements ManagerService {
     @Override
     public void addManager(Users user, Manager manager) {
         if((user != null) && (manager != null)) {
-            manager.setROLE(user.getRoles());
+            manager.setManagerRole(user.getRoles());
             manager.setUserName(user.getUsername());
             this.managerRepository.save(manager);
         }

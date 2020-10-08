@@ -8,13 +8,8 @@ import java.util.Set;
 
 public interface StandardWorkerService {
     StandardWorker getByUsername(String username);
-    Set<StandardWorker> findAllByUsername(String username);
-
+    List<StandardWorker> getAllFreeWorkersByUsername(String username);
     List<StandardWorker> getAllStandardWorkersSortedByPoints();
     List<StandardWorker> getAllStandardWorkersSortedByPointsByProject(Project project);
-
-    void addStandardWorker(Users user, StandardWorker standardWorker);
-    void insertAlteredStandardWorker(StandardWorker standardWorker, String username);
-
     boolean existsByUsername(String username);
 }

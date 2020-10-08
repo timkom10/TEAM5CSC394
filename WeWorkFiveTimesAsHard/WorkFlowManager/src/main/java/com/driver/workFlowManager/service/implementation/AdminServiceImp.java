@@ -69,6 +69,23 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
+    public void addManager(Users user, Manager manager) {
+        if(user == null || manager == null) return;
+
+        if(userService.addUser(user))
+        {
+            manager.setUserName(user.getUsername());
+            if(manager.getHireDate() == "")
+            {
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                manager.setHireDate(dateFormat.format(date));
+            }
+            this.managerRepository.save(manager);
+        }
+    }
+
+    @Override
     public void addAdmin(Users user, Admin admin)
     {
         if(user == null || admin == null) return;
@@ -76,7 +93,6 @@ public class AdminServiceImp implements AdminService {
         if(userService.addUser(user))
         {
             admin.setUserName(user.getUsername());
-            System.out.println("ROLE: " + admin.getRole());
             if(admin.getHireDate() == "")
             {
                 Date date = Calendar.getInstance().getTime();

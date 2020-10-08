@@ -5,9 +5,8 @@ import com.driver.workFlowManager.model.workers.Admin;
 import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.service.ManagerService;
+import com.driver.workFlowManager.service.StandardWorkerService;
 import com.driver.workFlowManager.service.implementation.AdminServiceImp;
-import com.driver.workFlowManager.service.implementation.ManagerServiceImp;
-import com.driver.workFlowManager.service.implementation.StandardWorkerServiceImp;
 import com.driver.workFlowManager.service.implementation.UserServiceImp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +20,9 @@ public class AdminController {
     private final AdminServiceImp adminService;
     private final UserServiceImp userService;
     private final ManagerService managerService;
-    private final StandardWorkerServiceImp standardWorkerService;
+    private final StandardWorkerService standardWorkerService;
 
-    public AdminController(AdminServiceImp adminService, UserServiceImp userService, ManagerService managerService, StandardWorkerServiceImp standardWorkerService) {
+    public AdminController(AdminServiceImp adminService, UserServiceImp userService, ManagerService managerService, StandardWorkerService standardWorkerService) {
         this.adminService = adminService;
         this.userService = userService;
         this.managerService = managerService;
@@ -66,9 +65,14 @@ public class AdminController {
     }
 
     @RequestMapping("addUser")
-    public String getAddUser(Model model) {
-        model.addAttribute("user", new Users());
+    public String getAddUser() {
         return "admin/selectUserTypeToAdd";
+    }
+
+    @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
+    public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("users", userService.findByUsername(username));
+        return "admin/searchTeamMembers";
     }
 
     @RequestMapping("addStandardWorker")
@@ -99,6 +103,30 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
+    @RequestMapping("addManager")
+    public String getAddManager(Model model) {
+        model.addAttribute("user", new Users());
+        model.addAttribute("manager", new Manager());
+        return "admin/addManager";
+    }
+
+    @RequestMapping("makeManager")
+    public String getMakeManagerSelectTeamMembers(@ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model)
+    {
+        this.adminService.addManager(user, manager);
+        model.addAttribute("currentM", manager.getUserName());
+        model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
+        return "admin/addManagerSelectTeamMembers";
+    }
+
+    @RequestMapping("makeManagerSelectTeamMembers")
+    public String getMakeManagersSelectTeamMembers(Model model, @RequestParam(defaultValue = "") String username, String managerUsername)
+    {
+        model.addAttribute("currentM", managerUsername);
+        model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(username));
+        return "admin/addManagerSelectTeamMembers";
+    }
+
     @RequestMapping("addAdmin")
     public String getAddAdmin(Model model) {
         model.addAttribute("user", new Users());
@@ -115,12 +143,6 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
-    @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
-    public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
-        model.addAttribute("users", userService.findByUsername(username));
-        return "admin/searchTeamMembers";
-    }
-
     @GetMapping("alterWorker")
     public String getAlterWorker(Model model,String username)
     {
@@ -131,6 +153,12 @@ public class AdminController {
             model.addAttribute("user", user);
             model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
             return "admin/addStandardWorker";
+        }
+
+        else if(user.getRoles().equals("MANAGER"))
+        {
+            System.out.println("Encountered alter manager");
+            return "error";
         }
         else if(user.getRoles().equals("ADMIN"))
         {

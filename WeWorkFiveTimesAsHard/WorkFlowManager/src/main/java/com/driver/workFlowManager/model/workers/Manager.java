@@ -59,7 +59,7 @@ public class Manager extends WorkerType implements Serializable {
     private String firstName;
     private String lastName;
     private String hireDate;
-    private String ROLE;
+    private String managerRole;
 
     @Override
     public boolean equals(Object o) {
@@ -101,6 +101,6 @@ public class Manager extends WorkerType implements Serializable {
 
     @Override
     public String getRole() {
-        return this.ROLE;
+        return this.managerRole;
     }
 }

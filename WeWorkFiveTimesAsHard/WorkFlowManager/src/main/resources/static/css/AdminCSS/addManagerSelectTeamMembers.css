@@ -39,8 +39,8 @@
 }
 
 .body {
-  background-image: url('images/addManagerBackground.jpg');
-  background-position: 0px 0px;
+  background-image: url('images/addManagerSelectTeamMembersBackground.jpg');
+  background-position: 50% 100%;
   background-size: cover;
   background-attachment: fixed;
   -o-object-fit: fill;
@@ -53,12 +53,12 @@
 }
 
 .heading {
-  color: #fff;
+  color: #333;
   font-weight: 400;
 }
 
 .heading-2 {
-  color: #fff;
+  color: #333;
   font-weight: 400;
 }
 
@@ -94,12 +94,6 @@
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-.form {
-  color: #333;
-  font-size: 16px;
-  font-weight: 700;
 }
 
 @media screen and (max-width: 767px) {

@@ -85,7 +85,7 @@ public class InitialData implements CommandLineRunner
         manager_1.setFirstName("Michael");
         manager_1.setLastName("Scott");
         manager_1.setHireDate("2004-03-24");
-        manager_1.setROLE("MANAGER");
+        manager_1.setManagerRole("MANAGER");
         managerRepository.save(manager_1);
 
         //Make a project
@@ -189,6 +189,13 @@ public class InitialData implements CommandLineRunner
         standardWorkerRepository.save(standardWorker_6);
         projectRepository.save(project_1);
 
+        StandardWorker standardWorker_7 = new StandardWorker();
+        standardWorker_7.setUserName("billy");
+        standardWorker_7.setHireDate("2020-07-24");
+        standardWorker_7.setFirstName("Billy");
+        standardWorker_7.setLastName("DemoLastName");
+        standardWorker_7.setEmployeeRole("Back End");
+        standardWorkerRepository.save(standardWorker_7);
 
         //Make a new admin
         Admin admin_1 = new Admin();
