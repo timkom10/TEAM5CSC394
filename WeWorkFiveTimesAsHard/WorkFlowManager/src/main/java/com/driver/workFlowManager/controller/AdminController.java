@@ -111,20 +111,41 @@ public class AdminController {
     }
 
     @RequestMapping("makeManager")
-    public String getMakeManagerSelectTeamMembers(@ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model)
-    {
+    public String getMakeManagerSelectTeamMembers(@ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model) {
         this.adminService.addManager(user, manager);
-        model.addAttribute("currentM", manager.getUserName());
+        model.addAttribute("currentM", user.getUsername());
         model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
         return "admin/addManagerSelectTeamMembers";
     }
 
     @RequestMapping("makeManagerSelectTeamMembers")
-    public String getMakeManagersSelectTeamMembers(Model model, @RequestParam(defaultValue = "") String username, String managerUsername)
-    {
+    public String getMakeManagersSelectTeamMembers(Model model, @RequestParam(defaultValue = "") String username, String managerUsername) {
         model.addAttribute("currentM", managerUsername);
         model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(username));
         return "admin/addManagerSelectTeamMembers";
+    }
+
+    @RequestMapping("addTeamMemberToManager")
+    public String getAddTeamMemberToManager(Model model, String workerUsername, String managerUsername) {
+        this.adminService.bindStandardWorkerAndManager(workerUsername, managerUsername);
+        model.addAttribute("currentM", managerUsername);
+        model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
+        return "admin/addManagerSelectTeamMembers";
+    }
+
+    @RequestMapping("addManagerRemoveTeamMember")
+    public String getAddManagerRemoveTeamMember(Model model, String managerUsername) {
+        model.addAttribute("currentM", managerUsername);
+        model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkerByManager(this.managerService.getByUsername(managerUsername)));
+        return "admin/addManagerRemoveTeamMembers";
+    }
+
+    @RequestMapping("removeTeamMemberFromManager")
+    public String getRemoveTeamMemberFromManager(Model model, String managerUsername, String workerUsername) {
+        this.managerService.removeWorkerFromManager(workerUsername, managerUsername);
+        model.addAttribute("currentM", managerUsername);
+        model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkerByManager(this.managerService.getByUsername(managerUsername)));
+        return "admin/addManagerRemoveTeamMembers";
     }
 
     @RequestMapping("addAdmin")
@@ -148,23 +169,19 @@ public class AdminController {
     {
         /*Return the original standard worker from service*/
         Users user = this.userService.getByUsername(username);
-        if(user.getRoles().equals("STANDARDWORKER"))
-        {
-            model.addAttribute("user", user);
-            model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
-            return "admin/addStandardWorker";
-        }
-
-        else if(user.getRoles().equals("MANAGER"))
-        {
-            System.out.println("Encountered alter manager");
-            return "error";
-        }
-        else if(user.getRoles().equals("ADMIN"))
-        {
-            model.addAttribute("user", user);
-            model.addAttribute("admin", this.adminService.removeAdminAndReturn(username));
-            return "admin/addAdmin";
+        switch (user.getRoles()) {
+            case "STANDARDWORKER":
+                model.addAttribute("user", user);
+                model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
+                return "admin/addStandardWorker";
+            case "MANAGER":
+                model.addAttribute("user", user);
+                model.addAttribute("manager", this.adminService.getManagerForEdit(username));
+                return "admin/addManager";
+            case "ADMIN":
+                model.addAttribute("user", user);
+                model.addAttribute("admin", this.adminService.removeAdminAndReturn(username));
+                return "admin/addAdmin";
         }
         return "error";
     }

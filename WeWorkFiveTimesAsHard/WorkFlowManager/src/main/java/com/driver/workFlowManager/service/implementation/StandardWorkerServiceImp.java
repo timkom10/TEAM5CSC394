@@ -43,6 +43,11 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
         return standardWorkers;
     }
 
+    @Override
+    public List<StandardWorker> getAllStandardWorkerByManager(Manager manager) {
+        return this.standardWorkerRepository.findAllByManager(manager);
+    }
+
 
     @Override
     public StandardWorker getByUsername(String username) {
@@ -57,7 +62,6 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     public boolean existsByUsername(String username) {
         return this.standardWorkerRepository.existsByUserName(username);
     }
-
 
     public static final Comparator<StandardWorker> compareByTotalPoints = (s1, s2) -> {
         //descending order

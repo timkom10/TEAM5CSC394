@@ -11,4 +11,5 @@ public interface UserService {
     void removeUser(String username);
     void simpleSaveUserInRoleRepo(String username);
     boolean addUser(Users user);
+    boolean existsByUsername(String username);
 }

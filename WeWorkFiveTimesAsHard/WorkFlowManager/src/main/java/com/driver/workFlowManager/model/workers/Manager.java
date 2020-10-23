@@ -31,7 +31,7 @@ public class Manager extends WorkerType implements Serializable {
     private Long id;
 
     @OneToMany(cascade = CascadeType.PERSIST,
-            mappedBy = "manager", orphanRemoval = true)
+            mappedBy = "manager")
     private Set<StandardWorker> dominion = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "manager")

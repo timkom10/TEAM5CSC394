@@ -58,7 +58,7 @@ public class AdminServiceImp implements AdminService {
         if(userService.addUser(user))
         {
             standardWorker.setUserName(user.getUsername());
-            if(standardWorker.getHireDate() == "")
+            if(standardWorker.getHireDate().equals(""))
             {
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -69,19 +69,42 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public void addManager(Users user, Manager manager) {
+    public void addManager(Users user, Manager manager)
+    {
         if(user == null || manager == null) return;
 
-        if(userService.addUser(user))
+        /*Check if we are adding a new user, or editing an existing one*/
+        if(manager.getUserName() != null && this.userService.existsByUsername(manager.getUserName()))
         {
-            manager.setUserName(user.getUsername());
-            if(manager.getHireDate() == "")
+            /*We are editing a user*/
+            user.setRoles("MANAGER");
+            Manager updateManager = this.managerRepository.findByUserName(manager.getUserName());
+
+            if(updateManager != null && userService.addUser(user))
             {
+                if(!manager.getUserName().equals(user.getUsername())) {
+                    /*Remove the old user, and add in the new one*/
+                    this.userService.removeUser(manager.getUserName());
+                    this.userService.addUser(user);
+                }
+                updateManager.setUserName(user.getUsername());
+                updateManager.setLastName(manager.getLastName());
+                updateManager.setFirstName(manager.getFirstName());
+                updateManager.setManagerRole(manager.getManagerRole());
+                this.managerRepository.save(updateManager);
+            }
+        }
+        else
+        {
+            user.setRoles("MANAGER");
+            if(userService.addUser(user))
+            {
+                manager.setUserName(user.getUsername());
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 manager.setHireDate(dateFormat.format(date));
+                this.managerRepository.save(manager);
             }
-            this.managerRepository.save(manager);
         }
     }
 
@@ -93,7 +116,7 @@ public class AdminServiceImp implements AdminService {
         if(userService.addUser(user))
         {
             admin.setUserName(user.getUsername());
-            if(admin.getHireDate() == "")
+            if(admin.getHireDate().equals(""))
             {
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -110,6 +133,21 @@ public class AdminServiceImp implements AdminService {
         if(standardWorker != null) this.standardWorkerRepository.delete(standardWorker);
         this.userService.removeUser(username);
         return standardWorker;
+    }
+
+    @Override
+    public Manager getManagerForEdit(String username)
+    {
+        Manager nManager = new Manager();
+        Manager oManager = this.managerRepository.findByUserName(username);
+        if(oManager != null) {
+            nManager.setHireDate(oManager.getHireDate());
+            nManager.setUserName(oManager.getUserName());
+            nManager.setFirstName(oManager.getFirstName());
+            nManager.setLastName(oManager.getLastName());
+            nManager.setManagerRole(oManager.getManagerRole());
+        }
+        return nManager;
     }
 
     @Override

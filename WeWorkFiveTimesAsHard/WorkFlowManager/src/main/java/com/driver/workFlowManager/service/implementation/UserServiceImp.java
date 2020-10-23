@@ -90,4 +90,10 @@ public class UserServiceImp implements UserService {
         //no insert
         return false;
     }
+
+    @Override
+    public boolean existsByUsername(String username)
+    {
+        return this.userRepository.existsByUsername(username);
+    }
 }

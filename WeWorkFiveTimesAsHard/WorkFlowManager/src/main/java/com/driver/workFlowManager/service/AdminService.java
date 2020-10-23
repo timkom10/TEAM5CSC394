@@ -12,8 +12,8 @@ public interface AdminService {
     void addAdmin(Users user, Admin admin);
 
     boolean existsByUsername(String username);
-
     StandardWorker removeStandardWorkerAndReturn(String username);
+    Manager getManagerForEdit(String username);
     Admin removeAdminAndReturn(String username);
     Admin findByUserName(String name);
 }

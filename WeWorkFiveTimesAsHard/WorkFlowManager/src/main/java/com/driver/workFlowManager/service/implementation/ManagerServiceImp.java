@@ -1,8 +1,9 @@
 package com.driver.workFlowManager.service.implementation;
 
-import com.driver.workFlowManager.model.workers.Users;
 import com.driver.workFlowManager.model.workers.Manager;
+import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.ManagerRepository;
+import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.ManagerService;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,26 @@ import java.util.Set;
 @Transactional
 public class ManagerServiceImp implements ManagerService {
     private final ManagerRepository managerRepository;
+    private final StandardWorkerRepository standardWorkerRepository;
 
-    public ManagerServiceImp(ManagerRepository managerRepository) {
+    public ManagerServiceImp(ManagerRepository managerRepository, StandardWorkerRepository standardWorkerRepository) {
         this.managerRepository = managerRepository;
+        this.standardWorkerRepository = standardWorkerRepository;
     }
 
     @Override
-    public void addManager(Users user, Manager manager) {
-        if((user != null) && (manager != null)) {
-            manager.setManagerRole(user.getRoles());
-            manager.setUserName(user.getUsername());
+    public void removeWorkerFromManager(String workerUsername, String managerUsername) {
+
+        StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(workerUsername);
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+
+        if(standardWorker != null && manager != null ) {
+            manager.getDominion().remove(standardWorker);
             this.managerRepository.save(manager);
+
+            standardWorker.setManager(null);
+            standardWorker.setProject(null);
+            this.standardWorkerRepository.save(standardWorker);
         }
     }
 

@@ -7,10 +7,11 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface StandardWorkerRepository extends CrudRepository<StandardWorker, Long> {
-    StandardWorker findByUserName(String username);
-    boolean existsByUserName(String username);
-
     List<StandardWorker> findAllByManagerAndUserNameLike(Manager manager, String username);
+    List<StandardWorker> findAllByManager(Manager manager);
     List<StandardWorker> findAllByProject(Project project);
     List<StandardWorker> findAll();
+
+    StandardWorker findByUserName(String username);
+    boolean existsByUserName(String username);
 }

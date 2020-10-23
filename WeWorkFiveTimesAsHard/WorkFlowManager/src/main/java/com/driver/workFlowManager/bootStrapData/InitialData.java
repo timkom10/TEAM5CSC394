@@ -11,6 +11,7 @@ import com.driver.workFlowManager.model.workers.Admin;
 import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.*;
+import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -68,7 +69,9 @@ public class InitialData implements CommandLineRunner
        Users paulina = new Users("Paulina", passwordEncoder.encode("paulina"),"STANDARDWORKER", "none");
        Users ricky = new Users("Ricky", passwordEncoder.encode("ricky"),"STANDARDWORKER", "none");
        Users willy = new Users("Willy", passwordEncoder.encode("willy"),"STANDARDWORKER", "none");
+       Users billy = new Users("Billy", passwordEncoder.encode("billy"),"STANDARDWORKER", "none");
 
+       userRepository.save(billy);
        userRepository.save(tyler);
        userRepository.save(tim);
        userRepository.save(joey);

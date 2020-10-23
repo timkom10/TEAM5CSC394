@@ -54,7 +54,8 @@
                     <input type="text" class="w-input" maxlength="256" name="lastname" data-name="lastname" placeholder="Enter Last Name" id="lastname" required="" th:field = "*{lastName}">
                 <label for="role">Role:</label>
                     <input type="text" class="w-input" maxlength="256" name="role" data-name="role" placeholder="Enter Role" id="role" required="" th:field = "*{managerRole}">
-                    <input type="hidden" class="w-input" maxlength="256" name="HireDate" data-name="HireDate" placeholder="yyyy-mm-dd" id="HireDate" required="" th:field = "*{hireDate}">
+                    <input type="hidden" th:field = "*{hireDate}">
+                    <input type="hidden" th:field = "*{userName}">
                 </div>
                 <input type="submit" value="Next" data-wait="Please wait..." class="w-button">
             </form>
