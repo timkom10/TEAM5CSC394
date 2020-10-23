@@ -15,6 +15,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -66,6 +67,22 @@ public class Admin extends WorkerType implements Serializable
             announcement.setId(this.lastAnnouncementKey++);
             this.announcements.add(announcement);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin admin = (Admin) o;
+        return Objects.equals(userName, admin.userName) &&
+                Objects.equals(firstName, admin.firstName) &&
+                Objects.equals(lastName, admin.lastName) &&
+                Objects.equals(hireDate, admin.hireDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, firstName, lastName, hireDate);
     }
 
     @Override

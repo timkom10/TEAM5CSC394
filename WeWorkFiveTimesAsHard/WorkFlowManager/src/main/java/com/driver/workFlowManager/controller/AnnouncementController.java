@@ -6,8 +6,6 @@ import com.driver.workFlowManager.service.implementation.UserServiceImp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 import java.security.Principal;
 
 /*

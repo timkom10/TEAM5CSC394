@@ -129,7 +129,7 @@ html[data-w-dynpage] [data-w-cloak] {
   border-radius: 0;
   background: none;
   background-image: none;
-  background-position: 0% 0%;
+  background-position: 0 0;
   background-size: auto auto;
   background-repeat: repeat;
   background-origin: padding-box;
@@ -187,7 +187,7 @@ html[data-w-dynpage] [data-w-cloak] {
   height: auto !important;
   overflow: visible !important;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 .w-webflow-badge > img {
@@ -256,7 +256,7 @@ figcaption {
 }
 ul,
 ol {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 10px;
   padding-left: 40px;
 }
@@ -381,7 +381,7 @@ textarea.w-select {
   display: inline-block;
   cursor: pointer;
   font-weight: normal;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 .w-radio {
   display: block;
@@ -1481,7 +1481,7 @@ textarea.w-select {
 }
 .w-richtext figure div {
   /* fix incorrectly sized selection border in the data manager */
-  font-size: 0px;
+  font-size: 0;
   color: transparent;
 }
 .w-richtext figure.w-richtext-figure-type-image,

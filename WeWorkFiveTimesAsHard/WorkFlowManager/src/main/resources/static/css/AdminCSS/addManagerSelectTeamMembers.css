@@ -1,7 +1,7 @@
 .sticky-nav {
   position: -webkit-sticky;
   position: sticky;
-  top: 0px;
+  top: 0;
   z-index: 1;
   padding: 20px;
   background-color: transparent;
@@ -14,8 +14,8 @@
   display: flex;
   width: 100%;
   height: auto;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -26,11 +26,8 @@
   -ms-flex-align: center;
   align-items: center;
   grid-auto-flow: column;
-  grid-auto-columns: -webkit-max-content;
   grid-auto-columns: max-content;
-  -ms-grid-columns: 1fr -webkit-max-content -webkit-max-content -webkit-max-content;
   -ms-grid-columns: 1fr max-content max-content max-content;
-  grid-template-columns: 1fr -webkit-max-content -webkit-max-content -webkit-max-content;
   grid-template-columns: 1fr max-content max-content max-content;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
@@ -68,7 +65,7 @@
 
 .list-item {
   padding-top: 15px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .submit-button {
@@ -151,12 +148,12 @@
 
 @media screen and (max-width: 479px) {
   .sticky-nav {
-    padding: 0px;
+    padding: 0;
   }
   .nav-grid {
     grid-auto-flow: row;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     -ms-grid-rows: 100px;

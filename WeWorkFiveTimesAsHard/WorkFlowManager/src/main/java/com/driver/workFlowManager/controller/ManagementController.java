@@ -3,7 +3,6 @@ package com.driver.workFlowManager.controller;
 import com.driver.workFlowManager.model.projects.Milestones;
 import com.driver.workFlowManager.model.projects.Project;
 import com.driver.workFlowManager.model.projects.Task;
-import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.ManagerRepository;
 import com.driver.workFlowManager.repository.StandardWorkerRepository;
@@ -11,7 +10,6 @@ import com.driver.workFlowManager.service.*;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 

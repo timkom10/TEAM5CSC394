@@ -1,7 +1,6 @@
 package com.driver.workFlowManager.service.implementation;
 
 import com.driver.workFlowManager.model.projects.Project;
-import com.driver.workFlowManager.model.workers.Users;
 import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.*;
