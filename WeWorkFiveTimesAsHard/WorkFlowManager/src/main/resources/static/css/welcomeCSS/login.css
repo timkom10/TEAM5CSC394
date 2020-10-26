@@ -46,10 +46,9 @@
 }
 
 .body {
-  background-image: url('images/WelcomeBackground.jpg');
-  background-position: 50% 50%;
+  background-image: url('images/LoginImage.jpg');
+  background-position: 100% 100%;
   background-size: cover;
-  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
@@ -213,17 +212,6 @@
   text-align: left;
 }
 
-.footer-link {
-  display: block;
-  margin-bottom: 10px;
-  color: #444;
-  text-decoration: none;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
-}
-
 .sticky-nav-3 {
   position: -webkit-sticky;
   position: sticky;
@@ -231,6 +219,162 @@
   z-index: 1;
   padding: 20px;
   background-color: transparent;
+}
+
+.div-block-3 {
+  background-color: transparent;
+}
+
+.heading-8 {
+  width: 30%;
+  color: #fff;
+}
+
+.container-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.heading-9 {
+  color: #ffeaea;
+  text-decoration: none;
+}
+
+.link-block-3 {
+  text-decoration: none;
+}
+
+.link-block-4 {
+  text-decoration: none;
+}
+
+.container-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 425px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.contact-form {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.contact-form-grid {
+  display: -ms-grid;
+  display: grid;
+  margin-top: 40px;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto;
+  grid-template-rows: auto;
+}
+
+.heading-10 {
+  color: #fff;
+}
+
+.container-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.field-label {
+  color: #fff;
+  font-weight: 700;
+}
+
+.field-label-2 {
+  color: #fff;
+}
+
+.field-label-3 {
+  color: #fff;
+}
+
+.field-label-4 {
+  color: #fff;
+}
+
+.paragraph {
+  color: #fff;
+}
+
+.italic-text {
+  color: #fff;
+}
+
+.form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.link-block-5 {
+  color: #ff0e0e;
+  text-decoration: none;
+}
+
+.heading-11 {
+  text-decoration: none;
+}
+
+.link-block-6 {
+  color: #fff;
+  text-decoration: none;
+}
+
+.container-7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 125px;
+  padding-top: 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 
 @media screen and (max-width: 991px) {
@@ -256,6 +400,9 @@
 
   .sticky-nav-3 {
     position: relative;
+  }
+  .contact-form {
+    padding: 40px 20px;
   }
 }
 
@@ -304,14 +451,21 @@
   }
 }
 
-#w-node-ae6973658765-3229ec8d {
-  -ms-grid-column-align: start;
-  justify-self: start;
-}
-
 @media screen and (max-width: 479px) {
-  #w-node-ae6973658765-3229ec8d {
-    -ms-grid-column-align: center;
-    justify-self: center;
+  #w-node-ae69e02d958b-3229ec8d {
+    grid-column-start: span 2;
+    -ms-grid-column-span: 2;
+    grid-column-end: span 2;
+    grid-row-start: span 1;
+    -ms-grid-row-span: 1;
+    grid-row-end: span 1;
+  }
+  #w-node-ae69e02d9597-3229ec8d {
+    grid-column-start: span 2;
+    -ms-grid-column-span: 2;
+    grid-column-end: span 2;
+    grid-row-start: span 1;
+    -ms-grid-row-span: 1;
+    grid-row-end: span 1;
   }
 }

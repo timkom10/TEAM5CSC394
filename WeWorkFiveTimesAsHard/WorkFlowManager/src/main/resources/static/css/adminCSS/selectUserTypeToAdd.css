@@ -35,23 +35,6 @@
   list-style-type: none;
 }
 
-.nav-logo-link {
-  display: block;
-  height: 60px;
-  margin-right: 0;
-  margin-left: 0;
-  padding: 0;
-}
-
-.nav-logo {
-  width: auto;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  -o-object-position: 0 50%;
-  object-position: 0 50%;
-}
-
 .nav-link {
   display: block;
   margin-right: 0;
@@ -191,9 +174,7 @@
     -ms-grid-rows: 100px;
     grid-template-rows: 100px;
   }
-  .nav-logo-link {
-    border-top: 1px solid #c4c4c4;
-  }
+
   .nav-link {
     padding-top: 10px;
     padding-bottom: 10px;

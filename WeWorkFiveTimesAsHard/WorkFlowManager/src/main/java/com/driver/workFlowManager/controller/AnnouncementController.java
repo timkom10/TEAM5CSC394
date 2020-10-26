@@ -22,16 +22,14 @@ public class AnnouncementController {
     private final StandardWorkerService standardWorkerService;
     private final ManagerService managerService;
     private final AdminService adminService;
-    private final UserServiceImp userService;
 
     private static  String usernamePlaceholder ="";
 
-    public AnnouncementController(AnnouncementService announcementService, StandardWorkerService standardWorkerService, ManagerService managerService, AdminService adminService, UserServiceImp userService) {
+    public AnnouncementController(AnnouncementService announcementService, StandardWorkerService standardWorkerService, ManagerService managerService, AdminService adminService) {
         this.announcementService = announcementService;
         this.standardWorkerService = standardWorkerService;
         this.managerService = managerService;
         this.adminService = adminService;
-        this.userService = userService;
     }
 
     @GetMapping(value = "viewAnnouncement")

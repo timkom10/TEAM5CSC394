@@ -12,22 +12,23 @@ import java.io.IOException;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping("index")
-    public String getWelcome() { return "index"; }
 
-    @GetMapping("/login")
+    @GetMapping({"/","index"})
+    public String getWelcome() { return "welcomePages/index"; }
+
+    @GetMapping("login")
     public String getLogin() {
         return "welcomePages/login";
     }
 
-    @RequestMapping("/About")
+    @RequestMapping("about")
     public String getAbout() {
-        return "welcomePages/About";
+        return "welcomePages/about";
     }
 
-    @RequestMapping("/TOS")
+    @RequestMapping("tos")
     public String getTOS() {
-        return "welcomePages/TOS";
+        return "welcomePages/tos";
     }
 
     @RequestMapping("/success")

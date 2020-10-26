@@ -152,17 +152,6 @@
   text-align: left;
 }
 
-.footer-link {
-  display: block;
-  margin-bottom: 10px;
-  color: #444;
-  text-decoration: none;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
-}
-
 .container-5 {
   display: -webkit-box;
   display: -webkit-flex;

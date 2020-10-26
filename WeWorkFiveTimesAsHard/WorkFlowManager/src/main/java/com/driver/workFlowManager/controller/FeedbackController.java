@@ -66,10 +66,10 @@ public class FeedbackController {
 
         /* Can either be a manager or a standard worker*/
         if(this.standardWorkerService.existsByUsername(principal.getName())) {
-            return "projectHome";
+            return "project/projectHome";
         }
         else if(this.managerService.existsByUsername(principal.getName())) {
-            return "projectHomepage";
+            return "project/projectHome";
         }
         return "error";
     }
