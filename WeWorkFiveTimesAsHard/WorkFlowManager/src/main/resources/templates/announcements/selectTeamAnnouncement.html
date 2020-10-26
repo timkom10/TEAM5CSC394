@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Select Team</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/selectTeamAnnouncement.css}"/>
 </head>
 <body class="body">
@@ -44,18 +44,20 @@
                 <thead class="text-center">
                 <tr>
                     <th>Username&nbsp;</th>
+                    <th>First Name&nbsp;</th>
+                    <th>Last Name&nbsp;</th>
                     <th>Id#</th>
-                    <th>Is Active?</th>
                     <th style="width: 200px;">Select Team</th>
                 </tr>
                 </thead>
                 <tbody class="text-center" th:each="manager: ${managers}">
                 <tr>
-                    <td th:text="${manager.getUsername()}">User1</td>
+                    <td th:text="${manager.getUserName()}">User1</td>
+                    <td th:text="${manager.getFirstName()}">FName</td>
+                    <td th:text="${manager.getLastName()}">LName</td>
                     <td th:text="${manager.getId()}">ID</td>
-                    <td th:text="${manager.getActive() &gt; 0 ? 'true' : 'false'}">Maybe</td>
                     <td>
-                        <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{composeAnnouncement(managerUsername=${manager.getUsername()})}">Select Team</a>
+                        <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{composeAnnouncement(managerUsername=${manager.getUserName()})}">Select Team</a>
                     </td>
                 </tr>
                 </tbody>

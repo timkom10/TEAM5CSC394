@@ -43,7 +43,7 @@ public class AdminController {
     @GetMapping("info")
     public String info(Principal principal, Model model) {
         model.addAttribute("workerType", adminService.findByUserName(principal.getName()));
-        return "Info/info";
+        return "info/info";
     }
 
     @RequestMapping("Hr")

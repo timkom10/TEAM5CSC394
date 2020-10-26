@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Task</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/normalize.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/CommonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/viewSingleTask.css}"/>
 </head>
 <body class="body">
@@ -61,14 +61,14 @@
             </div>
             <div th:if="${(name.equals(task.getWorker()))}">
                 <div th:if="${(task.getUpForReview() &lt; 1)}">
-                 <a th:href="@{markTaskComplete(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Mark Complete</a>
+                 <a th:href="@{standardWorkerMarkTaskComplete(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Mark Task Done</a>
                 </div>
             </div>
             <div th:if="${(task.getIsAssigned() &lt;1) && (ROLE.equals('STANDARDWORKER'))}">
-                <a th:href="@{addTask(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Volunteer</a>
+                <a th:href="@{volunteerTask(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Volunteer</a>
             </div>
             <div th:if="${(task.getUpForReview() &gt;0) && (ROLE.equals('MANAGER'))}">
-                <a th:href="@{markTaskDone(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()}, username =${task.getWorker()})}" class="button-2 w-button">Mark Task Done</a>
+                <a th:href="@{managerMarkTaskDone(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()}, username =${task.getWorker()})}" class="button-2 w-button">Mark Task Complete</a>
             </div>
         </div>
     </div>

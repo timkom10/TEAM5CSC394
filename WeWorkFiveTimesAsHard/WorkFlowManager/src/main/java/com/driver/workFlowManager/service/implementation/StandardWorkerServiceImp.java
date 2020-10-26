@@ -1,6 +1,7 @@
 package com.driver.workFlowManager.service.implementation;
 
 import com.driver.workFlowManager.model.projects.Project;
+import com.driver.workFlowManager.model.projects.Task;
 import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.*;
@@ -60,6 +61,15 @@ public class StandardWorkerServiceImp implements StandardWorkerService {
     @Override
     public boolean existsByUsername(String username) {
         return this.standardWorkerRepository.existsByUserName(username);
+    }
+
+    @Override
+    public void markTaskComplete(String username, Task task) {
+        StandardWorker standardWorker = getByUsername(username);
+        if(standardWorker != null) {
+            standardWorker.didTask(task);
+            this.standardWorkerRepository.save(standardWorker);
+        }
     }
 
     public static final Comparator<StandardWorker> compareByTotalPoints = (s1, s2) -> {

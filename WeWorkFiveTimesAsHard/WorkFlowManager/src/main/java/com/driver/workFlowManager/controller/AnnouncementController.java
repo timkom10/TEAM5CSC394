@@ -69,7 +69,7 @@ public class AnnouncementController {
     @RequestMapping(value = "searchTeamToSendAnnouncement", method = RequestMethod.GET)
     public String getSearchTeamToSendAnnouncement(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("name", principal.getName());
-        model.addAttribute("managers", userService.findManagersByUsernameLike(username));
+        model.addAttribute("managers", this.managerService.findManagersByUsernameLike(username));
         return "announcements/selectTeamAnnouncement";
     }
 
