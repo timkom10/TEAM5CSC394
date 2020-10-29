@@ -675,10 +675,7 @@ textarea.w-select {
   position: relative;
   display: block;
 }
-.w-widget-twitter-count-shim.w--large {
-  width: 36px;
-  height: 28px;
-}
+
 .w-widget-twitter-count-shim.w--large .w-widget-twitter-count-inner {
   font-size: 18px;
   line-height: 18px;
@@ -782,10 +779,6 @@ textarea.w-select {
   left: -100%;
   object-fit: cover;
   z-index: -100;
-}
-.w-background-video > video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-  -webkit-appearance: none;
 }
 .w-slider {
   position: relative;

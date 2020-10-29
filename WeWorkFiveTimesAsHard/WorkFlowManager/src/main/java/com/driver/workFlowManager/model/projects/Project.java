@@ -63,6 +63,7 @@ public class Project {
     @JsonIgnore
     private List<Task> tasks = new ArrayList<>();
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @Column(name = "next_task_key")
     private Integer nextTaskKey = 0;
 

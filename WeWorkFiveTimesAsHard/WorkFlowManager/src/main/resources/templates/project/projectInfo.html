@@ -3,52 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Info</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/projectInfo.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav">
-    <nav class="container w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
+<header id="nav" class="sticky-nav-2">
+    <nav class="w-container">
+        <ul role="list" class="nav-grid-2 w-list-unstyled">
+            <li><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
             <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
-            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
+            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
+            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
             <li>
                 <div class="w-form">
                     <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
+                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
                     </form>
                 </div>
             </li>
         </ul>
     </nav>
 </header>
-<div class="section-2">
-    <div class="container-2 w-container">
+<div class="projectInformationLoad">
+    <div class="container w-container">
         <div>
             <h1 th:text="${project.getProjectName()}">Project Name</h1>
         </div>
-    </div>
-</div>
-<div class="section">
-    <div class="w-container">
         <div class="projectdescription">
-            <p th:text="${project.getProjectDescription()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+            <p th:text="${project.getProjectDescription()}">Lorem ipsum.</p>
         </div>
     </div>
 </div>
-<div class="leaderboards">
-    <div class="container-3 w-container">
-        <div class="div-block">
-            <h1>Project Leader Board</h1>
-        </div>
-    </div>
-    <div class="w-container">
-
-        <table class="table">
+<div>
+    <div class="projectInformationLoad">
+    <div class="container w-container">
+        <h1>Project Leaderboard</h1>
+        <table class = "table">
             <thead class="text-center">
             <tr>
                 <th>Username&nbsp;</th>
@@ -67,6 +58,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 </body>
 </html>

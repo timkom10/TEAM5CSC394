@@ -37,7 +37,6 @@ public class AdminServiceImp implements AdminService {
             return adminRepository.findByUserName(name);
     }
 
-    @Override
     public void bindStandardWorkerAndManager(String standardWorkerUsername, String managerUsername)
     {
         StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(standardWorkerUsername);
@@ -51,7 +50,6 @@ public class AdminServiceImp implements AdminService {
         }
     }
 
-    @Override
     public void addStandardWorker(Users user, StandardWorker standardWorker) {
         if(user == null || standardWorker == null) return;
         user.setRoles("STANDARDWORKER");
@@ -68,7 +66,6 @@ public class AdminServiceImp implements AdminService {
         }
     }
 
-    @Override
     public void addManager(Users user, Manager manager)
     {
         if(user == null || manager == null) return;
@@ -108,7 +105,6 @@ public class AdminServiceImp implements AdminService {
         }
     }
 
-    @Override
     public void addAdmin(Users user, Admin admin)
     {
         if(user == null || admin == null) return;
@@ -126,7 +122,6 @@ public class AdminServiceImp implements AdminService {
         }
     }
 
-    @Override
     public StandardWorker removeStandardWorkerAndReturn(String username)
     {
         StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(username);
@@ -135,7 +130,6 @@ public class AdminServiceImp implements AdminService {
         return standardWorker;
     }
 
-    @Override
     public Manager getManagerForEdit(String username)
     {
         Manager nManager = new Manager();
@@ -150,7 +144,6 @@ public class AdminServiceImp implements AdminService {
         return nManager;
     }
 
-    @Override
     public Admin removeAdminAndReturn(String username)
     {
         Admin admin = this.adminRepository.findByUserName(username);

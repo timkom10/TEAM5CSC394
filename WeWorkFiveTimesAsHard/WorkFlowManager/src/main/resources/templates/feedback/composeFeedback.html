@@ -32,11 +32,11 @@
         </div>
         <div>
             <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{feedbackSent}" th:object="${feedback}" method="post">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{feedbackSent(toUsername = ${to})}" th:object="${feedback}" method="post">
                     <label for="subject" class="field-label">Subject:</label>
                         <input type="text" class="w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter subject" id="subject" th:field = "*{subject}">
                     <label for="feedback" class="field-label-2">Feedback</label>
-                        <input type="text" class="w-input" maxlength="1024" name="feedback" data-name="feedback" placeholder="Enter Feedbacl" id="feedback" required="" th:field = "*{content}">
+                        <textarea rows="4" cols="50" class="w-input" maxlength="5000" name="feedback" data-name="feedback" placeholder="Enter Feedback" id="feedback" required th:field = "*{content}"></textarea>
                     <input type="submit" value="Send Feedback" data-wait="Please wait..." class="w-button">
                 </form>
             </div>

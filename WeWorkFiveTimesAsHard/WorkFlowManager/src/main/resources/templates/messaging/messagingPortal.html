@@ -7,25 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/messagingPortal.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/commonMessaging.css}"/>
 
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-2">
-    <nav class="w-container">
-        <ul role="list" class="nav-grid-2 w-list-unstyled">
-            <li><a th:href="@{index}" class="nav-link">WeWorkFiveTimesAsHard</a></li>
-            <li><a th:href="@{index}" class="nav-link">Home</a></li>
-            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div th:replace="fragments/messagingfragment :: naviFragment"></div>
 <div>
     <div class="container-4 w-container">
         <div>

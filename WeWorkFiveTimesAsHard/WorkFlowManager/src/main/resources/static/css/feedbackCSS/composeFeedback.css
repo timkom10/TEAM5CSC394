@@ -47,6 +47,7 @@
   font-size: 20px;
 }
 
+
 .list-item {
   font-weight: 700;
 }
@@ -64,10 +65,6 @@
 
 .nav-link:hover {
   text-decoration: underline;
-}
-
-.form {
-  padding-top: 10px;
 }
 
 .body {
@@ -107,6 +104,8 @@
 }
 
 .div-block-3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
 }
 
@@ -115,10 +114,12 @@
 }
 
 .field-label {
+  font-size: 20px;
   color: #fff;
 }
 
 .field-label-2 {
+  font-size: 20px;
   color: #fff;
 }
 

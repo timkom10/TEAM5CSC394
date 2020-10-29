@@ -85,8 +85,7 @@ public class MessagingServiceImp  implements MessagingService {
         return new Message();
     }
 
-    @Override
-    public List<Message> getUsersMessages(String username) {
+    private List<Message> getUsersMessages(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             return standardWorkerRepository.findByUserName(username).getMessages();
         }

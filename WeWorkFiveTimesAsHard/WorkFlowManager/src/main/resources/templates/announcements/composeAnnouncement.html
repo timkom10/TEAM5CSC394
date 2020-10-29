@@ -34,11 +34,11 @@
     <div class="container-5 w-container">
         <div>
             <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{sendAnnouncement}" th:object="${announcement}" method="post">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{sendAnnouncement(manUsername = ${managerUsername})}" th:object="${announcement}" method="post">
                     <label for="subject" class="field-label">Subject:</label>
                         <input type="text" class="text-field-2 w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter Subject..." id="subject" required="" th:field = "*{subject}">
                     <label for="content" class="field-label-2">Announcement:</label>
-                        <input type="text" class="text-field w-input" maxlength="1024" name="content" data-name="content" placeholder="Enter announcement..." id="content" required="" th:field = "*{messagePayload}">
+                        <textarea class="text-field w-input" rows="4" cols="50" maxlength="5000" name="content" data-name="content" placeholder="Enter announcement..." id="content" required th:field = "*{messagePayload}"></textarea>
                     <input type="submit" value="Send Announcement" data-wait="Please wait..." class="w-button">
                 </form>
             </div>

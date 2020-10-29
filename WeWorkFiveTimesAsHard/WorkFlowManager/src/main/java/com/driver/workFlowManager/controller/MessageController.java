@@ -16,12 +16,8 @@ import java.security.Principal;
 @Controller
 @RequestMapping({"standardWorkers", "management", "admin"})
 public class MessageController {
-
-
     private final UserService userService;
     private final MessagingService messagingService;
-
-    static String usernamePlaceHolder ="";
 
     public MessageController(UserService userService, MessagingService messagingService) {
         this.userService = userService;
@@ -29,38 +25,42 @@ public class MessageController {
     }
 
     @RequestMapping("messagingPortal")
-    public String getMessagingPortal() {
+    public String getMessagingPortal(Principal principal, Model model) {
+        model.addAttribute("name", principal.getName());
         return "messaging/messagingPortal";
     }
 
     @GetMapping(value = "inbox")
     public String getInbox(Model model, @RequestParam(defaultValue = "") String username, Principal principal) {
+        model.addAttribute("name", principal.getName());
         model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
         return "messaging/messageInbox";
     }
 
     @GetMapping("searchUserToMessage")
     public String getSearchUserToMessage(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("name", principal.getName());
         model.addAttribute("users", userService.findByUsername(username));
         return "messaging/searchUserToMessage";
     }
 
     @GetMapping("composeMessage")
-    public String getComposeMessage(Model model, String username) {
-        usernamePlaceHolder = username;
+    public String getComposeMessage(Principal principal, Model model, String username) {
+        model.addAttribute("name", principal.getName());
         model.addAttribute("to", username);
         model.addAttribute("message", new Message());
         return "messaging/composeMessage";
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    public String getMessageSent(Principal principal, @ModelAttribute("message")Message message) {
-        this.messagingService.saveMessage(message,principal.getName(), usernamePlaceHolder);
-        return "messaging/messagingPortal";
+    public String getMessageSent(Principal principal, Model model,@ModelAttribute("message")Message message, String toUsername) {
+        this.messagingService.saveMessage(message,principal.getName(), toUsername);
+        return getMessagingPortal(principal, model) ;
     }
 
     @GetMapping(value = "viewMessage")
     public String getViewMessage(Model model, Principal principal, Integer messageId) {
+        model.addAttribute("name", principal.getName());
         model.addAttribute("message",this.messagingService.getByUsernameAndMessageId(principal.getName(), messageId));
         return "messaging/viewMessage";
     }
@@ -68,7 +68,6 @@ public class MessageController {
     @GetMapping(value = "deleteMessage")
     public String getDeleteMessage(Model model, Principal principal, @RequestParam(defaultValue = "") String username, Integer messageId) {
         this.messagingService.deleteMessage(principal.getName(), messageId);
-        model.addAttribute("messages",this.messagingService.getByUserWhereFromIsLike(principal.getName(), username));
-        return "messaging/messageInbox";
+        return getInbox(model, null, principal);
     }
 }
