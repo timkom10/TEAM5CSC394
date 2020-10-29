@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -25,8 +24,8 @@ import java.util.*;
 @TypeDefs({
         @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 })
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class StandardWorker extends WorkerType implements Serializable
 {
 
@@ -41,10 +40,10 @@ public class StandardWorker extends WorkerType implements Serializable
     private Manager manager;
 
     private String userName;
-    private String employeeRole;
     private String firstName;
     private String lastName;
     private String hireDate;
+    private String employeeRole;
     private int totalPoints = 0;
     private int currentProjectPoints = 0;
 

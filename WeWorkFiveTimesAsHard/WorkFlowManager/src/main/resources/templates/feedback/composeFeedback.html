@@ -6,25 +6,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/composeFeedback.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/commonFeedback.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav">
-    <nav class="container w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
-            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
-            <li class="list-item"><a th:href="@{feedback}"  class="nav-link">Feedback</a></li>
-            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div th:replace="fragments/feedbackFragment :: naviFragment"></div>
 <div>
     <div class="w-container">
         <div class="div-block-3">
@@ -35,7 +20,7 @@
                 <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{feedbackSent(toUsername = ${to})}" th:object="${feedback}" method="post">
                     <label for="subject" class="field-label">Subject:</label>
                         <input type="text" class="w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter subject" id="subject" th:field = "*{subject}">
-                    <label for="feedback" class="field-label-2">Feedback</label>
+                    <label for="feedback" class="field-label">Feedback</label>
                         <textarea rows="4" cols="50" class="w-input" maxlength="5000" name="feedback" data-name="feedback" placeholder="Enter Feedback" id="feedback" required th:field = "*{content}"></textarea>
                     <input type="submit" value="Send Feedback" data-wait="Please wait..." class="w-button">
                 </form>

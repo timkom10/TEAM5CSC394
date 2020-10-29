@@ -17,14 +17,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-
 /*
     PlaceHolder Data
  */
 @Component
 public class InitialData implements CommandLineRunner
 {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ManagerRepository managerRepository;
@@ -33,9 +31,7 @@ public class InitialData implements CommandLineRunner
     private final AdminRepository adminRepository;
     private final AllFeedbackRepository allFeedbackRepository;
 
-    public InitialData(UserRepository userRepository, PasswordEncoder passwordEncoder, ManagerRepository managerRepository, ProjectRepository projectRepository, StandardWorkerRepository standardWorkerRepository, AdminRepository adminRepository, AllFeedbackRepository allFeedbackRepository)
-    {
-
+    public InitialData(UserRepository userRepository, PasswordEncoder passwordEncoder, ManagerRepository managerRepository, ProjectRepository projectRepository, StandardWorkerRepository standardWorkerRepository, AdminRepository adminRepository, AllFeedbackRepository allFeedbackRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.managerRepository = managerRepository;
@@ -45,18 +41,75 @@ public class InitialData implements CommandLineRunner
         this.allFeedbackRepository = allFeedbackRepository;
     }
 
+    public StandardWorker makeStandardWorker(String userN, String firstN, String lastN, String hireD, String empR, Manager manager, Project project) {
+      StandardWorker standardWorker = new StandardWorker();
+      standardWorker.setUserName(userN);
+      standardWorker.setFirstName(firstN);
+      standardWorker.setLastName(lastN);
+      standardWorker.setHireDate(hireD);
+      standardWorker.setEmployeeRole(empR);
+      standardWorker.setManager(manager);
+      standardWorker.setProject(project);
+
+      this.standardWorkerRepository.save(standardWorker);
+      if(project != null) {
+       project.getTeamMembers().add(standardWorker);
+       this.projectRepository.save(project);
+      }
+      if(manager != null) {
+        manager.getDominion().add(standardWorker);
+        this.managerRepository.save(manager);
+      }
+      return standardWorker;
+    }
+
+    public void makeTask(String name, String urgency, String taskDescription, Integer mID, int bounty, int assigned, int complete, Project project, StandardWorker standardWorker)
+    {
+      Task task = new Task();
+      task.setTaskName(name);
+      task.setUrgency(urgency);
+      task.setTaskDescription(taskDescription);
+      task.setMilestoneId(mID);
+      task.setBounty(bounty);
+      task.setIsAssigned(assigned);
+      task.setIsComplete(complete);
+
+
+      if(standardWorker != null)
+          task.setWorker(standardWorker.getUserName());
+      else
+        task.setWorker("Available");
+
+      if(complete > 0 && standardWorker != null) {
+          standardWorker.didTask(task);
+          this.standardWorkerRepository.save(standardWorker);
+      }
+
+      if(project != null)
+      {
+       task.setProjectId(project.getId());
+       if(complete > 0) {
+        project.addCompletedTask(task);
+       }
+       else {
+        project.addTask(task);
+       }
+        this.projectRepository.save(project);
+      }
+    }
+
     @Override
-    public void run(String... args) {
-        System.out.println("Started in Bootstrap");
+    public void run(String... args)
+    {
+       System.out.println("Started in Bootstrap");
 
-        //clear the DB
-        userRepository.deleteAll();
-        managerRepository.deleteAll();
-        standardWorkerRepository.deleteAll();
-        projectRepository.deleteAll();
-        adminRepository.deleteAll();
-        allFeedbackRepository.deleteAll();
-
+       //clear the DB
+       userRepository.deleteAll();
+       managerRepository.deleteAll();
+       standardWorkerRepository.deleteAll();
+       projectRepository.deleteAll();
+       adminRepository.deleteAll();
+       allFeedbackRepository.deleteAll();
 
        //Any new users need to have password encrypted before db insert
        Users peter = new Users("Peter", passwordEncoder.encode("peter"),"STANDARDWORKER", "none");
@@ -70,152 +123,60 @@ public class InitialData implements CommandLineRunner
        Users willy = new Users("Willy", passwordEncoder.encode("willy"),"STANDARDWORKER", "none");
        Users billy = new Users("Billy", passwordEncoder.encode("billy"),"STANDARDWORKER", "none");
 
-       userRepository.save(billy);
-       userRepository.save(tyler);
-       userRepository.save(tim);
-       userRepository.save(joey);
-       userRepository.save(paulina);
-       userRepository.save(ricky);
-       userRepository.save(willy);
-       userRepository.save(peter);
-       userRepository.save(admin);
-       userRepository.save(manager);
+       this.userRepository.save(billy);
+       this.userRepository.save(tyler);
+       this.userRepository.save(tim);
+       this.userRepository.save(joey);
+       this.userRepository.save(paulina);
+       this.userRepository.save(ricky);
+       this.userRepository.save(willy);
+       this.userRepository.save(peter);
+       this.userRepository.save(admin);
+       this.userRepository.save(manager);
 
-        //Make a new manager...
-        Manager manager_1 = new Manager();
-        manager_1.setUserName("michael");
-        manager_1.setFirstName("Michael");
-        manager_1.setLastName("Scott");
-        manager_1.setHireDate("2004-03-24");
-        manager_1.setManagerRole("MANAGER");
-        managerRepository.save(manager_1);
+       //Make a new admin
+       Admin admin_1 = new Admin();
+       admin_1.setUserName("admin");
+       admin_1.setFirstName("Bobby");
+       admin_1.setLastName("Jenks");
+       admin_1.setAdminROLE("ADMIN");
+       admin_1.setHireDate("2020-09-30");
+       adminRepository.save(admin_1);
+       //Make a new manager...
+       Manager manager_1 = new Manager();
+       manager_1.setUserName("michael");
+       manager_1.setFirstName("Michael");
+       manager_1.setLastName("Scott");
+       manager_1.setHireDate("2004-03-24");
+       manager_1.setManagerRole("MANAGER");
+       managerRepository.save(manager_1);
 
-        //Make a project
-        Project project_1 = new Project();
-        project_1.setProjectName("We(Really)Work");
-        project_1.setManager(manager_1);
-        project_1.setProjectDescription("A very important project that will beat the competition 100%");
-        manager_1.setProject(project_1);
-        projectRepository.save(project_1);
+       //Make a project
+       Project project_1 = new Project();
+       project_1.setProjectName("We(Really)Work");
+       project_1.setManager(manager_1);
+       project_1.setProjectDescription("A very important project that will beat the competition 100%");
+       manager_1.setProject(project_1);
+       projectRepository.save(project_1);
 
-        //Make standard workers
-        StandardWorker standardWorker = new StandardWorker();
-        standardWorker.setUserName("peter");
-        standardWorker.setHireDate("2020-02-20");
-        standardWorker.setFirstName("Peter");
-        standardWorker.setLastName("Gentile");
-        standardWorker.setEmployeeRole("Architect");
-        standardWorker.setManager(manager_1);
-        standardWorker.setProject(project_1);
-        manager_1.getDominion().add(standardWorker);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker);
-        projectRepository.save(project_1);
+       //Make standard workers
+       StandardWorker standardWorker_0 = this.makeStandardWorker("peter", "Peter", "gentile", "2020-02-20", "Architect", manager_1, project_1);
+       StandardWorker standardWorker_1 = this.makeStandardWorker("tyler", "Tyler", "DemoLastName", "2020-03-30", "Engine", manager_1, project_1);
+       StandardWorker standardWorker_2 = this.makeStandardWorker("tim", "Tim", "DemoLastName", "2020-04-30", "Core", manager_1, project_1);
+       StandardWorker standardWorker_3 = this.makeStandardWorker("joey", "Tyler", "DemoLastName", "2020-03-23", "Test", manager_1, project_1);
+       StandardWorker standardWorker_4 = this.makeStandardWorker("paulina", "Paulina", "DemoLastName", "2020-03-31", "Lead", manager_1, project_1);
+       StandardWorker standardWorker_5 = this.makeStandardWorker("Ricky", "Paulina", "DemoLastName", "2020-04-01", "Security", manager_1, project_1);
+       StandardWorker standardWorker_6 = this.makeStandardWorker("willy", "Willy", "DemoLastName", "2020-04-02", "Front End", manager_1, project_1);
+       StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", null, null);
 
-        StandardWorker standardWorker_1 = new StandardWorker();
-        standardWorker_1.setUserName("tyler");
-        standardWorker_1.setHireDate("2020-03-30");
-        standardWorker_1.setFirstName("Tyler");
-        standardWorker_1.setLastName("DemoLastName");
-        standardWorker_1.setEmployeeRole("Engine");
-        standardWorker_1.setManager(manager_1);
-        manager_1.getDominion().add(standardWorker_1);
-        standardWorker_1.setProject(project_1);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_1);
-        projectRepository.save(project_1);
-
-        StandardWorker standardWorker_2 = new StandardWorker();
-        standardWorker_2.setUserName("tim");
-        standardWorker_2.setHireDate("2020-03-31");
-        standardWorker_2.setFirstName("Tim");
-        standardWorker_2.setLastName("DemoLastName");
-        standardWorker_2.setEmployeeRole("Core");
-        standardWorker_2.setManager(manager_1);
-        manager_1.getDominion().add(standardWorker_2);
-        standardWorker_2.setProject(project_1);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_2);
-        projectRepository.save(project_1);
-
-        StandardWorker standardWorker_3 = new StandardWorker();
-        standardWorker_3.setUserName("joey");
-        standardWorker_3.setHireDate("2020-04-01");
-        standardWorker_3.setFirstName("Joey");
-        standardWorker_3.setLastName("DemoLastName");
-        standardWorker_3.setEmployeeRole("Test");
-        standardWorker_3.setManager(manager_1);
-        standardWorker_3.setProject(project_1);
-        manager_1.getDominion().add(standardWorker_3);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_3);
-        projectRepository.save(project_1);
-
-        StandardWorker standardWorker_4 = new StandardWorker();
-        standardWorker_4.setUserName("paulina");
-        standardWorker_4.setHireDate("2020-04-02");
-        standardWorker_4.setFirstName("Paulina");
-        standardWorker_4.setLastName("DemoLastName");
-        standardWorker_4.setEmployeeRole("Lead");
-        standardWorker_4.setManager(manager_1);
-        standardWorker_4.setProject(project_1);
-        manager_1.getDominion().add(standardWorker_4);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_4);
-        projectRepository.save(project_1);
-
-
-        StandardWorker standardWorker_5 = new StandardWorker();
-        standardWorker_5.setUserName("ricky");
-        standardWorker_5.setHireDate("2020-04-03");
-        standardWorker_5.setFirstName("Ricky");
-        standardWorker_5.setLastName("DemoLastName");
-        standardWorker_5.setEmployeeRole("Security");
-        standardWorker_5.setManager(manager_1);
-        standardWorker_5.setProject(project_1);
-        manager_1.getDominion().add(standardWorker_5);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_5);
-        projectRepository.save(project_1);
-
-        StandardWorker standardWorker_6 = new StandardWorker();
-        standardWorker_6.setUserName("willy");
-        standardWorker_6.setHireDate("2020-04-04");
-        standardWorker_6.setFirstName("Willy");
-        standardWorker_6.setLastName("DemoLastName");
-        standardWorker_6.setEmployeeRole("Front End");
-        standardWorker_6.setManager(manager_1);
-        standardWorker_6.setProject(project_1);
-        manager_1.getDominion().add(standardWorker_6);
-        project_1.getTeamMembers().add(standardWorker);
-        standardWorkerRepository.save(standardWorker_6);
-        projectRepository.save(project_1);
-
-        StandardWorker standardWorker_7 = new StandardWorker();
-        standardWorker_7.setUserName("billy");
-        standardWorker_7.setHireDate("2020-07-24");
-        standardWorker_7.setFirstName("Billy");
-        standardWorker_7.setLastName("DemoLastName");
-        standardWorker_7.setEmployeeRole("Back End");
-        standardWorkerRepository.save(standardWorker_7);
-
-        //Make a new admin
-        Admin admin_1 = new Admin();
-        admin_1.setUserName("admin");
-        admin_1.setFirstName("Bobby");
-        admin_1.setLastName("Jenks");
-        admin_1.setAdminROLE("ADMIN");
-        admin_1.setHireDate("2020-09-30");
-        adminRepository.save(admin_1);
-
-        //Make some messages: STRESS TEST
-        Message message_1 = new Message();
-        message_1.setFrom(manager.getUsername());
-        message_1.setTo(standardWorker.getUserName());
-        message_1.setSubject("I Hope I am doing this right..");
-        message_1.setMessagePayload("Because, If I am not, I am more than likely doomed");
-        standardWorker.addMessage(message_1);
-        standardWorkerRepository.save(standardWorker);
+       //Make a message
+       Message message_1 = new Message();
+       message_1.setFrom(manager.getUsername());
+       message_1.setTo(standardWorker_0.getUserName());
+       message_1.setSubject("I Hope I am doing this right..");
+       message_1.setMessagePayload("Because, If I am not, I am more than likely doomed");
+       standardWorker_0.addMessage(message_1);
+       standardWorkerRepository.save(standardWorker_0);
 
         //Make an announcement(s):
        for(StandardWorker sw : manager_1.getDominion()) {
@@ -228,224 +189,54 @@ public class InitialData implements CommandLineRunner
            standardWorkerRepository.save(sw);
        }
 
-        //Make some COMPLETED Tasks
-        Task task_1 = new Task();
-        task_1.setBounty(450);
-        task_1.setIsAssigned(1);
-        task_1.setProjectId(project_1.getId());
-        task_1.setTaskName("Very important");
-        task_1.setUrgency("Extremely urgent");
-        task_1.setIsComplete(1);
-        task_1.setWorker(standardWorker.getUserName());
-        project_1.addCompletedTask(task_1);
-        projectRepository.save(project_1);
+       //Make some COMPLETED Tasks
+       this.makeTask("Demo Test Task Name", "Demo Test Urgency","", null,450, 1,1, project_1, standardWorker_0);
+       this.makeTask("Pretty important", "Extremely urgent", "",null, 300, 1, 1, project_1, standardWorker_1);
+       this.makeTask("Important Task Name", "Crucial", "",null, 310, 1, 1, project_1, standardWorker_2);
+       this.makeTask("Test Task Name", "Important", "",null, 320, 1, 1, project_1, standardWorker_3);
+       this.makeTask("Hard Task Name", "Very-Urgent", "",null, 330, 1, 1, project_1, standardWorker_4);
+       this.makeTask("Also Hard Task Name", "Did I say important?", "",null, 340, 1, 1, project_1, standardWorker_5);
+       this.makeTask("Task Name", "Im-port-ant","", null, 350, 1, 1, project_1, standardWorker_6);
 
-        standardWorker.didTask(task_1);
-        this.standardWorkerRepository.save(standardWorker);
+       //Make a few milestones
+       Milestones milestone_1 = new Milestones();
+       milestone_1.setMilestoneName("Milestone #343");
+       milestone_1.setDescription("A very important milestone");
+       milestone_1.setDueDate(new Date());
+       project_1.addMilestone(milestone_1);
+       projectRepository.save(project_1);
 
+       Milestones milestone_2 = new Milestones();
+       milestone_2.setMilestoneName("Milestone #342");
+       milestone_2.setDescription("Not so very important milestone");
+       milestone_2.setDueDate(new Date());
+       project_1.addMilestone(milestone_2);
+       projectRepository.save(project_1);
 
-        Task task_2 = new Task();
-        task_2.setBounty(300);
-        task_2.setIsAssigned(1);
-        task_2.setProjectId(project_1.getId());
-        task_2.setTaskName("Pretty important");
-        task_2.setUrgency("Extremely urgent");
-        task_2.setIsComplete(1);
-        task_2.setWorker(standardWorker_1.getUserName());
-        project_1.addCompletedTask(task_2);
-        projectRepository.save(project_1);
+       //Add some milestone specific tasks
+       this.makeTask("Demo Task Name", "Extremely urgent","Test Task Description", milestone_1.getId(), 450, 1, 0, project_1, standardWorker_0);
+       this.makeTask("Test Task Name", "is Important","Drawn-out, task description", milestone_1.getId(), 440, 1, 0, project_1, standardWorker_1);
+       this.makeTask("--Important--", "crucial","Drawn-out, task description", milestone_1.getId(), 430, 1, 0, project_1, standardWorker_2);
+       this.makeTask("--Task Name--", "urgent","Drawn-out, task description", milestone_1.getId(), 420, 1, 0, project_1, standardWorker_3);
+       this.makeTask("Some Task Name", "urgent","Drawn-out, task description", milestone_1.getId(), 410, 1, 0, project_1, standardWorker_4);
+       this.makeTask("A Task Name", "urgent","Drawn-out, task description", milestone_1.getId(), 400, 0, 0, project_1, null);
 
-        standardWorker_1.didTask(task_2);
-        this.standardWorkerRepository.save(standardWorker_1);
+       //Make some feedback types
+       Feedback feedback = new Feedback();
+       feedback.setFrom(manager_1.getUserName());
+       feedback.setTo(standardWorker_0.getUserName());
+       feedback.setSubject("Great Job");
+       feedback.setContent("very nice thank you!");
+       standardWorker_0.addFeedback(feedback);
+       this.standardWorkerRepository.save(standardWorker_0);
 
-        Task task_3 = new Task();
-        task_3.setBounty(310);
-        task_3.setIsAssigned(1);
-        task_3.setProjectId(project_1.getId());
-        task_3.setTaskName("Important Task Name");
-        task_3.setUrgency("Crucial");
-        task_3.setIsComplete(1);
-        task_3.setWorker(standardWorker_2.getUserName());
-        project_1.addCompletedTask(task_3);
-        projectRepository.save(project_1);
-
-        standardWorker_2.didTask(task_3);
-        this.standardWorkerRepository.save(standardWorker_2);
-
-        Task task_4 = new Task();
-        task_4.setBounty(320);
-        task_4.setIsAssigned(1);
-        task_4.setProjectId(project_1.getId());
-        task_4.setTaskName("Also important");
-        task_4.setUrgency("Was key");
-        task_4.setIsComplete(1);
-        task_4.setWorker(standardWorker_3.getUserName());
-        project_1.addCompletedTask(task_4);
-        projectRepository.save(project_1);
-
-        standardWorker_3.didTask(task_4);
-        this.standardWorkerRepository.save(standardWorker_3);
-
-        Task task_5 = new Task();
-        task_5.setBounty(330);
-        task_5.setIsAssigned(1);
-        task_5.setProjectId(project_1.getId());
-        task_5.setTaskName("Hard Task Name");
-        task_5.setUrgency("very urgent");
-        task_5.setIsComplete(1);
-        task_5.setWorker(standardWorker_4.getUserName());
-        project_1.addCompletedTask(task_5);
-        projectRepository.save(project_1);
-
-        standardWorker_4.didTask(task_5);
-        this.standardWorkerRepository.save(standardWorker_4);
-
-        Task task_6 = new Task();
-        task_6.setBounty(340);
-        task_6.setIsAssigned(1);
-        task_6.setProjectId(project_1.getId());
-        task_6.setTaskName("Hard.Task.Name");
-        task_6.setUrgency("Did I say important?");
-        task_6.setIsComplete(1);
-        task_6.setWorker(standardWorker_5.getUserName());
-        project_1.addCompletedTask(task_6);
-        projectRepository.save(project_1);
-
-        standardWorker_5.didTask(task_6);
-        this.standardWorkerRepository.save(standardWorker_5);
-
-        Task task_7 = new Task();
-        task_7.setBounty(350);
-        task_7.setIsAssigned(1);
-        task_7.setProjectId(project_1.getId());
-        task_7.setTaskName("Task Name");
-        task_7.setUrgency("Im-port-ant");
-        task_7.setIsComplete(1);
-        task_7.setWorker(standardWorker_6.getUserName());
-        project_1.addCompletedTask(task_7);
-        projectRepository.save(project_1);
-
-        standardWorker_6.didTask(task_7);
-        this.standardWorkerRepository.save(standardWorker_6);
-
-
-        //Make some feedback
-        Feedback feedback = new Feedback();
-        feedback.setFrom(manager_1.getUserName());
-        feedback.setTo(standardWorker.getUserName());
-        feedback.setSubject("Great Job");
-        feedback.setContent("very nice thank you!");
-        standardWorker.addFeedback(feedback);
-        this.standardWorkerRepository.save(standardWorker);
-
-        AllFeedback allFeedback = new AllFeedback();
-        allFeedback.setTo(standardWorker.getUserName());
-        allFeedback.setFrom(standardWorker.getUserName());
-        allFeedback.setSubject("Congratulating myself?");
-        allFeedback.setContent("For demonstrations of course");
-        allFeedback.setDate(new Date());
-        this.allFeedbackRepository.save(allFeedback);
-        //check the Database
-
-
-     //Make a milestone
-     Milestones milestone_1 = new Milestones();
-     milestone_1.setMilestoneName("Milestone #343");
-     milestone_1.setDescription("A very important milestone");
-     milestone_1.setDueDate(new Date());
-
-     project_1.addMilestone(milestone_1);
-     projectRepository.save(project_1);
-
-     Milestones milestone_2 = new Milestones();
-     milestone_2.setMilestoneName("Milestone #342");
-     milestone_2.setDescription("Not so very important milestone");
-     milestone_2.setDueDate(new Date());
-
-     project_1.addMilestone(milestone_2);
-     projectRepository.save(project_1);
-
-     /*Add milestone tasks !COMPLETED => In Progress*/
-
-     Task _task_ = new Task();
-     _task_.setBounty(450);
-     _task_.setIsAssigned(1);
-     _task_.setProjectId(project_1.getId());
-     _task_.setTaskName("Very important");
-     _task_.setUrgency("Extremely urgent");
-     _task_.setWorker(standardWorker.getUserName());
-     _task_.setMilestoneId(milestone_1.getId());
-     _task_.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_);
-     projectRepository.save(project_1);
-
-     Task _task_1 = new Task();
-     _task_1.setBounty(440);
-     _task_1.setIsAssigned(1);
-     _task_1.setProjectId(project_1.getId());
-     _task_1.setTaskName("Very important");
-     _task_1.setUrgency("is important");
-     _task_1.setMilestoneId(milestone_1.getId());
-     _task_1.setWorker(standardWorker_1.getUserName());
-     _task_1.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_1);
-
-     projectRepository.save(project_1);
-
-
-     Task _task_2 = new Task();
-     _task_2.setBounty(440);
-     _task_2.setIsAssigned(1);
-     _task_2.setProjectId(project_1.getId());
-     _task_2.setTaskName("--important--");
-     _task_2.setUrgency("crucial");
-     _task_2.setMilestoneId(milestone_1.getId());
-     _task_2.setWorker(standardWorker_2.getUserName());
-     _task_2.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_2);
-
-     projectRepository.save(project_1);
-
-     Task _task_3 = new Task();
-     _task_3.setBounty(440);
-     _task_3.setIsAssigned(1);
-     _task_3.setProjectId(project_1.getId());
-     _task_3.setTaskName("--Task Name--");
-     _task_3.setUrgency("urgent");
-     _task_3.setMilestoneId(milestone_1.getId());
-     _task_3.setWorker(standardWorker_3.getUserName());
-     _task_3.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_3);
-
-     projectRepository.save(project_1);
-
-
-     Task _task_4 = new Task();
-     _task_4.setBounty(440);
-     _task_4.setIsAssigned(1);
-     _task_4.setProjectId(project_1.getId());
-     _task_4.setTaskName("A task Name");
-     _task_4.setUrgency("An urgency");
-     _task_4.setMilestoneId(milestone_1.getId());
-     _task_4.setWorker(standardWorker_4.getUserName());
-     _task_4.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_4);
-
-     projectRepository.save(project_1);
-
-
-     Task _task_5 = new Task();
-     _task_5.setBounty(440);
-     _task_5.setIsAssigned(0);
-     _task_5.setProjectId(project_1.getId());
-     _task_5.setTaskName("Demo task Name");
-     _task_5.setUrgency("Demo urgency");
-     _task_5.setMilestoneId(milestone_1.getId());
-     _task_5.setWorker("Available");
-     _task_5.setTaskDescription("A very long, drawn-out, task description....");
-     project_1.addTask(_task_5);
-
-     projectRepository.save(project_1);
-
+       AllFeedback allFeedback = new AllFeedback();
+       allFeedback.setTo(standardWorker_0.getUserName());
+       allFeedback.setFrom(standardWorker_0.getUserName());
+       allFeedback.setSubject("Congratulating myself?");
+       allFeedback.setContent("For demonstrations of course");
+       allFeedback.setDate(new Date());
+       this.allFeedbackRepository.save(allFeedback);
+        // check the Database
     }
 }

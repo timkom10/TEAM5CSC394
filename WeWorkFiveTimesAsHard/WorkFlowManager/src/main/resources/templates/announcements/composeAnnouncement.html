@@ -6,25 +6,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/composeAnnouncement.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/commonAnnouncement.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-2">
-    <nav class="w-container">
-        <ul role="list" class="nav-grid-2 w-list-unstyled">
-            <li><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
-            <li><a th:href="@{index}" class="nav-link">Home</a></li>
-            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                            <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div th:replace="fragments/announcementFragment :: naviFragment"></div>
 <div>
     <div class="container-4 w-container">
         <div>
@@ -36,8 +21,8 @@
             <div class="w-form">
                 <form id="email-form-2" name="email-form-2" data-name="Email Form 2" th:action="@{sendAnnouncement(manUsername = ${managerUsername})}" th:object="${announcement}" method="post">
                     <label for="subject" class="field-label">Subject:</label>
-                        <input type="text" class="text-field-2 w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter Subject..." id="subject" required="" th:field = "*{subject}">
-                    <label for="content" class="field-label-2">Announcement:</label>
+                        <input type="text" class="text-field w-input" maxlength="256" name="subject" data-name="subject" placeholder="Enter Subject..." id="subject" required="" th:field = "*{subject}">
+                    <label for="content" class="field-label">Announcement:</label>
                         <textarea class="text-field w-input" rows="4" cols="50" maxlength="5000" name="content" data-name="content" placeholder="Enter announcement..." id="content" required th:field = "*{messagePayload}"></textarea>
                     <input type="submit" value="Send Announcement" data-wait="Please wait..." class="w-button">
                 </form>
