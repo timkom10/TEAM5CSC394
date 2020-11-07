@@ -10,7 +10,6 @@ import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.AdminService;
 import com.driver.workFlowManager.service.UserService;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,7 +31,6 @@ public class AdminServiceImp implements AdminService {
         this.userService = userService;
     }
 
-    @Override
     public Admin findByUserName(String name) {
             return adminRepository.findByUserName(name);
     }

@@ -1,0 +1,35 @@
+.body
+{
+    background-image: url('images/errorBackground.jpg');
+    background-position: 50%, 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.container{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 15%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 400;
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.button
+{
+    width: 100%;
+    text-align: center;
+}

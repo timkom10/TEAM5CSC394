@@ -6,39 +6,13 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/addManager.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/commonAdmin.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav">
-    <nav class="w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li id="w-node-14d3ead45d2e-6fdf9210" class="list-item-2">
-                <a th:href="@{index}" class="link-block w-inline-block">
-                    <h3 class="heading-2">WeWorkFiveTimesAsHard</h3>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{messagingPortal}" class="link-block-2 w-inline-block">
-                    <h3 class="heading">Messages</h3>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{Hr}" class="link-block-2 w-inline-block">
-                    <h3 class="heading">Resources</h3>
-                </a>
-            </li>
-            <li class="list-item">
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
 <div>
     <div class="container w-container">
-        <h3 class="heading-3">Add or Alter Manager</h3>
+        <h3 class="Info-heading">Add or Alter Manager</h3>
     </div>
     <div class="w-container">
         <div class="w-form">

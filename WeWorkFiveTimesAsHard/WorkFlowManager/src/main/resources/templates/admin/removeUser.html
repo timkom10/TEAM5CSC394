@@ -3,34 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Remove User</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/removeUser.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/commonAdmin.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-2">
-    <nav class="container-8 w-container">
-        <div>
-            <a th:href="@{/}" class="link-block-10 w-inline-block">
-                <h5 class="heading-9">WeWorkFiveTimesAsHard</h5>
-            </a>
-        </div>
-        <div>
-            <a th:href="@{index}" class="link-block-10 w-inline-block">
-                <h5 class="heading-9">Home</h5>
-            </a>
-        </div>
-        <div>
-            <div class="form-block w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" method="post" class="form" th:action="@{/logout}">
-                    <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button w-button">
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
+<div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
 <div class="section-4">
     <div class="container-9 w-container">
         <div>

@@ -32,16 +32,17 @@ public class AdminController {
     @GetMapping("index")
     public String index(Principal principal, Model model) {
         Admin admin = adminService.findByUserName(principal.getName());
-        if(admin != null)
-        {
-            model.addAttribute("admin", admin);
+        if(admin != null) {
+            model.addAttribute("aUsername", principal.getName());
             model.addAttribute("announcements", admin.getAnnouncements());
+            return "admin/index";
         }
-        return "admin/index";
+        return "error";
     }
 
     @GetMapping("info")
     public String info(Principal principal, Model model) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("workerType", adminService.findByUserName(principal.getName()));
         return "info/info";
     }
@@ -52,104 +53,119 @@ public class AdminController {
     }
 
     @RequestMapping(value = "RemoveUser", method = RequestMethod.GET)
-    public String getUserSearch(Model model, @RequestParam(defaultValue = "") String username) {
+    public String getUserSearch(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("users", userService.findByUsername(username));
-        return "admin/RemoveUser";
+        return "admin/removeUser";
     }
 
     @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
-    public String getRemoveUser(Model model, String username) {
+    public String getRemoveUser(Principal principal, Model model, String username) {
         userService.removeUser(username);
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("users", userService.findByUsername(""));
-        return "admin/RemoveUser";
+        return "admin/removeUser";
     }
 
     @RequestMapping("addUser")
-    public String getAddUser() {
+    public String getAddUser(Principal principal, Model model) {
+        model.addAttribute("aUsername", principal.getName());
         return "admin/selectUserTypeToAdd";
     }
 
     @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
-    public String getTeamMemberSearch(Model model, @RequestParam(defaultValue = "") String username) {
+    public String getTeamMemberSearch(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/searchTeamMembers";
     }
 
     @RequestMapping("addStandardWorker")
-    public String getAddStandardWorker(Model model) {
+    public String getAddStandardWorker(Principal principal, Model model) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("user", new Users());
         model.addAttribute("worker", new StandardWorker());
         return "admin/addStandardWorker";
     }
 
     @RequestMapping(value = "makeStandardWorker", method = RequestMethod.POST)
-    public String getMakeStandardWorker(@ModelAttribute("user") Users user, @ModelAttribute("worker") StandardWorker standardWorker, Model model) {
+    public String getMakeStandardWorker(Principal principal, @ModelAttribute("user") Users user, @ModelAttribute("worker") StandardWorker standardWorker, Model model) {
         this.adminService.addStandardWorker(user, standardWorker);
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentSW", standardWorker.getUserName());
         model.addAttribute("managers", this.managerService.findManagersByUsernameLike(""));
         return "admin/addStandardWorkerSelectManager";
     }
 
     @RequestMapping(value = "makeStandardWorkerSelectManager", method = RequestMethod.GET)
-    public String getMakeStandardWorkerSelectManager(Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername) {
+    public String getMakeStandardWorkerSelectManager(Principal principal, Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentSW", standardWorkerUsername);
         model.addAttribute("managers", this.managerService.findManagersByUsernameLike(username));
         return "admin/addStandardWorkerSelectManager";
     }
 
     @RequestMapping(value = "insertStandardWorker", method = RequestMethod.GET)
-    public String getInsertStandardWorker(String standardWorkerUsername, String managerUsername) {
+    public String getInsertStandardWorker(Principal principal, Model model, String standardWorkerUsername, String managerUsername) {
+        model.addAttribute("aUsername", principal.getName());
         this.adminService.bindStandardWorkerAndManager(standardWorkerUsername, managerUsername);
         return "redirect:/admin/index";
     }
 
     @RequestMapping("addManager")
-    public String getAddManager(Model model) {
+    public String getAddManager(Principal principal, Model model) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("user", new Users());
         model.addAttribute("manager", new Manager());
         return "admin/addManager";
     }
 
     @RequestMapping("makeManager")
-    public String getMakeManagerSelectTeamMembers(@ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model) {
+    public String getMakeManagerSelectTeamMembers(Principal principal, @ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model) {
         this.adminService.addManager(user, manager);
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentM", user.getUsername());
         model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
         return "admin/addManagerSelectTeamMembers";
     }
 
     @RequestMapping("makeManagerSelectTeamMembers")
-    public String getMakeManagersSelectTeamMembers(Model model, @RequestParam(defaultValue = "") String username, String managerUsername) {
+    public String getMakeManagersSelectTeamMembers(Principal principal, Model model, @RequestParam(defaultValue = "") String username, String managerUsername) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentM", managerUsername);
         model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(username));
         return "admin/addManagerSelectTeamMembers";
     }
 
     @RequestMapping("addTeamMemberToManager")
-    public String getAddTeamMemberToManager(Model model, String workerUsername, String managerUsername) {
+    public String getAddTeamMemberToManager(Principal principal, Model model, String workerUsername, String managerUsername) {
         this.adminService.bindStandardWorkerAndManager(workerUsername, managerUsername);
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentM", managerUsername);
         model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
         return "admin/addManagerSelectTeamMembers";
     }
 
     @RequestMapping("addManagerRemoveTeamMember")
-    public String getAddManagerRemoveTeamMember(Model model, String managerUsername) {
+    public String getAddManagerRemoveTeamMember(Principal principal, Model model, String managerUsername) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentM", managerUsername);
         model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkerByManager(this.managerService.getByUsername(managerUsername)));
         return "admin/addManagerRemoveTeamMembers";
     }
 
     @RequestMapping("removeTeamMemberFromManager")
-    public String getRemoveTeamMemberFromManager(Model model, String managerUsername, String workerUsername) {
+    public String getRemoveTeamMemberFromManager(Principal principal, Model model, String managerUsername, String workerUsername) {
         this.managerService.removeWorkerFromManager(workerUsername, managerUsername);
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("currentM", managerUsername);
         model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkerByManager(this.managerService.getByUsername(managerUsername)));
         return "admin/addManagerRemoveTeamMembers";
     }
 
     @RequestMapping("addAdmin")
-    public String getAddAdmin(Model model) {
+    public String getAddAdmin(Principal principal, Model model) {
+        model.addAttribute("aUsername", principal.getName());
         model.addAttribute("user", new Users());
         model.addAttribute("admin", new Admin());
         return "admin/addAdmin";
@@ -165,21 +181,24 @@ public class AdminController {
     }
 
     @GetMapping("alterWorker")
-    public String getAlterWorker(Model model,String username)
+    public String getAlterWorker(Principal principal, Model model,String username)
     {
         /*Return the original standard worker from service*/
         Users user = this.userService.getByUsername(username);
         switch (user.getRoles()) {
             case "STANDARDWORKER":
                 model.addAttribute("user", user);
+                model.addAttribute("aUsername", principal.getName());
                 model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
                 return "admin/addStandardWorker";
             case "MANAGER":
                 model.addAttribute("user", user);
+                model.addAttribute("aUsername", principal.getName());
                 model.addAttribute("manager", this.adminService.getManagerForEdit(username));
                 return "admin/addManager";
             case "ADMIN":
                 model.addAttribute("user", user);
+                model.addAttribute("aUsername", principal.getName());
                 model.addAttribute("admin", this.adminService.removeAdminAndReturn(username));
                 return "admin/addAdmin";
         }

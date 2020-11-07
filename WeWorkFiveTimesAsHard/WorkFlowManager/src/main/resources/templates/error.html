@@ -3,29 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Page Not Found - Brand</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" type="text/css"  th:href="@{/css/errorCSS/Error.css}"/>
-    <link rel="stylesheet" type="text/css"  th:href="@{/css/commonCSS/bootstrap.css}"/>
-
+    <title>Page Not Found</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/welcomeCSS/error.css}"/>
 </head>
-<body id="page-top">
-<div id="wrapper">
-    <div class="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                <div class="container-fluid"><strong style="color: rgb(0,0,0);font-size: 30px;">Not Found</strong></div>
-            </nav>
-            <div class="container-fluid">
-                <div class="text-center mt-5">
-                    <div class="error mx-auto" data-text="404">
-                        <p class="m-0">404</p>
-                    </div>
-                    <p class="text-dark mb-5 lead">Page Not Found</p>
-                    <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a th:href="@{index}">← Back to Dashboard</a></div>
-            </div>
-        </div>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+<body class="body">
+<div class="container w-container">
+    <h1>404 - Page Not Found</h1>
+    <a th:href="@{/}" class="button w-button">Back To Dashboard</a>
+</div>
 </body>
 </html>

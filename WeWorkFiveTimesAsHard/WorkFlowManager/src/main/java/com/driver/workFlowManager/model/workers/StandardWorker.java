@@ -28,7 +28,6 @@ import java.util.*;
 @NoArgsConstructor
 public class StandardWorker extends WorkerType implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -144,13 +143,5 @@ public class StandardWorker extends WorkerType implements Serializable
     @Override
     public String getRole() {
         return this.employeeRole;
-    }
-
-    public String getManagerUsername()
-    {
-        if(this.manager == null) {
-            return "";
-        }
-        return manager.getUserName();
     }
 }

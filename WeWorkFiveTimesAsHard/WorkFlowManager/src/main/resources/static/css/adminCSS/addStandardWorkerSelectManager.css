@@ -1,0 +1,50 @@
+.body {
+  background-image: url('images/makeStandardWorkerSelectManagerBackGround.jpg');
+  background-position: 50% 50%;
+}
+
+.nav-link{
+  color: black;
+}
+
+.form {
+  display: block;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.field-label {
+  display: block;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.table
+{
+  text-align:center;
+  width: 100%;
+  font-size: 20px;
+  color: black;
+}
+
+.tableRow
+{
+  padding-top: 20px;
+  text-align:center;
+  border-bottom: 1px solid #ddd;
+}

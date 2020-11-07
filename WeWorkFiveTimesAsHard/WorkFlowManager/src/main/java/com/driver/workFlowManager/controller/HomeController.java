@@ -12,7 +12,6 @@ import java.io.IOException;
 @RequestMapping("/")
 public class HomeController {
 
-
     @GetMapping({"/","index"})
     public String getWelcome() { return "welcomePages/index"; }
 
