@@ -66,10 +66,23 @@
     text-decoration: none;
 }
 
+.infoContainer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 .Info-heading {
     color: #333;
     font-weight: 400;
     text-align: center;
+}
+
+.table {
+    text-align:center;
+    width: 100%;
+    font-size: 20px;
+    border-collapse: separate;
+    border-spacing: 0 20px;
 }
 
 @media screen and (max-width: 767px) {

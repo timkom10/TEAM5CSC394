@@ -58,69 +58,12 @@
   text-decoration: underline;
 }
 
-.submit-button-2 {
-  margin-top: 7px;
-  padding-top: 11px;
-}
-
 .form {
   margin-top: 4px;
 }
 
-.container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.paragraph {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  color: #000;
+.table{
   font-size: 20px;
-}
-
-.table
-{
-  font-size: 20px;
-}
-.div-block {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 0;
-  padding-bottom: 0;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.container-3 {
-  padding-top: 20px;
-  padding-bottom: 40px;
 }
 
 .container-4 {
@@ -134,27 +77,6 @@
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-}
-
-.button {
-  width: 100%;
-  background-color: #ec383b;
-  -o-object-fit: cover;
-  object-fit: cover;
-}
-
-.div-block-2 {
-  width: 20%;
-}
-
-.div-block-3 {
-  width: 20%;
-}
-
-.button-2 {
-  width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 
 .list {
@@ -171,10 +93,6 @@
 
 .list-item {
   font-size: 20px;
-}
-
-.container-5 {
-  padding-top: 10px;
 }
 
 @media screen and (max-width: 767px) {

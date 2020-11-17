@@ -163,9 +163,9 @@ public class InitialData implements CommandLineRunner
        StandardWorker standardWorker_0 = this.makeStandardWorker("peter", "Peter", "gentile", "2020-02-20", "Architect", manager_1, project_1);
        StandardWorker standardWorker_1 = this.makeStandardWorker("tyler", "Tyler", "DemoLastName", "2020-03-30", "Engine", manager_1, project_1);
        StandardWorker standardWorker_2 = this.makeStandardWorker("tim", "Tim", "DemoLastName", "2020-04-30", "Core", manager_1, project_1);
-       StandardWorker standardWorker_3 = this.makeStandardWorker("joey", "Tyler", "DemoLastName", "2020-03-23", "Test", manager_1, project_1);
+       StandardWorker standardWorker_3 = this.makeStandardWorker("joey", "Joey", "DemoLastName", "2020-03-23", "Test", manager_1, project_1);
        StandardWorker standardWorker_4 = this.makeStandardWorker("paulina", "Paulina", "DemoLastName", "2020-03-31", "Lead", manager_1, project_1);
-       StandardWorker standardWorker_5 = this.makeStandardWorker("Ricky", "Paulina", "DemoLastName", "2020-04-01", "Security", manager_1, project_1);
+       StandardWorker standardWorker_5 = this.makeStandardWorker("ricky", "Ricky", "DemoLastName", "2020-04-01", "Security", manager_1, project_1);
        StandardWorker standardWorker_6 = this.makeStandardWorker("willy", "Willy", "DemoLastName", "2020-04-02", "Front End", manager_1, project_1);
        StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", null, null);
 

@@ -7,21 +7,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/welcomeCSS/about.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/welcomeCSS/commonWelcome.css}"/>
 </head>
 <body class="body">
 <div th:replace="fragments/welcomepagesfragment :: welcomePagesHeader"></div>
 <div>
     <div class="container w-container">
-        <div>
-            <h1 class="heading">About Us</h1>
-        </div>
+        <h1 class="heading">About Us</h1>
     </div>
-</div>
-<div>
-    <div class="container-2 w-container">
-        <div class="div-block">
-            <p class="paragraph">Welcome to WeWorkFiveTimesAsHard, a project management tool that makes working remotely easy. <br>The current rise of remote workers calls for an improved platform for team collaboration. WeWorkFiveTimesAsHard is a project management tool that allows teams to track task progress, provide peer-feedback, and communicate with one another all on one platform. By providing these features in one location, our tool allows for a more organized project workflow that allows for efficient and effective remote teamwork.<br></p>
-        </div>
+    <div class="container w-container">
+        <p class="paragraph">Welcome to WeWorkFiveTimesAsHard, a project management tool that makes working remotely easy. <br>The current rise of remote workers calls for an improved platform for team collaboration. WeWorkFiveTimesAsHard is a project management tool that allows teams to track task progress, provide peer-feedback, and communicate with one another all on one platform. By providing these features in one location, our tool allows for a more organized project workflow that allows for efficient and effective remote teamwork.<br></p>
     </div>
 </div>
 </body>

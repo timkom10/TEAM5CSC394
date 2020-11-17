@@ -30,23 +30,16 @@
 }
 
 .table-container {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 20px;
-  font-weight:bold;
   font-size: 20px;
 }
 
-.table
-{
-  text-align:center;
-  width: 100%;
-  font-size: 20px;
+
+.table {
   color: black;
 }
 
-.tableRow
-{
-  padding-top: 20px;
-  text-align:center;
-  border-bottom: 1px solid #ddd;
+.tableInfoPanel {
+  border-bottom: 1px solid black;
 }

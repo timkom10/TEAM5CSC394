@@ -6,16 +6,16 @@
 </head>
 <body>
 <div th:fragment="welcomePagesHeader">
-    <header id="nav" class="sticky-nav-3">
+    <header id="nav" class="sticky-nav-welcome">
         <nav class="w-container">
-            <ul role="list" class="nav-grid w-list-unstyled">
-                <li id="w-node-ae6973658765-3229ec8d">
+            <ul role="list" class="welcome-nav-grid w-list-unstyled">
+                <li>
                     <div>
                         <h2>WeWorkFiveTimesAsHard</h2>
                     </div>
                 </li>
-                <li><a th:href="@{tos}" class="nav-link-2">Terms of Service</a></li>
-                <li><a th:href="@{about}" class="nav-link-2">About</a></li>
+                <li><a th:href="@{tos}" class="nav-link-welcome">Terms of Service</a></li>
+                <li><a th:href="@{about}" class="nav-link-welcome">About</a></li>
                 <li><a th:href="@{login}" class="w-button">Login</a></li>
             </ul>
         </nav>

@@ -3,17 +3,6 @@
   background-position: 50% 50%;
 }
 
-.container-6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 20px;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-}
-
 .field-label {
   color: #000;
   font-size: 20px;

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Select Team Members</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/addManagerSelectTeamMembers.css}"/>
@@ -12,7 +11,7 @@
 <body class="body">
 <div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
 <div>
-    <div class="container w-container">
+    <div class="infoContainer w-container">
         <h3 class="Info-heading">Assign Available Workers</h3>
     </div>
     <div class="w-container">
@@ -28,7 +27,7 @@
     <div class="w-container">
         <table class="table">
             <thead>
-            <tr class="tableRow">
+            <tr>
                 <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -37,7 +36,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="worker: ${workers}" class="tableRow">
+            <tr th:each="worker: ${workers}" >
                 <td th:text="${worker.getUserName()}">Username</td>
                 <td th:text="${worker.getFirstName()}">First name</td>
                 <td th:text="${worker.getLastName()}">Last name</td>

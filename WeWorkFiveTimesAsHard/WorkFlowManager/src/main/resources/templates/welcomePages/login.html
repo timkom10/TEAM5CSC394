@@ -4,41 +4,34 @@
     <meta charset="utf-8">
     <title>ProjectManagement</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/welcomeCSS/login.css}"/>
 </head>
-
 <body class="body">
-<section id="contact-form" class="contact-form">
     <div class="container-6 w-container">
-        <h2 class="heading-10">Login</h2>
-        <div id="formInstructions" class="small-text"><em class="italic-text">Fields marked with an asterisk (*) are required.</em></div>
+        <h2>Login</h2>
+        <div id="formInstructions" class="small-text"><em>Fields marked with an asterisk (*) are required.</em></div>
         <div class="w-form">
-
             <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form" class="form" th:action="@{/login}" method="post">
                 <div class="contact-form-grid">
-
-                    <div id="w-node-ae69e02d958b-3229ec8d">
-                        <label for="username" class="field-label-4"> User Name *</label>
+                    <div>
+                        <label for="username"> User Name *</label>
                         <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Your User Name" id="username" required="">
                     </div>
-                    <div id="w-node-ae69e02d9597-3229ec8d">
-                        <label for="password" class="field-label-4">Password *</label>
+                    <div>
+                        <label for="password">Password *</label>
                         <input type="password" class="w-input" maxlength="256" name="password" data-name="password" placeholder="Your Password" id="password" required="">
                     </div>
                 </div>
                 <input type="submit" value="Submit" data-wait="Please wait..." class="w-button">
             </form>
+        </div>
     </div>
+    <div class="container-6 w-container" th:if="${param.error}"  >
+        <a href="#" class="forgotLinkBlock w-inline-block">
+            <h4>Forgot? Click Here.</h4>
+         </a>
     </div>
-</section>
-
-<div class="container-7 w-container" th:if="${param.error}"  >
-    <a href="#" class="link-block-6 w-inline-block">
-        <h4 class="heading-11">Forgot? Click Here.</h4>
-    </a>
-</div>
 </body>
 </html>

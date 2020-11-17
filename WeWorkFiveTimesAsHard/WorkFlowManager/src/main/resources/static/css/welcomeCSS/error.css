@@ -1,5 +1,4 @@
-.body
-{
+.body {
     background-image: url('images/errorBackground.jpg');
     background-position: 50%, 100%;
     background-size: cover;
@@ -28,8 +27,7 @@
     object-fit: fill;
 }
 
-.button
-{
+.button {
     width: 100%;
     text-align: center;
 }

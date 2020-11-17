@@ -15,20 +15,22 @@
         <div>
             <h2 class="Info-heading">Compose Announcement</h2>
         </div>
-        <div><a th:href="@{searchTeamToSendAnnouncement}" class="w-button">Compose Announcement</a></div>
+        <div>
+            <a th:href="@{searchTeamToSendAnnouncement}" class="w-button">Compose Announcement</a>
+        </div>
     </div>
     <div class="table-container w-container">
         <div>
             <table class="table">
                 <thead>
-                <tr class="tableRow">
-                    <th>From</th>
-                    <th>Subject</th>
-                    <th>View</th>
+                <tr>
+                    <th class="tableInfoPanel">From</th>
+                    <th class="tableInfoPanel">Subject</th>
+                    <th class="tableInfoPanel" >View</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="tableRow" th:each="announcement : ${announcements}">
+                <tr th:each="announcement : ${announcements}">
                     <td th:text="${announcement.getFrom()}"><strong>From</strong></td>
                     <td th:text="${announcement.getSubject()}"><strong>Subject</strong></td>
                     <td>

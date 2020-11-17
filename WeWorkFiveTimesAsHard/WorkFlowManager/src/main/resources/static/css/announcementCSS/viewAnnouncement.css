@@ -10,16 +10,6 @@
   text-align: center;
 }
 
-.container-6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 20px;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-}
 
 .button-3 {
   background-color: #ec383b;

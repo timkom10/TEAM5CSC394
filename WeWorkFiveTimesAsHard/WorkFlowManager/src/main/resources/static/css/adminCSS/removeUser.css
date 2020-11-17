@@ -7,48 +7,6 @@
   color: black;
 }
 
-.section-4 {
-  display: block;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-}
-
-.form {
-  color: transparent;
-}
-
-.form-block {
-  margin-bottom: 0;
-  padding-top: 14px;
-  color: transparent;
-}
-
-.submit-button {
-  margin-top: 5px;
-  background-color: transparent;
-  color: #000;
-  font-size: 18px;
-}
-
-.link-block-10 {
-  padding-top: 0;
-  padding-bottom: 0;
-  text-decoration: none;
-}
-
-.heading-9 {
-  padding-bottom: 1px;
-  font-weight: 400;
-}
-
 .container-9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -68,14 +26,14 @@
   align-items: stretch;
 }
 
-.heading-14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 20px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+.table {
+  color: black;
+}
+
+.tableRow:hover {
+  background-color: silver;
+}
+
+.removeUserButton {
+  background-color: red;
 }

@@ -5,13 +5,11 @@
     <title>Remove User</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/removeUser.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/commonAdmin.css}"/>
 </head>
 <body class="body">
 <div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
-<div class="section-4">
     <div class="container-9 w-container">
         <div>
             <h3>Remove User Search</h3>
@@ -24,32 +22,27 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="returnedusers w-container">
-        <h4 class="heading-14">Current Users</h4>
-        <div>
-            <table class="table">
-                <thead class="text-center">
-                <tr>
-                    <th>Users&nbsp;</th>
-                    <th>Role</th>
-                    <th>ID#</th>
-                    <th style="width: 200px;">Remove?</th>
-                </tr>
-                </thead>
-                <tbody class="text-center" th:each="user: ${users}">
-                <tr>
-                    <td th:text="${user.getUsername()}">User1</td>
-                    <td th:text="${user.getRoles()}">Role</td>
-                    <td th:text="${user.getId()}">12345</td>
-                    <td>
-                        <a class="btn btn-danger btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{deleteUser(username=${user.username})}">Remove</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <h2 class="Info-heading">Current Users</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Users</th>
+                <th>Role</th>
+                <th>ID#</th>
+                <th>Remove?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}" class="tableRow">
+                <td th:text="${user.getUsername()}">User1</td>
+                <td th:text="${user.getRoles()}">Role</td>
+                <td th:text="${user.getId()}">12345</td>
+                <td>
+                    <a class="w-button removeUserButton" th:href="@{deleteUser(username=${user.username})}">Remove</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 </div>
 </body>
 </html>

@@ -11,14 +11,13 @@
 <body class="body">
 <div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
 <div>
-    <div class="container w-container">
-        <h3 class="Info-heading">Please Select A Manager to Assign Worker to:</h3>
+    <div class="infoContainer w-container">
+        <h3 class="notice-heading">Assign Worker to Manager:</h3>
     </div>
     <div class="w-container">
         <div class="w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeStandardWorkerSelectManager}" method="get">
-                <label for="name" class="field-label">Search Managers By Username</label>
-                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Manager Username" id="name">
+                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder=" Search Managers By Username" id="name">
                 <input type="hidden" name = "standardWorkerUsername" data-name="standardWorkerUsername" th:value="${currentSW}">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>
@@ -27,7 +26,7 @@
     <div class="w-container">
         <table class="table">
             <thead>
-            <tr class="tableRow">
+            <tr>
                 <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -36,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="manager: ${managers}" class="tableRow">
+            <tr th:each="manager: ${managers}">
                 <td th:text="${manager.getUserName()}">Username</td>
                 <td th:text="${manager.getFirstName()}">First name</td>
                 <td th:text="${manager.getLastName()}">Last name</td>

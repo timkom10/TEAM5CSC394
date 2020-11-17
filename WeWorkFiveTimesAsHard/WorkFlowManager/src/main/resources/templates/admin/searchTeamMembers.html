@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/searchTeamMember.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/commonAdmin.css}"/>
-
 </head>
 <body class="body">
 <div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
@@ -15,7 +14,7 @@
     <div class="w-container">
         <div class="w-form">
             <form id="email-form" name="email-form" data-name="Email Form" class="searchteammembers" th:action="@{searchTeamMember}" method="get">
-                <h1 style="color: white;">Search Team Members:</h1>
+                <h1 class="formInfoHeading">Search Team Members:</h1>
                 <label for="username"></label><input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search By Username" id="username" required="">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>
@@ -25,15 +24,15 @@
 <div class="w-container">
     <table class="table">
         <thead>
-        <tr class="tableRow">
-            <th>Username</th>
-            <th>Role</th>
-            <th>Is Active?</th>
-            <th>Select?</th>
+        <tr>
+            <th class="tableInfoPanel" >Username</th>
+            <th class="tableInfoPanel" >Role</th>
+            <th class="tableInfoPanel" >Is Active?</th>
+            <th class="tableInfoPanel" >Select?</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}" class="tableRow">
+        <tr th:each="user: ${users}">
             <td th:text="${user.getUsername()}">Username</td>
             <td th:text="${user.getRoles()}">A Role</td>
             <td th:text="${user.getActive()}">Front End</td>

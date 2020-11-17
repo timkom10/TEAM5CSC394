@@ -7,23 +7,6 @@
   color: black;
 }
 
-.container {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.table{
-  text-align: left;
-  width: 100%;
-  font-size: 20px;
-  color: black;
-}
-
-.tableRow {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
 .assignBox
 {
   color: #494949 !important;
