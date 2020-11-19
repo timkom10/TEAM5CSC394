@@ -3,31 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/milestoneView.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav">
-    <nav class="container w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
-            <li><a th:href="@{viewProject}"  class="nav-link">Project</a></li>
-            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="section">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="commonProjectSection">
     <div class="container-2 w-container">
             <h1 class="heading-2" th:text="${milestone.getMilestoneName()}">Milestone Name</h1>
         <div>
@@ -35,21 +19,21 @@
         </div>
     </div>
 </div>
-<div class="section-2">
+<div class="commonProjectSection">
     <div class="milestonetasks w-container">
         <div class="taskdiv" th:each="task :${tasks}">
             <ul role="list" class="tasklist">
                 <li th:text="${task.getTaskName()}">Task Name</li>
                 <li th:text="${task.getIsAssigned()  &gt; 0 ? 'Is Assigned' : 'Available'}">Is Assigned</li>
                 <li th:text="${task.getBounty()}">Bounty</li>
-                <li><a th:href="@{viewSingleTask(projectId=${project.getId()}, milestoneId = ${milestone.getId()}, taskId = ${task.getTaskId()})}"  class="button-5 w-button">View</a></li>
+                <li><a th:href="@{viewSingleTask(projectId=${project.getId()}, milestoneId = ${milestone.getId()}, taskId = ${task.getTaskId()})}"  class="viewSingleTasksButton w-button">View</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div>
-    <div class="container-7 w-container" th:if="${ROLE.equals('STANDARDWORKER')}">
-        <a th:href="@{viewUsersTasks(projectId = ${project.getId()}, milestoneId=${milestone.getId()})}" class="button-10 w-button"> View Your Tasks</a>
+    <div class="viewYourTasksDiv w-container" th:if="${ROLE.equals('STANDARDWORKER')}">
+        <a th:href="@{viewUsersTasks(projectId = ${project.getId()}, milestoneId=${milestone.getId()})}" class="viewYourTasksButton w-button"> View Your Tasks</a>
     </div>
 </div>
 </body>

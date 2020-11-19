@@ -41,54 +41,30 @@
   font-size: 20px;
 }
 
-.div-block {
+.container-3 {
+  padding-top: 20px;
+  padding-bottom: 60px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 0;
-  padding-bottom: 0;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
 }
 
-.container-3 {
-  padding-top: 20px;
-  padding-bottom: 40px;
-}
-
-.container-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-
-.button {
+.deleteButton {
   width: 100%;
   background-color: #ec383b;
-  -o-object-fit: cover;
-  object-fit: cover;
+  text-align: center;
 }
 
 .div-block-2 {
   width: 20%;
 }
 
-.div-block-3 {
-  width: 20%;
-}
-
 .button-2 {
   width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+  text-align: center;
 }

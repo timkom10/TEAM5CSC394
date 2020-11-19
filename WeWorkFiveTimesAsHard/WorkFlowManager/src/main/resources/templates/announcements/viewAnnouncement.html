@@ -5,15 +5,16 @@
     <title>Your Announcement</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/viewAnnouncement.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/commonAnnouncement.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/announcementFragment :: naviFragment"></div>
+<div th:replace="fragments/nonDeterministicFragment :: naviFragment"></div>
 <div>
     <div class="container-4 w-container">
         <div>
-            <h1 class="heading">From: [[${announcement.getFrom()}]]</h1>
+            <h1>From: [[${announcement.getFrom()}]]</h1>
         </div>
     </div>
     <div class="container-5 w-container">

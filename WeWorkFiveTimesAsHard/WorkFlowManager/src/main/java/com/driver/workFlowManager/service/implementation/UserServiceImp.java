@@ -72,6 +72,15 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public String getUserType(String username)
+    {
+        if(this.standardWorkerRepository.existsByUserName(username)) return "S";
+        else if(this.managerRepository.existsByUserName(username)) return "M";
+        else if(this.adminRepository.existsByUserName(username)) return "A";
+        return null;
+    }
+
+    @Override
     public boolean addUser(Users user) {
         if(userRepository.findByUsername(user.getUsername()) == null) {
             //can insert

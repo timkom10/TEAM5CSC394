@@ -1,0 +1,69 @@
+.body {
+    background-size: cover;
+    background-attachment: fixed;
+    -o-object-fit: fill;
+    object-fit: fill;
+}
+
+.nav-grid-2 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    -ms-grid-columns: 1fr max-content max-content max-content;
+    grid-template-columns: 1fr max-content max-content max-content;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.sticky-nav-2 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 20px;
+}
+
+.nav-link {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 10px 0;
+    font-size: 22px;
+    line-height: 22px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.table {
+    text-align:center;
+    width: 100%;
+    font-size: 20px;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+.form {
+    margin-top: 4px;
+}
+

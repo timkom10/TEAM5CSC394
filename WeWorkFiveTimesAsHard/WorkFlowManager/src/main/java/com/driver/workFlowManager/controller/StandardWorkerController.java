@@ -21,7 +21,7 @@ public class StandardWorkerController {
 
     @GetMapping("index")
     public  String index(Principal principal, Model model) {
-        model.addAttribute("standardWorker", this.standardWorkerService.getByUsername(principal.getName()));
+        model.addAttribute("name", principal.getName());
         model.addAttribute("announcements", this.announcementService.getAllAnnouncementsByUsername(principal.getName()));
         return "standardWorkers/index";
     }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>announcement fragment</title>
+    <title>nDF</title>
 </head>
 <body>
 <div th:fragment="naviFragment">
@@ -11,7 +11,10 @@
             <ul role="list" class="nav-grid-2 w-list-unstyled">
                 <li><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
                 <li><a th:href="@{index}" class="nav-link">Home</a></li>
-                <li><a th:href="@{Hr}"  class="nav-link">Resources</a></li>
+                <!--Determine if admin or if other-->
+                <li th:if="${userType == 'A'}"><a th:href="@{Hr}"  class="nav-link">Resources</a></li>
+                <li th:if="${userType != 'A'}"><a th:href="@{viewProject}"  class="nav-link">Project</a></li>
+                <li th:if="${userType != 'A'}"><a th:href="@{feedback}"  class="nav-link">Feedback</a></li>
                 <li><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
                 <li>
                     <div class="w-form">

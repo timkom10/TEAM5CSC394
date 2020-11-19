@@ -3,21 +3,7 @@
   background-position: 0 0;
 }
 
-.heading-2 {
-  text-align: center;
-}
-
-.div-block-4 {
-  padding-bottom: 10px;
-}
-
-.form-block {
-  -webkit-align-self: center;
-  -ms-grid-row-align: center;
-  align-self: center;
-}
-
-.form-2 {
+.managerSearchForm {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

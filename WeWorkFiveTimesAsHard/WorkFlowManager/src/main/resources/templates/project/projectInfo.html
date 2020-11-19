@@ -6,26 +6,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/projectInfo.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-2">
-    <nav class="w-container">
-        <ul role="list" class="nav-grid-2 w-list-unstyled">
-            <li><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
-            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
-            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li><a th:href="@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="projectInformationLoad">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="commonProjectSection">
     <div class="container w-container">
         <div>
             <h1 th:text="${project.getProjectName()}">Project Name</h1>
@@ -35,12 +21,11 @@
         </div>
     </div>
 </div>
-<div>
-    <div class="projectInformationLoad">
+    <div class="commonProjectSection">
     <div class="container w-container">
         <h1>Project Leaderboard</h1>
         <table class = "table">
-            <thead class="text-center">
+            <thead>
             <tr>
                 <th>Username&nbsp;</th>
                 <th>Role</th>
@@ -48,7 +33,7 @@
                 <th>Total Points</th>
             </tr>
             </thead>
-            <tbody class="text-center" th:each="worker : ${workers}">
+            <tbody th:each="worker : ${workers}">
             <tr>
                 <td th:text="${worker.getUserName()}">From</td>
                 <td th:text="${worker.getRole()}" >Subject</td>
@@ -58,7 +43,6 @@
             </tbody>
         </table>
     </div>
-</div>
 </div>
 </body>
 </html>

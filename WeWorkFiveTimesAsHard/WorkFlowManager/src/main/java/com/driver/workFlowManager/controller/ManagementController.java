@@ -22,7 +22,7 @@ public class ManagementController {
 
     @GetMapping("index")
     public  String index(Principal principal, Model model) {
-        model.addAttribute("manager", this.managerService.getByUsername(principal.getName()));
+        model.addAttribute("name", principal.getName());
         model.addAttribute("announcements", announcementService.getAllAnnouncementsByUsername(principal.getName()));
         return "management/index";
     }

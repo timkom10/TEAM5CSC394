@@ -1,6 +1,6 @@
-.sticky-nav {
+.sticky-nav-2 {
   background-color: #fff;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .nav-link {
@@ -10,10 +10,8 @@
 .body {
   background-image: url('images/publicFeedbackBackground.jpg');
   background-position: 0 0;
-}
-
-.heading {
-  color: #040303;
+  background-color: #fff;
+  opacity: 0.9;
 }
 
 .section {

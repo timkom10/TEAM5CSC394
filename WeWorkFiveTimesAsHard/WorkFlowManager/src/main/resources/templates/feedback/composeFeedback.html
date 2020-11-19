@@ -7,13 +7,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/composeFeedback.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/commonFeedback.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/feedbackFragment :: naviFragment"></div>
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
 <div>
     <div class="w-container">
         <div class="div-block-3">
-            <h1 class="heading-2">Congratulate [[${to}]]</h1>
+            <h1>Congratulate [[${to}]]</h1>
         </div>
         <div>
             <div class="w-form">

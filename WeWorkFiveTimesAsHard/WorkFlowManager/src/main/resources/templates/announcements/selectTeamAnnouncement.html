@@ -5,19 +5,17 @@
     <title>Select Team</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/selectTeamAnnouncement.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/announcementCSS/commonAnnouncement.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/announcementFragment :: naviFragment"></div>
+<div th:replace="fragments/nonDeterministicFragment :: naviFragment"></div>
 <div>
     <div class="container-4 w-container">
-        <div class="div-block-4">
-            <h2 class="heading-2">Select Manager to Send Announcement to</h2>
-        </div>
-        <div class="form-block w-form">
-            <form id="wf-form-managerSearch" name="wf-form-managerSearch" data-name="managerSearch" class="form-2" th:action="@{searchTeamToSendAnnouncement}" method="get">
+            <h2>Select Manager to Send Announcement to</h2>
+        <div class="w-form">
+            <form id="wf-form-managerSearch" name="wf-form-managerSearch" data-name="managerSearch" class="managerSearchForm" th:action="@{searchTeamToSendAnnouncement}" method="get">
                 <label for="username"></label><input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder="Search Manager..." id="username">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>
@@ -26,23 +24,23 @@
     <div class="container-5 w-container">
         <div>
             <table class="table">
-                <thead class="text-center">
+                <thead>
                 <tr>
-                    <th>Username&nbsp;</th>
-                    <th>First Name&nbsp;</th>
-                    <th>Last Name&nbsp;</th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Id#</th>
-                    <th style="width: 200px;">Select Team</th>
+                    <th>Select Team</th>
                 </tr>
                 </thead>
-                <tbody class="text-center" th:each="manager: ${managers}">
+                <tbody th:each="manager: ${managers}">
                 <tr>
                     <td th:text="${manager.getUserName()}">User1</td>
                     <td th:text="${manager.getFirstName()}">FName</td>
                     <td th:text="${manager.getLastName()}">LName</td>
                     <td th:text="${manager.getId()}">ID</td>
                     <td>
-                        <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{composeAnnouncement(managerUsername=${manager.getUserName()})}">Select Team</a>
+                        <a class="w-button" th:href="@{composeAnnouncement(managerUsername=${manager.getUserName()})}">Select Team</a>
                     </td>
                 </tr>
                 </tbody>

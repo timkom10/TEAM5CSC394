@@ -5,29 +5,29 @@
     <title>Public Feedback</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/publicFeedback.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/commonFeedback.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/feedbackFragment :: naviFragment"></div>
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
 <div class="section">
     <div class="container-2 w-container">
         <div class="div-block-2">
-            <h1 class="heading">Public Feedback</h1>
+            <h1>Public Feedback</h1>
         </div>
     </div>
-    <div class="container-3 w-container">
+    <div class="w-container">
         <table class="table">
-            <thead class="text-center">
+            <thead>
             <tr>
-                <th>To&nbsp;</th>
-                <th>From&nbsp;</th>
+                <th>To</th>
+                <th>From</th>
                 <th>Subject</th>
                 <th>Feedback</th>
             </tr>
             </thead>
-            <tbody class="text-center" th:each="feedback: ${feedbacks}">
+            <tbody th:each="feedback: ${feedbacks}">
             <tr>
                 <td th:text="${feedback.getTo()}">From</td>
                 <td th:text="${feedback.getFrom()}">From</td>

@@ -7,9 +7,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/adminCSS/commonAdmin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/adminFragment :: adminNaviFragment"></div>
+<div th:replace="fragments/adminFragment :: naviFragment"></div>
 <div>
     <div class="infoContainer w-container">
         <h3 class="notice-heading">Assign Worker to Manager:</h3>
@@ -17,7 +18,7 @@
     <div class="w-container">
         <div class="w-form">
             <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeStandardWorkerSelectManager}" method="get">
-                    <input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder=" Search Managers By Username" id="name">
+                <label for="name"></label><input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder=" Search Managers By Username" id="name">
                 <input type="hidden" name = "standardWorkerUsername" data-name="standardWorkerUsername" th:value="${currentSW}">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
             </form>

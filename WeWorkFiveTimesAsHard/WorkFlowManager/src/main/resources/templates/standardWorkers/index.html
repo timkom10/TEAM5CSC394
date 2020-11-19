@@ -5,48 +5,32 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/standardWorkerCSS/standardWorkerHomepage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav-2">
-    <nav class="w-container">
-        <ul role="list" class="nav-grid-2 w-list-unstyled">
-            <li><a th:href="@{info}"  class="nav-link" th:text="${standardWorker.getFirstName()}">Username</a></li>
-            <li><a th:href="@{viewProject}" class="nav-link">Project</a></li>
-            <li><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="submit-button-2 w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
 <div>
     <div class="container-4 w-container">
         <div>
             <h1>Announcements</h1>
         </div>
     </div>
-    <div class="container-5 w-container">
+    <div class="w-container">
         <table class="table">
-            <thead class="text-center">
+            <thead>
             <tr>
-                <th>From&nbsp;</th>
+                <th>From</th>
                 <th>Subject</th>
-                <th style="width: 200px;">View</th>
+                <th>View</th>
             </tr>
             </thead>
-            <tbody class="text-center" th:each="announcement : ${announcements}">
+            <tbody th:each="announcement : ${announcements}">
             <tr>
                 <td th:text="${announcement.getFrom()}">From</td>
                 <td th:text="${announcement.getSubject()}">Subject</td>
                 <td>
-                    <a class="btn btn-primary btn-lg text-uppercase text-center text-white visible" role="button" th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" >View</a>
+                    <a class="w-button" th:href="@{viewAnnouncement(announcementID=${announcement.getId()})}" >View</a>
                 </td>
             </tr>
             </tbody>

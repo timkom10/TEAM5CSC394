@@ -3,40 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Project</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/projectHome.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<header id="nav" class="sticky-nav">
-    <nav class="container w-container">
-        <ul role="list" class="nav-grid w-list-unstyled">
-            <li class="list-item"><a th:href="@{info}" class="nav-link" th:text="${name}">Username</a></li>
-            <li><a th:href="@{index}" class="nav-link">Home</a></li>
-            <li class="list-item"><a th:href="@{feedback}" class="nav-link">Feedback</a></li>
-            <li class="list-item"><a th:href= "@{messagingPortal}" class="nav-link">Messages</a></li>
-            <li>
-                <div class="w-form">
-                    <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{/logout}">
-                        <input type="submit" value="Logout" data-wait="Please wait..." class="w-button">
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="section">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
     <div class="container-2 w-container">
         <a th:href="@{projectInfo(projectId = ${project.getId()})}"  class="link-block w-inline-block">
-            <h1 class="heading-2" th:text="${project.getProjectName()}" >Project Name</h1>
+            <h2 class="projectInfoHeading" th:text="${project.getProjectName()}" >Project Name</h2>
         </a>
     </div>
-</div>
-<div class="section-2">
+<div class="commonProjectSection">
     <div class="container-3 w-container">
         <div class="teamlist">
-            <ul role="list" class="list-4" th:each="worker : ${workers}">
+            <ul role="list" class="list-2" th:each="worker : ${workers}">
                 <li th:text="${worker.getUserName()}">Username</li>
                 <li th:text="${worker.getRole()}">Role</li>
                 <li th:text="${worker.getHireDate()}">Hire Date</li>
@@ -61,9 +44,9 @@
         </div>
     </div>
 </div>
-<div th:if="${(ROLE.equals('MANAGER'))}" class="section-4">
-    <div class="container-6 w-container">
-        <div class="div-block-6"><a href="#" class="button-7 w-button">Edit Project</a></div>
+<div th:if="${(ROLE.equals('MANAGER'))}" class="commonProjectSection">
+    <div class="w-container">
+        <div class="div-block-6"><a href="#" class="button-2 w-button">Edit Project</a></div>
     </div>
 </div>
 </body>

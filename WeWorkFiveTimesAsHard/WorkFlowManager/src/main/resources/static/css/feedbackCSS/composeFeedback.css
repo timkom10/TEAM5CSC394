@@ -1,8 +1,3 @@
-.sticky-nav {
-  background-color: transparent;
-  opacity: 1;
-}
-
 .nav-link {
   color: #fff;
 }
@@ -11,17 +6,10 @@
   background-position: 100% 50%;
 }
 
-.heading {
-  color: #040303;
-}
-
 .div-block-3 {
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
-}
-
-.heading-2 {
   color: #fff;
 }
 

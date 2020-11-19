@@ -6,24 +6,20 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/viewMessage.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/messagingCSS/commonMessaging.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/messagingfragment :: naviFragment"></div>
+<div th:replace="fragments/nonDeterministicFragment :: naviFragment"></div>
 <div>
     <div class="container w-container">
-        <div>
-            <h2 th:text="${message.getSubject()}">SUBJECT</h2>
-        </div>
+        <h2 th:text="${message.getSubject()}">SUBJECT</h2>
     </div>
     <div class="container-3 w-container">
-        <div class="div-block">
-            <p class="paragraph" th:text="${message.messagePayload}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-        </div>
+        <p class="paragraph" th:text="${message.messagePayload}">Lorem Ipsum</p>
     </div>
-    <div class="container-4 w-container">
-        <div class="div-block-2"><a th:href="@{deleteMessage(username = ${''}, messageId=${message.getId()})}" class="button w-button">      Delete Message?</a></div>
-        <div class="div-block-3"><a th:href="@{composeMessage(username = ${message.getFrom()})}" class="button-2 w-button">             Reply</a></div>
+    <div class="container w-container">
+        <div class="div-block-2"><a th:href="@{deleteMessage(username = ${''}, messageId=${message.getId()})}" class="deleteButton w-button">Delete Message?</a></div>
+        <div class="div-block-2"><a th:href="@{composeMessage(username = ${message.getFrom()})}" class="button-2 w-button">Reply</a></div>
     </div>
 </div>
 </body>

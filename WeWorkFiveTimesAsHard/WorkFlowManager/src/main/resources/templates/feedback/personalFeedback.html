@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Feedback</title>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/personalFeedback.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/commonFeedback.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
 <body class="body">
-<div th:replace="fragments/feedbackFragment :: naviFragment"></div>
-<div>
-    <div class="container-2 w-container">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+    <div class="w-container">
         <div class="div-block-2">
             <h1>Your Feedback</h1>
         </div>
     </div>
-    <div class="container-3 w-container">
+    <div class="w-container">
         <table class="table">
-            <thead class="text-center">
+            <thead>
             <tr>
-                <th>From&nbsp;</th>
+                <th>From</th>
                 <th>Subject</th>
                 <th>Feedback</th>
             </tr>
             </thead>
-            <tbody class="text-center" th:each="feedback: ${feedbacks}">
+            <tbody th:each="feedback: ${feedbacks}">
             <tr>
                 <td th:text="${feedback.getFrom()}">From</td>
                 <td th:text="${feedback.getSubject()}">Subject</td>
@@ -36,6 +34,5 @@
             </tbody>
         </table>
     </div>
-</div>
 </body>
 </html>
