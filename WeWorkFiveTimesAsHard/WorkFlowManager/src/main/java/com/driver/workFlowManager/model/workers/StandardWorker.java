@@ -141,6 +141,11 @@ public class StandardWorker extends WorkerType implements Serializable
     }
 
     @Override
+    public String getWorkerTypeUsername() {
+        return  this.userName;
+    }
+
+    @Override
     public String getRole() {
         return this.employeeRole;
     }

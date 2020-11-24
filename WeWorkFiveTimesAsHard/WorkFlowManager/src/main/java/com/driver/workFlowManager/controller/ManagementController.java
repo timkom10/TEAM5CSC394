@@ -1,12 +1,10 @@
 package com.driver.workFlowManager.controller;
 
-
 import com.driver.workFlowManager.service.*;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
-
 
 @Controller
 @RequestMapping("management")

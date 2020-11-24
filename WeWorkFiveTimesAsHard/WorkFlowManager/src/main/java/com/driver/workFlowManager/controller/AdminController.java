@@ -189,7 +189,7 @@ public class AdminController {
             case "STANDARDWORKER":
                 model.addAttribute("user", user);
                 model.addAttribute("name", principal.getName());
-                model.addAttribute("worker", this.adminService.removeStandardWorkerAndReturn(username));
+                model.addAttribute("worker", this.adminService.getStandardWorkerForEdit(username));
                 return "admin/addStandardWorker";
             case "MANAGER":
                 model.addAttribute("user", user);
@@ -199,7 +199,7 @@ public class AdminController {
             case "ADMIN":
                 model.addAttribute("user", user);
                 model.addAttribute("name", principal.getName());
-                model.addAttribute("admin", this.adminService.removeAdminAndReturn(username));
+                model.addAttribute("admin", this.adminService.getAdminForEdit(username));
                 return "admin/addAdmin";
         }
         return "error";
