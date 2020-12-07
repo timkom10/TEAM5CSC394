@@ -38,8 +38,11 @@ public class AdminServiceImp implements AdminService {
         if(standardWorker != null && manager != null) {
             standardWorker.setManager(manager);
             manager.getDominion().add(standardWorker);
-            this.standardWorkerRepository.save(standardWorker);
             this.managerRepository.save(manager);
+
+            //Any team member added to a manager is auto added to the manager's project that may exist
+            standardWorker.setProject(manager.getProject());
+            this.standardWorkerRepository.save(standardWorker);
         }
     }
 
@@ -57,7 +60,6 @@ public class AdminServiceImp implements AdminService {
         return nStandardWorker;
     }
 
-
     public void addStandardWorker(Users user, StandardWorker standardWorker) {
         if(user == null || standardWorker == null) return;
         /*Check if we are adding a new user, or editing an existing one*/
@@ -65,17 +67,19 @@ public class AdminServiceImp implements AdminService {
         if(standardWorker.getUserName() != null && this.userService.existsByUsername(standardWorker.getUserName())) {
             /*We are editing an existing user*/
             StandardWorker updateThisStandardWorker = this.standardWorkerRepository.findByUserName(standardWorker.getUserName());
-            if(updateThisStandardWorker != null  && userService.addUser(user)) {
-                /*Check if the username was changed*/
-                if(!updateThisStandardWorker.getUserName().equals(user.getUsername())) {
-                    this.userService.removeUser(standardWorker.getUserName());
+            if(updateThisStandardWorker != null) {
+                /*Remove the old user associated with the standard worker*/
+                this.userService.removeUser(standardWorker.getUserName());
+
+                //Attempt to add in the new user and update the standard worker
+                if(this.userService.addUser(user)) {
+                    /*Update the fName, lName, uName, Role */
+                    updateThisStandardWorker.setUserName(user.getUsername());
+                    updateThisStandardWorker.setFirstName(standardWorker.getFirstName());
+                    updateThisStandardWorker.setLastName(standardWorker.getLastName());
+                    updateThisStandardWorker.setEmployeeRole(standardWorker.getEmployeeRole());
+                    this.standardWorkerRepository.save(updateThisStandardWorker);
                 }
-                /*Update the fName, lName, uName, Role */
-                updateThisStandardWorker.setUserName(user.getUsername());
-                updateThisStandardWorker.setFirstName(standardWorker.getFirstName());
-                updateThisStandardWorker.setLastName(standardWorker.getLastName());
-                updateThisStandardWorker.setEmployeeRole(standardWorker.getEmployeeRole());
-                this.standardWorkerRepository.save(updateThisStandardWorker);
             }
         }
         else {
@@ -83,8 +87,7 @@ public class AdminServiceImp implements AdminService {
         }
     }
 
-    public void addManager(Users user, Manager manager)
-    {
+    public void addManager(Users user, Manager manager) {
         if(user == null || manager == null) return;
         user.setRoles("MANAGER");
 
@@ -92,16 +95,18 @@ public class AdminServiceImp implements AdminService {
         if(manager.getUserName() != null && this.userService.existsByUsername(manager.getUserName())) {
             /*We are editing a user*/
             Manager updateManager = this.managerRepository.findByUserName(manager.getUserName());
-            if(updateManager != null && userService.addUser(user))
-            {
-                if(!manager.getUserName().equals(user.getUsername())) {
-                    this.userService.removeUser(manager.getUserName());
+            if(updateManager != null) {
+                /*Remove the old user associated with the manager*/
+                this.userService.removeUser(manager.getUserName());
+
+                //Attempt to add in the new user and update the manager
+                if(this.userService.addUser(user)) {
+                    updateManager.setUserName(user.getUsername());
+                    updateManager.setLastName(manager.getLastName());
+                    updateManager.setFirstName(manager.getFirstName());
+                    updateManager.setManagerRole(manager.getManagerRole());
+                    this.managerRepository.save(updateManager);
                 }
-                updateManager.setUserName(user.getUsername());
-                updateManager.setLastName(manager.getLastName());
-                updateManager.setFirstName(manager.getFirstName());
-                updateManager.setManagerRole(manager.getManagerRole());
-                this.managerRepository.save(updateManager);
             }
         }
         else {
@@ -141,19 +146,21 @@ public class AdminServiceImp implements AdminService {
 
         /*Check if we are adding a user or editing one*/
         if(admin.getUserName() != null && this.userService.existsByUsername(admin.getUserName())) {
+
             //We are editing an active user
             Admin updateAdmin = this.adminRepository.findByUserName(admin.getUserName());
-            if(updateAdmin != null && userService.addUser(user)) {
-                /*Check if we changed the username*/
-                if(!admin.getUserName().equals(user.getUsername())) {
-                    this.userService.removeUser(admin.getUserName());
-                }
+            if(updateAdmin != null) {
+                /*Remove the old user associated with the admin*/
+                this.userService.removeUser(admin.getUserName());
 
-                updateAdmin.setUserName(user.getUsername());
-                updateAdmin.setLastName(admin.getLastName());
-                updateAdmin.setFirstName(admin.getFirstName());
-                updateAdmin.setAdminROLE(admin.getAdminROLE());
-                this.adminRepository.save(updateAdmin);
+                //Attempt to add in the new user and update the admin
+                if(this.userService.addUser(user)) {
+                    updateAdmin.setUserName(user.getUsername());
+                    updateAdmin.setLastName(admin.getLastName());
+                    updateAdmin.setFirstName(admin.getFirstName());
+                    updateAdmin.setAdminROLE(admin.getAdminROLE());
+                    this.adminRepository.save(updateAdmin);
+                }
             }
         }
         else {

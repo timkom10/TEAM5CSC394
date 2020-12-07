@@ -11,6 +11,7 @@ import com.driver.workFlowManager.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.util.List;
@@ -30,8 +31,7 @@ public class ProjectController {
     }
 
     @GetMapping(value = "viewProject")
-    public String getViewProject(Principal principal,Model model)
-    {
+    public String getViewProject(Principal principal,Model model) {
         Project project = this.projectService.getProjectByUsername(principal.getName());
         if(project != null) {
             model.addAttribute("ROLE", userService.getByUsername(principal.getName()).getRoles());
@@ -45,17 +45,17 @@ public class ProjectController {
 
         /*No project, find user type*/
         Users user = this.userService.getByUsername(principal.getName());
-        if(user != null)
-        {
-            if(user.getRoles().equals("STANDARDWORKER"))
-            {
+        if(user != null) {
+            if(user.getRoles().equals("STANDARDWORKER")) {
                 /*Case where no project, is standard worker*/
+                model.addAttribute("name", principal.getName());
                 return "project/noProjectStandardWorker";
             }
-            else if(user.getRoles().equals("MANAGER"))
-            {
+            else if(user.getRoles().equals("MANAGER")) {
                 /*Case where no project, is Manager*/
-                return "error";
+                model.addAttribute("project", new Project());
+                model.addAttribute("name", principal.getName());
+                return "project/makeProjectInitial";
             }
         }
         /*Unknown Type*/
@@ -131,6 +131,12 @@ public class ProjectController {
             model.addAttribute("tasks",tasks);
             return "project/viewUsersTasks";
         }
+        return "error";
+    }
+
+    @GetMapping(value = "makeProject")
+    public String getMakeProject(Principal principal, Model model, @ModelAttribute("project") Project project) {
+        this.projectService.bindProjectToManager(project, principal.getName());
         return "error";
     }
 }

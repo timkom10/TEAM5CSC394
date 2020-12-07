@@ -23,7 +23,6 @@ public class ManagerServiceImp implements ManagerService {
 
     @Override
     public void removeWorkerFromManager(String workerUsername, String managerUsername) {
-
         StandardWorker standardWorker = this.standardWorkerRepository.findByUserName(workerUsername);
         Manager manager = this.managerRepository.findByUserName(managerUsername);
 

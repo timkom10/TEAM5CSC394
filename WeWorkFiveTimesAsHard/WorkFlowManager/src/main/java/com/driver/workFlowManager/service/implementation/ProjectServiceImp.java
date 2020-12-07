@@ -3,12 +3,12 @@ package com.driver.workFlowManager.service.implementation;
 import com.driver.workFlowManager.model.projects.Milestones;
 import com.driver.workFlowManager.model.projects.Project;
 import com.driver.workFlowManager.model.projects.Task;
+import com.driver.workFlowManager.model.workers.Manager;
 import com.driver.workFlowManager.repository.ManagerRepository;
 import com.driver.workFlowManager.repository.ProjectRepository;
 import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.ProjectService;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,16 +141,12 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId)
-    {
+    public List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId) {
         List<Task> tasks = new ArrayList<>();
-        if(this.projectRepository.existsById(projectId))
-        {
+        if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
-            for(Task t : project.getTasks())
-            {
-                if(t.getWorker().equals(username) && t.getMilestoneId().equals(milestoneId))
-                {
+            for(Task t : project.getTasks()) {
+                if(t.getWorker().equals(username) && t.getMilestoneId().equals(milestoneId)) {
                     tasks.add(t);
                 }
             }
@@ -173,5 +169,15 @@ public class ProjectServiceImp implements ProjectService {
             }
         }
         return new Task();
+    }
+
+    @Override
+    public void bindProjectToManager(Project project, String managerUsername) {
+        Manager manager =  this.managerRepository.findByUserName(managerUsername);
+        if(manager != null) {
+            project.setManager(manager);
+            manager.setProject(project);
+            this.projectRepository.save(project);
+        }
     }
 }

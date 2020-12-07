@@ -73,6 +73,6 @@ public class MessageController {
     @GetMapping(value = "deleteMessage")
     public String getDeleteMessage(Model model, Principal principal, Integer messageId) {
         this.messagingService.deleteMessage(principal.getName(), messageId);
-        return getInbox(model, null, principal);
+        return getInbox(model, "", principal);
     }
 }

@@ -114,7 +114,7 @@ public class InitialData implements CommandLineRunner
        //Any new users need to have password encrypted before db insert
        Users peter = new Users("Peter", passwordEncoder.encode("peter"),"STANDARDWORKER", "none");
        Users admin = new Users("admin", passwordEncoder.encode("peter"),"ADMIN", "");
-       Users manager = new Users("michael", passwordEncoder.encode("peter"),"MANAGER", "");
+       Users michael = new Users("michael", passwordEncoder.encode("peter"),"MANAGER", "");
        Users tyler = new Users("Tyler", passwordEncoder.encode("tyler"),"STANDARDWORKER", "none");
        Users tim = new Users("Tim", passwordEncoder.encode("tim"),"STANDARDWORKER", "none");
        Users joey = new Users("Joey", passwordEncoder.encode("joey"),"STANDARDWORKER", "none");
@@ -122,17 +122,19 @@ public class InitialData implements CommandLineRunner
        Users ricky = new Users("Ricky", passwordEncoder.encode("ricky"),"STANDARDWORKER", "none");
        Users willy = new Users("Willy", passwordEncoder.encode("willy"),"STANDARDWORKER", "none");
        Users billy = new Users("Billy", passwordEncoder.encode("billy"),"STANDARDWORKER", "none");
+       Users kim = new Users("Kim", passwordEncoder.encode("kim"), "MANAGER", "none");
 
+       this.userRepository.save(kim);
        this.userRepository.save(billy);
-       this.userRepository.save(tyler);
-       this.userRepository.save(tim);
-       this.userRepository.save(joey);
-       this.userRepository.save(paulina);
-       this.userRepository.save(ricky);
        this.userRepository.save(willy);
-       this.userRepository.save(peter);
+       this.userRepository.save(ricky);
+       this.userRepository.save(paulina);
+       this.userRepository.save(joey);
+       this.userRepository.save(tim);
+       this.userRepository.save(tyler);
+       this.userRepository.save(michael);
        this.userRepository.save(admin);
-       this.userRepository.save(manager);
+       this.userRepository.save(peter);
 
        //Make a new admin
        Admin admin_1 = new Admin();
@@ -142,7 +144,8 @@ public class InitialData implements CommandLineRunner
        admin_1.setAdminROLE("ADMIN");
        admin_1.setHireDate("2020-09-30");
        adminRepository.save(admin_1);
-       //Make a new manager...
+
+       //Make two new managers...
        Manager manager_1 = new Manager();
        manager_1.setUserName("michael");
        manager_1.setFirstName("Michael");
@@ -150,6 +153,14 @@ public class InitialData implements CommandLineRunner
        manager_1.setHireDate("2004-03-24");
        manager_1.setManagerRole("MANAGER");
        managerRepository.save(manager_1);
+
+       Manager manager_2 = new Manager();
+       manager_2.setUserName("kim");
+       manager_2.setFirstName("Kim");
+       manager_2.setLastName("DemoLastName");
+       manager_2.setHireDate("2020-11-28");
+       manager_2.setManagerRole("DemoLeadName");
+       managerRepository.save(manager_2);
 
        //Make a project
        Project project_1 = new Project();
@@ -167,11 +178,11 @@ public class InitialData implements CommandLineRunner
        StandardWorker standardWorker_4 = this.makeStandardWorker("paulina", "Paulina", "DemoLastName", "2020-03-31", "Lead", manager_1, project_1);
        StandardWorker standardWorker_5 = this.makeStandardWorker("ricky", "Ricky", "DemoLastName", "2020-04-01", "Security", manager_1, project_1);
        StandardWorker standardWorker_6 = this.makeStandardWorker("willy", "Willy", "DemoLastName", "2020-04-02", "Front End", manager_1, project_1);
-       StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", null, null);
+       StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", manager_1, null);
 
        //Make a message
        Message message_1 = new Message();
-       message_1.setFrom(manager.getUsername());
+       message_1.setFrom(manager_1.getUserName());
        message_1.setTo(standardWorker_0.getUserName());
        message_1.setSubject("I Hope I am doing this right..");
        message_1.setMessagePayload("Because, If I am not, I am more than likely doomed");
@@ -237,6 +248,5 @@ public class InitialData implements CommandLineRunner
        allFeedback.setContent("For demonstrations of course");
        allFeedback.setDate(new Date());
        this.allFeedbackRepository.save(allFeedback);
-        // check the Database
     }
 }

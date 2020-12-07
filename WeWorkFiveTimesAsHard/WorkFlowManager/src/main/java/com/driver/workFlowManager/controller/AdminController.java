@@ -175,7 +175,7 @@ public class AdminController {
     public String getMakeAdmin(@ModelAttribute("user") Users user, @ModelAttribute("admin") Admin admin, Principal principal) {
         this.adminService.addAdmin(user, admin);
         if(principal.getName().equals(user.getUsername())) {
-            return "welcomePages/login";
+            return "redirect:/login";
         }
         return "redirect:/admin/index";
     }

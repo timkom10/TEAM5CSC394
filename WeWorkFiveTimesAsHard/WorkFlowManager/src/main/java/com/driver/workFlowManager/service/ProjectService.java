@@ -9,6 +9,8 @@ public interface ProjectService {
     void addMileStoneToProject(Project project, Milestones milestone);
     void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId);
     void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId);
+    void bindProjectToManager(Project project, String managerUsername);
+
     Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId);
     Project getProjectByUsername(String username);
     Milestones getMilestone(Long projectId, Integer milestoneId);

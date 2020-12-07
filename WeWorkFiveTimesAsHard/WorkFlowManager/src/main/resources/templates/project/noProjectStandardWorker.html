@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>No Assigned Projects</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/noProjectStandardWorker.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
 </head>
-<body>
-<h1>No Project</h1>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="container w-container">
+    <h1>No Project</h1>
+    <p class="paragraph">It appears that you are not currently enrolled in a project.</p>
+    <a th:href="@{searchUserToMessage}" class="w-button">Take Me To Messaging</a>
+</div>
 </body>
 </html>
