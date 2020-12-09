@@ -77,3 +77,13 @@
     background-color: transparent;
     text-align: center;
 }
+
+.noticecontainer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.submit-button {
+    width: 100%;
+}

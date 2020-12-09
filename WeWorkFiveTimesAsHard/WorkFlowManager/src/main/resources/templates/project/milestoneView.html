@@ -17,6 +17,9 @@
         <div>
             <h1 class="heading-2">Due: [[${milestone.getDueDate()}]]</h1>
         </div>
+        <div class = "milestoneDescription">
+            <p th:text="${milestone.getDescription()}"> Base Description</p>
+        </div>
     </div>
 </div>
 <div class="commonProjectSection">
@@ -31,10 +34,11 @@
         </div>
     </div>
 </div>
-<div>
-    <div class="viewYourTasksDiv w-container" th:if="${ROLE.equals('STANDARDWORKER')}">
-        <a th:href="@{viewUsersTasks(projectId = ${project.getId()}, milestoneId=${milestone.getId()})}" class="viewYourTasksButton w-button"> View Your Tasks</a>
-    </div>
+<div class="specialNoticeDiv w-container" th:if="${ROLE.equals('STANDARDWORKER')}">
+    <a th:href="@{viewUsersTasks(projectId = ${project.getId()}, milestoneId=${milestone.getId()})}" class="specialNoticeButton w-button"> View Your Tasks</a>
+</div>
+<div class="specialNoticeDiv w-container" th:if="${!ROLE.equals('STANDARDWORKER')}">
+    <a th:href="@{/}" class="specialNoticeButton w-button">Edit</a>
 </div>
 </body>
 </html>

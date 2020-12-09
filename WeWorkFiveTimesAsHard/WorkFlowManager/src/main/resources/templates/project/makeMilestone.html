@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Milestone</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/makeMilestone.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+</head>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Add Milestone</h2>
+</div>
+<div class="w-container">
+    <div class="w-form">
+        <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{addMilestone}" th:object="${milestone}" method="post">
+            <label for="name">Milestone Name</label>
+                <input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter Milestone Name" id="name" th:field = "*{milestoneName}">
+            <label for="dDate">Due Date</label>
+                <input type="date" class="w-input" maxlength="256" name="dDate" data-name="dDate" placeholder="Enter Due date" id="dDate" required="" th:field="*{dueDate}">
+            <label for="mDescription">Milestone Description</label>
+                <textarea rows="4" cols="50" class="w-input" maxlength="5000" name="mDescription" data-name="mDescription" placeholder="Enter Description" id="mDescription" required="" th:field ="*{description}"></textarea>
+            <input type="submit" value="Add Tasks To Milestone" data-wait="Please wait..." class="submit-button w-button">
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -213,14 +213,14 @@ public class InitialData implements CommandLineRunner
        Milestones milestone_1 = new Milestones();
        milestone_1.setMilestoneName("Milestone #343");
        milestone_1.setDescription("A very important milestone");
-       milestone_1.setDueDate(new Date());
+       milestone_1.setDueDate("2021-02-28");
        project_1.addMilestone(milestone_1);
        projectRepository.save(project_1);
 
        Milestones milestone_2 = new Milestones();
        milestone_2.setMilestoneName("Milestone #342");
        milestone_2.setDescription("Not so very important milestone");
-       milestone_2.setDueDate(new Date());
+       milestone_2.setDueDate("2030-01-22");
        project_1.addMilestone(milestone_2);
        projectRepository.save(project_1);
 

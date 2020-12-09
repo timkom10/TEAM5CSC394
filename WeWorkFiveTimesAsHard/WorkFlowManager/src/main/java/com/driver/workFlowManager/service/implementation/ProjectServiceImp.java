@@ -4,6 +4,7 @@ import com.driver.workFlowManager.model.projects.Milestones;
 import com.driver.workFlowManager.model.projects.Project;
 import com.driver.workFlowManager.model.projects.Task;
 import com.driver.workFlowManager.model.workers.Manager;
+import com.driver.workFlowManager.model.workers.StandardWorker;
 import com.driver.workFlowManager.repository.ManagerRepository;
 import com.driver.workFlowManager.repository.ProjectRepository;
 import com.driver.workFlowManager.repository.StandardWorkerRepository;
@@ -28,21 +29,20 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public void addMileStoneToProject(Project project, Milestones milestone) {
-        if((project != null) && (milestone != null)) {
-            project.addMilestone(milestone);
-            this.projectRepository.save(project);
+    public void addMileStoneToProject(String managerUsername, Milestones milestone)
+    {
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null) {
+            manager.getProject().addMilestone(milestone);
+            this.projectRepository.save(manager.getProject());
         }
     }
 
     @Override
-    public void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId)
-    {
-        if(this.projectRepository.existsById(projectId))
-        {
+    public void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId) {
+        if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
-            for(Task t: project.getTasks())
-            {
+            for(Task t: project.getTasks()) {
                 if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId)) {
                     t.setIsAssigned(1);
                     t.setWorker(username);
@@ -54,13 +54,10 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId)
-    {
-        if(this.projectRepository.existsById(projectId))
-        {
+    public void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId) {
+        if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
-            for(Task t: project.getTasks())
-            {
+            for(Task t: project.getTasks()) {
                 if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId)) {
                     t.setUpForReview(1);
                     this.projectRepository.save(project);
@@ -71,13 +68,10 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId)
-    {
-        if(this.projectRepository.existsById(projectId))
-        {
+    public Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId) {
+        if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
-            for(Task t: project.getTasks())
-            {
+            for(Task t: project.getTasks()) {
                 if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId))
                 {
                     t.setIsComplete(1);
@@ -92,8 +86,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public Project getProjectByUsername(String username)
-    {
+    public Project getProjectByUsername(String username) {
         if(this.standardWorkerRepository.existsByUserName(username)) {
             return standardWorkerRepository.findByUserName(username).getProject();
         }
@@ -104,8 +97,7 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
-    public Milestones getMilestone(Long projectId, Integer milestoneId)
-    {
+    public Milestones getMilestone(Long projectId, Integer milestoneId) {
         if(this.projectRepository.existsById(projectId)) {
             Project project = this.projectRepository.getById(projectId);
             for(Milestones m : project.getMilestones())
@@ -174,10 +166,16 @@ public class ProjectServiceImp implements ProjectService {
     @Override
     public void bindProjectToManager(Project project, String managerUsername) {
         Manager manager =  this.managerRepository.findByUserName(managerUsername);
-        if(manager != null) {
+        if(manager != null)
+        {
             project.setManager(manager);
             manager.setProject(project);
             this.projectRepository.save(project);
+
+            for(StandardWorker standardWorker : manager.getDominion()) {
+                standardWorker.setProject(project);
+                this.standardWorkerRepository.save(standardWorker);
+            }
         }
     }
 }

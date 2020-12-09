@@ -6,7 +6,7 @@ import com.driver.workFlowManager.model.projects.Task;
 import java.util.List;
 
 public interface ProjectService {
-    void addMileStoneToProject(Project project, Milestones milestone);
+    void addMileStoneToProject(String managerUsername, Milestones milestone);
     void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId);
     void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId);
     void bindProjectToManager(Project project, String managerUsername);

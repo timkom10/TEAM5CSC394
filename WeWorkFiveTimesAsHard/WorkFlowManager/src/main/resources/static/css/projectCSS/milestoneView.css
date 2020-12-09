@@ -45,15 +45,19 @@
   font-size: 32px;
 }
 
-.viewYourTasksDiv {
+.specialNoticeDiv {
   max-width: 100%;
 }
 
-.viewYourTasksButton {
+.specialNoticeButton {
   width: 100%;
   text-align: center;
 }
 
 .viewSingleTasksButton {
   width: 80%;
+}
+
+.milestoneDescription {
+  font-size: 20px;
 }

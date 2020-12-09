@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 import java.util.List;
 
@@ -137,6 +138,17 @@ public class ProjectController {
     @GetMapping(value = "makeProject")
     public String getMakeProject(Principal principal, Model model, @ModelAttribute("project") Project project) {
         this.projectService.bindProjectToManager(project, principal.getName());
-        return "error";
+        model.addAttribute("milestone", new Milestones());
+        model.addAttribute("name", principal.getName());
+        return "project/makeMilestone";
     }
+
+    @RequestMapping(value = "addMilestone", method = RequestMethod.POST)
+    public String getAddMileStone(Principal principal, Model model,@ModelAttribute("milestone") Milestones milestones) {
+        this.projectService.addMileStoneToProject(principal.getName(), milestones);
+        return getViewProject(principal, model);
+    }
+
+
+
 }
