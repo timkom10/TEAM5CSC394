@@ -146,9 +146,45 @@ public class ProjectController {
     @RequestMapping(value = "addMilestone", method = RequestMethod.POST)
     public String getAddMileStone(Principal principal, Model model,@ModelAttribute("milestone") Milestones milestones) {
         this.projectService.addMileStoneToProject(principal.getName(), milestones);
-        return getViewProject(principal, model);
+        return getMakeTask(principal, model, milestones.getId());
     }
 
+    @RequestMapping(value = "milestoneOptions")
+    public String getMilestoneOptions(Principal principal, Model model, Integer mID) {
+        model.addAttribute("mID", mID);
+        model.addAttribute("name", principal.getName());
+        return "project/milestoneEditOptions";
+    }
+
+    @RequestMapping(value = "editMilestone")
+    public String getEditMilestone(Principal principal, Model model, Integer mID) {
+        model.addAttribute("mID", mID);
+        model.addAttribute("milestone", this.projectService.getMilestone(principal.getName(),mID ));
+        model.addAttribute("name", principal.getName());
+        return "project/makeMilestone";
+    }
+
+    @RequestMapping(value = "makeTask")
+    public String getMakeTask(Principal principal, Model model, Integer mID) {
+        model.addAttribute("name", principal.getName());
+        model.addAttribute("task", new Task());
+        model.addAttribute("mID", mID);
+        return "project/makeTask";
+    }
+
+    @RequestMapping(value = "addTask")
+    public String getAddTask(Principal principal, Model model, @ModelAttribute("task") Task task, Integer mID) {
+        this.projectService.addTaskToMilestone(principal.getName(), mID, task);
+        return getViewProject(principal,model);
+    }
+
+    @RequestMapping(value = "viewActiveTasksInMilestone")
+    public String getViewActiveTasksInMilestone(Principal principal, Model model, Integer mID)
+    {
+        //model.addAttribute("tasks", this.projectService.ge)
+        model.addAttribute("name", principal.getName());
+        return "project/viewActiveTasksInMilestone";
+    }
 
 
 }

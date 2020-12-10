@@ -23,6 +23,7 @@
                 <input type="date" class="w-input" maxlength="256" name="dDate" data-name="dDate" placeholder="Enter Due date" id="dDate" required="" th:field="*{dueDate}">
             <label for="mDescription">Milestone Description</label>
                 <textarea rows="4" cols="50" class="w-input" maxlength="5000" name="mDescription" data-name="mDescription" placeholder="Enter Description" id="mDescription" required="" th:field ="*{description}"></textarea>
+            <input type="hidden" th:field ="*{id}">
             <input type="submit" value="Add Tasks To Milestone" data-wait="Please wait..." class="submit-button w-button">
         </form>
     </div>

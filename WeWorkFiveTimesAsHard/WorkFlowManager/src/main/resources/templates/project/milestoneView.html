@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Milestone</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/milestoneView.css}"/>
@@ -38,7 +38,7 @@
     <a th:href="@{viewUsersTasks(projectId = ${project.getId()}, milestoneId=${milestone.getId()})}" class="specialNoticeButton w-button"> View Your Tasks</a>
 </div>
 <div class="specialNoticeDiv w-container" th:if="${!ROLE.equals('STANDARDWORKER')}">
-    <a th:href="@{/}" class="specialNoticeButton w-button">Edit</a>
+    <a th:href="@{milestoneOptions(mID = ${milestone.getId()})}" class="specialNoticeButton w-button">Edit</a>
 </div>
 </body>
 </html>

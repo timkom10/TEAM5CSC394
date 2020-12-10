@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Milestone Edit Options</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/milestoneEditOptions.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+</head>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Milestone Configurations</h2>
+</div>
+<div class="container optioncontainer w-container">
+    <a th:href="@{editMilestone(mID = ${mID})}" class="optionlink w-inline-block">
+        <h3>Configure</h3>
+        <div>Edit milestone description,<br>due date, etc.</div>
+    </a>
+    <a th:href="@{makeTask(mID = ${mID})}" class="optionlink w-inline-block">
+        <h3>Add A Task</h3>
+        <div>Add an individual task<br>to this milestone</div>
+    </a>
+    <a th:href="@{viewActiveTasksInMilestone(mID = ${mID})}" class="optionlink w-inline-block">
+        <h3>View Tasks</h3>
+        <div>View all active tasks in this<br>milestone with a delete option</div>
+    </a>
+</div>
+</body>
+</html>

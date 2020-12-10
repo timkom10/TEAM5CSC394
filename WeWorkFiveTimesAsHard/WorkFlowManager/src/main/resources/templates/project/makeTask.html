@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Task</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/makeTask.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+</head>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Make Task</h2>
+</div>
+<div class="container w-container">
+    <div class="form-block w-form">
+        <form id="email-form" name="email-form" data-name="Email Form" class="form" th:action="@{addTask(task = ${task},mID = ${mID})}" th:object="${task}" method="post">
+            <label for="name">Task Name</label>
+                <input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter Milestone Name" id="name" th:field="*{taskName}">
+            <label for="urgency">Urgency</label>
+                <input type="text" class="w-input" maxlength="256" name="urgency" data-name="urgency" placeholder="Enter Urgency" id="urgency" required="" th:field="*{urgency}">
+            <label for="bounty">Bounty</label>
+                <input type="number" class="w-input" maxlength="256" name="bounty" data-name="bounty" placeholder="Enter Bounty" id="bounty" required="" th:field="*{bounty}">
+            <label for="description">Task Description</label>
+                <textarea rows="4" cols="50" class="w-input" maxlength="4096" name="description" data-name="description" placeholder="Enter Description" id="description" required="" th:field = "*{taskDescription}"> </textarea>
+            <input type="submit" value="Add Task" data-wait="Please wait..." class="submit-button w-button">
+        </form>
+    </div>
+</div>
+</body>
+</html>

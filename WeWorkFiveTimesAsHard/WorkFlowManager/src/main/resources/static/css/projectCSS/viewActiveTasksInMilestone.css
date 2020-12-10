@@ -1,0 +1,24 @@
+.body {
+  background-image: url('images/removeTasksFromMilestoneBackground.jpg');
+  background-position: 50% 50%;
+}
+.nav-link {
+  color: #fff;
+}
+
+.heading {
+  color: #fff;
+}
+
+.container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}

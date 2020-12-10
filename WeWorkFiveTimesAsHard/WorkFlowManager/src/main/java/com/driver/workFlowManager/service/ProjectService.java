@@ -10,12 +10,13 @@ public interface ProjectService {
     void setTaskToUser(String username, Long projectId, Integer milestoneId, Integer taskId);
     void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId);
     void bindProjectToManager(Project project, String managerUsername);
-
-    Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId);
-    Project getProjectByUsername(String username);
-    Milestones getMilestone(Long projectId, Integer milestoneId);
-    Project getByID(Long projectId);
+    void addTaskToMilestone(String managerUsername, Integer milestoneID, Task task);
     List<Task> getTasksByMileStoneId(Long projectId, Integer mID);
     List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId);
+    Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId);
     Task getSingleTask(Long projectId, Integer milestoneId, Integer taskId);
+    Project getProjectByUsername(String username);
+    Project getByID(Long projectId);
+    Milestones getMilestone(String managerUsername, Integer milestoneID);
+    Milestones getMilestone(Long projectId, Integer milestoneId);
 }
