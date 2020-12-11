@@ -179,12 +179,17 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "viewActiveTasksInMilestone")
-    public String getViewActiveTasksInMilestone(Principal principal, Model model, Integer mID)
-    {
-        //model.addAttribute("tasks", this.projectService.ge)
+    public String getViewActiveTasksInMilestone(Principal principal, Model model, Integer mID) {
+        model.addAttribute("tasks", this.projectService.getTaskByUsernameAndMilestoneID(principal.getName(), mID));
         model.addAttribute("name", principal.getName());
+        model.addAttribute("mID", mID);
         return "project/viewActiveTasksInMilestone";
     }
 
+    @RequestMapping(value = "removeTaskFromMilestone")
+    public String getRemoveTaskFromMileStone(Principal principal, Model model, Integer taskId, Integer mID) {
+        this.projectService.removeTaskFromMilestone(principal.getName(), taskId, mID);
+        return getViewActiveTasksInMilestone(principal, model, mID);
+    }
 
 }

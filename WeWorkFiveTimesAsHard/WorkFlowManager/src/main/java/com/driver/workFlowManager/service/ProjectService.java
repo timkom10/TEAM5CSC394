@@ -11,6 +11,8 @@ public interface ProjectService {
     void setTaskUpForReview(Long projectId, Integer milestoneId, Integer taskId);
     void bindProjectToManager(Project project, String managerUsername);
     void addTaskToMilestone(String managerUsername, Integer milestoneID, Task task);
+    void removeTaskFromMilestone(String managerUsername, Integer taskID, Integer mID);
+    List<Task> getTaskByUsernameAndMilestoneID(String managerUsername, Integer mID);
     List<Task> getTasksByMileStoneId(Long projectId, Integer mID);
     List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId);
     Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId);

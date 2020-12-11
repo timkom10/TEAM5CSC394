@@ -210,8 +210,46 @@ public class ProjectServiceImp implements ProjectService {
               task.setMilestoneId(milestoneID);
               project.addTask(task);
               this.projectRepository.save(project);
-              return;
             }
         }
+    }
+
+    @Override
+    public void removeTaskFromMilestone(String managerUsername, Integer taskID, Integer mID) {
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null)
+        {
+            Project project = manager.getProject();
+            if(project != null)
+            {
+                for(Task t : project.getTasks())
+                {
+                    if(t.getTaskId().equals(taskID) && t.getMilestoneId().equals(mID))
+                    {
+                        project.getTasks().remove(t);
+                        this.projectRepository.save(project);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Task> getTaskByUsernameAndMilestoneID(String managerUsername, Integer mID) {
+
+        List<Task> tasks = new ArrayList<>();
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null) {
+            Project project = manager.getProject();
+            if(project != null) {
+                for (Task t : project.getTasks()) {
+                    if(t.getMilestoneId().equals(mID)) {
+                        tasks.add(t);
+                    }
+                }
+            }
+        }
+        return tasks;
     }
 }

@@ -15,7 +15,29 @@
     <h2 class="heading">Active Tasks</h2>
 </div>
 <div class="container w-container">
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Assigned?</th>
+            <th>Bounty</th>
+            <th>Remove?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task: ${tasks}" class="tableRow">
+            <td th:text="${task.getTaskName()}">Name</td>
+            <td>
+                <span th:if="${task.getIsAssigned() gt 0}"> True</span>
+                <span th:unless="${task.getIsAssigned() gt 0}"> False</span>
+            </td>
+            <td th:text="${task.getBounty()}">User1</td>
+            <td>
+                <a class="w-button removeTaskButton" th:href="@{removeTaskFromMilestone(taskId =${task.getTaskId()}, mID = ${mID})}">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
