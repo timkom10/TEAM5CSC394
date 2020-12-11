@@ -138,6 +138,11 @@ public class ProjectController {
     @GetMapping(value = "makeProject")
     public String getMakeProject(Principal principal, Model model, @ModelAttribute("project") Project project) {
         this.projectService.bindProjectToManager(project, principal.getName());
+        return getViewProject(principal,model);
+    }
+
+    @RequestMapping(value = "makeMilestone")
+    public String getMakeMilestone(Principal principal, Model model) {
         model.addAttribute("milestone", new Milestones());
         model.addAttribute("name", principal.getName());
         return "project/makeMilestone";
@@ -192,4 +197,30 @@ public class ProjectController {
         return getViewActiveTasksInMilestone(principal, model, mID);
     }
 
+    @RequestMapping(value = "projectOptions")
+    public String getProjectOptions(Principal principal, Model model) {
+        model.addAttribute("name", principal.getName());
+        return "project/projectEditOptions";
+    }
+
+    @RequestMapping(value = "editProject")
+    public String getEditProject(Principal principal, Model model) {
+        model.addAttribute("project", this.projectService.getProjectByManagersUsername(principal.getName()));
+        model.addAttribute("name", principal.getName());
+        return "project/makeProjectInitial";
+    }
+
+    @RequestMapping(value = "viewActiveMilestonesInProject")
+    public String getViewActiveMilestonesInProject(Principal principal, Model model) {
+        model.addAttribute("milestones", this.projectService.getAllMilestonesByProject(principal.getName()));
+        model.addAttribute("name", principal.getName());
+        return "project/viewActiveMilestonesInProject";
+    }
+
+    @RequestMapping(value = "removeMilestone")
+    public String getRemoveMilestone(Principal principal, Model model, Integer mID) {
+        this.projectService.removeAllTasksWithAssociatedMilestone(principal.getName(), mID);
+        this.projectService.removeMilestoneFromProject(principal.getName(), mID);
+        return getViewProject(principal,model);
+    }
 }

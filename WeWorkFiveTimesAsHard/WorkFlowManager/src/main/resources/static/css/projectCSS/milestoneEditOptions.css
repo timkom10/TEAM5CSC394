@@ -21,18 +21,3 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
-
-.container.optioncontainer {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-
-.optionlink {
-  border: 1px solid #fff;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-}
-.optionlink:hover {
-  background-color: gray;
-}

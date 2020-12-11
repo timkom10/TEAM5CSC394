@@ -9,6 +9,7 @@ import com.driver.workFlowManager.repository.ManagerRepository;
 import com.driver.workFlowManager.repository.ProjectRepository;
 import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.ProjectService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -114,6 +115,17 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Override
+    public Project getProjectByManagersUsername(String managerUsername) {
+
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null) {
+            Project project = manager.getProject();
+            if(project != null) return project;
+        }
+        return new Project();
+    }
+
+    @Override
     public Milestones getMilestone(String managerUsername, Integer milestoneID) {
         Manager manager = this.managerRepository.findByUserName(managerUsername);
         if(manager != null) {
@@ -136,6 +148,18 @@ public class ProjectServiceImp implements ProjectService {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Milestones> getAllMilestonesByProject(String managerUsername) {
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null) {
+            Project project = manager.getProject();
+            if(project != null) {
+                return project.getMilestones();
+            }
+        }
+        return  new ArrayList<>();
     }
 
     @Override
@@ -189,11 +213,21 @@ public class ProjectServiceImp implements ProjectService {
     @Override
     public void bindProjectToManager(Project project, String managerUsername) {
         Manager manager =  this.managerRepository.findByUserName(managerUsername);
-        if(manager != null) {
+        if(manager != null && project != null)
+        {
+            /*Check if we are editing a project, or adding a new one*/
+            if(manager.getProject() != null) {
+                //we are editing an existing project
+                manager.getProject().setProjectName(project.getProjectName());
+                manager.getProject().setProjectDescription(project.getProjectDescription());
+                this.projectRepository.save(manager.getProject());
+                return;
+            }
+            //adding a new project
             project.setManager(manager);
             manager.setProject(project);
-            this.projectRepository.save(project);
 
+            this.projectRepository.save(project);
             for(StandardWorker standardWorker : manager.getDominion()) {
                 standardWorker.setProject(project);
                 this.standardWorkerRepository.save(standardWorker);
@@ -228,6 +262,42 @@ public class ProjectServiceImp implements ProjectService {
                     {
                         project.getTasks().remove(t);
                         this.projectRepository.save(project);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removeAllTasksWithAssociatedMilestone(String managerUsername, Integer mID) {
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null)
+        {
+            Project project = manager.getProject();
+            if(project != null)
+            {
+                project.getTasks().removeIf(t -> t.getMilestoneId().equals(mID));
+                this.projectRepository.save(project);
+            }
+        }
+
+    }
+
+    @Override
+    public void removeMilestoneFromProject(String managerUsername, Integer mID) {
+        Manager manager = this.managerRepository.findByUserName(managerUsername);
+        if(manager != null)
+        {
+            Project project = manager.getProject();
+            if(project != null)
+            {
+                for(Milestones m : project.getMilestones())
+                {
+                    if(m.getId().equals(mID))
+                    {
+                        project.getMilestones().remove(m);
+                        projectRepository.save(project);
                         return;
                     }
                 }

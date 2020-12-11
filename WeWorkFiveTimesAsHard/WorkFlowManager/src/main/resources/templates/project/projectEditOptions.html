@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Settings</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/projectEditOptions.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+</head>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Project Configurations</h2>
+</div>
+<div class="container optioncontainer w-container">
+    <a th:href="@{editProject}" class="optionlink w-inline-block">
+        <h3>Configure</h3>
+        <div>Edit project name, description,<br>due date, etc.</div>
+    </a>
+    <a th:href="@{makeMilestone}" class="optionlink w-inline-block">
+        <h3>Add A Milestone</h3>
+        <div>Add an individual milestone<br>to this project</div>
+    </a>
+    <a th:href="@{viewActiveMilestonesInProject}" class="optionlink w-inline-block">
+        <h3>View Milestones</h3>
+        <div>View all active milestones in this<br>project with a delete option</div>
+    </a>
+</div>
+</body>
+</html>

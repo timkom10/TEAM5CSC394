@@ -12,13 +12,20 @@ public interface ProjectService {
     void bindProjectToManager(Project project, String managerUsername);
     void addTaskToMilestone(String managerUsername, Integer milestoneID, Task task);
     void removeTaskFromMilestone(String managerUsername, Integer taskID, Integer mID);
+    void removeAllTasksWithAssociatedMilestone(String managerUsername, Integer mID);
+    void removeMilestoneFromProject(String managerUsername, Integer mID);
     List<Task> getTaskByUsernameAndMilestoneID(String managerUsername, Integer mID);
     List<Task> getTasksByMileStoneId(Long projectId, Integer mID);
     List<Task> getTasksByUsernameProjectIdAndMilestoneId(String username, Long projectId, Integer milestoneId);
+
     Task setTaskDoneReturn(Long projectId, Integer milestoneId, Integer taskId);
     Task getSingleTask(Long projectId, Integer milestoneId, Integer taskId);
+
     Project getProjectByUsername(String username);
+    Project getProjectByManagersUsername(String managerUsername);
     Project getByID(Long projectId);
+
     Milestones getMilestone(String managerUsername, Integer milestoneID);
     Milestones getMilestone(Long projectId, Integer milestoneId);
+    List<Milestones> getAllMilestonesByProject(String managerUsername);
 }

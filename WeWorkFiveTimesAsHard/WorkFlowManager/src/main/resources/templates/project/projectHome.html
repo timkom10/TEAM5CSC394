@@ -46,7 +46,7 @@
 </div>
 <div th:if="${(ROLE.equals('MANAGER'))}" class="commonProjectSection">
     <div class="w-container">
-        <div class="div-block-6"><a href="#" class="button-2 w-button">Edit Project</a></div>
+        <div class="div-block-6"><a th:href="@{projectOptions}" class="button-2 w-button">Edit Project</a></div>
     </div>
 </div>
 </body>

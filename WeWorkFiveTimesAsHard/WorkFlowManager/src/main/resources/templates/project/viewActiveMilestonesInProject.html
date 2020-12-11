@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Active Milestones</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/viewActiveMilestonesInProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/projectCSS/commonProject.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+</head>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Active Tasks</h2>
+</div>
+<div class="container w-container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Due Date</th>
+            <th>On Schedule</th>
+            <th>Remove?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="milestone: ${milestones}" class="tableRow">
+            <td th:text="${milestone.getMilestoneName()}">Name</td>
+            <td th:text="${milestone.getDueDate()}">DD</td>
+            <td>Place</td>
+            <td>
+                <a class="w-button removeTaskButton" th:href="@{removeMilestone(mID = ${milestone.getId()})}">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
