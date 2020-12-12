@@ -1,104 +1,42 @@
+.body {
+  background-image: url('images/viewSingleTaskBackground.jpg');
+  background-position: 0 0;
+}
+
 .nav-link {
   color: #333;
 }
 
-.body {
-  background-image: url('images/viewSingleTaskBackground.jpg');
-  background-position: 100% 0;
-}
-
-.container-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.section-2 {
-  width: auto;
-  height: auto;
+.noticecontainer {
   padding-top: 20px;
-  padding-bottom: 20px;
-  border: 1px none #000;
-  background-color: transparent;
-  opacity: 1;
-}
-
-.section-3 {
-  width: auto;
-  height: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border: 1px solid #000;
-}
-
-.footer {
-  padding-top: 60px;
   padding-bottom: 40px;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
   text-align: center;
 }
 
-.footer-flex-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 40px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  text-align: left;
-}
-
-.container-5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.section-4 {
-  width: auto;
-  height: auto;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border: 1px solid #000;
+.heading {
+  color: #000;
 }
 
 .paragraph {
-  color: #fff;
+  color: #000;
+  font-size: 20px;
+}
+
+.infodiv {
+  width: 100%;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.button {
+  width: 100%;
   font-size: 20px;
   text-align: center;
 }
 
-.button-2 {
-  width: 100%;
-  text-align: center;
+.tasknotices {
+  background-color: #fff;
+  opacity: 0.85;
 }
+
+

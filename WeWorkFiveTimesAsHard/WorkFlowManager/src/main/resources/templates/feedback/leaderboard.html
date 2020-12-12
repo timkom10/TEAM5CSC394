@@ -4,30 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Leaderboards</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/webflow.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonCSS/repeatingStyles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/leaderboard.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/feedbackCSS/commonFeedback.css}"/>
 </head>
-<body>
-    <h1 class="text-center text-success">Point Leaderboard</h1>
+<body class="body">
+<div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
+<div class="noticecontainer w-container">
+    <h2 class="heading">Point Leaderboard</h2>
+</div>
+<div class="tablecontainer w-container">
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr>
-                    <th style="padding: 12px;width: 361px;">User</th>
-                    <th>Points</th>
-                    <th style="width: 300px;">Hire Date</th>
-                    <th>Role</th>
-                </tr>
+            <tr>
+                <th>User</th>
+                <th>Points</th>
+                <th>Role</th>
+                <th>Hire Date</th>
+                <th>Message</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="worker: ${workers}">
-                    <td th:text="${worker.getUserName()}">peter</td>
-                    <td th:text="${worker.getTotalPoints()}">20</td>
-                    <td th:text="${worker.getHireDate()}">October 23, 2019</td>
-                    <td th:text="${worker.getRole()}">Standard Worker</td>
-                </tr>
+            <tr th:each="worker: ${workers}" class="tableRow">
+                <td th:text="${worker.getUserName()}">peter</td>
+                <td th:text="${worker.getTotalPoints()}">20</td>
+                <td th:text="${worker.getRole()}">Standard Worker</td>
+                <td th:text="${worker.getHireDate()}">October 23, 2019</td>
+                <td>
+                    <a class="w-button" th:href="@{composeMessage(username = ${worker.getUserName()})}">Message </a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
-    <a type="button" class="btn btn-primary btn-block" th:href="@{feedback}">Back </a>
+</div>
 </body>
 </html>

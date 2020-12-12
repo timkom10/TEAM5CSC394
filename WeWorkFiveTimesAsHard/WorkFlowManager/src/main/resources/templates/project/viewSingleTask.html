@@ -11,52 +11,37 @@
 </head>
 <body class="body">
 <div th:replace="fragments/managerAndStandardFragment :: naviFragment"></div>
-<div class="section-3">
-    <div class="container-4 w-container">
-        <div>
-            <h1 th:text="${task.getTaskName()}">Task Name</h1>
+<div class="noticecontainer w-container">
+    <h2 class="heading" th:text="${task.getTaskName()}">Task Name</h2>
+</div>
+<div class="tasknotices w-container">
+    <div class="infodiv">
+        <p class="paragraph">Urgency: [[${task.getUrgency()}]]</p>
+    </div>
+    <div class="infodiv">
+        <p class="paragraph">Bounty: [[${task.getBounty()}]]</p>
+    </div>
+    <div class="infodiv">
+        <span th:if="${task.getIsAssigned() &gt;0}" class="paragraph">Assigned to: [[${task.getWorker()}]]</span>
+        <span th:unless="${task.getIsAssigned() &gt;0}" class="paragraph">Available</span>
+    </div>
+    <div class="infodiv">
+        <p class="paragraph" th:text="${task.getTaskDescription()}">Task DescriptionMake this do this</p>
+    </div>
+    <div  class="infodiv" th:if="${(!name.equals(task.getWorker())) && (task.getWorker() != 'Available')}">
+        <a class="button w-button" th:href="@{composeMessage(username=${task.getWorker()})}">Message</a>
+    </div>
+    <div class="infodiv" th:if="${(name.equals(task.getWorker()))}">
+        <div th:if="${(task.getUpForReview() &lt; 1)}">
+            <a th:href="@{standardWorkerMarkTaskComplete(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button w-button">Mark Task Done</a>
         </div>
+    </div>
+    <div class="infodiv" th:if="${(task.getIsAssigned() &lt;1) && (ROLE.equals('STANDARDWORKER'))}">
+        <a th:href="@{volunteerTask(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button w-button">Volunteer</a>
+    </div>
+    <div class="infodiv" th:if="${(task.getUpForReview() &gt;0) && (ROLE.equals('MANAGER'))}">
+        <a th:href="@{managerMarkTaskDone(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()}, username =${task.getWorker()})}" class="button w-button">Mark Task Complete</a>
     </div>
 </div>
-<div class="section-2">
-    <div class="w-container">
-        <div>
-            <p class="paragraph" th:text="${task.getTaskDescription()}">Lorem</p>
-        </div>
-    </div>
-</div>
-<div class="section-4">
-    <div class="container-5 w-container">
-        <div>
-            <h1 style="color: white;">Urgency: [[${task.getUrgency()}]]</h1>
-        </div>
-        <div>
-            <h1>Bounty: [[${task.getBounty()}]]</h1>
-        </div>
-        <div th:if="${task.getIsAssigned() &gt;0}">
-            <h1>Assigned to: [[${task.getWorker()}]]</h1>
-        </div>
-    </div>
-</div>
-<footer id="footer" class="footer">
-    <div class="w-container">
-        <div class="footer-flex-container">
-            <div>
-                <a th:if="${(!name.equals(task.getWorker())) && (task.getWorker() != 'Available')}" class="button-2 w-button" th:href="@{composeMessage(username=${task.getWorker()})}">Message</a>
-            </div>
-            <div th:if="${(name.equals(task.getWorker()))}">
-                <div th:if="${(task.getUpForReview() &lt; 1)}">
-                 <a th:href="@{standardWorkerMarkTaskComplete(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Mark Task Done</a>
-                </div>
-            </div>
-            <div th:if="${(task.getIsAssigned() &lt;1) && (ROLE.equals('STANDARDWORKER'))}">
-                <a th:href="@{volunteerTask(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()})}" class="button-2 w-button">Volunteer</a>
-            </div>
-            <div th:if="${(task.getUpForReview() &gt;0) && (ROLE.equals('MANAGER'))}">
-                <a th:href="@{managerMarkTaskDone(projectId = ${project.getId()}, milestoneId =${task.getMilestoneId()}, taskId=${task.getTaskId()}, username =${task.getWorker()})}" class="button-2 w-button">Mark Task Complete</a>
-            </div>
-        </div>
-    </div>
-</footer>
 </body>
 </html>

@@ -1,0 +1,28 @@
+.body {
+    background-image: url('images/leaderboardBackground.jpg');
+    background-position: 0 0;
+}
+
+.nav-link {
+    color: white;
+}
+
+.noticecontainer {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.heading {
+    color: black;
+}
+
+.table{
+    color: black;
+    background-color: white;
+    opacity: 0.85;
+}
+
+.tableRow:hover {
+    background-color: darkgrey;
+}

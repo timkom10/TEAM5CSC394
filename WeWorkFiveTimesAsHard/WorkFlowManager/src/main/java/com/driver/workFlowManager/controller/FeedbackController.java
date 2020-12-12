@@ -50,7 +50,8 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "leaderboard")
-    public String getLeaderboard(Model model) {
+    public String getLeaderboard(Principal principle, Model model) {
+        model.addAttribute("name",principle.getName());
         model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkersSortedByPoints());
         return "feedback/leaderboard";
     }
