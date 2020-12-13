@@ -30,9 +30,9 @@
                     <label for="Role">Role</label>
                         <input type="text" class="w-input" maxlength="256" name="Role" data-name="Role" placeholder="Lead, Core, Engine, etc." id="Role" required="" th:field = "*{employeeRole}">
                     <label for= "ProjectPoints">Current Project Points</label>
-                         <input type="text" class="w-input" maxlength="256" name="ProjectPoints" data-name="ProjectPoints" placeholder="0" id="ProjectPoints" required="" th:field = "*{currentProjectPoints}">
+                         <input type="number" class="w-input" maxlength="256" name="ProjectPoints" data-name="ProjectPoints" placeholder="0" id="ProjectPoints" required="" th:field = "*{currentProjectPoints}">
                     <label for= "StartingPoints">Total Points</label>
-                        <input type="text" class="w-input" maxlength="256" name="StartingPoints" data-name="StartingPoints" placeholder="0" id="StartingPoints" required="" th:field = "*{totalPoints}">
+                        <input type="number" class="w-input" maxlength="256" name="StartingPoints" data-name="StartingPoints" placeholder="0" id="StartingPoints" required="" th:field = "*{totalPoints}">
                     <input type="hidden" th:field = "*{hireDate}">
                     <input type="hidden" th:field = "*{project}">
                     <input type="hidden" th:field = "*{userName}">

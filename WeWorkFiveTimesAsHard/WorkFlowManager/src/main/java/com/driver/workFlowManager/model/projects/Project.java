@@ -69,9 +69,6 @@ public class Project {
 
     public Project(){
     }
-    public Project(Manager manager) {
-        this.manager = manager;
-    }
 
     public void addMilestone(Milestones milestone) {
         if(milestone != null) {

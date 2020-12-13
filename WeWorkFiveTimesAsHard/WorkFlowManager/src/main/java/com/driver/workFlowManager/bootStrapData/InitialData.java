@@ -98,6 +98,7 @@ public class InitialData implements CommandLineRunner
       }
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void run(String... args)
     {
@@ -178,14 +179,14 @@ public class InitialData implements CommandLineRunner
        StandardWorker standardWorker_4 = this.makeStandardWorker("paulina", "Paulina", "DemoLastName", "2020-03-31", "Lead", manager_1, project_1);
        StandardWorker standardWorker_5 = this.makeStandardWorker("ricky", "Ricky", "DemoLastName", "2020-04-01", "Security", manager_1, project_1);
        StandardWorker standardWorker_6 = this.makeStandardWorker("willy", "Willy", "DemoLastName", "2020-04-02", "Front End", manager_1, project_1);
-       StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", manager_1, null);
+       StandardWorker standardWorker_7 = this.makeStandardWorker("billy", "billy", "demoLName", "2020-07-24", "BackEnd", null, null);
 
        //Make a message
        Message message_1 = new Message();
        message_1.setFrom(manager_1.getUserName());
        message_1.setTo(standardWorker_0.getUserName());
-       message_1.setSubject("I Hope I am doing this right..");
-       message_1.setMessagePayload("Because, If I am not, I am more than likely doomed");
+       message_1.setSubject("I think I am doing this right");
+       message_1.setMessagePayload("Otherwise, I would be unable to see this...");
        standardWorker_0.addMessage(message_1);
        standardWorkerRepository.save(standardWorker_0);
 

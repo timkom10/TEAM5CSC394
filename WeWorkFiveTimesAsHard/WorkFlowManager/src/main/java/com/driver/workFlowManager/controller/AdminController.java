@@ -47,40 +47,38 @@ public class AdminController {
         return "info/info";
     }
 
-    @RequestMapping("Hr")
+    @GetMapping("Hr")
     public String getHR() {
         return "admin/HumanResources";
     }
 
-    @RequestMapping(value = "RemoveUser", method = RequestMethod.GET)
+    @GetMapping(value = "removeUser")
     public String getUserSearch(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/removeUser";
     }
 
-    @RequestMapping(value = "deleteUser", method = RequestMethod.GET)
+    @GetMapping(value = "deleteUser")
     public String getRemoveUser(Principal principal, Model model, String username) {
         userService.removeUser(username);
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("users", userService.findByUsername(""));
-        return "admin/removeUser";
+        return getUserSearch(principal, model, "");
     }
 
-    @RequestMapping("addUser")
+    @GetMapping("addUser")
     public String getAddUser(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         return "admin/selectUserTypeToAdd";
     }
 
-    @RequestMapping(value = "searchTeamMember", method = RequestMethod.GET)
+    @GetMapping(value = "searchTeamMember")
     public String getTeamMemberSearch(Principal principal, Model model, @RequestParam(defaultValue = "") String username) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("users", userService.findByUsername(username));
         return "admin/searchTeamMembers";
     }
 
-    @RequestMapping("addStandardWorker")
+    @GetMapping("addStandardWorker")
     public String getAddStandardWorker(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("user", new Users());
@@ -97,7 +95,7 @@ public class AdminController {
         return "admin/addStandardWorkerSelectManager";
     }
 
-    @RequestMapping(value = "makeStandardWorkerSelectManager", method = RequestMethod.GET)
+    @RequestMapping(value = "makeStandardWorkerSelectManager", method = RequestMethod.POST)
     public String getMakeStandardWorkerSelectManager(Principal principal, Model model, @RequestParam(defaultValue = "") String username, String standardWorkerUsername) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("currentSW", standardWorkerUsername);
@@ -105,14 +103,13 @@ public class AdminController {
         return "admin/addStandardWorkerSelectManager";
     }
 
-    @RequestMapping(value = "insertStandardWorker", method = RequestMethod.GET)
+    @GetMapping(value = "bindStandardWorkerToManager")
     public String getInsertStandardWorker(Principal principal, Model model, String standardWorkerUsername, String managerUsername) {
-        model.addAttribute("name", principal.getName());
         this.adminService.bindStandardWorkerAndManager(standardWorkerUsername, managerUsername);
-        return "redirect:/admin/index";
+        return index(principal, model);
     }
 
-    @RequestMapping("addManager")
+    @GetMapping("addManager")
     public String getAddManager(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("user", new Users());
@@ -120,16 +117,13 @@ public class AdminController {
         return "admin/addManager";
     }
 
-    @RequestMapping("makeManager")
+    @RequestMapping(value = "makeManager", method = RequestMethod.POST)
     public String getMakeManagerSelectTeamMembers(Principal principal, @ModelAttribute("user") Users user, @ModelAttribute("manager") Manager manager, Model model) {
         this.adminService.addManager(user, manager);
-        model.addAttribute("name", principal.getName());
-        model.addAttribute("currentM", user.getUsername());
-        model.addAttribute("workers", this.standardWorkerService.getAllFreeWorkersByUsername(""));
-        return "admin/addManagerSelectTeamMembers";
+        return getMakeManagersSelectTeamMembers(principal, model, "", user.getUsername());
     }
 
-    @RequestMapping("makeManagerSelectTeamMembers")
+    @GetMapping("makeManagerSelectTeamMembers")
     public String getMakeManagersSelectTeamMembers(Principal principal, Model model, @RequestParam(defaultValue = "") String username, String managerUsername) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("currentM", managerUsername);
@@ -137,7 +131,7 @@ public class AdminController {
         return "admin/addManagerSelectTeamMembers";
     }
 
-    @RequestMapping("addTeamMemberToManager")
+    @GetMapping("addTeamMemberToManager")
     public String getAddTeamMemberToManager(Principal principal, Model model, String workerUsername, String managerUsername) {
         this.adminService.bindStandardWorkerAndManager(workerUsername, managerUsername);
         model.addAttribute("name", principal.getName());
@@ -146,7 +140,7 @@ public class AdminController {
         return "admin/addManagerSelectTeamMembers";
     }
 
-    @RequestMapping("addManagerRemoveTeamMember")
+    @GetMapping("addManagerRemoveTeamMember")
     public String getAddManagerRemoveTeamMember(Principal principal, Model model, String managerUsername) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("currentM", managerUsername);
@@ -154,7 +148,7 @@ public class AdminController {
         return "admin/addManagerRemoveTeamMembers";
     }
 
-    @RequestMapping("removeTeamMemberFromManager")
+    @GetMapping("removeTeamMemberFromManager")
     public String getRemoveTeamMemberFromManager(Principal principal, Model model, String managerUsername, String workerUsername) {
         this.managerService.removeWorkerFromManager(workerUsername, managerUsername);
         model.addAttribute("name", principal.getName());
@@ -163,7 +157,7 @@ public class AdminController {
         return "admin/addManagerRemoveTeamMembers";
     }
 
-    @RequestMapping("addAdmin")
+    @GetMapping("addAdmin")
     public String getAddAdmin(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("user", new Users());
@@ -171,13 +165,14 @@ public class AdminController {
         return "admin/addAdmin";
     }
 
-    @RequestMapping("makeAdmin")
-    public String getMakeAdmin(@ModelAttribute("user") Users user, @ModelAttribute("admin") Admin admin, Principal principal) {
+    @RequestMapping(value = "makeAdmin", method = RequestMethod.POST)
+    public String getMakeAdmin(Principal principal, Model model, @ModelAttribute("user") Users user, @ModelAttribute("admin") Admin admin) {
         this.adminService.addAdmin(user, admin);
+
         if(principal.getName().equals(user.getUsername())) {
             return "redirect:/login";
         }
-        return "redirect:/admin/index";
+        return index(principal, model);
     }
 
     @GetMapping("alterWorker")

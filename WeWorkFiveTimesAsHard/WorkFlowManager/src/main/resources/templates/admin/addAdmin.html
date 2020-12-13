@@ -17,7 +17,7 @@
     </div>
     <div class="w-container">
         <div class="w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeAdmin}" th:object="${user}">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeAdmin}" th:object="${user}" method="post">
                 <label for="name">User Name:</label>
                     <input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter Username" id="name" required="" th:field = "*{username}">
                 <label for="password">Password:</label>

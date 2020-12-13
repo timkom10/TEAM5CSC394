@@ -9,7 +9,6 @@ import com.driver.workFlowManager.repository.ManagerRepository;
 import com.driver.workFlowManager.repository.ProjectRepository;
 import com.driver.workFlowManager.repository.StandardWorkerRepository;
 import com.driver.workFlowManager.service.ProjectService;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;

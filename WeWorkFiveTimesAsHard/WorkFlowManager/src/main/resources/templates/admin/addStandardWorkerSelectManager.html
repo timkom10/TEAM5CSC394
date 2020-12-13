@@ -17,7 +17,7 @@
     </div>
     <div class="w-container">
         <div class="w-form">
-            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeStandardWorkerSelectManager}" method="get">
+            <form id="email-form-2" name="email-form-2" data-name="Email Form 2" class="form" th:action="@{makeStandardWorkerSelectManager}" method="post">
                 <label for="name"></label><input type="text" class="w-input" maxlength="256" name="username" data-name="username" placeholder=" Search Managers By Username" id="name">
                 <input type="hidden" name = "standardWorkerUsername" data-name="standardWorkerUsername" th:value="${currentSW}">
                 <input type="submit" value="Search" data-wait="Please wait..." class="w-button">
@@ -42,7 +42,7 @@
                 <td th:text="${manager.getLastName()}">Last name</td>
                 <td th:text="${manager.getId()}">Manager Username</td>
                 <td>
-                    <a th:href="@{insertStandardWorker(standardWorkerUsername = ${currentSW},managerUsername = ${manager.getUserName()})}" class="w-button"> Assign </a>
+                    <a th:href="@{bindStandardWorkerToManager(standardWorkerUsername = ${currentSW},managerUsername = ${manager.getUserName()})}" class="w-button"> Assign </a>
                 </td>
             </tr>
             </tbody>
