@@ -20,12 +20,12 @@ public class HomeController {
         return "welcomePages/login";
     }
 
-    @RequestMapping("about")
+    @GetMapping("about")
     public String getAbout() {
         return "welcomePages/about";
     }
 
-    @RequestMapping("tos")
+    @GetMapping("tos")
     public String getTOS() {
         return "welcomePages/tos";
     }

@@ -43,8 +43,7 @@ public class FeedbackServiceImp implements FeedbackService {
     }
 
     @Override
-    public List<AllFeedback> getAllFeedbackSortedByDate()
-    {
+    public List<AllFeedback> getAllFeedbackSortedByDate() {
         List<AllFeedback> sortedFeedback = (List<AllFeedback>) this.allFeedbackRepository.findAll();
         sortedFeedback.sort(compareByDate);
         return sortedFeedback;

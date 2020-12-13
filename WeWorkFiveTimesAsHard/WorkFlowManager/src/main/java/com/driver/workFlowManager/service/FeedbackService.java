@@ -8,4 +8,5 @@ import java.util.List;
 public interface FeedbackService {
     void addFeedback(Feedback feedback, String to, String from);
     List<AllFeedback> getAllFeedbackSortedByDate();
+
 }

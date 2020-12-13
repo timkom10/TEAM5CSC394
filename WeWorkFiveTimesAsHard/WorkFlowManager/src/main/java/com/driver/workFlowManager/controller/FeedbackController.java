@@ -49,14 +49,14 @@ public class FeedbackController {
         return "redirect:/management/viewProject";
     }
 
-    @RequestMapping(value = "leaderboard")
+    @GetMapping(value = "leaderboard")
     public String getLeaderboard(Principal principle, Model model) {
         model.addAttribute("name",principle.getName());
         model.addAttribute("workers", this.standardWorkerService.getAllStandardWorkersSortedByPoints());
         return "feedback/leaderboard";
     }
 
-    @RequestMapping(value = "publicFeedback")
+    @GetMapping(value = "publicFeedback")
     public String getPublicFeedback(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("feedbacks",this.feedbackService.getAllFeedbackSortedByDate());
