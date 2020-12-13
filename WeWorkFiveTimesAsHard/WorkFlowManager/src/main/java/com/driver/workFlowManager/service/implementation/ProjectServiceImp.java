@@ -92,7 +92,7 @@ public class ProjectServiceImp implements ProjectService {
             for(Task t: project.getTasks()) {
                 if(t.getMilestoneId().equals(milestoneId) && t.getTaskId().equals(taskId)) {
                     t.setIsComplete(1);
-                    project.getCompletedTasks().add(t);
+                    project.addCompletedTask(t);
                     project.getTasks().remove(t);
                     this.projectRepository.save(project);
                     return t;

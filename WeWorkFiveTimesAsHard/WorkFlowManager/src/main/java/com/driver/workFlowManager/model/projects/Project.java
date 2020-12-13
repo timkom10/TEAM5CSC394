@@ -8,8 +8,6 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -86,12 +84,11 @@ public class Project {
     }
 
     public void addCompletedTask(Task task) {
-
         if(task != null && (task.getIsComplete() >0)) {
             this.completedTasks.add(task);
             this.completedTasksSize++;
         }
-        if(completedTasksSize > 7) {
+        if(completedTasksSize > teamMembers.size()) {
             this.completedTasks.remove(0);
             completedTasksSize--;
         }
