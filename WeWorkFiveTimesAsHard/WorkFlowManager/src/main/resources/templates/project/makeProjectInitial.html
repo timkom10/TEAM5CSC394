@@ -16,7 +16,7 @@
 </div>
 <div class="w-container">
     <div class="w-form">
-        <form id="email-form" name="email-form" data-name="Email Form" th:action="@{makeProject}" th:object="${project}">
+        <form id="email-form" name="email-form" data-name="Email Form" th:action="@{makeProject}" th:object="${project}" method="post">
             <label for="name">Project Name</label>
             <input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter Project Name" id="name" th:field = "*{projectName}">
             <label for="description">Description</label>

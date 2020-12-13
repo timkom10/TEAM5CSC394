@@ -135,13 +135,13 @@ public class ProjectController {
         return "error";
     }
 
-    @GetMapping(value = "makeProject")
+    @RequestMapping(value = "makeProject", method = RequestMethod.POST)
     public String getMakeProject(Principal principal, Model model, @ModelAttribute("project") Project project) {
         this.projectService.bindProjectToManager(project, principal.getName());
         return getViewProject(principal,model);
     }
 
-    @RequestMapping(value = "makeMilestone")
+    @GetMapping(value = "makeMilestone")
     public String getMakeMilestone(Principal principal, Model model) {
         model.addAttribute("milestone", new Milestones());
         model.addAttribute("name", principal.getName());
@@ -154,14 +154,14 @@ public class ProjectController {
         return getMakeTask(principal, model, milestones.getId());
     }
 
-    @RequestMapping(value = "milestoneOptions")
+    @GetMapping(value = "milestoneOptions")
     public String getMilestoneOptions(Principal principal, Model model, Integer mID) {
         model.addAttribute("mID", mID);
         model.addAttribute("name", principal.getName());
         return "project/milestoneEditOptions";
     }
 
-    @RequestMapping(value = "editMilestone")
+    @GetMapping(value = "editMilestone")
     public String getEditMilestone(Principal principal, Model model, Integer mID) {
         model.addAttribute("mID", mID);
         model.addAttribute("milestone", this.projectService.getMilestone(principal.getName(),mID ));
@@ -169,7 +169,7 @@ public class ProjectController {
         return "project/makeMilestone";
     }
 
-    @RequestMapping(value = "makeTask")
+    @GetMapping(value = "makeTask")
     public String getMakeTask(Principal principal, Model model, Integer mID) {
         model.addAttribute("name", principal.getName());
         model.addAttribute("task", new Task());
@@ -177,13 +177,13 @@ public class ProjectController {
         return "project/makeTask";
     }
 
-    @RequestMapping(value = "addTask")
+    @RequestMapping(value = "addTask", method = RequestMethod.POST)
     public String getAddTask(Principal principal, Model model, @ModelAttribute("task") Task task, Integer mID) {
         this.projectService.addTaskToMilestone(principal.getName(), mID, task);
         return getViewProject(principal,model);
     }
 
-    @RequestMapping(value = "viewActiveTasksInMilestone")
+    @GetMapping(value = "viewActiveTasksInMilestone")
     public String getViewActiveTasksInMilestone(Principal principal, Model model, Integer mID) {
         model.addAttribute("tasks", this.projectService.getTaskByUsernameAndMilestoneID(principal.getName(), mID));
         model.addAttribute("name", principal.getName());
@@ -191,33 +191,33 @@ public class ProjectController {
         return "project/viewActiveTasksInMilestone";
     }
 
-    @RequestMapping(value = "removeTaskFromMilestone")
+    @GetMapping(value = "removeTaskFromMilestone")
     public String getRemoveTaskFromMileStone(Principal principal, Model model, Integer taskId, Integer mID) {
         this.projectService.removeTaskFromMilestone(principal.getName(), taskId, mID);
         return getViewActiveTasksInMilestone(principal, model, mID);
     }
 
-    @RequestMapping(value = "projectOptions")
+    @GetMapping(value = "projectOptions")
     public String getProjectOptions(Principal principal, Model model) {
         model.addAttribute("name", principal.getName());
         return "project/projectEditOptions";
     }
 
-    @RequestMapping(value = "editProject")
+    @GetMapping(value = "editProject")
     public String getEditProject(Principal principal, Model model) {
         model.addAttribute("project", this.projectService.getProjectByManagersUsername(principal.getName()));
         model.addAttribute("name", principal.getName());
         return "project/makeProjectInitial";
     }
 
-    @RequestMapping(value = "viewActiveMilestonesInProject")
+    @GetMapping(value = "viewActiveMilestonesInProject")
     public String getViewActiveMilestonesInProject(Principal principal, Model model) {
         model.addAttribute("milestones", this.projectService.getAllMilestonesByProject(principal.getName()));
         model.addAttribute("name", principal.getName());
         return "project/viewActiveMilestonesInProject";
     }
 
-    @RequestMapping(value = "removeMilestone")
+    @GetMapping(value = "removeMilestone")
     public String getRemoveMilestone(Principal principal, Model model, Integer mID) {
         this.projectService.removeAllTasksWithAssociatedMilestone(principal.getName(), mID);
         this.projectService.removeMilestoneFromProject(principal.getName(), mID);

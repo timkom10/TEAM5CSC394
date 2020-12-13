@@ -24,7 +24,7 @@ public class MessageController {
         this.messagingService = messagingService;
     }
 
-    @RequestMapping("messagingPortal")
+    @GetMapping("messagingPortal")
     public String getMessagingPortal(Principal principal, Model model) {
         model.addAttribute("userType", this.userService.getUserType(principal.getName()));
         model.addAttribute("name", principal.getName());
